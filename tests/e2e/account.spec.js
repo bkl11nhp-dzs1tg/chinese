@@ -17,7 +17,7 @@ async function login(page, { register }) {
 
 test('đồng bộ tiến độ giữa 2 thiết bị', async ({ browser }) => {
   const A = await (await browser.newContext()).newPage();
-  await A.goto('/');
+  await A.goto('/#/today');
   await expect(A.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 20000 });
   await login(A, { register: true });
   await A.screenshot({ path: 'test-results/screens/20-account.png' });
@@ -35,7 +35,7 @@ test('đồng bộ tiến độ giữa 2 thiết bị', async ({ browser }) => {
 
   // Thiết bị B: trình duyệt mới, dữ liệu trống
   const B = await (await browser.newContext({ viewport: { width: 1280, height: 800 } })).newPage();
-  await B.goto('/');
+  await B.goto('/#/today');
   await expect(B.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 20000 });
   await login(B, { register: false });
   await B.goto('/#/cards');

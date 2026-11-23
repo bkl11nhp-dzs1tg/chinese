@@ -3,7 +3,7 @@
 import { test, expect } from '@playwright/test';
 
 test('đọc bài: tra từ, lưu từ mới, nhớ vị trí, bài khóa', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#/today');
   await expect(page.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 20000 });
 
   await page.goto('/#/readings');

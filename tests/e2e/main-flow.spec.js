@@ -6,7 +6,7 @@ import { readFileSync } from 'node:fs';
 const SHOTS = 'test-results/screens';
 
 test('tự nạp nội dung → học bài 1 → tiến độ giữ sau khi tải lại → luyện tập → kiểm tra → xuất dữ liệu', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#/today');
   await expect(page.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 20000 });
   await page.screenshot({ path: `${SHOTS}/01-today.png` });
 
@@ -69,7 +69,7 @@ test('tự nạp nội dung → học bài 1 → tiến độ giữ sau khi tả
   // Xuất dữ liệu có đủ các bảng
   await page.goto('/#/settings');
   const dl = page.waitForEvent('download');
-  await page.getByRole('button', { name: 'Xuất sao lưu (JSON)' }).click();
+  await page.getByRole('button', { name: 'Xuất bản sao lưu' }).click();
   const backup = JSON.parse(readFileSync(await (await dl).path(), 'utf8'));
   for (const k of ['cards', 'card_state', 'review_events', 'lessons', 'settings', 'study_sessions', 'lesson_progress', 'readings']) expect(backup[k]).toBeDefined();
   expect(backup.card_state.length).toBeGreaterThanOrEqual(12);

@@ -115,8 +115,8 @@ async function renderEmpty(root) {
     h('div', { class: 'large-title' }, h('h1', {}, 'Chào mừng!')),
     h('div', { class: 'hero px-box stack center' },
       badgeIcon('books'),
-      h('p', {}, 'Chưa có nội dung học. Nội dung được lấy từ thư mục data/ khi đóng gói app.'),
-      h('p', { class: 'muted small' }, 'Trên máy: chạy “npm run pack” rồi mở lại trang. Nếu đang offline lần đầu, hãy kết nối mạng và tải lại.'),
+      h('p', {}, 'Chưa tải được nội dung học.'),
+      h('p', { class: 'muted small' }, 'Hãy kết nối mạng rồi tải lại trang.'),
       h('button', { class: 'btn primary big block', type: 'button', onclick: () => location.reload() }, 'Tải lại')),
   );
 }

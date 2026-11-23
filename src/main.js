@@ -4,6 +4,7 @@ import './styles/tokens.css';
 import './styles/pixel.css';
 import './styles/app.css';
 import './styles/v4.css';
+import './styles/glass.css';
 import { openDb, createRepo } from './db/repo.js';
 import { createContext, applyTheme } from './app.js';
 import { createRouter } from './router.js';
@@ -18,6 +19,8 @@ import * as testPage from './features/exercises/test-page.js';
 import * as reading from './features/reading/reading.js';
 import * as practice from './features/practice/practice.js';
 import * as account from './features/account/account.js';
+import * as landing from './features/landing/landing.js';
+import { initInstall, canInstall, promptInstall } from './install.js';
 import { setFeedbackEnabled } from './ui/feedback.js';
 import { syncContent } from './content.js';
 import { loadAccount, syncNow } from './sync.js';
@@ -50,10 +53,13 @@ const routes = [
   { path: 'stats', render: stats.render },
   { path: 'settings', render: settings.render },
   { path: 'account', render: account.render },
+  { path: 'welcome', render: landing.render },
 ];
 
 const prefersDark = () => globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches;
 const effectiveTheme = (t) => (t === 'dark' || t === 'light' ? t : prefersDark() ? 'dark' : 'light');
+
+initInstall();
 
 async function boot() {
   const appEl = document.getElementById('app');
@@ -61,7 +67,7 @@ async function boot() {
   try {
     repo = createRepo(await openDb());
   } catch (e) {
-    mount(appEl, h('main', { class: 'main' }, h('h1', {}, 'Không mở được bộ nhớ'), h('p', {}, `Trình duyệt chặn IndexedDB (${e.message}). Thử tắt chế độ ẩn danh hoặc cho phép lưu dữ liệu trang.`)));
+    mount(appEl, h('main', { class: 'main' }, h('h1', {}, 'Không mở được bộ nhớ'), h('p', {}, 'Trình duyệt đang chặn lưu dữ liệu. Hãy tắt chế độ ẩn danh hoặc cho phép trang lưu dữ liệu.')));
     return;
   }
   const ctx = createContext(repo);
@@ -101,6 +107,9 @@ async function boot() {
   };
   paintSync();
 
+  const installBtn = h('button', { class: 'icon-btn hidden', type: 'button', 'aria-label': 'Cài app', title: 'Cài app', onclick: () => promptInstall() }, icon('download'));
+  const paintInstall = () => installBtn.classList.toggle('hidden', !canInstall());
+  window.addEventListener('install:changed', paintInstall);
   const settingsBtn = h('a', { class: 'icon-btn', href: '#/settings', 'aria-label': 'Cài đặt', title: 'Cài đặt', dataset: { name: 'settings' } }, icon('settings'));
   const mkTabs = () => NAV.map((n) => h('a', { class: 'tab', href: `#/${n.name}`, dataset: { name: n.name } }, icon(n.icon), h('span', {}, n.label)));
   const topTabs = mkTabs();
@@ -116,7 +125,7 @@ async function boot() {
     h('header', { class: 'topbar' },
       h('a', { class: 'brand', href: '#/today', 'aria-label': 'Chinese – về trang Hôm nay' }, icon('logo'), h('span', {}, 'Chinese')),
       h('nav', { class: 'top-tabs', 'aria-label': 'Điều hướng chính' }, topTabs),
-      h('div', { class: 'top-actions' }, offline, themeBtn, syncBtn, settingsBtn)),
+      h('div', { class: 'top-actions' }, offline, installBtn, themeBtn, syncBtn, settingsBtn)),
     main,
     h('nav', { class: 'nav', 'aria-label': 'Điều hướng chính (điện thoại)' }, bottomTabs)));
 
@@ -153,6 +162,7 @@ async function boot() {
   setInterval(() => autoSync(), 5 * 60_000);
   window.addEventListener('hashchange', () => { if (/^#\/(today|stats|lessons)/.test(location.hash)) autoSync(); });
 
+  if (!ctx.settings.onboarded && !location.hash) location.replace('#/welcome');
   await router.start(main, ctx);
   autoSync({ force: true });
 }

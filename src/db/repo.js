@@ -168,6 +168,19 @@ export function createRepo(db) {
     return next;
   }
 
+  /** Đánh dấu một điểm ngữ pháp đã hiểu / bỏ đánh dấu. */
+  async function markGrammar(lessonId, grammarId, understood = true, now = Date.now()) {
+    const tx = db.transaction('lesson_progress', 'readwrite');
+    const s = tx.objectStore('lesson_progress');
+    const old = (await req(s.get(lessonId))) || { lesson_id: lessonId, status: 'todo', best_score: null, attempts: 0 };
+    const set = new Set(old.grammar_done || []);
+    if (understood) set.add(grammarId); else set.delete(grammarId);
+    const next = { ...old, grammar_done: [...set], updated_at: now };
+    s.put(next);
+    await done(tx);
+    return next;
+  }
+
   async function setLessonStatus(lessonId, status, now = Date.now()) {
     const old = (await get('lesson_progress', lessonId)) || { lesson_id: lessonId, best_score: null, attempts: 0 };
     if (old.status === status) return old;
@@ -258,7 +271,7 @@ export function createRepo(db) {
     recordReview, undoReview, makeDue,
     importContent, existingIds,
     saveReadingProgress, recordLookup, lookupCount, saveReadingWord, markKnown, unmarkKnown,
-    lessonsOrdered, saveLessonScore, saveTestScore, setLessonStatus,
+    lessonsOrdered, saveLessonScore, saveTestScore, setLessonStatus, markGrammar,
     saveSession,
     putAudio, getAudio, audioIndex,
     exportAll, restoreBackup, clearAll,

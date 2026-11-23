@@ -55,6 +55,7 @@ export function mergeRecord(store, local, remote) {
         test_attempts: max(local.test_attempts, remote.test_attempts),
         test_last: (local.updated_at ?? 0) >= (remote.updated_at ?? 0) ? local.test_last : remote.test_last,
         updated_at: max(local.updated_at, remote.updated_at),
+        grammar_done: [...new Set([...(local.grammar_done || []), ...(remote.grammar_done || [])])],
       };
     }
     case 'study_sessions':

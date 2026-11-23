@@ -96,6 +96,10 @@ export async function render(root, ctx) {
         h('div', { class: 'title' }, loadAccount() ? `Tài khoản: ${loadAccount().username}` : 'Tài khoản & đồng bộ'),
         h('div', { class: 'meta' }, loadAccount() ? 'Đang đồng bộ giữa các thiết bị' : 'Đăng nhập để học trên nhiều thiết bị')),
       icon('chevron')),
+    h('a', { class: 'group row-link account-row', href: '#/welcome' },
+      h('span', { class: 'icon-box' }, icon('download')),
+      h('span', { class: 'grow' }, h('div', { class: 'title' }, 'Giới thiệu & cài app'), h('div', { class: 'meta' }, 'Cài lên màn hình chính để mở nhanh')),
+      icon('chevron')),
     h('div', { class: 'section-title' }, 'Học tập'),
     h('section', { class: 'group' },
       numberRow('new_per_day', 'Số từ mới mỗi ngày', 'Mặc định 10', { min: 0, max: 100 }),
@@ -105,7 +109,7 @@ export async function render(root, ctx) {
       switchRow('show_pinyin_front', 'Hiện bính âm ở mặt trước thẻ', 'Tắt để tự nhớ cách đọc'),
       switchRow('sound_enabled', 'Âm báo & rung', 'Khi trả lời đúng/sai'),
       switchRow('games_enabled', 'Trò chơi cuối buổi học', 'Một trò nối cặp ngắn'),
-      selectRow('tts_rate', 'Tốc độ đọc', voice ? `Giọng: ${voice.name}` : 'Máy chưa có giọng zh-CN: thêm gói giọng "Chinese (Simplified)" trong cài đặt hệ điều hành', [[0.7, '0.7× (chậm)'], [0.85, '0.85×'], [1, '1×']], Number),
+      selectRow('tts_rate', 'Tốc độ đọc', voice ? `Giọng: ${voice.name}` : 'Thiết bị chưa có giọng đọc tiếng Trung', [[0.7, '0.7× (chậm)'], [0.85, '0.85×'], [1, '1×']], Number),
       h('div', { class: 'form-row' }, h('label', { for: 'set-reminder' }, 'Giờ nhắc học', h('span', { class: 'hint' }, 'Dùng khi tích hợp Telegram (giai đoạn 4)')),
         h('input', { id: 'set-reminder', type: 'time', value: s.reminder_time, onchange: (e) => save({ reminder_time: e.target.value }) })),
       switchRow('cat_enabled', 'Mèo thư ký (XP)', s.cat_enabled ? `Tổng ${s.xp_total || 0} XP` : 'Cộng XP theo thời gian học (thử nghiệm)'),
@@ -113,15 +117,14 @@ export async function render(root, ctx) {
 
     h('section', { class: 'card px-box stack', style: { marginTop: '24px' } },
       h('h2', {}, 'Nội dung'),
-      h('p', {}, `${counts.cards} từ · ${counts.lessons} bài · ${counts.readings} bài đọc. Nội dung lấy thẳng từ thư mục data/ của app, tự cập nhật khi có bản mới; tiến độ học được giữ nguyên.`),
-      s.content_version ? h('p', { class: 'muted small' }, `Phiên bản nội dung: ${s.content_version}`) : null,
+      h('p', {}, `${counts.cards} từ · ${counts.lessons} bài · ${counts.readings} bài đọc. Nội dung tự cập nhật khi có bản mới; tiến độ học được giữ nguyên.`),
       h('div', { class: 'row' }, h('button', {
         class: 'btn', type: 'button',
         onclick: async () => {
           await repo.saveSettings({ content_version: null });
           const r = await syncContent(repo, await ctx.refreshSettings());
           await ctx.refreshSettings();
-          toast(r.status === 'missing' ? 'Không tìm thấy nội dung (content/pack.json).' : r.status === 'offline' ? 'Đang offline, thử lại sau.' : 'Đã cập nhật nội dung.');
+          toast(r.status === 'missing' ? 'Không tải được nội dung.' : r.status === 'offline' ? 'Đang offline, thử lại sau.' : 'Đã cập nhật nội dung.');
           ctx.navigate(`settings?r=${Date.now()}`);
         },
       }, icon('refresh'), 'Cập nhật lại nội dung'))),
@@ -130,8 +133,8 @@ export async function render(root, ctx) {
       h('h2', {}, 'Dữ liệu của bạn'),
       h('p', { class: 'muted small' }, s.last_export_at ? `Lần sao lưu gần nhất: ${new Date(s.last_export_at).toLocaleString('vi-VN')}` : 'Chưa sao lưu lần nào. Dữ liệu chỉ nằm trong trình duyệt này.'),
       h('div', { class: 'row' },
-        h('button', { class: 'btn', type: 'button', onclick: exportJson }, icon('download'), 'Xuất sao lưu (JSON)'),
-        h('button', { class: 'btn ghost', type: 'button', onclick: exportCsv }, icon('download'), 'Xuất từ vựng (CSV)'),
+        h('button', { class: 'btn', type: 'button', onclick: exportJson }, icon('download'), 'Xuất bản sao lưu'),
+        h('button', { class: 'btn ghost', type: 'button', onclick: exportCsv }, icon('download'), 'Xuất danh sách từ'),
         h('button', { class: 'btn ghost', type: 'button', onclick: () => restoreInput.click() }, icon('upload'), 'Khôi phục từ sao lưu'),
         restoreInput),
       h('div', { class: 'row' }, h('button', { class: 'btn danger', type: 'button', onclick: wipe }, icon('trash'), 'Xóa toàn bộ dữ liệu'))),

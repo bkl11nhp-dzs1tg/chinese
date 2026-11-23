@@ -11,7 +11,7 @@ export async function render(root, ctx) {
   if (acct) return renderSignedIn(root, ctx, acct);
 
   let register = false;
-  const urlInput = h('input', { type: 'url', id: 'acc-url', placeholder: 'https://chinese-study-sync.<tên>.workers.dev', value: localStorage.getItem('chinese-study-sync-url') || DEFAULT_SYNC_URL, autocomplete: 'off' });
+  const urlInput = h('input', { type: 'url', id: 'acc-url', placeholder: 'https://…', value: localStorage.getItem('chinese-study-sync-url') || DEFAULT_SYNC_URL, autocomplete: 'off' });
   const userInput = h('input', { type: 'text', id: 'acc-user', autocomplete: 'username', autocapitalize: 'off', spellcheck: false, placeholder: 'tên đăng nhập hoặc email' });
   const passInput = h('input', { type: 'password', id: 'acc-pass', autocomplete: 'current-password', placeholder: 'ít nhất 8 ký tự' });
   const err = h('p', { class: 'form-error', role: 'alert' });
@@ -51,8 +51,7 @@ export async function render(root, ctx) {
   h('label', { class: 'field' }, h('span', {}, 'Mật khẩu'), passInput),
   h('details', { class: 'field-adv', open: !urlInput.value },
     h('summary', {}, 'Máy chủ đồng bộ'),
-    h('label', { class: 'field' }, h('span', {}, 'Địa chỉ'), urlInput),
-    h('p', { class: 'muted small' }, 'Cloudflare Worker của bạn (xem README, mục Tài khoản). Trên máy tính có thể chạy thử bằng “npm run sync-server” → http://localhost:8787.')),
+    h('label', { class: 'field' }, h('span', {}, 'Địa chỉ'), urlInput),),
   err, submitBtn, switchBtn);
 
   mount(root,
@@ -66,7 +65,7 @@ export async function render(root, ctx) {
           h('li', {}, icon('check'), 'Tiến độ thẻ, lịch ôn, điểm kiểm tra, thời gian học, từ đã lưu'),
           h('li', {}, icon('check'), 'Vẫn học offline bình thường; có mạng thì tự đồng bộ'),
           h('li', {}, icon('check'), 'Không đăng nhập vẫn dùng đầy đủ, dữ liệu chỉ ở máy này'),
-          h('li', {}, icon('check'), 'Mật khẩu được băm (PBKDF2), có thể xóa tài khoản bất cứ lúc nào')))));
+          h('li', {}, icon('check'), 'Mật khẩu được mã hóa, có thể xóa tài khoản bất cứ lúc nào')))));
 }
 
 function renderSignedIn(root, ctx, acct) {

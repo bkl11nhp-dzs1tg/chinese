@@ -28,6 +28,17 @@ export function gameCards(data, n) {
 
 const fmtSec = (ms) => `${(ms / 1000).toFixed(1)} giây`;
 
+/** Thanh trạng thái trò chơi: tên + các ô số liệu. */
+function hud(title, ...items) {
+  return h('div', { class: 'game-hud glass' }, h('strong', { class: 'gh-title' }, title), h('div', { class: 'gh-items' }, items));
+}
+const stat = (label, el) => h('span', { class: 'gh-stat' }, h('small', {}, label), el);
+function popFx(parent, text, good = true) {
+  const fx = h('span', { class: ['pop-fx', good ? 'good' : 'bad'] }, text);
+  parent.append(fx);
+  setTimeout(() => fx.remove(), 700);
+}
+
 // ---------------------------------------------------------------- Nối cặp
 export function matchGame({ cards, onResult, onDone }) {
   const pairs = cards.slice(0, 6);
@@ -38,14 +49,17 @@ export function matchGame({ cards, onResult, onDone }) {
   let matched = 0;
   let mistakes = 0;
   const missedOnce = new Set();
-  const clock = h('span', { class: 'timer-pill' }, '0.0');
-  const tick = setInterval(() => { clock.textContent = ((performance.now() - t0) / 1000).toFixed(1); }, 100);
+  const clock = h('b', {}, '0.0s');
+  const pairsEl = h('b', {}, `0/${pairs.length}`);
+  const comboEl = h('b', {}, '×0');
+  let combo = 0;
+  const tick = setInterval(() => { clock.textContent = `${((performance.now() - t0) / 1000).toFixed(1)}s`; }, 100);
 
   const tiles = shuffle([
     ...pairs.map((c) => ({ id: c.id, text: c.hanzi, han: true })),
     ...pairs.map((c) => ({ id: c.id, text: c.meaning, han: false })),
   ]).map((t) => {
-    const b = h('button', { class: ['chip', t.han ? 'han' : ''], type: 'button' }, t.text);
+    const b = h('button', { class: ['mg-tile', t.han ? 'han' : ''], type: 'button' }, h('span', {}, t.text));
     b.onclick = () => pick(t, b);
     return b;
   });
@@ -59,12 +73,18 @@ export function matchGame({ cards, onResult, onDone }) {
     selected = null;
     a.b.classList.remove('selected');
     if (a.t.id === t.id) {
-      [a.b, b].forEach((x) => { x.disabled = true; x.classList.add('correct'); });
+      [a.b, b].forEach((x) => { x.disabled = true; x.classList.add('correct'); setTimeout(() => x.classList.add('gone'), 450); });
       matched++;
+      combo++;
+      pairsEl.textContent = `${matched}/${pairs.length}`;
+      comboEl.textContent = `×${combo}`;
+      if (combo >= 2) popFx(b, `Combo ×${combo}`);
       onResult?.(t.id, !missedOnce.has(t.id));
       if (matched === pairs.length) finish();
     } else {
       mistakes++;
+      combo = 0;
+      comboEl.textContent = '×0';
       missedOnce.add(a.t.id);
       missedOnce.add(t.id);
       [a.b, b].forEach((x) => { x.classList.add('wrong'); setTimeout(() => x.classList.remove('wrong'), 400); });
@@ -74,9 +94,9 @@ export function matchGame({ cards, onResult, onDone }) {
     clearInterval(tick);
     onDone({ ms: performance.now() - t0, mistakes, pairs: pairs.length });
   }
-  mount(root, h('div', { class: 'row between' }, h('h2', { style: { margin: 0 } }, 'Nối cặp'), clock),
-    h('p', { class: 'muted small' }, 'Chọn một chữ Hán rồi chọn nghĩa của nó.'),
-    h('div', { class: 'options' }, tiles));
+  mount(root, hud('Nối cặp', stat('Cặp', pairsEl), stat('Combo', comboEl), stat('Thời gian', clock)),
+    h('p', { class: 'muted small center' }, 'Chọn một chữ Hán rồi chọn nghĩa của nó.'),
+    h('div', { class: 'mg-grid' }, tiles));
   return { el: root, destroy: () => clearInterval(tick) };
 }
 
@@ -85,10 +105,20 @@ export function raceGame({ cards, pool, onResult, onDone, seconds = 60 }) {
   const root = h('div', { class: 'stack' });
   const queue = shuffle(cards);
   let qi = 0, correct = 0, total = 0, left = seconds, over = false;
-  const clock = h('span', { class: 'timer-pill' }, `${left}s`);
-  const score = h('span', { class: 'badge' }, '0 đúng');
-  const stage = h('div');
-  const tick = setInterval(() => { left--; clock.textContent = `${left}s`; if (left <= 0) end(); }, 1000);
+  const clock = h('b', {}, `${left}s`);
+  const score = h('b', {}, '0');
+  const comboEl = h('b', {}, '×0');
+  let combo = 0;
+  const timeFill = h('span', { style: { width: '100%' } });
+  const timeBar = h('div', { class: 'time-bar' }, timeFill);
+  const stage = h('div', { class: 'race-stage' });
+  const tick = setInterval(() => {
+    left--;
+    clock.textContent = `${left}s`;
+    timeFill.style.width = `${(left / seconds) * 100}%`;
+    timeBar.classList.toggle('low', left <= 10);
+    if (left <= 0) end();
+  }, 1000);
 
   function show() {
     if (over) return;
@@ -101,13 +131,15 @@ export function raceGame({ cards, pool, onResult, onDone, seconds = 60 }) {
       if (over) return;
       const ok = o === c.meaning;
       total++;
-      if (ok) correct++;
-      score.textContent = `${correct} đúng`;
+      if (ok) { correct++; combo++; } else combo = 0;
+      score.textContent = String(correct);
+      comboEl.textContent = `×${combo}`;
+      popFx(stage, ok ? (combo >= 3 ? `+1 · combo ×${combo}` : '+1') : 'Sai', ok);
       onResult?.(c.id, ok);
       btns.forEach((b) => { b.disabled = true; if (b.textContent === c.meaning) b.classList.add('correct'); else if (b.textContent === o) b.classList.add('wrong'); });
       setTimeout(show, ok ? 250 : 900);
     }
-    stage.replaceChildren(h('div', { class: 'game-hanzi', lang: 'zh-CN' }, c.hanzi), h('div', { class: 'options' }, btns));
+    stage.replaceChildren(h('div', { class: 'race-card glass' }, h('div', { class: 'game-hanzi', lang: 'zh-CN' }, c.hanzi)), h('div', { class: 'options' }, btns));
     keyFn = (e) => { const n = Number(e.key); if (n >= 1 && n <= btns.length && !btns[n - 1].disabled) btns[n - 1].click(); };
   }
   let keyFn = null;
@@ -120,7 +152,7 @@ export function raceGame({ cards, pool, onResult, onDone, seconds = 60 }) {
     window.removeEventListener('keydown', onKey);
     onDone({ correct, total });
   }
-  mount(root, h('div', { class: 'row between' }, h('h2', { style: { margin: 0 } }, 'Đua thời gian'), h('div', { class: 'row' }, score, clock)), stage);
+  mount(root, hud('Đua thời gian', stat('Đúng', score), stat('Combo', comboEl), stat('Còn', clock)), timeBar, stage);
   show();
   return { el: root, destroy: () => { over = true; clearInterval(tick); window.removeEventListener('keydown', onKey); } };
 }
@@ -152,7 +184,7 @@ export function buildGame({ sentences, onDone }) {
       } else msg.replaceChildren(h('div', { class: 'feedback no' }, 'Chưa đúng thứ tự, bấm mảnh trong câu để sửa.'));
     };
     redraw();
-    mount(root, h('div', { class: 'row between' }, h('h2', { style: { margin: 0 } }, 'Xây câu'), h('span', { class: 'badge' }, `${done}/${list.length} câu`)),
+    mount(root, hud('Xây câu', stat('Xong', h('b', {}, `${done}/${list.length}`))),
       s.prompt ? h('p', {}, s.prompt) : null, area, bank, msg,
       h('div', { class: 'row' },
         h('button', { class: 'btn ghost', type: 'button', onclick: () => { i++; show(); } }, 'Bỏ qua'),
@@ -182,7 +214,7 @@ export function listenGame({ cards, pool, rate = 1, onResult, onDone, rounds = 1
       fb.replaceChildren(h('div', { class: ['feedback', ok ? 'ok' : 'no'] }, h('span', { class: 'han' }, c.hanzi), ` ${c.pinyin} — ${c.meaning}`));
       setTimeout(() => { i++; show(); }, ok ? 900 : 1800);
     }
-    mount(root, h('div', { class: 'row between' }, h('h2', { style: { margin: 0 } }, 'Nghe chọn chữ'), h('span', { class: 'badge' }, `Câu ${i + 1}/${qs.length}`)),
+    mount(root, hud('Nghe chọn chữ', stat('Câu', h('b', {}, `${i + 1}/${qs.length}`)), stat('Đúng', h('b', {}, String(correct)))),
       h('div', { class: 'center' }, h('button', { class: 'btn primary big', type: 'button', onclick: () => speak(c.hanzi, rate) }, icon('speaker'), 'Nghe lại'),
         ' ', h('button', { class: 'btn ghost', type: 'button', onclick: () => speak(c.hanzi, 0.7) }, 'Chậm 0.7×')),
       h('div', { class: 'options' }, btns), fb);

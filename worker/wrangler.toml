@@ -9,5 +9,5 @@ ALLOWED_ORIGINS = "https://bkl11nhp-dzs1tg.github.io,http://localhost:5173"
 [[d1_databases]]
 binding = "DB"
 database_name = "chinese-study"
-database_id = "ĐIỀN-ID-SAU-KHI-CHẠY-wrangler-d1-create"
+database_id = "342a716b-31ff-4065-ac41-b4d1bd7ec802"
 migrations_dir = "migrations"

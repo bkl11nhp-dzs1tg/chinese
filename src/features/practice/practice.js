@@ -33,11 +33,32 @@ export function scopeOf(data, scope) {
 }
 
 const SCOPES = [
-  ['upto', 'Đến bài đang học'],
-  ['active', 'Bài đang học'],
-  ['learned', 'Từ đã học'],
-  ['all', 'Cả 2 quyển'],
+  ['upto', 'Đến bài đang học', 'Từ bài 1 tới bài đang học', 'today'],
+  ['active', 'Bài đang học', 'Chỉ bài đang học', 'lessons'],
+  ['learned', 'Từ đã học', 'Mọi từ đã học qua thẻ', 'cards'],
+  ['all', 'Cả 2 quyển', 'Toàn bộ 30 bài', 'books'],
 ];
+
+/** Bảng chọn phạm vi: 4 lựa chọn nhanh + lưới bài theo quyển. */
+function openScopePicker(data, current, onPick) {
+  const close = () => { dlg.close(); };
+  const pick = (v) => { close(); onPick(v); };
+  const books = [...new Set(data.lessons.map((l) => l.book))];
+  const dlg = h('dialog', { class: 'scope-dialog', 'aria-label': 'Chọn phạm vi luyện' },
+    h('div', { class: 'row between nowrap' }, h('h2', { style: { margin: 0 } }, 'Phạm vi luyện'),
+      h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Đóng', onclick: close }, icon('close'))),
+    h('div', { class: 'scope-opts' }, SCOPES.map(([v, label, desc, ic]) => h('button', { class: ['scope-opt', v === current ? 'on' : ''], type: 'button', onclick: () => pick(v) },
+      h('span', { class: 'sc-ic' }, icon(ic)), h('span', { class: 'grow' }, h('strong', {}, label), h('span', { class: 'sc-meta' }, desc)), v === current ? icon('check') : null))),
+    books.map((b) => [h('div', { class: 'section-title', style: { margin: '16px 2px 8px' } }, b),
+      h('div', { class: 'lesson-pick' }, data.lessons.filter((l) => l.book === b).map((l) => {
+        const st = data.statusById.get(l.id).status;
+        return h('button', { class: ['lp-num', l.id === current ? 'on' : '', st], type: 'button', title: `Bài ${l.unit}: ${l.title}`, onclick: () => pick(l.id) }, String(l.unit));
+      }))]));
+  dlg.addEventListener('close', () => dlg.remove());
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
+  document.body.append(dlg);
+  dlg.showModal();
+}
 
 export async function renderHub(root, ctx, { query = {} } = {}) {
   const data = await ctx.loadAll();
@@ -56,16 +77,18 @@ export async function renderHub(root, ctx, { query = {} } = {}) {
 
   mount(root,
     h('div', { class: 'large-title' },
-      h('div', {}, h('div', { class: 'sub' }, `${cards.length} từ · ${lines.length} câu · ${scopeLabel}`), h('h1', {}, 'Luyện tập'))),
-    h('div', { class: 'chip-scroll', role: 'group', 'aria-label': 'Phạm vi luyện' },
-      SCOPES.map(([v, label]) => h('button', { class: ['chip', 'opt', v === scope ? 'selected' : ''], type: 'button', onclick: () => setScope(v) }, label)),
-      h('select', { class: 'chip opt scope-select', 'aria-label': 'Chọn một bài', onchange: (e) => e.target.value && setScope(e.target.value) },
-        h('option', { value: '' }, 'Chọn bài…'),
-        data.lessons.map((l) => h('option', { value: l.id, selected: l.id === scope }, `Bài ${l.unit}: ${l.title}`)))),
+      h('div', {}, h('div', { class: 'sub' }, 'Kỹ năng & trò chơi'), h('h1', {}, 'Luyện tập'))),
+    h('button', { class: 'scope-card glass', type: 'button', onclick: () => openScopePicker(data, scope, setScope), 'aria-haspopup': 'dialog' },
+      h('span', { class: 'sc-ic' }, icon('target')),
+      h('span', { class: 'grow' },
+        h('span', { class: 'sc-label' }, 'Phạm vi luyện'),
+        h('strong', {}, scopeLabel),
+        h('span', { class: 'sc-meta' }, `${cards.length} từ · ${lines.length} câu bài khóa`)),
+      h('span', { class: 'sc-change' }, 'Đổi', icon('chevron'))),
 
     h('div', { class: 'section-title' }, 'Theo kỹ năng'),
     h('div', { class: 'skill-grid' }, SKILLS.map((k) => {
-      const disabled = (k.id === 'listen' && !ttsSupported()) ? 'Máy không có giọng đọc' : (k.id === 'speak' && !speechOk() ? 'Cần Chrome để nhận dạng giọng (vẫn tự chấm được)' : null);
+      const disabled = (k.id === 'listen' && !ttsSupported()) ? 'Máy không có giọng đọc' : (k.id === 'speak' && !speechOk() ? 'Tự đánh giá khi đọc' : null);
       const st = stats[k.id];
       return h('a', { class: ['skill-card', `tone-${k.tone}`], href: `#/practice/${k.id}?scope=${scope}` },
         h('span', { class: 'sk-ic' }, icon(k.icon)),

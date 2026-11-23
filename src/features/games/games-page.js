@@ -92,7 +92,7 @@ export async function renderGame(root, ctx, { params }) {
   } else if (game.id === 'listen') {
     const voice = await chineseVoice();
     if (!voice) {
-      stage.append(h('p', { class: 'notice' }, 'Máy chưa có giọng đọc tiếng Trung (zh-CN). Trên Windows: Cài đặt → Thời gian & ngôn ngữ → Giọng nói → Thêm giọng "Chinese (Simplified)". Trên Chrome Android thường có sẵn.'));
+      stage.append(h('p', { class: 'notice' }, 'Thiết bị chưa có giọng đọc tiếng Trung nên chưa phát được âm.'));
     }
     current = listenGame({
       cards: gameCards(data, 10), pool: data.cards, rate: s.tts_rate, onResult: record,

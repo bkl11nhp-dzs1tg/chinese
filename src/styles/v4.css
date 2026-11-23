@@ -189,3 +189,7 @@ input[type="url"], input[type="password"] { font: 17px var(--font); color: var(-
 .reader-tools .seg-btn.on { background: var(--accent); color: var(--on-accent); box-shadow: none; }
 .reader-tools .chip.opt { min-height: 40px; padding: 0 16px; font-size: 15px; border-radius: 999px; }
 @media (max-width: 560px) { .reader-tools .seg-btn { flex: 1 0 auto; padding: 0 12px; } }
+
+.gp-done h3 { color: var(--good); }
+.gp-check { min-height: 36px; padding: 0 12px; font-size: 14px; flex: none; }
+.gp-check svg { width: 16px; height: 16px; }

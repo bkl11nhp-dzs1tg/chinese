@@ -70,7 +70,7 @@ export async function renderList(root, ctx) {
   mount(root,
     h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Đọc hiểu'), h('h1', {}, 'Bài đọc')), segmented('readings')),
     readings.length ? [h('div', { class: 'section-title' }, 'Bài đọc của bạn'), h('div', { class: 'group' }, readings.map((r) => row(readingToDoc(r))))]
-      : h('p', { class: 'notice' }, 'Chưa có bài đọc riêng. Đặt file vào data/readings/*.json rồi nạp ở Cài đặt (định dạng: mục 9.11 của đặc tả).'),
+      : h('p', { class: 'notice' }, 'Chưa có bài đọc riêng.'),
     lessonDocs.length ? [h('div', { class: 'section-title' }, 'Bài khóa trong sách'), h('div', { class: 'group' }, lessonDocs.map(row))] : null);
 }
 

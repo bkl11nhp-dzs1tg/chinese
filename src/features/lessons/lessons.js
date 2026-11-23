@@ -79,6 +79,8 @@ export async function renderLesson(root, ctx, { params }) {
   const next = data.lessons[idx + 1];
   const allLearned = st.total > 0 && st.learned === st.total;
   const textCount = (lesson.texts || []).reduce((n, t) => n + t.lines.length, 0);
+  const gpTotal = lesson.grammar_points?.length || 0;
+  const gpDone = new Set((progress?.grammar_done || []).filter((id) => lesson.grammar_points?.some((g) => g.id === id)));
   const readProg = await ctx.repo.get('reading_progress', `lesson:${lesson.id}`);
   const testPassed = st.test_best != null && st.test_best >= threshold;
 
@@ -122,7 +124,7 @@ export async function renderLesson(root, ctx, { params }) {
       textCount
         ? stepRow({ n: 2, iconName: 'lessons', title: 'Bài khóa', meta: `${textCount} câu · bấm từ để tra, nghe từng câu${readProg?.finished ? ' · đã đọc xong' : ''}`, done: !!readProg?.finished, href: `#/read/${encodeURIComponent(`lesson:${lesson.id}`)}` })
         : stepRow({ n: 2, iconName: 'lessons', title: 'Bài khóa', meta: 'Bài này chưa có bài khóa', href: `#/lesson/${encodeURIComponent(lesson.id)}` }),
-      stepRow({ n: 3, iconName: 'sparkle', title: 'Ngữ pháp', meta: lesson.grammar_points?.length ? `${lesson.grammar_points.length} điểm: ${lesson.grammar_points.map((g) => g.title).filter(Boolean).slice(0, 2).join(' · ')}` : 'Chưa có ghi chú ngữ pháp', onclick: () => root.querySelector('#grammar')?.scrollIntoView({ behavior: 'smooth' }) }),
+      stepRow({ n: 3, iconName: 'sparkle', title: 'Ngữ pháp', meta: gpTotal ? `${gpDone.size}/${gpTotal} điểm đã hiểu` : 'Bài này không có điểm ngữ pháp', done: gpTotal > 0 && gpDone.size >= gpTotal, onclick: () => root.querySelector('#grammar')?.scrollIntoView({ behavior: 'smooth' }) }),
       stepRow({ n: 4, iconName: 'pencil', title: 'Luyện tập', meta: st.best_score != null ? `Tốt nhất ${Math.round(st.best_score * 100)}%` : 'Trắc nghiệm, ghép cặp, điền từ, sắp xếp câu', done: st.best_score != null && st.best_score >= threshold, href: `#/exercise/${encodeURIComponent(lesson.id)}` }),
       stepRow({ n: 5, iconName: 'trophy', title: 'Kiểm tra cuối bài', meta: st.test_best != null ? `Tốt nhất ${Math.round(st.test_best * 100)}% · ${progress?.test_attempts || 0} lần · đạt từ ${Math.round(threshold * 100)}%` : `Từ vựng + bài khóa · đạt từ ${Math.round(threshold * 100)}% để hoàn thành bài`, done: testPassed, href: `#/test/${encodeURIComponent(lesson.id)}` })),
     audioUrl
@@ -143,33 +145,14 @@ export async function renderLesson(root, ctx, { params }) {
         h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': `Nghe ${c.hanzi}`, onclick: () => speak(c.hanzi, rate) }, icon('speaker'))));
     })) : h('p', { class: 'muted' }, 'Bài này chưa có từ vựng.'),
 
-    h('div', { class: 'section-title' }, `Từ vựng (${cards.length})`),
-    cards.length ? h('ul', { class: 'list group' }, cards.map((c) => {
-      const s = cardStatus(data.statesById.get(c.id));
-      return h('li', {}, h('div', { class: 'item' },
-        h('span', { class: 'han', lang: 'zh-CN', style: { fontSize: '28px', minWidth: '2.4em' } }, c.hanzi),
-        h('span', { style: { flex: 1, minWidth: 0 } },
-          h('div', { style: { color: 'var(--accent-ink)', fontWeight: 700 } }, c.pinyin),
-          h('div', {}, c.meaning),
-          c.pos ? h('div', { class: 'muted small' }, c.pos) : null),
-        s !== 'new' ? h('span', { class: ['badge', s === 'mastered' ? 'done' : 'doing'] }, s === 'mastered' ? 'Thuộc' : 'Đang học') : null,
-        h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': `Nghe ${c.hanzi}`, onclick: () => speak(c.hanzi, rate) }, icon('speaker'))));
-    })) : h('p', { class: 'muted' }, 'Bài này chưa có từ vựng.'),
-
-    lesson.texts?.length ? [h('div', { class: 'section-title' }, 'Bài khóa'),
-      h('div', { class: 'group card' }, lesson.texts.map((t) => h('div', { style: { marginBottom: '12px' } },
-        t.title ? h('h3', {}, t.title) : null,
-        (t.lines || []).map((ln) => h('div', { class: 'row nowrap', style: { padding: '6px 0', alignItems: 'flex-start' } },
-          ln.speaker ? h('strong', { class: 'han', style: { minWidth: '2.5em' } }, `${ln.speaker}：`) : null,
-          h('div', { style: { flex: 1 } },
-            h('div', { class: 'han', lang: 'zh-CN', style: { fontSize: '22px' } }, ln.zh),
-            ln.pinyin ? h('div', { class: 'small', style: { color: 'var(--accent-ink)' } }, ln.pinyin) : null,
-            ln.vi ? h('div', { class: 'muted small' }, ln.vi) : null),
-          h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe câu', onclick: () => speak(ln.zh, rate) }, icon('speaker')))))))] : null,
-
     lesson.grammar_points?.length ? [h('div', { class: 'section-title', id: 'grammar' }, 'Ngữ pháp & ghi chú'),
-      h('div', { class: 'group' }, lesson.grammar_points.map((g, gi) => h('div', { class: 'gp' },
-        h('h3', {}, `${gi + 1}. ${g.title || ''}`),
+      h('div', { class: 'group' }, lesson.grammar_points.map((g, gi) => h('div', { class: ['gp', gpDone.has(g.id) ? 'gp-done' : ''] },
+        h('div', { class: 'row between nowrap' },
+          h('h3', { style: { margin: 0 } }, `${gi + 1}. ${g.title || ''}`),
+          h('button', {
+            class: ['btn', 'gp-check', gpDone.has(g.id) ? 'good' : 'tinted'], type: 'button', 'aria-pressed': String(gpDone.has(g.id)),
+            onclick: async () => { await ctx.repo.markGrammar(lesson.id, g.id, !gpDone.has(g.id)); ctx.navigate(`lesson/${encodeURIComponent(lesson.id)}?g=${Date.now()}`); },
+          }, icon('check'), gpDone.has(g.id) ? 'Đã hiểu' : 'Đánh dấu đã hiểu')),
         g.note ? h('p', { style: { margin: '0 0 6px' } }, g.note) : null,
         g.example ? h('div', { class: 'han', style: { fontSize: '20px' } }, g.example) : null,
         (g.examples || []).map((e) => h('div', { class: 'ex' },
