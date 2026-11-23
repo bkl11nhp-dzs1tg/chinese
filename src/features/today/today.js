@@ -39,7 +39,6 @@ export async function render(root, ctx) {
   ring.querySelector('text').textContent = `${Math.round(totals.today / 60000)}′`;
   ring.setAttribute('aria-label', `Đã học ${Math.round(totals.today / 60000)} trên ${s.session_minutes} phút hôm nay`);
 
-  const upcoming = active ? active.vocab_ids.map((id) => data.cardsById.get(id)).filter((c) => c && !data.statesById.get(c.id)?.last_reviewed_at).slice(0, 6) : [];
   // Bước tiếp theo của bài đang học
   let lessonCta = null;
   if (active) {
@@ -74,19 +73,16 @@ export async function render(root, ctx) {
 
     active ? h('div', { class: 'today-active' },
       h('div', { class: 'section-title today-st' }, 'Bài đang học'),
-      h('div', { class: 'group' },
+      h('div', { class: 'group active-group' },
         h('a', { class: 'lesson-card', style: { boxShadow: 'none' }, href: `#/lesson/${encodeURIComponent(active.id)}` },
           h('span', { class: 'thumb' }, h('img', { src: `./lessons/${encodeURIComponent(active.id)}.webp`, alt: '', onerror: (e) => e.target.remove() })),
           h('span', { class: 'info' },
             h('span', { class: 'num' }, `BÀI ${active.unit ?? ''} · ${activeSt.learned}/${activeSt.total} TỪ`),
             h('span', { class: 'han t' }, active.title),
-            h('span', { class: 'vi' }, active.title_vi || '')),
+            h('span', { class: 'vi' }, active.title_vi || ''),
+            h('span', { class: 'bar thin' }, h('span', { style: { width: `${activeSt.total ? (activeSt.learned / activeSt.total) * 100 : 0}%` } }))),
           icon('chevron')),
         h('div', { class: 'active-body' },
-          h('div', { class: 'bar', style: { margin: '4px 0 0' } }, h('span', { style: { width: `${activeSt.total ? (activeSt.learned / activeSt.total) * 100 : 0}%` } })),
-          upcoming.length ? h('div', { class: 'upcoming' },
-            h('div', { class: 'muted small', style: { marginBottom: '6px' } }, activeSt.learned ? 'Từ tiếp theo' : 'Từ sẽ học'),
-            h('div', { class: 'up-chips' }, upcoming.map((c) => h('span', { class: 'up-chip' }, h('span', { class: 'han' }, c.hanzi), h('small', {}, c.meaning))))) : null,
           h('div', { class: 'mini-steps' },
             miniStep('cards', 'Từ mới', `${activeSt.learned}/${activeSt.total}`, activeSt.total > 0 && activeSt.learned === activeSt.total),
             miniStep('lessons', 'Bài khóa', active.texts?.length ? `${active.texts.reduce((n, t) => n + t.lines.length, 0)} câu` : '—', false),

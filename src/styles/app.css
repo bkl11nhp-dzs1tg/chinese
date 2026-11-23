@@ -576,3 +576,6 @@ ruby rt { font: 600 12px var(--font); color: var(--accent-ink); letter-spacing: 
   .today-active .group { flex: none; }
   .main > input[type="search"], .filters input[type="search"] { max-width: none; }
 }
+.active-group > * + * { border-top: 0; }
+.active-group .lesson-card .bar.thin { margin-top: 8px; }
+.active-body { padding-top: 4px; }
