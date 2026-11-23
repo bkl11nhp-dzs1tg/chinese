@@ -2,6 +2,7 @@
 
 import { h, mount, toast, confirmDialog, downloadFile, readFileText } from '../../ui/dom.js';
 import { syncContent } from '../../content.js';
+import { loadAccount, resetSyncState } from '../../sync.js';
 import { toCsv } from '../../core/csv.js';
 import { applyTheme } from '../../app.js';
 import { chineseVoice, ttsSupported } from '../../ui/speech.js';
@@ -73,13 +74,14 @@ export async function render(root, ctx) {
     ctx.navigate('today');
   } });
   async function wipe() {
-    const first = await confirmDialog({ title: 'Xóa toàn bộ dữ liệu?', body: 'Xóa mọi tiến độ, lịch ôn, thời gian học, từ tự lưu trong trình duyệt này (nội dung bài học sẽ được nạp lại từ data/). Không thể hoàn tác. Nên xuất bản sao lưu trước.', ok: 'Tiếp tục', danger: true });
+    const first = await confirmDialog({ title: 'Xóa toàn bộ dữ liệu?', body: loadAccount() ? 'Xóa dữ liệu học trong trình duyệt này. Vì đang đăng nhập, lần đồng bộ sau sẽ tải lại tiến độ từ máy chủ (muốn xóa cả trên máy chủ: Tài khoản → Xóa tài khoản).' : 'Xóa mọi tiến độ, lịch ôn, thời gian học, từ tự lưu trong trình duyệt này (nội dung bài học sẽ được nạp lại). Không thể hoàn tác. Nên xuất bản sao lưu trước.', ok: 'Tiếp tục', danger: true });
     if (!first) return;
     const input = h('input', { type: 'text', 'aria-label': 'Gõ XÓA để xác nhận', placeholder: 'XÓA', autocomplete: 'off' });
     const second = await confirmDialog({ title: 'Xác nhận lần hai', body: h('div', {}, h('p', {}, 'Gõ chữ XÓA để xác nhận.'), input), ok: 'Xóa vĩnh viễn', danger: true });
     if (!second) return;
     if (input.value.trim().toUpperCase() !== 'XÓA' && input.value.trim().toUpperCase() !== 'XOA') { toast('Chưa gõ đúng chữ XÓA, đã hủy.'); return; }
     await repo.clearAll();
+    await resetSyncState(repo);
     await syncContent(repo, await ctx.refreshSettings());
     await ctx.refreshSettings();
     toast('Đã xóa toàn bộ tiến độ; nội dung bài học được nạp lại.');
@@ -88,6 +90,12 @@ export async function render(root, ctx) {
 
   mount(root,
     h('div', { class: 'large-title' }, h('h1', {}, 'Cài đặt')),
+    h('a', { class: 'group row-link account-row', href: '#/account' },
+      h('span', { class: 'icon-box' }, icon(loadAccount() ? 'cloudCheck' : 'user')),
+      h('span', { class: 'grow' },
+        h('div', { class: 'title' }, loadAccount() ? `Tài khoản: ${loadAccount().username}` : 'Tài khoản & đồng bộ'),
+        h('div', { class: 'meta' }, loadAccount() ? 'Đang đồng bộ giữa các thiết bị' : 'Đăng nhập để học trên nhiều thiết bị')),
+      icon('chevron')),
     h('div', { class: 'section-title' }, 'Học tập'),
     h('section', { class: 'group' },
       numberRow('new_per_day', 'Số từ mới mỗi ngày', 'Mặc định 10', { min: 0, max: 100 }),

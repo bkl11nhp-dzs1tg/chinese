@@ -5,6 +5,8 @@ import { h, mount } from '../../ui/dom.js';
 import { icon, badgeIcon } from '../../ui/icons.js';
 import { newLearnedToday, timeTotals, streak, formatDuration, startOfDay } from '../../core/stats.js';
 import { newCardQueue } from '../../core/lessons.js';
+import { SKILLS } from '../../core/practice.js';
+import { dayKey, addDays } from '../../core/stats.js';
 import { scoreRing } from '../exercises/result-view.js';
 
 const WEEKDAYS = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
@@ -52,7 +54,7 @@ export async function render(root, ctx) {
     h('div', { class: 'large-title' },
       h('div', {}, h('div', { class: 'sub' }, `${WEEKDAYS[d.getDay()]}, ${d.getDate()}/${d.getMonth() + 1}`), h('h1', {}, 'Hôm nay')),
       h('div', { class: 'chips-row' },
-        h('span', { class: 'stat-chip flame', title: 'Chuỗi ngày học', 'aria-label': `Chuỗi ${st} ngày` }, icon('lantern'), String(st)),
+        h('span', { class: 'stat-chip flame', title: 'Chuỗi ngày học', 'aria-label': `Chuỗi ${st} ngày` }, icon('flame'), String(st)),
         s.cat_enabled ? h('span', { class: 'stat-chip', title: 'XP' }, icon('star'), String(s.xp_total || 0)) : null)),
 
     h('div', { class: 'today-top' }, h('div', { class: 'hero px-box today-hero' },
@@ -90,13 +92,16 @@ export async function render(root, ctx) {
           h('a', { class: 'btn tinted block', href: lessonCta.href }, lessonCta.label))),
     ) : null),
 
-    h('div', { class: 'section-title' }, 'Tổng quan'),
-    h('div', { class: 'grid' },
-      tile(formatDuration(totals.week), '7 ngày qua'),
-      tile(`${doneLessons}/${data.lessons.length}`, 'bài hoàn thành'),
-      tile(data.states.length, 'từ đã học'),
-      h('a', { class: 'tile px-box', href: '#/games', style: { textDecoration: 'none', color: 'inherit' } },
-        h('div', { class: 'value', style: { color: 'var(--accent-ink)' } }, icon('game')), h('div', { class: 'label' }, 'Trò chơi ôn từ'))),
+    h('div', { class: 'today-bottom' },
+      h('section', { class: 'card px-box week-card' },
+        h('div', { class: 'row between nowrap' },
+          h('div', {}, h('div', { class: 'q-type' }, 'Tuần này'), h('strong', { class: 'week-total' }, `${formatDuration(totals.week)} · ${doneLessons}/${data.lessons.length} bài xong`)),
+          h('span', { class: ['streak-badge', st ? 'on' : ''] }, icon('flame'), h('span', {}, st ? `${st} ngày liên tiếp` : 'Bắt đầu chuỗi'))),
+        h('div', { class: 'week-strip' }, weekDays(sessions, now))),
+      h('section', { class: 'card px-box' },
+        h('div', { class: 'row between' }, h('div', { class: 'q-type' }, 'Luyện theo kỹ năng'), h('a', { class: 'small link-more', href: '#/practice' }, 'Tất cả', icon('chevron'))),
+        h('div', { class: 'skill-mini' }, SKILLS.map((k) => h('a', { class: ['skill-pill', `tone-${k.tone}`], href: `#/practice/${k.id}` },
+          h('span', { class: 'sk-ic' }, icon(k.icon)), h('span', {}, k.label)))))),
 
     backupHint ? h('p', { class: 'notice small mt' },
       'Dữ liệu chỉ nằm trong trình duyệt này. Thỉnh thoảng nên ', h('a', { href: '#/settings' }, 'xuất bản sao lưu'), '.') : null,
@@ -122,4 +127,18 @@ function planRow(ic, label, value, tone) {
 
 function miniStep(ic, label, value, done) {
   return h('div', { class: ['mini-step', done ? 'done' : ''] }, h('span', { class: 'plan-ic' }, icon(done ? 'check' : ic)), h('span', {}, h('small', {}, label), h('strong', {}, value)));
+}
+
+/** 7 ngày của tuần hiện tại (T2 → CN): ngày đã học có lửa, hôm nay được viền. */
+function weekDays(sessions, now) {
+  const studied = new Set(sessions.filter((x) => (x.active_ms || 0) > 0).map((x) => dayKey(x.started_at)));
+  const today = startOfDay(now);
+  const dow = (new Date(today).getDay() + 6) % 7;
+  const labels = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+  return labels.map((lb, i) => {
+    const t = addDays(today, i - dow);
+    const on = studied.has(dayKey(t));
+    return h('span', { class: ['wd', on ? 'on' : '', t === today ? 'today' : '', t > today ? 'future' : ''], title: on ? 'Đã học' : '' },
+      h('span', { class: 'wd-ic' }, on ? icon('flame') : String(new Date(t).getDate())), h('small', {}, lb));
+  });
 }

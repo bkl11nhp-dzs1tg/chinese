@@ -20,7 +20,7 @@ const MODES = [
   { id: 'normal', label: 'Đọc' },
   { id: 'step', label: 'Từng câu' },
   { id: 'quiz', label: 'Kiểm tra' },
-  { id: 'plain', label: 'Không pinyin' },
+  { id: 'plain', label: 'Ẩn pinyin' },
 ];
 const FONT = { 1: 22, 2: 28, 3: 36 };
 
@@ -132,9 +132,11 @@ export async function renderReader(root, ctx, { params }) {
 
   const tracker = ctx.startTracking({ kind: 'reading' });
   let current = Math.min(progress?.last_sentence_index || 0, flat.length - 1);
+  const posLabel = h('span', { class: 'pl-pos' });
   let saveTimer = null;
   function setCurrent(i, { save = true } = {}) {
     current = i;
+    posLabel.textContent = `Câu ${i + 1}/${flat.length}`;
     root.querySelectorAll('.sent.active').forEach((e) => e.classList.remove('active'));
     root.querySelector(`.sent[data-i="${i}"]`)?.classList.add('active');
     if (!save) return;
@@ -230,15 +232,20 @@ export async function renderReader(root, ctx, { params }) {
 
   // ---------------- dựng giao diện
   const content = h('div', { class: 'reader-body' });
-  const playBtn = h('button', { class: 'btn primary', type: 'button', onclick: () => (playingAll ? stopAll() : playAll()) });
-  function updatePlayBtn() { playBtn.replaceChildren(icon(playingAll ? 'close' : 'headphones'), playingAll ? 'Dừng' : 'Nghe cả bài'); }
-  updatePlayBtn();
+  const playBtn = h('button', { class: 'pl-play', type: 'button', onclick: () => (playingAll ? stopAll() : playAll()) });
+  function updatePlayBtn() {
+    playBtn.replaceChildren(icon(playingAll ? 'pause' : 'play'));
+    playBtn.setAttribute('aria-label', playingAll ? 'Dừng' : 'Nghe cả bài');
+    posLabel.textContent = `Câu ${current + 1}/${flat.length}`;
+  }
   async function playAll() {
     playingAll = true;
     updatePlayBtn();
-    for (let i = mode === 'step' ? current : 0; i < flat.length && playingAll; i++) {
+    const start = current >= flat.length - 1 ? 0 : current;
+    for (let i = start; i < flat.length && playingAll; i++) {
       setCurrent(i);
       if (mode === 'step') renderStep();
+      updatePlayBtn();
       root.querySelector(`.sent[data-i="${i}"]`)?.scrollIntoView({ block: 'center', behavior: 'smooth' });
       await playSentence(flat[i]);
       await new Promise((r) => setTimeout(r, 250));
@@ -246,6 +253,15 @@ export async function renderReader(root, ctx, { params }) {
     playingAll = false;
     updatePlayBtn();
   }
+  const jump = (d) => {
+    stopAll();
+    const i = Math.max(0, Math.min(flat.length - 1, current + d));
+    setCurrent(i);
+    if (mode === 'step') renderStep();
+    updatePlayBtn();
+    root.querySelector(`.sent[data-i="${i}"]`)?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    playSentence(flat[i]);
+  };
 
   const modeBar = h('div', { class: 'seg small-seg', role: 'tablist', 'aria-label': 'Chế độ đọc' },
     MODES.map((m) => h('button', {
@@ -261,8 +277,13 @@ export async function renderReader(root, ctx, { params }) {
     class: 'chip opt', type: 'button', 'aria-label': 'Cỡ chữ',
     onclick: async () => { prefs.font = (prefs.font % 3) + 1; await ctx.repo.saveSettings({ reading_font: prefs.font }); rerender(); },
   }, 'Aa');
+  const playerBar = h('div', { class: 'player', role: 'group', 'aria-label': 'Nghe bài' },
+    h('button', { class: 'pl-btn', type: 'button', 'aria-label': 'Câu trước', onclick: () => jump(-1) }, icon('skipBack')),
+    playBtn,
+    h('button', { class: 'pl-btn', type: 'button', 'aria-label': 'Câu sau', onclick: () => jump(1) }, icon('skipFwd')),
+    posLabel);
   const rateBtn = h('button', {
-    class: 'chip opt', type: 'button',
+    class: 'pl-rate', type: 'button', 'aria-label': 'Tốc độ đọc',
     onclick: async (e) => { prefs.rate = prefs.rate === 1 ? 0.7 : 1; e.currentTarget.textContent = `${prefs.rate}×`; },
   }, `${prefs.rate}×`);
 
@@ -281,6 +302,13 @@ export async function renderReader(root, ctx, { params }) {
     }, t.text, showPy && py ? h('rt', {}, py) : null);
     return el;
   }
+
+  const SPK = ['#e07b39', '#3a7bd5', '#2e9d63', '#9b59b6', '#c0392b', '#d4a017'];
+  const spkColor = new Map();
+  const avatar = (sp) => {
+    if (!spkColor.has(sp)) spkColor.set(sp, SPK[spkColor.size % SPK.length]);
+    return h('span', { class: 'spk-av han', style: { '--c': spkColor.get(sp) }, 'aria-hidden': 'true' }, [...sp][0]);
+  };
 
   function sentenceEl(st, { big = false } = {}) {
     const showMeaning = mode === 'normal' && prefs.meaning;
@@ -302,13 +330,14 @@ export async function renderReader(root, ctx, { params }) {
       quizBox = h('div', { style: { marginTop: '6px' } }, showBtn, reveal);
     }
     return h('div', { class: ['sent', big ? 'big' : '', st.idx === current ? 'active' : ''], dataset: { i: String(st.idx) } },
-      h('div', { class: 'row nowrap', style: { alignItems: 'flex-start', gap: '8px' } },
+      h('div', { class: 'row nowrap', style: { alignItems: 'flex-start', gap: '10px' } },
+        st.speaker ? avatar(st.speaker) : null,
         h('button', {
           class: 'say', type: 'button', 'aria-label': 'Nghe câu',
           onclick: async () => { setCurrent(st.idx); if (mode === 'normal' || mode === 'plain') meaningEl.classList.remove('hidden'); await playSentence(st); },
         }, icon('play')),
         h('div', { style: { flex: 1, minWidth: 0 } },
-          st.speaker ? h('span', { class: 'speaker han' }, `${st.speaker}：`) : null,
+          st.speaker ? h('div', { class: ['speaker', 'han', [...st.speaker].length < 2 ? 'sr-only' : ''], style: { color: spkColor.get(st.speaker) } }, st.speaker) : null,
           h('span', { class: 'han zh', lang: 'zh-CN', style: { fontSize: `${big ? FONT[prefs.font] + 6 : FONT[prefs.font]}px` } }, st.tokens.map((t, k) => tokenEl(st, t, k))),
           pyLine, meaningEl, quizBox)));
   }
@@ -339,18 +368,30 @@ export async function renderReader(root, ctx, { params }) {
       flat.filter((st) => st.pi === pi).map((st) => sentenceEl(st)))));
   }
 
+  const lessonRow = doc.lesson_id ? await repo.get('lessons', doc.lesson_id) : null;
+  const wordCount = new Set(flat.flatMap((x) => x.tokens.filter((t) => t.word && dict.map.has(t.text)).map((t) => t.text))).size;
   mount(root,
     h('div', { class: 'reader', style: { '--rd-font': `${FONT[prefs.font]}px` } },
-      h('div', { class: 'reader-top' },
-        h('a', { class: 'btn ghost', href: doc.kind === 'lesson' ? `#/lesson/${encodeURIComponent(doc.lesson_id)}` : '#/readings', style: { paddingLeft: 0 } }, icon('back'), doc.kind === 'lesson' ? 'Bài học' : 'Bài đọc'),
-        playBtn),
-      h('div', { class: 'q-type' }, doc.subtitle),
-      h('h1', { class: 'han', style: { fontSize: '30px', margin: '2px 0 10px' } }, doc.title),
-      modeBar,
-      h('div', { class: 'row', style: { gap: '8px', margin: '10px 0 4px' } }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ mới'), fontBtn, rateBtn),
+      h('a', { class: 'btn ghost back-link', href: doc.kind === 'lesson' ? `#/lesson/${encodeURIComponent(doc.lesson_id)}` : '#/readings' }, icon('back'), doc.kind === 'lesson' ? 'Bài học' : 'Bài đọc'),
+      h('header', { class: 'reader-hero px-box' },
+        doc.lesson_id ? h('span', { class: 'rh-art' }, h('img', { src: `./lessons/${encodeURIComponent(doc.lesson_id)}.webp`, alt: '', onerror: (e) => e.target.parentNode.remove() })) : null,
+        h('div', { class: 'rh-text' },
+          h('div', { class: 'q-type' }, doc.subtitle),
+          h('h1', { class: 'han' }, doc.title),
+          lessonRow?.title_vi ? h('p', { class: 'muted', style: { margin: 0 } }, lessonRow.title_vi) : null,
+          h('div', { class: 'rh-meta' },
+            h('span', {}, icon('lessons'), `${flat.length} câu`),
+            h('span', {}, icon('cards'), `${wordCount} từ vựng`),
+            audioEl ? h('span', {}, icon('headphones'), 'MP3 của sách') : null))),
+      h('div', { class: 'reader-tools' },
+        modeBar,
+        h('div', { class: 'tool-chips' }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ mới'), fontBtn)),
       !audioEl && !ttsSupported() ? h('p', { class: 'notice small' }, 'Trình duyệt không hỗ trợ đọc giọng máy.') : null,
-      content),
+      h('div', { class: 'reader-card px-box' }, content),
+      h('p', { class: 'muted small center reader-hint' }, 'Bấm vào một từ để tra nghĩa · bấm ▶ để nghe câu'),
+      h('div', { class: 'player-wrap' }, playerBar, rateBtn)),
     scrim, sheet);
+  updatePlayBtn();
 
   rerender();
   ensurePinyin().then(() => { if (pinyinLib && prefs.pinyin) rerender(); requestAnimationFrame(() => root.querySelector(`.sent[data-i="${current}"]`)?.scrollIntoView({ block: 'center' })); });

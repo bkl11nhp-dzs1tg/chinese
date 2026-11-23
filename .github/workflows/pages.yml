@@ -25,6 +25,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build # tự chạy validate + pack từ data/ rồi build
+        env:
+          VITE_SYNC_URL: ${{ vars.SYNC_URL }} # địa chỉ Worker đồng bộ (Settings → Variables)
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

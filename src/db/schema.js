@@ -1,7 +1,7 @@
 // Định nghĩa các store IndexedDB (mục 6.1).
 
 export const DB_NAME = 'chinese-study';
-export const DB_VERSION = 2;
+export const DB_VERSION = 3;
 
 export const STORES = {
   cards: { keyPath: 'id', indexes: { lesson_id: 'lesson_id' } },
@@ -20,6 +20,8 @@ export const STORES = {
   reading_progress: { keyPath: 'reading_id', since: 2 },
   word_lookups: { keyPath: 'id', indexes: { word: 'word', created_at: 'created_at' }, since: 2 },
   known_words: { keyPath: 'word', since: 2 },
+  // Đồng bộ nhiều thiết bị (phiên bản 3): băm của bản đã đồng bộ, theo từng store.
+  sync_meta: { keyPath: 'store', since: 3 },
 };
 
 /** Store được đưa vào bản xuất/sao lưu JSON. */

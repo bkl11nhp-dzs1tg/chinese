@@ -31,7 +31,7 @@ test('đọc bài: tra từ, lưu từ mới, nhớ vị trí, bài khóa', asyn
   await page.goto('/#/read/R02');
   await expect(page.locator('.sent.active')).toHaveAttribute('data-i', '1');
   await page.getByRole('tab', { name: 'Từng câu' }).click();
-  await expect(page.getByText(/Câu 2\//)).toBeVisible();
+  await expect(page.locator('.pl-pos')).toHaveText(/Câu 2\//);
   await page.getByRole('tab', { name: 'Đọc' }).click();
 
   // Bài khóa của bài 28 (kèm người nói)

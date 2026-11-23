@@ -28,6 +28,19 @@ npm run build      # kiểm tra + đóng gói nội dung + build ra dist/
 4. **Luyện tập**: trắc nghiệm, ghép cặp, điền từ, sắp xếp câu.
 5. **Kiểm tra cuối bài**: từ vựng + câu trong bài khóa, đạt ≥ 70% là hoàn thành.
 
+## Tài khoản & đồng bộ nhiều thiết bị
+
+Không đăng nhập vẫn dùng đầy đủ (dữ liệu chỉ ở máy đó). Đăng nhập thì tiến độ thẻ, lịch ôn, điểm kiểm tra, thời gian học, từ đã lưu được đồng bộ; vẫn học offline, có mạng thì tự đồng bộ (khi mở app, khi ẩn tab, mỗi 5 phút, nút "Đồng bộ ngay").
+
+- **Chạy thử trên máy:** `npm run sync-server` → server ở `http://localhost:8787` (điện thoại cùng Wi-Fi: `http://<IP máy>:8787`). Trong app: biểu tượng người ở đầu trang → Máy chủ đồng bộ → nhập địa chỉ.
+- **Triển khai thật (Cloudflare Workers + D1, miễn phí ở mức cá nhân):**
+  1. `cd worker && npx wrangler login`
+  2. `npx wrangler d1 create chinese-study` → chép `database_id` vào `worker/wrangler.toml`
+  3. Sửa `ALLOWED_ORIGINS` trong `wrangler.toml` thành địa chỉ trang GitHub Pages của bạn
+  4. `cd .. && npm run worker:deploy` → nhận địa chỉ `https://chinese-study-sync.<tên>.workers.dev`
+  5. Trên GitHub: Settings → Secrets and variables → Actions → **Variables** → thêm `SYNC_URL` = địa chỉ trên. Lần build sau, app tự điền sẵn địa chỉ máy chủ.
+- Bảo mật: mật khẩu băm PBKDF2-SHA256 (100.000 vòng, có salt), phiên đăng nhập là token ngẫu nhiên (lưu dạng băm, hết hạn sau 180 ngày), khóa tạm sau 10 lần sai/15 phút, mọi truy vấn lọc theo tài khoản. Có nút xóa tài khoản kèm toàn bộ dữ liệu trên máy chủ.
+
 ## Deploy GitHub Pages
 
 Workflow `.github/workflows/pages.yml`: mỗi lần push lên `main` sẽ chạy test, build rồi deploy `dist/`. Trong repo: Settings → Pages → Source: **GitHub Actions**. Lưu ý: trang Pages công khai, nội dung chữ trong `data/` sẽ xem được; MP3 không được đưa lên.
@@ -46,4 +59,6 @@ Workflow `.github/workflows/pages.yml`: mỗi lần push lên `main` sẽ chạy
 - [x] Một phần giai đoạn 2: 4 dạng bài tập, 4 trò chơi, nghe TTS, kiểm tra cuối bài
 - [x] Bài khóa + ngữ pháp 30 bài, bài đọc (mục 9.11)
 - [ ] Giai đoạn 2 còn lại: nói (SpeechRecognition), luyện viết chữ theo nét
-- [ ] Giai đoạn 3–4: đồng bộ Workers + D1, tích hợp Personal Secretary
+- [x] Giai đoạn 3: tài khoản + đồng bộ Workers + D1 (cần triển khai Worker)
+- [x] Luyện theo kỹ năng: nghe, nói, đọc hiểu, từ vựng, thanh điệu, gõ bính âm, ghép câu
+- [ ] Giai đoạn 4: tích hợp Personal Secretary

@@ -1,6 +1,6 @@
 {
   "name": "chinese-study",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,7 +13,9 @@
     "pack": "node scripts/csv-to-json.js",
     "audio": "node scripts/copy-audio.js",
     "cut-art": "node scripts/cut-illustrations.js",
-    "icons": "node scripts/make-icons.js"
+    "icons": "node scripts/make-icons.js",
+    "sync-server": "node scripts/sync-dev-server.js",
+    "worker:deploy": "cd worker && npx wrangler d1 migrations apply chinese-study --remote && npx wrangler deploy"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",

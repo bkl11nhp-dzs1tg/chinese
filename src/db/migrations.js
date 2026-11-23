@@ -15,6 +15,8 @@ export const MIGRATIONS = {
   1(db) { createStores(db, 1); },
   // v2: bài đọc, tiến độ đọc, lịch sử tra từ, từ đã biết.
   2(db) { createStores(db, 2); },
+  // v3: siêu dữ liệu đồng bộ.
+  3(db) { createStores(db, 3); },
 };
 
 export function runMigrations(db, oldVersion, newVersion, tx) {

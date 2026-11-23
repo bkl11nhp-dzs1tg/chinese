@@ -7,7 +7,7 @@ import { columnChart, hbars } from '../../ui/chart.js';
 import { dayKey, dailySeries, timeTotals, streak, cardStatusCounts, weeklyAccuracy, accuracyByActivity, formatDuration, startOfDay, addDays } from '../../core/stats.js';
 import { scoreRing } from '../exercises/result-view.js';
 
-const ACTIVITY = { review: 'Ôn thẻ', new: 'Thẻ mới', relearn: 'Ôn lại trong buổi', exercise: 'Bài tập', game: 'Trò chơi' };
+const ACTIVITY = { review: 'Ôn thẻ', new: 'Thẻ mới', relearn: 'Ôn lại trong buổi', exercise: 'Bài tập', game: 'Trò chơi', practice: 'Luyện kỹ năng' };
 const WD = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
 export async function render(root, ctx) {
@@ -73,7 +73,7 @@ export async function render(root, ctx) {
           h('div', { style: { flex: 1 } },
             h('div', { class: 'q-type' }, 'Hôm nay'),
             h('div', { style: { fontSize: '22px', fontWeight: 800 } }, `${minutes(totals.today)} / ${s.session_minutes} phút`),
-            h('div', { class: 'streak-line' }, icon('lantern'), st ? `Chuỗi ${st} ngày` : 'Bắt đầu chuỗi ngày học'))),
+            h('div', { class: 'streak-line' }, icon('flame'), st ? `Chuỗi ${st} ngày` : 'Bắt đầu chuỗi ngày học'))),
         h('div', { class: 'wk-row', 'aria-label': 'Các ngày đã học trong tuần này' }, thisWeek)),
         h('div', { class: 'grid stats-tiles' },
           tile(formatDuration(totals.week), '7 ngày qua', 'clock'),

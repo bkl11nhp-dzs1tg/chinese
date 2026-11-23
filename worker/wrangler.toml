@@ -1,0 +1,13 @@
+name = "chinese-study-sync"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+# Địa chỉ trang web được phép gọi API (GitHub Pages của bạn), cách nhau bằng dấu phẩy.
+[vars]
+ALLOWED_ORIGINS = "https://bkl11nhp-dzs1tg.github.io,http://localhost:5173"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "chinese-study"
+database_id = "ĐIỀN-ID-SAU-KHI-CHẠY-wrangler-d1-create"
+migrations_dir = "migrations"

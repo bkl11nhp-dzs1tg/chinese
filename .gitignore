@@ -11,3 +11,6 @@ data/pack.json
 # Kết quả test e2e
 test-results/
 playwright-report/
+
+# Server đồng bộ chạy thử trên máy
+data/*.sqlite
