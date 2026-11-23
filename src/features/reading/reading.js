@@ -68,8 +68,7 @@ export async function renderList(root, ctx) {
   };
   const lessonDocs = lessons.filter((l) => l.texts?.length).map(lessonToDoc);
   mount(root,
-    segmented('readings'),
-    h('div', { class: 'large-title' }, h('h1', {}, 'Bài đọc')),
+    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Đọc hiểu'), h('h1', {}, 'Bài đọc')), segmented('readings')),
     readings.length ? [h('div', { class: 'section-title' }, 'Bài đọc của bạn'), h('div', { class: 'group' }, readings.map((r) => row(readingToDoc(r))))]
       : h('p', { class: 'notice' }, 'Chưa có bài đọc riêng. Đặt file vào data/readings/*.json rồi nạp ở Cài đặt (định dạng: mục 9.11 của đặc tả).'),
     lessonDocs.length ? [h('div', { class: 'section-title' }, 'Bài khóa trong sách'), h('div', { class: 'group' }, lessonDocs.map(row))] : null);
@@ -77,7 +76,7 @@ export async function renderList(root, ctx) {
 
 /** Thanh chọn Lộ trình | Bài đọc ở đầu tab Bài học. */
 export function segmented(active) {
-  return h('div', { class: 'seg', role: 'tablist' },
+  return h('div', { class: 'seg seg-fit seg-page', role: 'tablist' },
     h('a', { class: ['seg-btn', active === 'path' ? 'on' : ''], href: '#/lessons', role: 'tab', 'aria-selected': String(active === 'path') }, 'Lộ trình'),
     h('a', { class: ['seg-btn', active === 'readings' ? 'on' : ''], href: '#/readings', role: 'tab', 'aria-selected': String(active === 'readings') }, 'Bài đọc'));
 }

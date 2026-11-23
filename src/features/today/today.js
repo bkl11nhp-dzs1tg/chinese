@@ -39,6 +39,7 @@ export async function render(root, ctx) {
   ring.querySelector('text').textContent = `${Math.round(totals.today / 60000)}′`;
   ring.setAttribute('aria-label', `Đã học ${Math.round(totals.today / 60000)} trên ${s.session_minutes} phút hôm nay`);
 
+  const upcoming = active ? active.vocab_ids.map((id) => data.cardsById.get(id)).filter((c) => c && !data.statesById.get(c.id)?.last_reviewed_at).slice(0, 6) : [];
   // Bước tiếp theo của bài đang học
   let lessonCta = null;
   if (active) {
@@ -55,14 +56,19 @@ export async function render(root, ctx) {
         h('span', { class: 'stat-chip flame', title: 'Chuỗi ngày học', 'aria-label': `Chuỗi ${st} ngày` }, icon('lantern'), String(st)),
         s.cat_enabled ? h('span', { class: 'stat-chip', title: 'XP' }, icon('star'), String(s.xp_total || 0)) : null)),
 
-    h('div', { class: 'today-top' }, h('div', { class: 'hero px-box' },
+    h('div', { class: 'today-top' }, h('div', { class: 'hero px-box today-hero' },
       h('div', { class: 'row nowrap', style: { alignItems: 'center', gap: '16px' } },
         h('div', { style: { flex: 1 } },
           h('div', { class: 'q-type' }, 'Mục tiêu hôm nay'),
           h('h2', { style: { margin: '4px 0' } }, nothingToDo ? 'Đã xong phần hôm nay' : `${due} thẻ ôn · ${suggestedNew} từ mới`),
           h('p', { class: 'muted small', style: { margin: 0 } }, `${formatDuration(totals.today)} / ${s.session_minutes} phút`)),
         ring),
-      h('div', { class: 'stack', style: { marginTop: '18px' } },
+      h('ul', { class: 'plan-list' },
+        planRow('repeat', 'Ôn tập đến hạn', due ? `${due} thẻ` : 'không có', due ? 'learning' : ''),
+        planRow('sparkle', 'Từ mới', suggestedNew ? `${suggestedNew} từ` : 'đủ hôm nay', suggestedNew ? 'new' : ''),
+        planRow('pencil', 'Luyện tập', active ? `Bài ${active.unit ?? ''}` : '—', ''),
+        planRow('game', 'Trò chơi cuối buổi', s.games_enabled ? 'nối cặp' : 'tắt', '')),
+      h('div', { class: 'stack hero-actions' },
         h('a', { class: 'btn primary big block', href: '#/session' }, icon('play'), nothingToDo ? 'Học thêm' : 'Bắt đầu buổi học'),
         due ? h('a', { class: 'btn big block', href: '#/session?mode=review' }, icon('repeat'), `Chỉ ôn tập (${due})`) : null)),
 
@@ -76,8 +82,15 @@ export async function render(root, ctx) {
             h('span', { class: 'han t' }, active.title),
             h('span', { class: 'vi' }, active.title_vi || '')),
           icon('chevron')),
-        h('div', { style: { padding: '0 16px 16px' } },
-          h('div', { class: 'bar', style: { margin: '4px 0 14px' } }, h('span', { style: { width: `${activeSt.total ? (activeSt.learned / activeSt.total) * 100 : 0}%` } })),
+        h('div', { class: 'active-body' },
+          h('div', { class: 'bar', style: { margin: '4px 0 0' } }, h('span', { style: { width: `${activeSt.total ? (activeSt.learned / activeSt.total) * 100 : 0}%` } })),
+          upcoming.length ? h('div', { class: 'upcoming' },
+            h('div', { class: 'muted small', style: { marginBottom: '6px' } }, activeSt.learned ? 'Từ tiếp theo' : 'Từ sẽ học'),
+            h('div', { class: 'up-chips' }, upcoming.map((c) => h('span', { class: 'up-chip' }, h('span', { class: 'han' }, c.hanzi), h('small', {}, c.meaning))))) : null,
+          h('div', { class: 'mini-steps' },
+            miniStep('cards', 'Từ mới', `${activeSt.learned}/${activeSt.total}`, activeSt.total > 0 && activeSt.learned === activeSt.total),
+            miniStep('lessons', 'Bài khóa', active.texts?.length ? `${active.texts.reduce((n, t) => n + t.lines.length, 0)} câu` : '—', false),
+            miniStep('trophy', 'Kiểm tra', activeSt.test_best != null ? `${Math.round(activeSt.test_best * 100)}%` : 'chưa làm', activeSt.status === 'done')),
           h('a', { class: 'btn tinted block', href: lessonCta.href }, lessonCta.label))),
     ) : null),
 
@@ -105,4 +118,12 @@ async function renderEmpty(root) {
       h('p', { class: 'muted small' }, 'Trên máy: chạy “npm run pack” rồi mở lại trang. Nếu đang offline lần đầu, hãy kết nối mạng và tải lại.'),
       h('button', { class: 'btn primary big block', type: 'button', onclick: () => location.reload() }, 'Tải lại')),
   );
+}
+
+function planRow(ic, label, value, tone) {
+  return h('li', { class: ['plan-row', tone] }, h('span', { class: 'plan-ic' }, icon(ic)), h('span', { class: 'grow' }, label), h('strong', {}, value));
+}
+
+function miniStep(ic, label, value, done) {
+  return h('div', { class: ['mini-step', done ? 'done' : ''] }, h('span', { class: 'plan-ic' }, icon(done ? 'check' : ic)), h('span', {}, h('small', {}, label), h('strong', {}, value)));
 }

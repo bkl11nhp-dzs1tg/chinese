@@ -50,15 +50,15 @@ export async function renderList(root, ctx, { query = {} } = {}) {
   search.addEventListener('input', draw);
   const chip = (id, label) => h('button', { class: ['chip', 'opt', filter === id ? 'selected' : ''], type: 'button', onclick: () => go({ f: id }) }, label);
   mount(root,
-    segmented('path'),
-    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Lộ trình'), h('h1', {}, 'Bài học'))),
-    books.length > 1 ? h('div', { class: 'seg' }, books.map((b) => h('button', { class: ['seg-btn', b === book ? 'on' : ''], type: 'button', onclick: () => go({ book: b }) }, b))) : null,
+    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, `${data.lessons.length} bài · ${books.length} quyển`), h('h1', {}, 'Bài học')), segmented('path')),
     h('div', { class: 'unit-head' },
-      h('h2', {}, book),
+      h('div', { class: 'row between' },
+        h('h2', {}, book),
+        books.length > 1 ? h('div', { class: 'seg seg-fit seg-dark' }, books.map((b) => h('button', { class: ['seg-btn', b === book ? 'on' : ''], type: 'button', onclick: () => go({ book: b }) }, b.replace('Hán ngữ ', 'Quyển ')))) : null),
       h('div', { class: 'small', style: { opacity: 0.85 } }, `${done}/${inBook.length} bài hoàn thành`),
       h('div', { class: 'bar' }, h('span', { style: { width: `${(done / inBook.length) * 100}%` } }))),
-    search,
-    h('div', { class: 'row', style: { gap: '8px', margin: '12px 0' } }, chip('all', 'Tất cả'), chip('doing', 'Đang học'), chip('todo', 'Chưa học'), chip('done', 'Đã xong')),
+    h('div', { class: 'filters lesson-filters' }, search,
+      h('div', { class: 'chip-scroll' }, chip('all', 'Tất cả'), chip('doing', 'Đang học'), chip('todo', 'Chưa học'), chip('done', 'Đã xong'))),
     listEl);
   draw();
   requestAnimationFrame(() => listEl.querySelector('.current')?.scrollIntoView({ block: 'center' }));
