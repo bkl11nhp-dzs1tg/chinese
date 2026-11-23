@@ -1,0 +1,91 @@
+/* Trang giới thiệu: chữ dọc + thẻ thử, dòng thời gian, cuộn phim bài học, khung điện thoại. */
+.ld { max-width: 1100px; margin: 0 auto; padding-bottom: 48px; }
+
+/* 1. Màn đầu */
+.ld-open { display: grid; grid-template-columns: auto 1fr; gap: 18px 22px; align-items: center; min-height: calc(100dvh - 140px); padding: 12px 0 24px; }
+.ld-vert { grid-row: span 2; display: flex; flex-direction: column; align-items: center; gap: 14px; align-self: stretch; justify-content: center; }
+.ld-vert .han { writing-mode: vertical-rl; font-size: clamp(84px, 22vw, 170px); line-height: .95; font-weight: 700; color: var(--ink); letter-spacing: .02em; }
+.ld-seal svg { width: 46px; height: 46px; border-radius: 10px; transform: rotate(-6deg); box-shadow: 0 6px 16px rgba(196, 69, 47, .35); }
+.ld-copy { align-self: end; }
+.ld-kicker { margin: 0 0 8px; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+.ld-copy h1 { font-size: clamp(30px, 6vw, 52px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; }
+.ld-lead { color: var(--ink-2); font-size: 17px; max-width: 30em; margin: 0; }
+.ld-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 20px; }
+.ld-actions .btn { min-height: 52px; padding: 0 24px; }
+.ld-link { color: var(--ink-2); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.ld-demo { align-self: start; }
+.demo-card {
+  position: relative; width: 100%; max-width: 340px; aspect-ratio: 4 / 5; border-radius: 28px; cursor: pointer;
+  border: 1px solid var(--glass-border); background: var(--glass-strong); box-shadow: var(--glass-shadow), 0 24px 60px rgba(31, 42, 68, .14);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: var(--ink); font: inherit;
+  display: grid; place-items: center; transition: transform .35s cubic-bezier(.2,.8,.2,1); -webkit-tap-highlight-color: transparent;
+  transform: rotate(3deg);
+}
+.demo-card:hover { transform: rotate(0) translateY(-4px); }
+.demo-card.flipped { transform: rotate(-2deg); background: linear-gradient(160deg, var(--glass-strong), var(--accent-soft)); }
+.demo-card::before, .demo-card::after { content: ""; position: absolute; inset: 12px; border-radius: 20px; border: 1.5px dashed var(--line-strong); pointer-events: none; }
+.demo-card::after { inset: auto 22px 22px auto; width: 34px; height: 34px; border: 0; border-radius: 8px; background: #c4452f; opacity: .85; transform: rotate(8deg); }
+.demo-face { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.demo-han { font-size: clamp(64px, 16vw, 96px); line-height: 1.1; font-weight: 500; }
+.demo-py { font-size: 24px; font-weight: 800; color: var(--accent-ink); }
+.demo-vi { font-size: 18px; color: var(--ink-2); }
+.demo-hint { position: absolute; left: 0; right: 0; bottom: 24px; text-align: center; font-size: 13px; font-weight: 700; color: var(--muted); }
+
+/* 2. Dòng thời gian */
+.ld-block { margin-top: 40px; }
+.ld-h2 { font-size: clamp(24px, 4vw, 34px); letter-spacing: -.01em; margin: 0 0 18px; }
+.ld-h2 span { color: var(--muted); font-weight: 600; }
+.ld-timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; position: relative; }
+.ld-timeline li { position: relative; padding: 0 0 22px 64px; }
+.ld-timeline li::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: repeating-linear-gradient(var(--line-strong) 0 6px, transparent 6px 12px); }
+.ld-timeline li:last-child::before { display: none; }
+.tl-dot { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--bg); }
+.tl-dot svg { width: 22px; height: 22px; }
+.tl-min { float: right; font-weight: 900; font-size: 20px; color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+.ld-timeline strong { display: block; font-size: 18px; padding-top: 10px; }
+.ld-timeline p { margin: 2px 0 0; color: var(--muted); }
+
+/* 3. Cuộn phim bài học */
+.ld-reel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 14px; margin: 0 -16px; padding-left: 16px; scrollbar-width: thin; }
+.reel-item { position: relative; flex: none; width: 220px; scroll-snap-align: start; color: var(--ink); text-decoration: none; }
+.reel-item img { width: 100%; aspect-ratio: 3.4 / 1; object-fit: cover; border-radius: 14px; display: block; border: 1px solid var(--glass-border); }
+.reel-num { position: absolute; top: 6px; left: 8px; font: 900 13px var(--font); color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, .5); }
+.reel-title { display: block; font-size: 20px; margin-top: 8px; }
+.reel-vi { display: block; font-size: 13px; color: var(--muted); }
+
+/* 4. Cài app */
+.ld-install { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; }
+.phone { position: relative; width: 120px; height: 220px; border-radius: 26px; border: 3px solid var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: var(--glass-strong); }
+.phone svg { width: 48px; height: 48px; border-radius: 12px; }
+.phone b { font-size: 14px; }
+.phone-notch { position: absolute; top: 8px; width: 40px; height: 6px; border-radius: 6px; background: var(--ink); }
+.inst-body p { color: var(--ink-2); margin: 0 0 12px; }
+.inst-steps { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-weight: 600; }
+
+@media (min-width: 900px) {
+  .ld-open { grid-template-columns: auto 1.1fr .9fr; grid-template-rows: auto; gap: 40px; min-height: calc(100dvh - 160px); }
+  .ld-vert { grid-row: auto; }
+  .ld-copy { align-self: center; }
+  .ld-demo { align-self: center; justify-self: center; width: 100%; }
+  .ld-timeline { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .ld-timeline li { padding: 60px 8px 0 0; }
+  .ld-timeline li::before { left: 50px; right: -18px; top: 21px; bottom: auto; width: auto; height: 2px; background: repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px); }
+  .tl-min { position: absolute; top: 8px; left: 56px; float: none; }
+  .ld-timeline strong { padding-top: 0; }
+  .ld-reel { margin: 0; padding-left: 2px; }
+  .reel-item { width: 250px; }
+}
+@media (max-width: 560px) {
+  .ld-open { grid-template-columns: auto 1fr; }
+  .ld-demo { grid-column: 1 / -1; justify-self: center; width: 100%; display: grid; justify-items: center; }
+  .demo-card { max-width: 280px; }
+}
+
+.ld-open { min-height: 0; padding: 20px 0 8px; }
+@media (min-width: 900px) { .ld-open { min-height: 0; padding: 48px 0 16px; } .ld-block { margin-top: 56px; } }
+@media (max-width: 560px) { .demo-card { max-width: 230px; aspect-ratio: 1; } .demo-han { font-size: 64px; } }
+
+.ld-link { background: none; border: 0; cursor: pointer; font: 700 16px var(--font); display: inline-flex; align-items: center; gap: 6px; padding: 0; }
+.ld-link svg { width: 18px; height: 18px; }
+.ld-note { font-size: 13px; color: var(--muted); }
+.ld-open { min-height: calc(100dvh - 160px); }

@@ -1,5 +1,16 @@
 // Helper DOM nhỏ: h() tạo phần tử, toast, hộp thoại xác nhận.
 
+// append/replaceChildren gốc in null/undefined/false thành chữ "null"… trên màn hình:
+// bỏ qua các giá trị rỗng để mọi chỗ dùng `điều kiện ? phần tử : null` đều an toàn.
+for (const proto of [globalThis.Element?.prototype, globalThis.DocumentFragment?.prototype]) {
+  if (!proto || proto.__nullSafe) continue;
+  for (const name of ['append', 'prepend', 'replaceChildren']) {
+    const orig = proto[name];
+    proto[name] = function (...kids) { return orig.apply(this, kids.flat(Infinity).filter((k) => k != null && k !== false)); };
+  }
+  proto.__nullSafe = true;
+}
+
 export function h(tag, props = {}, ...children) {
   const el = tag === 'svg' || props?.svg ? document.createElementNS('http://www.w3.org/2000/svg', tag) : document.createElement(tag);
   for (const [k, v] of Object.entries(props || {})) {

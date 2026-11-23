@@ -110,37 +110,5 @@ body.focus-mode { background: transparent; }
 .lp-num.doing { border-color: var(--accent); }
 .lp-num.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
-/* ---------- Landing ---------- */
-body.landing-mode .nav { display: none; }
-.landing { max-width: 1080px; margin: 0 auto; padding-bottom: 40px; }
-.ld-hero { display: grid; gap: 28px; align-items: center; padding: 18px 0 10px; }
-.ld-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-weight: 800; font-size: 13px; color: var(--accent-ink); }
-.ld-badge svg { width: 16px; height: 16px; }
-.ld-hero h1 { font-size: clamp(36px, 7vw, 60px); line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 12px; }
-.ld-hero h1 .han { color: var(--accent-ink); }
-.ld-lead { font-size: 18px; color: var(--ink-2); max-width: 34em; }
-.ld-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-.ld-cta .btn { min-height: 54px; padding: 0 26px; font-size: 17px; }
-.ld-stats { display: flex; gap: 22px; margin-top: 24px; flex-wrap: wrap; }
-.ld-stats b { display: block; font-size: 28px; font-weight: 900; }
-.ld-stats span { color: var(--muted); font-size: 14px; }
-.ld-collage { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; transform: rotate(-2deg); }
-.ld-collage img { width: 100%; aspect-ratio: 3.4 / 1; object-fit: cover; border-radius: 16px; box-shadow: var(--glass-shadow); border: 2px solid var(--glass-border); }
-.ld-collage img:nth-child(odd) { transform: translateY(14px); }
-.ld-features { display: grid; gap: 12px; margin-top: 34px; }
-.ld-feat { padding: 18px; border-radius: var(--r-lg); }
-.ld-feat .sk-ic { margin-bottom: 10px; }
-.ld-feat h3 { margin: 0 0 4px; }
-.ld-feat p { margin: 0; color: var(--muted); font-size: 15px; }
-.ld-install { margin-top: 28px; padding: 20px; border-radius: var(--r-lg); display: grid; gap: 14px; align-items: center; }
-.ld-install h2 { margin: 0; }
-.ld-steps { margin: 0; padding-left: 20px; color: var(--ink-2); }
-@media (min-width: 860px) {
-  .ld-hero { grid-template-columns: 1.05fr 1fr; padding-top: 34px; }
-  .ld-features { grid-template-columns: repeat(4, 1fr); }
-  .ld-install { grid-template-columns: 1fr auto; }
-}
-
 body.landing-mode .nav { display: none !important; }
 body.landing-mode .main { padding-bottom: 32px; }
-.ld-hero h1 .han { white-space: nowrap; }

@@ -5,6 +5,7 @@ import './styles/pixel.css';
 import './styles/app.css';
 import './styles/v4.css';
 import './styles/glass.css';
+import './styles/landing.css';
 import { openDb, createRepo } from './db/repo.js';
 import { createContext, applyTheme } from './app.js';
 import { createRouter } from './router.js';
@@ -136,6 +137,7 @@ async function boot() {
         if (item.match.includes(m.name)) a.setAttribute('aria-current', 'page');
         else a.removeAttribute('aria-current');
       }
+      document.body.classList.toggle('landing-mode', m.name === 'welcome');
       if (m.name === 'settings') settingsBtn.setAttribute('aria-current', 'page'); else settingsBtn.removeAttribute('aria-current');
     },
   });
