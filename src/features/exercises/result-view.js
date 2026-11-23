@@ -18,7 +18,7 @@ export function scoreRing(score, { size = 148, stroke = 14, passed = null } = {}
   svg.innerHTML = `
     <circle class="track" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke-width="${stroke}"/>
     <circle class="val" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke-width="${stroke}" style="stroke:${color}"
-      stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - score)}" transform="rotate(-90 ${size / 2} ${size / 2})"/>
+      stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - score)}" ${score < 0.01 ? 'visibility="hidden"' : ''} transform="rotate(-90 ${size / 2} ${size / 2})"/>
     <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" style="font:900 34px var(--font);fill:var(--ink)">${Math.round(score * 100)}%</text>`;
   return svg;
 }

@@ -1,11 +1,11 @@
-// Icon nét mảnh 24×24 (tự vẽ, kiểu iOS). Logo giữ chữ 中 dạng pixel.
+// Icon nét mảnh 24×24, tự vẽ. Icon điều hướng có lớp tô (.tone) đậm lên khi đang chọn. Logo: con dấu chữ 中.
 
 const PATHS = {
-  today: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
-  cards: '<rect x="3.5" y="6.5" width="13" height="14" rx="2.5"/><path d="M7.5 3.5h10a3 3 0 0 1 3 3v11"/>',
-  lessons: '<path d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20c2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5Z"/><path d="M12 6.5V20"/>',
-  stats: '<path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V6"/><path d="M17 16v-8"/>',
-  settings: '<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M21.2 12h-2.4M5.2 12H2.8M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7M18.5 18.5l-1.7-1.7M7.2 7.2 5.5 5.5"/>',
+  today: '<path class="tone" fill="currentColor" fill-opacity=".16" stroke="none" d="M2.5 19.5 8 12.5l3.5 4 3-3.5 7 6.5z"/><path d="M7.5 11.5a4.5 4.5 0 0 1 9 0"/><path d="M12 3v2.2M5.2 6l1.5 1.5M18.8 6l-1.5 1.5M3 11.5h1.8M19.2 11.5H21"/><path d="M2.5 19.5 8 12.5l3.5 4 3-3.5 7 6.5"/><path d="M2.5 19.5h19"/>',
+  cards: '<rect class="tone" fill="currentColor" fill-opacity=".16" stroke="none" x="3.5" y="6" width="12.5" height="15" rx="2.5"/><path d="M8 3h9.5A3 3 0 0 1 20.5 6v11.5"/><rect x="3.5" y="6" width="12.5" height="15" rx="2.5"/><path d="M9.7 8.6v1M6.5 10.5h6.5v1.3M7.6 12.8h4.6l-2.3 1.7v3.3l-1 .6M6.5 15.4h6.5"/>',
+  lessons: '<path class="tone" fill="currentColor" fill-opacity=".16" stroke="none" d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20z"/><path d="M12 6.5C10 5 7 4.5 3.5 5v13.5C7 18 10 18.5 12 20c2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5Z"/><path d="M12 6.5V20"/><path d="M15.5 5.2V11l1.5-1.2 1.5 1.2V5.1"/>',
+  stats: '<rect class="tone" fill="currentColor" fill-opacity=".16" stroke="none" x="4" y="13" width="3.6" height="7" rx="1.8"/><rect class="tone" fill="currentColor" fill-opacity=".16" stroke="none" x="10.2" y="9.5" width="3.6" height="10.5" rx="1.8"/><rect class="tone" fill="currentColor" fill-opacity=".16" stroke="none" x="16.4" y="11.5" width="3.6" height="8.5" rx="1.8"/><rect x="4" y="13" width="3.6" height="7" rx="1.8"/><rect x="10.2" y="9.5" width="3.6" height="10.5" rx="1.8"/><rect x="16.4" y="11.5" width="3.6" height="8.5" rx="1.8"/><path d="M4 8.5 9 5l4 2.5 6.5-4"/><path d="M17 3.5h2.5V6"/>',
+  settings: '<path class="tone" fill="currentColor" fill-opacity=".16" stroke="none" d="M18.76 10.20 L21.17 10.43 L21.17 13.57 L18.76 13.80 L18.06 15.51 L19.59 17.37 L17.37 19.59 L15.51 18.06 L13.80 18.76 L13.57 21.17 L10.43 21.17 L10.20 18.76 L8.49 18.06 L6.63 19.59 L4.41 17.37 L5.94 15.51 L5.24 13.80 L2.83 13.57 L2.83 10.43 L5.24 10.20 L5.94 8.49 L4.41 6.63 L6.63 4.41 L8.49 5.94 L10.20 5.24 L10.43 2.83 L13.57 2.83 L13.80 5.24 L15.51 5.94 L17.37 4.41 L19.59 6.63 L18.06 8.49Z"/><path d="M18.76 10.20 L21.17 10.43 L21.17 13.57 L18.76 13.80 L18.06 15.51 L19.59 17.37 L17.37 19.59 L15.51 18.06 L13.80 18.76 L13.57 21.17 L10.43 21.17 L10.20 18.76 L8.49 18.06 L6.63 19.59 L4.41 17.37 L5.94 15.51 L5.24 13.80 L2.83 13.57 L2.83 10.43 L5.24 10.20 L5.94 8.49 L4.41 6.63 L6.63 4.41 L8.49 5.94 L10.20 5.24 L10.43 2.83 L13.57 2.83 L13.80 5.24 L15.51 5.94 L17.37 4.41 L19.59 6.63 L18.06 8.49Z"/><circle cx="12" cy="12" r="3"/>',
   speaker: '<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/>',
   play: '<path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/>',
   game: '<rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".9" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".9" fill="currentColor"/>',
@@ -23,6 +23,7 @@ const PATHS = {
   pencil: '<path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M13.5 7l3.5 3.5"/>',
   repeat: '<path d="M4 11V9.5A3.5 3.5 0 0 1 7.5 6H19l-3-3M20 13v1.5a3.5 3.5 0 0 1-3.5 3.5H5l3 3"/>',
   sparkle: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/>',
+  lantern: '<path d="M12 2.5V4"/><rect x="9" y="4" width="6" height="2" rx=".6"/><ellipse cx="12" cy="11.5" rx="6.3" ry="5.5" fill="currentColor" fill-opacity=".22"/><ellipse cx="12" cy="11.5" rx="6.3" ry="5.5"/><path d="M9.3 6.6c-1.5 3-1.5 6.8 0 9.8M14.7 6.6c1.5 3 1.5 6.8 0 9.8"/><rect x="9.5" y="17" width="5" height="1.8" rx=".6"/><path d="M12 18.8v2.7M10.8 21.5h2.4"/>',
   clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
   link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
   bolt: '<path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z"/>',
@@ -48,17 +49,15 @@ const PATHS = {
   info: '<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.5v.5"/>',
 };
 
-const LOGO = ['...##...', '########', '#..##..#', '#..##..#', '########', '...##...', '...##...', '...##...'];
-
 export function icon(name, { title } = {}) {
   const ns = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(ns, 'svg');
   if (name === 'logo') {
-    svg.setAttribute('viewBox', '0 0 12 12');
-    svg.setAttribute('shape-rendering', 'crispEdges');
-    let d = '';
-    LOGO.forEach((row, y) => [...row].forEach((ch, x) => { if (ch === '#') d += `M${x + 2} ${y + 2}h1v1h-1z`; }));
-    svg.innerHTML = `<rect width="12" height="12" fill="#1f2a44"/><rect y="11" width="12" height="1" fill="#ec8a4c"/><path fill="#f5efe2" d="${d}"/>`;
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.innerHTML = '<rect x="1" y="1" width="22" height="22" rx="5" fill="#c4452f"/>'
+      + '<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="3.6" fill="none" stroke="#f7e6d4" stroke-width="1.1"/>'
+      + '<path d="M6.8 8.4h10.4v6.4H6.8z" fill="none" stroke="#fdf3e6" stroke-width="2.1" stroke-linejoin="round"/>'
+      + '<path d="M12 4.8v14.6" stroke="#fdf3e6" stroke-width="2.3" stroke-linecap="round"/>';
   } else {
     svg.setAttribute('viewBox', '0 0 24 24');
     svg.setAttribute('fill', 'none');
