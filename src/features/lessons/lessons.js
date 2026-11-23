@@ -1,0 +1,187 @@
+// Lộ trình bài học theo sách (mục 9.3) và trang một bài với các bước:
+// 1. Học từ mới → 2. Nghe bài (MP3 của sách) → 3. Luyện tập → 4. Kiểm tra cuối bài.
+
+import { h, mount, toast } from '../../ui/dom.js';
+import { icon } from '../../ui/icons.js';
+import { speak } from '../../ui/speech.js';
+import { cardStatus } from '../../core/srs.js';
+import { segmented } from '../reading/reading.js';
+import { lessonAudioSrc } from '../../content.js';
+
+const STATUS_LABEL = { todo: 'Chưa học', doing: 'Đang học', done: 'Hoàn thành' };
+const statusBadge = (st) => h('span', { class: ['badge', st === 'done' ? 'done' : st === 'doing' ? 'doing' : 'new'] }, STATUS_LABEL[st]);
+
+export const lessonArt = (id) => `./lessons/${encodeURIComponent(id)}.webp`;
+
+export async function renderList(root, ctx, { query = {} } = {}) {
+  const data = await ctx.loadAll();
+  if (!data.lessons.length) {
+    mount(root, h('div', { class: 'large-title' }, h('h1', {}, 'Bài học')), h('p', { class: 'notice' }, 'Chưa có nội dung bài học.'));
+    return;
+  }
+  const books = [...new Set(data.lessons.map((l) => l.book))];
+  const book = books.includes(query.book) ? query.book : (data.active?.book || books[0]);
+  const filter = ['all', 'doing', 'done', 'todo'].includes(query.f) ? query.f : 'all';
+  const inBook = data.lessons.filter((l) => l.book === book);
+  const done = inBook.filter((l) => data.statusById.get(l.id).status === 'done').length;
+  const search = h('input', { type: 'search', placeholder: 'Tìm bài: số bài, chữ Hán, tiếng Việt…', 'aria-label': 'Tìm bài', value: query.q || '' });
+  const listEl = h('div', { class: 'lesson-list' });
+  const go = (patch) => ctx.navigate(`lessons?${new URLSearchParams({ book, f: filter, ...patch })}`);
+  function draw() {
+    const term = search.value.trim().toLowerCase();
+    const rows = inBook.filter((l) => {
+      const st = data.statusById.get(l.id).status;
+      if (filter !== 'all' && st !== filter) return false;
+      return !term || `${l.unit} bài ${l.unit} ${l.title} ${l.title_vi || ''}`.toLowerCase().includes(term);
+    });
+    listEl.replaceChildren(...(rows.length ? rows.map((l) => {
+      const st = data.statusById.get(l.id);
+      const isCurrent = data.active?.id === l.id;
+      return h('a', { class: ['lesson-card', isCurrent ? 'current' : ''], href: `#/lesson/${encodeURIComponent(l.id)}` },
+        h('span', { class: 'thumb' }, h('img', { src: lessonArt(l.id), alt: '', loading: 'lazy', onerror: (e) => { e.target.remove(); } })),
+        h('span', { class: 'info' },
+          h('span', { class: 'top' }, h('span', { class: 'num' }, `BÀI ${l.unit ?? ''}`), isCurrent ? h('span', { class: 'badge doing' }, st.status === 'todo' ? 'Bắt đầu' : 'Đang học') : statusBadge(st.status)),
+          h('span', { class: 'han t' }, l.title),
+          h('span', { class: 'vi' }, l.title_vi || ''),
+          h('span', { class: ['bar', 'thin', st.status === 'done' ? 'good' : ''] }, h('span', { style: { width: `${st.total ? (st.learned / st.total) * 100 : 0}%` } }))),
+        icon('chevron'));
+    }) : [h('p', { class: 'muted center' }, 'Không có bài phù hợp.')]));
+  }
+  search.addEventListener('input', draw);
+  const chip = (id, label) => h('button', { class: ['chip', 'opt', filter === id ? 'selected' : ''], type: 'button', onclick: () => go({ f: id }) }, label);
+  mount(root,
+    segmented('path'),
+    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Lộ trình'), h('h1', {}, 'Bài học'))),
+    books.length > 1 ? h('div', { class: 'seg' }, books.map((b) => h('button', { class: ['seg-btn', b === book ? 'on' : ''], type: 'button', onclick: () => go({ book: b }) }, b))) : null,
+    h('div', { class: 'unit-head' },
+      h('h2', {}, book),
+      h('div', { class: 'small', style: { opacity: 0.85 } }, `${done}/${inBook.length} bài hoàn thành`),
+      h('div', { class: 'bar' }, h('span', { style: { width: `${(done / inBook.length) * 100}%` } }))),
+    search,
+    h('div', { class: 'row', style: { gap: '8px', margin: '12px 0' } }, chip('all', 'Tất cả'), chip('doing', 'Đang học'), chip('todo', 'Chưa học'), chip('done', 'Đã xong')),
+    listEl);
+  draw();
+  requestAnimationFrame(() => listEl.querySelector('.current')?.scrollIntoView({ block: 'center' }));
+}
+
+export async function renderLesson(root, ctx, { params }) {
+  const data = await ctx.loadAll();
+  const lesson = data.lessons.find((l) => l.id === params.id);
+  if (!lesson) { mount(root, h('p', {}, 'Không tìm thấy bài. '), h('a', { href: '#/lessons' }, 'Về lộ trình')); return; }
+  const st = data.statusById.get(lesson.id);
+  const progress = data.progressById.get(lesson.id);
+  const rate = ctx.settings.tts_rate;
+  const threshold = ctx.settings.pass_threshold;
+  const cards = lesson.vocab_ids.map((id) => data.cardsById.get(id)).filter(Boolean);
+  const audioUrl = await lessonAudioSrc(lesson.id);
+  const idx = data.lessons.indexOf(lesson);
+  const prev = data.lessons[idx - 1];
+  const next = data.lessons[idx + 1];
+  const allLearned = st.total > 0 && st.learned === st.total;
+  const textCount = (lesson.texts || []).reduce((n, t) => n + t.lines.length, 0);
+  const readProg = await ctx.repo.get('reading_progress', `lesson:${lesson.id}`);
+  const testPassed = st.test_best != null && st.test_best >= threshold;
+
+  const stepRow = ({ n, iconName, title, meta, done, href, onclick }) => h(href ? 'a' : 'button', {
+    class: 'row-link', href, type: href ? null : 'button', onclick,
+  },
+  h('span', { class: ['icon-box', done ? 'done' : ''] }, done ? icon('check') : icon(iconName)),
+  h('span', { class: 'grow' }, h('div', { class: 'title' }, `${n}. ${title}`), h('div', { class: 'meta' }, meta)),
+  icon('chevron'));
+
+  const startLearning = async () => {
+    await ctx.repo.saveSettings({ active_lesson_id: lesson.id });
+    await ctx.refreshSettings();
+    ctx.navigate(`session?lesson=${encodeURIComponent(lesson.id)}`);
+  };
+  // Bước nên làm tiếp theo: học từ → kiểm tra.
+  const primary = !allLearned
+    ? h('button', { class: 'btn primary big block', type: 'button', onclick: startLearning }, icon('play'), st.learned ? `Học tiếp (${st.total - st.learned} từ)` : 'Bắt đầu học')
+    : textCount && !readProg
+      ? h('a', { class: 'btn primary big block', href: `#/read/${encodeURIComponent(`lesson:${lesson.id}`)}` }, icon('lessons'), 'Đọc bài khóa')
+    : !testPassed
+      ? h('a', { class: 'btn primary big block', href: `#/test/${encodeURIComponent(lesson.id)}` }, 'Làm kiểm tra cuối bài')
+      : next ? h('a', { class: 'btn primary big block', href: `#/lesson/${encodeURIComponent(next.id)}` }, 'Sang bài tiếp theo') : null;
+
+  mount(root, h('div', { class: 'lesson-page' }, h('div', { class: 'lp-aside' },
+    h('p', { style: { margin: 0 } }, h('a', { class: 'btn ghost', href: '#/lessons', style: { paddingLeft: 0 } }, icon('back'), 'Lộ trình')),
+    h('div', { class: 'hero px-box center lesson-hero' },
+      h('div', { class: 'art' }, h('img', { src: lessonArt(lesson.id), alt: '', onerror: (e) => e.target.parentNode.remove() })),
+      h('div', { class: 'q-type' }, `${lesson.book} · Bài ${lesson.unit ?? ''}`),
+      h('h1', { class: 'han', lang: 'zh-CN', style: { fontSize: '36px', fontWeight: 600, margin: '4px 0' } }, lesson.title),
+      lesson.title_vi ? h('p', { class: 'muted', style: { margin: 0 } }, lesson.title_vi) : null,
+      h('div', { style: { margin: '14px 0 4px' } }, statusBadge(st.status)),
+      h('div', { class: 'bar', style: { margin: '12px 0 18px' }, role: 'progressbar', 'aria-label': 'Từ đã học', 'aria-valuenow': st.learned, 'aria-valuemax': st.total },
+        h('span', { style: { width: `${st.total ? (st.learned / st.total) * 100 : 0}%` } })),
+      primary)),
+    h('div', { class: 'lp-main' },
+
+    h('div', { class: 'section-title' }, 'Các bước'),
+    h('div', { class: 'group' },
+      stepRow({ n: 1, iconName: 'cards', title: 'Học từ mới', meta: `${st.learned}/${st.total} từ đã học`, done: allLearned, onclick: startLearning }),
+      textCount
+        ? stepRow({ n: 2, iconName: 'lessons', title: 'Bài khóa', meta: `${textCount} câu · bấm từ để tra, nghe từng câu${readProg?.finished ? ' · đã đọc xong' : ''}`, done: !!readProg?.finished, href: `#/read/${encodeURIComponent(`lesson:${lesson.id}`)}` })
+        : stepRow({ n: 2, iconName: 'lessons', title: 'Bài khóa', meta: 'Bài này chưa có bài khóa', href: `#/lesson/${encodeURIComponent(lesson.id)}` }),
+      stepRow({ n: 3, iconName: 'sparkle', title: 'Ngữ pháp', meta: lesson.grammar_points?.length ? `${lesson.grammar_points.length} điểm: ${lesson.grammar_points.map((g) => g.title).filter(Boolean).slice(0, 2).join(' · ')}` : 'Chưa có ghi chú ngữ pháp', onclick: () => root.querySelector('#grammar')?.scrollIntoView({ behavior: 'smooth' }) }),
+      stepRow({ n: 4, iconName: 'pencil', title: 'Luyện tập', meta: st.best_score != null ? `Tốt nhất ${Math.round(st.best_score * 100)}%` : 'Trắc nghiệm, ghép cặp, điền từ, sắp xếp câu', done: st.best_score != null && st.best_score >= threshold, href: `#/exercise/${encodeURIComponent(lesson.id)}` }),
+      stepRow({ n: 5, iconName: 'trophy', title: 'Kiểm tra cuối bài', meta: st.test_best != null ? `Tốt nhất ${Math.round(st.test_best * 100)}% · ${progress?.test_attempts || 0} lần · đạt từ ${Math.round(threshold * 100)}%` : `Từ vựng + bài khóa · đạt từ ${Math.round(threshold * 100)}% để hoàn thành bài`, done: testPassed, href: `#/test/${encodeURIComponent(lesson.id)}` })),
+    audioUrl
+      ? [h('div', { class: 'section-title' }, 'Nghe bài (MP3 của sách)'),
+        h('div', { class: 'group card' }, h('audio', { controls: true, preload: 'metadata', src: audioUrl }), h('p', { class: 'muted small', style: { margin: '6px 0 0' } }, `File nghe của ${lesson.book}, bài ${lesson.unit ?? ''}`))]
+      : null,
+
+    h('div', { class: 'section-title' }, `Từ vựng (${cards.length})`),
+    cards.length ? h('ul', { class: 'list group' }, cards.map((c) => {
+      const s = cardStatus(data.statesById.get(c.id));
+      return h('li', {}, h('div', { class: 'item' },
+        h('span', { class: 'han', lang: 'zh-CN', style: { fontSize: '28px', minWidth: '2.4em' } }, c.hanzi),
+        h('span', { style: { flex: 1, minWidth: 0 } },
+          h('div', { style: { color: 'var(--accent-ink)', fontWeight: 700 } }, c.pinyin),
+          h('div', {}, c.meaning),
+          c.pos ? h('div', { class: 'muted small' }, c.pos) : null),
+        s !== 'new' ? h('span', { class: ['badge', s === 'mastered' ? 'done' : 'doing'] }, s === 'mastered' ? 'Thuộc' : 'Đang học') : null,
+        h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': `Nghe ${c.hanzi}`, onclick: () => speak(c.hanzi, rate) }, icon('speaker'))));
+    })) : h('p', { class: 'muted' }, 'Bài này chưa có từ vựng.'),
+
+    h('div', { class: 'section-title' }, `Từ vựng (${cards.length})`),
+    cards.length ? h('ul', { class: 'list group' }, cards.map((c) => {
+      const s = cardStatus(data.statesById.get(c.id));
+      return h('li', {}, h('div', { class: 'item' },
+        h('span', { class: 'han', lang: 'zh-CN', style: { fontSize: '28px', minWidth: '2.4em' } }, c.hanzi),
+        h('span', { style: { flex: 1, minWidth: 0 } },
+          h('div', { style: { color: 'var(--accent-ink)', fontWeight: 700 } }, c.pinyin),
+          h('div', {}, c.meaning),
+          c.pos ? h('div', { class: 'muted small' }, c.pos) : null),
+        s !== 'new' ? h('span', { class: ['badge', s === 'mastered' ? 'done' : 'doing'] }, s === 'mastered' ? 'Thuộc' : 'Đang học') : null,
+        h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': `Nghe ${c.hanzi}`, onclick: () => speak(c.hanzi, rate) }, icon('speaker'))));
+    })) : h('p', { class: 'muted' }, 'Bài này chưa có từ vựng.'),
+
+    lesson.texts?.length ? [h('div', { class: 'section-title' }, 'Bài khóa'),
+      h('div', { class: 'group card' }, lesson.texts.map((t) => h('div', { style: { marginBottom: '12px' } },
+        t.title ? h('h3', {}, t.title) : null,
+        (t.lines || []).map((ln) => h('div', { class: 'row nowrap', style: { padding: '6px 0', alignItems: 'flex-start' } },
+          ln.speaker ? h('strong', { class: 'han', style: { minWidth: '2.5em' } }, `${ln.speaker}：`) : null,
+          h('div', { style: { flex: 1 } },
+            h('div', { class: 'han', lang: 'zh-CN', style: { fontSize: '22px' } }, ln.zh),
+            ln.pinyin ? h('div', { class: 'small', style: { color: 'var(--accent-ink)' } }, ln.pinyin) : null,
+            ln.vi ? h('div', { class: 'muted small' }, ln.vi) : null),
+          h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe câu', onclick: () => speak(ln.zh, rate) }, icon('speaker')))))))] : null,
+
+    lesson.grammar_points?.length ? [h('div', { class: 'section-title', id: 'grammar' }, 'Ngữ pháp & ghi chú'),
+      h('div', { class: 'group' }, lesson.grammar_points.map((g, gi) => h('div', { class: 'gp' },
+        h('h3', {}, `${gi + 1}. ${g.title || ''}`),
+        g.note ? h('p', { style: { margin: '0 0 6px' } }, g.note) : null,
+        g.example ? h('div', { class: 'han', style: { fontSize: '20px' } }, g.example) : null,
+        (g.examples || []).map((e) => h('div', { class: 'ex' },
+          h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe ví dụ', style: { width: '36px', minHeight: '36px' }, onclick: () => speak(e.zh, rate) }, icon('speaker')),
+          h('div', {}, h('div', { class: 'han', lang: 'zh-CN' }, e.zh), e.pinyin ? h('div', { class: 'py' }, e.pinyin) : null, e.vi ? h('div', { class: 'vi' }, e.vi) : null))))))] : null,
+    h('div', { class: 'row between mt' },
+      prev ? h('a', { class: 'btn ghost', href: `#/lesson/${encodeURIComponent(prev.id)}` }, icon('back'), `Bài ${prev.unit ?? ''}`) : h('span'),
+      data.active?.id !== lesson.id && st.status !== 'done' ? h('button', {
+        class: 'btn ghost', type: 'button',
+        onclick: async () => { await ctx.repo.saveSettings({ active_lesson_id: lesson.id }); await ctx.refreshSettings(); toast('Từ mới hằng ngày sẽ lấy từ bài này.'); },
+      }, 'Đặt làm bài đang học') : null,
+      next ? h('a', { class: 'btn ghost', href: `#/lesson/${encodeURIComponent(next.id)}` }, `Bài ${next.unit ?? ''}`, icon('chevron')) : h('span')),
+  )));
+  return null;
+}

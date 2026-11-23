@@ -1,0 +1,153 @@
+{
+ "id": "L03",
+ "book": "Hán ngữ 1",
+ "unit": 3,
+ "order": 3,
+ "title": "明天见",
+ "title_vi": "Ngày mai gặp lại",
+ "vocab_ids": [
+  "L03-阿拉伯语",
+  "L03-的",
+  "L03-对",
+  "L03-俄语",
+  "L03-法语",
+  "L03-韩国语",
+  "L03-寄",
+  "L03-见",
+  "L03-九",
+  "L03-六",
+  "L03-明天",
+  "L03-七",
+  "L03-钱",
+  "L03-取",
+  "L03-去",
+  "L03-日语",
+  "L03-西班牙语",
+  "L03-信",
+  "L03-学",
+  "L03-银行",
+  "L03-英语",
+  "L03-邮局"
+ ],
+ "exercises": [
+  {
+   "id": "L03-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Đi ngân hàng rút tiền.”",
+   "options": [
+    "去",
+    "银行",
+    "取",
+    "钱"
+   ],
+   "answer": [
+    "去",
+    "银行",
+    "取",
+    "钱"
+   ],
+   "explanation": "去银行取钱 — Đi ngân hàng rút tiền."
+  },
+  {
+   "id": "L03-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Đi bưu điện gửi thư.”",
+   "options": [
+    "去",
+    "邮局",
+    "寄",
+    "信"
+   ],
+   "answer": [
+    "去",
+    "邮局",
+    "寄",
+    "信"
+   ],
+   "explanation": "去邮局寄信 — Đi bưu điện gửi thư."
+  },
+  {
+   "id": "L03-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 明天___！",
+   "answer": "见",
+   "explanation": "Ngày mai gặp lại!"
+  }
+ ],
+ "texts": [
+  {
+   "title": "学汉语",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "你学英语吗？",
+     "vi": "Bạn học tiếng Anh à?"
+    },
+    {
+     "speaker": "B",
+     "zh": "不，学汉语。",
+     "vi": "Không, học tiếng Hán."
+    },
+    {
+     "speaker": "A",
+     "zh": "去北京吗？",
+     "vi": "Đi Bắc Kinh à?"
+    },
+    {
+     "speaker": "B",
+     "zh": "对。",
+     "vi": "Đúng."
+    }
+   ]
+  },
+  {
+   "title": "明天见",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "你去邮局寄信吗？",
+     "vi": "Bạn đi bưu điện gửi thư à?"
+    },
+    {
+     "speaker": "B",
+     "zh": "不去。去银行取钱。",
+     "vi": "Không đi. Đi ngân hàng rút tiền."
+    },
+    {
+     "speaker": "A",
+     "zh": "明天见！",
+     "vi": "Mai gặp lại!"
+    },
+    {
+     "speaker": "B",
+     "zh": "明天见！",
+     "vi": "Mai gặp lại!"
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L03-g1",
+   "title": "Ngữ âm: j q x và vận mẫu bắt đầu bằng i, ü",
+   "note": "Thanh mẫu j q x chỉ đi với i, ü và các vần bắt đầu bằng i, ü. Khi j q x đi với ü thì bỏ hai chấm: ju, qu, xu (vẫn đọc là ü).",
+   "examples": [
+    {
+     "zh": "去 qù / 学 xué",
+     "vi": "đi / học"
+    }
+   ]
+  },
+  {
+   "id": "L03-g2",
+   "title": "Quy tắc viết y, w",
+   "note": "Vần bắt đầu bằng i, u, ü đứng một mình thì viết thành y, w, yu: i → yi, ia → ya, u → wu, ü → yu.",
+   "examples": [
+    {
+     "zh": "银行 yínháng",
+     "vi": "ngân hàng"
+    }
+   ]
+  }
+ ]
+}

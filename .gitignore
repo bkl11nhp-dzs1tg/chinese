@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+
+# Nội dung sách: commit phần chữ (data/vocab, lessons, readings); KHÔNG commit MP3, PDF.
+data/audio/
+data/pack.json
+*.mp3
+*.pdf
+
+# Kết quả test e2e
+test-results/
+playwright-report/

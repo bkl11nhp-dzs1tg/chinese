@@ -1,0 +1,129 @@
+{
+  "id": "R02",
+  "title": "我的一天",
+  "level": 2,
+  "source": "tự viết, theo dạng đoạn văn kể nhật ký ngắn của giáo trình cấp 2",
+  "audio": null,
+  "vocab": [
+    {
+      "hanzi": "起床",
+      "pinyin": "qǐchuáng",
+      "pos": "động từ",
+      "meaning": "dậy, thức dậy"
+    },
+    {
+      "hanzi": "上班",
+      "pinyin": "shàngbān",
+      "pos": "động từ",
+      "meaning": "đi làm"
+    },
+    {
+      "hanzi": "公司",
+      "pinyin": "gōngsī",
+      "pos": "danh từ",
+      "meaning": "công ty"
+    },
+    {
+      "hanzi": "中午",
+      "pinyin": "zhōngwǔ",
+      "pos": "danh từ",
+      "meaning": "buổi trưa"
+    },
+    {
+      "hanzi": "饭馆",
+      "pinyin": "fànguǎn",
+      "pos": "danh từ",
+      "meaning": "quán ăn"
+    },
+    {
+      "hanzi": "下班",
+      "pinyin": "xiàbān",
+      "pos": "động từ",
+      "meaning": "tan làm"
+    },
+    {
+      "hanzi": "回家",
+      "pinyin": "huíjiā",
+      "pos": "động từ",
+      "meaning": "về nhà"
+    },
+    {
+      "hanzi": "累",
+      "pinyin": "lèi",
+      "pos": "tính từ",
+      "meaning": "mệt"
+    },
+    {
+      "hanzi": "睡觉",
+      "pinyin": "shuìjiào",
+      "pos": "động từ",
+      "meaning": "ngủ"
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "id": "s1",
+          "hanzi": "我每天六点半起床。",
+          "pinyin": "Wǒ měi tiān liù diǎn bàn qǐchuáng.",
+          "meaning": "Mỗi ngày tôi dậy lúc 6 giờ rưỡi."
+        },
+        {
+          "id": "s2",
+          "hanzi": "早上七点，我骑车去公司上班。",
+          "pinyin": "Zǎoshang qī diǎn, wǒ qí chē qù gōngsī shàngbān.",
+          "meaning": "Lúc 7 giờ sáng, tôi đi xe đạp đến công ty làm việc."
+        },
+        {
+          "id": "s3",
+          "hanzi": "我的公司离家不远，骑车十分钟就到。",
+          "pinyin": "Wǒ de gōngsī lí jiā bù yuǎn, qí chē shí fēnzhōng jiù dào.",
+          "meaning": "Công ty tôi cách nhà không xa, đi xe đạp mười phút là tới."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "sentences": [
+        {
+          "id": "s4",
+          "hanzi": "中午，我和同事一起去饭馆吃饭。",
+          "pinyin": "Zhōngwǔ, wǒ hé tóngshì yìqǐ qù fànguǎn chīfàn.",
+          "meaning": "Buổi trưa, tôi cùng đồng nghiệp đi quán ăn ăn cơm."
+        },
+        {
+          "id": "s5",
+          "hanzi": "我们喜欢吃米饭和青菜。",
+          "pinyin": "Wǒmen xǐhuan chī mǐfàn hé qīngcài.",
+          "meaning": "Chúng tôi thích ăn cơm và rau xanh."
+        },
+        {
+          "id": "s6",
+          "hanzi": "下午五点半，我下班回家。",
+          "pinyin": "Xiàwǔ wǔ diǎn bàn, wǒ xiàbān huíjiā.",
+          "meaning": "5 giờ rưỡi chiều, tôi tan làm về nhà."
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "sentences": [
+        {
+          "id": "s7",
+          "hanzi": "晚上我常常很累，所以早点睡觉。",
+          "pinyin": "Wǎnshang wǒ chángcháng hěn lèi, suǒyǐ zǎo diǎn shuìjiào.",
+          "meaning": "Buổi tối tôi thường rất mệt, nên đi ngủ sớm."
+        },
+        {
+          "id": "s8",
+          "hanzi": "我觉得这样的生活很好。",
+          "pinyin": "Wǒ juéde zhèyàng de shēnghuó hěn hǎo.",
+          "meaning": "Tôi thấy cuộc sống như vậy rất tốt."
+        }
+      ]
+    }
+  ],
+  "illustration": "/illustrations/R02.svg"
+}

@@ -1,0 +1,146 @@
+{
+ "id": "L02",
+ "book": "Hán ngữ 1",
+ "unit": 2,
+ "order": 2,
+ "title": "汉语不太难",
+ "title_vi": "Tiếng Hán không khó lắm",
+ "vocab_ids": [
+  "L02-爸爸",
+  "L02-弟弟",
+  "L02-哥哥",
+  "L02-汉语",
+  "L02-很",
+  "L02-她",
+  "L02-妈妈",
+  "L02-吗",
+  "L02-忙",
+  "L02-妹妹",
+  "L02-男",
+  "L02-难",
+  "L02-他",
+  "L02-太"
+ ],
+ "exercises": [
+  {
+   "id": "L02-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Tiếng Hán không khó lắm.”",
+   "options": [
+    "汉语",
+    "不",
+    "太",
+    "难"
+   ],
+   "answer": [
+    "汉语",
+    "不",
+    "太",
+    "难"
+   ],
+   "explanation": "汉语不太难 — Tiếng Hán không khó lắm."
+  },
+  {
+   "id": "L02-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Bố mẹ rất bận.”",
+   "options": [
+    "爸爸",
+    "妈妈",
+    "很",
+    "忙"
+   ],
+   "answer": [
+    "爸爸",
+    "妈妈",
+    "很",
+    "忙"
+   ],
+   "explanation": "爸爸妈妈很忙 — Bố mẹ rất bận."
+  },
+  {
+   "id": "L02-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 你忙___？",
+   "answer": "吗",
+   "explanation": "Bạn có bận không?"
+  }
+ ],
+ "texts": [
+  {
+   "title": "汉语不太难",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "你忙吗？",
+     "vi": "Bạn có bận không?"
+    },
+    {
+     "speaker": "B",
+     "zh": "很忙。",
+     "vi": "Rất bận."
+    },
+    {
+     "speaker": "A",
+     "zh": "汉语难吗？",
+     "vi": "Tiếng Hán có khó không?"
+    },
+    {
+     "speaker": "B",
+     "zh": "不太难。",
+     "vi": "Không khó lắm."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L02-g1",
+   "title": "Ngữ âm: vận mẫu kép, vận mẫu mũi",
+   "note": "Học các vận mẫu ai ei ao ou, an en ang eng ong. Chú ý phân biệt -n (đầu lưỡi) và -ng (cuống lưỡi).",
+   "examples": [
+    {
+     "zh": "忙 máng / 难 nán",
+     "vi": "bận / khó"
+    }
+   ]
+  },
+  {
+   "id": "L02-g2",
+   "title": "Thanh nhẹ (轻声)",
+   "note": "Một số âm tiết đọc nhẹ và ngắn, không đánh dấu thanh: 爸爸 bàba, 妈妈 māma, 吗 ma.",
+   "examples": [
+    {
+     "zh": "爸爸、妈妈",
+     "vi": "bố, mẹ"
+    }
+   ]
+  },
+  {
+   "id": "L02-g3",
+   "title": "Câu hỏi với 吗",
+   "note": "Thêm 吗 vào cuối câu trần thuật để thành câu hỏi có/không.",
+   "examples": [
+    {
+     "zh": "你忙吗？",
+     "vi": "Bạn có bận không?"
+    },
+    {
+     "zh": "汉语难吗？",
+     "vi": "Tiếng Hán có khó không?"
+    }
+   ]
+  },
+  {
+   "id": "L02-g4",
+   "title": "不太 + tính từ",
+   "note": "不太 = không … lắm, làm nhẹ ý phủ định.",
+   "examples": [
+    {
+     "zh": "不太难。",
+     "vi": "Không khó lắm."
+    }
+   ]
+  }
+ ]
+}

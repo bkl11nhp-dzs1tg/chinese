@@ -1,0 +1,55 @@
+/* Thành phần cơ bản: thẻ nổi, nút 3D (nhấn lún xuống), chip lựa chọn, thanh tiến độ.
+   (Tên file giữ theo đặc tả; phong cách đã chuyển sang mềm kiểu iOS, chỉ giữ chút "pixel" ở logo.) */
+.px-box { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); }
+.px-icon { image-rendering: pixelated; shape-rendering: crispEdges; }
+
+.btn {
+  --press: var(--line-strong);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+  min-height: 48px; padding: 0 var(--s5);
+  font: 700 16px/1 var(--font); letter-spacing: .01em; color: var(--ink);
+  background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: var(--r);
+  box-shadow: 0 3px 0 var(--press); cursor: pointer; text-decoration: none;
+  transition: transform .08s ease, box-shadow .08s ease, background .15s;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none;
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn:active { transform: translateY(3px); box-shadow: 0 0 0 var(--press); }
+.btn:focus-visible, .chip:focus-visible, .tab:focus-visible, input:focus-visible, select:focus-visible, .row-link:focus-visible, .node:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 2px;
+}
+.btn[disabled] { opacity: .45; cursor: not-allowed; transform: none; }
+.btn.primary { --press: var(--accent-press); background: var(--accent); color: var(--on-accent); border-color: transparent; }
+.btn.good { --press: var(--good-press); background: var(--good); color: #fff; border-color: transparent; }
+.btn.bad { --press: var(--bad-press); background: var(--bad); color: #fff; border-color: transparent; }
+.btn.ghost { box-shadow: none; border-color: transparent; background: transparent; color: var(--accent-ink); }
+.btn.ghost:active { transform: none; opacity: .6; }
+.btn.tinted { box-shadow: none; border-color: transparent; background: var(--accent-soft); color: var(--accent-ink); }
+.btn.danger { color: var(--bad); }
+.btn.big { min-height: 54px; font-size: 17px; }
+.btn.block { width: 100%; }
+.btn.icon-only { padding: 0; width: 44px; min-height: 44px; }
+.btn .kbd { font: 500 11px var(--font-mono); opacity: .55; }
+@media (hover: none) { .btn .kbd { display: none; } }
+
+.chip {
+  display: inline-flex; align-items: center; justify-content: center; text-align: center;
+  min-height: 52px; min-width: 52px; padding: var(--s2) var(--s4);
+  background: var(--surface); color: var(--ink);
+  border: 2px solid var(--line); border-radius: var(--r); box-shadow: 0 2px 0 var(--line);
+  font: 600 17px/1.3 var(--font); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  transition: transform .08s, border-color .15s, background .15s;
+}
+.chip:active { transform: scale(.97); }
+.chip.han { font-family: var(--font-han); font-size: 24px; font-weight: 500; }
+.chip.selected { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 2px 0 var(--accent); }
+.chip.correct { border-color: var(--good); background: var(--good-bg); box-shadow: 0 2px 0 var(--good); }
+.chip.wrong { border-color: var(--bad); background: var(--bad-bg); box-shadow: 0 2px 0 var(--bad); animation: shake .3s; }
+.chip.used { opacity: .25; pointer-events: none; }
+.chip[disabled] { cursor: default; }
+@keyframes shake { 0%,100% { transform: translateX(0) } 25% { transform: translateX(-5px) } 75% { transform: translateX(5px) } }
+
+.bar { height: 14px; background: var(--surface-2); border-radius: var(--r-pill); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--accent); border-radius: var(--r-pill); transition: width .35s cubic-bezier(.2,.8,.2,1); }
+.bar.good > span { background: var(--good); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

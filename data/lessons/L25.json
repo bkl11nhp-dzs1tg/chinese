@@ -1,0 +1,229 @@
+{
+ "id": "L25",
+ "book": "Hán ngữ 2",
+ "unit": 25,
+ "order": 25,
+ "title": "她学得很好",
+ "title_vi": "Cô ấy học rất giỏi",
+ "vocab_ids": [
+  "L25-表演",
+  "L25-不错",
+  "L25-错",
+  "L25-得",
+  "L25-电视台",
+  "L25-刚才",
+  "L25-坚持",
+  "L25-节目",
+  "L25-进步",
+  "L25-看",
+  "L25-可以",
+  "L25-篮球",
+  "L25-流利",
+  "L25-哪里",
+  "L25-那么",
+  "L25-努力",
+  "L25-跑",
+  "L25-跑步",
+  "L25-球",
+  "L25-认真",
+  "L25-水平",
+  "L25-台",
+  "L25-提高",
+  "L25-晚",
+  "L25-为",
+  "L25-为什么",
+  "L25-因为",
+  "L25-愿意",
+  "L25-运动",
+  "L25-早",
+  "L25-这么"
+ ],
+ "exercises": [
+  {
+   "id": "L25-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Cô ấy nói tiếng Hán rất lưu loát.”",
+   "options": [
+    "她",
+    "汉语",
+    "说得",
+    "很",
+    "流利"
+   ],
+   "answer": [
+    "她",
+    "汉语",
+    "说得",
+    "很",
+    "流利"
+   ],
+   "explanation": "她汉语说得很流利 — Cô ấy nói tiếng Hán rất lưu loát."
+  },
+  {
+   "id": "L25-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Ngày nào anh ấy cũng kiên trì chạy bộ.”",
+   "options": [
+    "他",
+    "每天",
+    "都",
+    "坚持",
+    "跑步"
+   ],
+   "answer": [
+    "他",
+    "每天",
+    "都",
+    "坚持",
+    "跑步"
+   ],
+   "explanation": "他每天都坚持跑步 — Ngày nào anh ấy cũng kiên trì chạy bộ."
+  },
+  {
+   "id": "L25-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 她学___很好。",
+   "answer": "得",
+   "explanation": "Cô ấy học rất giỏi."
+  }
+ ],
+ "texts": [
+  {
+   "title": "她学得很好",
+   "lines": [
+    {
+     "speaker": "老师",
+     "zh": "罗兰，电视台想请留学生表演一个汉语节目，你愿意去吗？",
+     "vi": "Rollan, đài truyền hình muốn mời lưu học sinh biểu diễn một tiết mục tiếng Hán, em có muốn đi không?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "老师，我不想去。",
+     "vi": "Thưa thầy, em không muốn đi."
+    },
+    {
+     "speaker": "老师",
+     "zh": "为什么？",
+     "vi": "Tại sao?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "我汉语说得不好，也不会表演。",
+     "vi": "Em nói tiếng Hán không tốt, cũng không biết biểu diễn."
+    },
+    {
+     "speaker": "老师",
+     "zh": "你学得不错，有很大进步，汉语水平提高得很快。",
+     "vi": "Em học khá tốt, tiến bộ rất nhiều, trình độ tiếng Hán nâng cao rất nhanh."
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "哪里，我发音发得不准，说得也不流利。让玛丽去吧。她汉语学得很好，说得很流利。玛丽还会唱京剧。",
+     "vi": "Đâu có, em phát âm chưa chuẩn, nói cũng chưa lưu loát. Để Mary đi đi ạ. Bạn ấy học tiếng Hán rất giỏi, nói rất lưu loát. Mary còn biết hát kinh kịch."
+    },
+    {
+     "speaker": "老师",
+     "zh": "是吗？她京剧唱得怎么样？",
+     "vi": "Thế à? Bạn ấy hát kinh kịch thế nào?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "王老师说她唱得不错。",
+     "vi": "Thầy Vương nói bạn ấy hát khá hay."
+    },
+    {
+     "speaker": "老师",
+     "zh": "她怎么学得这么好？",
+     "vi": "Sao bạn ấy học giỏi thế?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "她非常努力，也很认真。",
+     "vi": "Bạn ấy rất cố gắng, cũng rất chăm chỉ."
+    }
+   ]
+  },
+  {
+   "title": "她每天都起得很早",
+   "lines": [
+    {
+     "speaker": "麦克",
+     "zh": "老师，您看她太极拳打得怎么样？",
+     "vi": "(Trên sân trường, Mary đang tập Thái cực quyền) Thưa thầy, thầy thấy bạn ấy đánh Thái cực quyền thế nào?"
+    },
+    {
+     "speaker": "老师",
+     "zh": "打得不错。",
+     "vi": "Đánh khá tốt."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "为学太极拳，她每天都起得很早。",
+     "vi": "Để học Thái cực quyền, ngày nào bạn ấy cũng dậy rất sớm."
+    },
+    {
+     "speaker": "老师",
+     "zh": "麦克，你喜欢什么运动？",
+     "vi": "Mike, em thích môn thể thao nào?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "我喜欢跑步、打篮球。",
+     "vi": "Em thích chạy bộ, chơi bóng rổ."
+    },
+    {
+     "speaker": "老师",
+     "zh": "刚才我看你跑得很快。你篮球打得怎么样？",
+     "vi": "Lúc nãy thầy thấy em chạy rất nhanh. Em chơi bóng rổ thế nào?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "打得还可以。老师，您每天都来锻炼吗？",
+     "vi": "Cũng tạm được ạ. Thưa thầy, ngày nào thầy cũng đến tập ạ?"
+    },
+    {
+     "speaker": "老师",
+     "zh": "对，我每天都坚持锻炼。你呢？",
+     "vi": "Đúng, ngày nào thầy cũng kiên trì rèn luyện. Còn em?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "我不常锻炼，因为我晚上常常睡得很晚，早上起得也很晚。",
+     "vi": "Em không hay tập, vì buổi tối em thường ngủ rất muộn, buổi sáng cũng dậy rất muộn."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L25-g1",
+   "title": "Bổ ngữ trạng thái (1)",
+   "note": "Động từ + 得 + tính từ: đánh giá kết quả/mức độ của hành động. Có tân ngữ thì lặp động từ hoặc đưa tân ngữ lên trước: (说)汉语说得很流利. Phủ định: 得 + 不 + tính từ.",
+   "examples": [
+    {
+     "zh": "她学得很好。",
+     "vi": "Cô ấy học rất giỏi."
+    },
+    {
+     "zh": "我汉语说得不好。",
+     "vi": "Tôi nói tiếng Hán không tốt."
+    },
+    {
+     "zh": "她京剧唱得怎么样？",
+     "vi": "Cô ấy hát kinh kịch thế nào?"
+    }
+   ]
+  },
+  {
+   "id": "L25-g2",
+   "title": "哪里 đáp lời khen",
+   "note": "Khiêm tốn khi được khen: 哪里 = đâu có.",
+   "examples": [
+    {
+     "zh": "哪里，我发音发得不准。",
+     "vi": "Đâu có, tôi phát âm chưa chuẩn."
+    }
+   ]
+  }
+ ]
+}

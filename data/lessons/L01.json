@@ -1,0 +1,83 @@
+{
+ "id": "L01",
+ "book": "Hán ngữ 1",
+ "unit": 1,
+ "order": 1,
+ "title": "你好",
+ "title_vi": "Xin chào",
+ "vocab_ids": [
+  "L01-八",
+  "L01-白",
+  "L01-不",
+  "L01-大",
+  "L01-好",
+  "L01-口",
+  "L01-马",
+  "L01-你",
+  "L01-你好",
+  "L01-女",
+  "L01-五",
+  "L01-一"
+ ],
+ "exercises": [
+  {
+   "id": "L01-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 你___！",
+   "answer": "好",
+   "explanation": "Xin chào!"
+  }
+ ],
+ "texts": [
+  {
+   "title": "你好",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "你好！",
+     "vi": "Xin chào!"
+    },
+    {
+     "speaker": "B",
+     "zh": "你好！",
+     "vi": "Xin chào!"
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L01-g1",
+   "title": "Ngữ âm: thanh mẫu, vận mẫu, âm tiết",
+   "note": "Một âm tiết tiếng Hán = thanh mẫu (phụ âm đầu) + vận mẫu (phần vần) + thanh điệu. Bài 1 học thanh mẫu b p m f d t n l g k h và các vận mẫu đơn a o e i u ü.",
+   "examples": [
+    {
+     "zh": "你好",
+     "vi": "nǐ hǎo"
+    }
+   ]
+  },
+  {
+   "id": "L01-g2",
+   "title": "Bốn thanh điệu",
+   "note": "Thanh 1 (ā) cao, bằng; thanh 2 (á) đi lên; thanh 3 (ǎ) xuống thấp rồi lên; thanh 4 (à) đi xuống mạnh. Thanh điệu khác nhau thì nghĩa khác: mā 妈 (mẹ) – mǎ 马 (ngựa).",
+   "examples": [
+    {
+     "zh": "妈 mā / 马 mǎ",
+     "vi": "mẹ / ngựa"
+    }
+   ]
+  },
+  {
+   "id": "L01-g3",
+   "title": "Biến điệu thanh 3",
+   "note": "Hai thanh 3 đi liền nhau thì thanh 3 đầu đọc thành thanh 2: nǐ hǎo đọc thành ní hǎo.",
+   "examples": [
+    {
+     "zh": "你好！",
+     "vi": "Xin chào!"
+    }
+   ]
+  }
+ ]
+}

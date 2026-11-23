@@ -1,0 +1,228 @@
+{
+ "id": "L24",
+ "book": "Hán ngữ 2",
+ "unit": 24,
+ "order": 24,
+ "title": "我想学太极拳",
+ "title_vi": "Tôi muốn học Thái cực quyền",
+ "vocab_ids": [
+  "L24-报名",
+  "L24-遍",
+  "L24-病",
+  "L24-次",
+  "L24-打",
+  "L24-懂",
+  "L24-发烧",
+  "L24-感冒",
+  "L24-会",
+  "L24-开始",
+  "L24-看病",
+  "L24-咳嗽",
+  "L24-可能",
+  "L24-了",
+  "L24-能",
+  "L24-请假",
+  "L24-舒服",
+  "L24-太极拳",
+  "L24-疼",
+  "L24-听说",
+  "L24-头",
+  "L24-头疼",
+  "L24-下",
+  "L24-小时",
+  "L24-意思",
+  "L24-再"
+ ],
+ "exercises": [
+  {
+   "id": "L24-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Tôi muốn học Thái cực quyền.”",
+   "options": [
+    "我",
+    "想",
+    "学",
+    "太极拳"
+   ],
+   "answer": [
+    "我",
+    "想",
+    "学",
+    "太极拳"
+   ],
+   "explanation": "我想学太极拳 — Tôi muốn học Thái cực quyền."
+  },
+  {
+   "id": "L24-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Tôi bị cảm rồi, muốn xin nghỉ.”",
+   "options": [
+    "我",
+    "感冒",
+    "了",
+    "想",
+    "请假"
+   ],
+   "answer": [
+    "我",
+    "感冒",
+    "了",
+    "想",
+    "请假"
+   ],
+   "explanation": "我感冒了想请假 — Tôi bị cảm rồi, muốn xin nghỉ."
+  },
+  {
+   "id": "L24-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 你___不会打太极拳？",
+   "answer": "会",
+   "explanation": "Bạn có biết đánh Thái cực quyền không?"
+  }
+ ],
+ "texts": [
+  {
+   "title": "我想学太极拳",
+   "lines": [
+    {
+     "speaker": "玛丽",
+     "zh": "你会打太极拳吗？",
+     "vi": "Bạn có biết đánh Thái cực quyền không?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "不会。你呢？",
+     "vi": "Không biết. Còn bạn?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我也不会。你想不想学？",
+     "vi": "Tôi cũng không biết. Bạn có muốn học không?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "想学。",
+     "vi": "Muốn học."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我也想学。听说体育老师下星期教太极拳，我们去报名吧。",
+     "vi": "Tôi cũng muốn học. Nghe nói tuần sau thầy thể dục dạy Thái cực quyền, chúng ta đi đăng ký đi."
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "好。",
+     "vi": "Được."
+    }
+   ]
+  },
+  {
+   "title": "您能不能再说一遍",
+   "lines": [
+    {
+     "speaker": "玛丽",
+     "zh": "老师，我们想学太极拳，现在可以报名吗？",
+     "vi": "Thưa thầy, chúng em muốn học Thái cực quyền, bây giờ có thể đăng ký không ạ?"
+    },
+    {
+     "speaker": "老师",
+     "zh": "可以。",
+     "vi": "Được."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "什么时候开始上课？",
+     "vi": "Khi nào bắt đầu học ạ?"
+    },
+    {
+     "speaker": "老师",
+     "zh": "下星期一。",
+     "vi": "Thứ hai tuần sau."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "每天下午都有课吗？",
+     "vi": "Chiều nào cũng có lớp ạ?"
+    },
+    {
+     "speaker": "老师",
+     "zh": "不，只一三五下午。",
+     "vi": "Không, chỉ chiều thứ hai, tư, sáu."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "对不起，您能不能再说一遍？我不懂“一三五”是什么意思。",
+     "vi": "Xin lỗi, thầy có thể nói lại một lần nữa không ạ? Em không hiểu “一三五” nghĩa là gì."
+    },
+    {
+     "speaker": "老师",
+     "zh": "就是星期一、星期三、星期五。",
+     "vi": "Tức là thứ hai, thứ tư, thứ sáu."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "从几点到几点上课？",
+     "vi": "Học từ mấy giờ đến mấy giờ ạ?"
+    },
+    {
+     "speaker": "老师",
+     "zh": "四点半到五点半。一次一个小时。",
+     "vi": "Từ bốn rưỡi đến năm rưỡi. Mỗi buổi một tiếng."
+    },
+    {
+     "speaker": "老师",
+     "zh": "玛丽！……玛丽怎么没来？",
+     "vi": "(Chiều thứ hai) Mary! … Sao Mary không đến?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "老师，玛丽让我给她请个假。她今天有点儿不舒服，头疼，发烧，咳嗽，可能感冒了。她要去医院看病，不能来上课。",
+     "vi": "Thưa thầy, Mary nhờ em xin phép nghỉ giúp bạn ấy. Hôm nay bạn ấy hơi khó chịu, đau đầu, sốt, ho, có lẽ bị cảm rồi. Bạn ấy phải đi bệnh viện khám, không đến học được."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L24-g1",
+   "title": "Động từ năng nguyện: 会, 能, 可以, 想, 要",
+   "note": "会 = biết (do học mà biết); 能 = có thể (khả năng, điều kiện); 可以 = được phép, có thể; 想/要 = muốn. Đặt trước động từ; câu hỏi chính phản: 想不想学, 能不能说.",
+   "examples": [
+    {
+     "zh": "你会打太极拳吗？",
+     "vi": "Bạn có biết đánh Thái cực quyền không?"
+    },
+    {
+     "zh": "您能不能再说一遍？",
+     "vi": "Thầy có thể nói lại một lần nữa không?"
+    },
+    {
+     "zh": "现在可以报名吗？",
+     "vi": "Bây giờ có thể đăng ký không?"
+    }
+   ]
+  },
+  {
+   "id": "L24-g2",
+   "title": "Hỏi nguyên nhân: 为什么 / 怎么",
+   "note": "为什么 hỏi lý do trung tính; 怎么 + động từ thường kèm ngạc nhiên.",
+   "examples": [
+    {
+     "zh": "玛丽怎么没来？",
+     "vi": "Sao Mary không đến?"
+    }
+   ]
+  },
+  {
+   "id": "L24-g3",
+   "title": "从…到…",
+   "note": "Chỉ khoảng thời gian hoặc khoảng cách.",
+   "examples": [
+    {
+     "zh": "从几点到几点上课？",
+     "vi": "Học từ mấy giờ đến mấy giờ?"
+    }
+   ]
+  }
+ ]
+}

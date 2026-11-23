@@ -1,0 +1,112 @@
+{
+  "id": "R01",
+  "title": "你好吗？",
+  "level": 1,
+  "source": "tự viết, theo dạng hội thoại ngắn của giáo trình cấp 1",
+  "audio": null,
+  "vocab": [
+    {
+      "hanzi": "你好",
+      "pinyin": "nǐ hǎo",
+      "pos": "cụm",
+      "meaning": "xin chào"
+    },
+    {
+      "hanzi": "吗",
+      "pinyin": "ma",
+      "pos": "trợ từ",
+      "meaning": "(dùng cuối câu hỏi)"
+    },
+    {
+      "hanzi": "很",
+      "pinyin": "hěn",
+      "pos": "phó từ",
+      "meaning": "rất"
+    },
+    {
+      "hanzi": "谢谢",
+      "pinyin": "xièxie",
+      "pos": "động từ",
+      "meaning": "cảm ơn"
+    },
+    {
+      "hanzi": "哪国人",
+      "pinyin": "nǎ guó rén",
+      "pos": "cụm",
+      "meaning": "người nước nào"
+    },
+    {
+      "hanzi": "认识",
+      "pinyin": "rènshi",
+      "pos": "động từ",
+      "meaning": "quen biết"
+    },
+    {
+      "hanzi": "高兴",
+      "pinyin": "gāoxìng",
+      "pos": "tính từ",
+      "meaning": "vui"
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "id": "s1",
+          "hanzi": "A：你好！",
+          "pinyin": "Nǐ hǎo!",
+          "meaning": "Chào bạn!"
+        },
+        {
+          "id": "s2",
+          "hanzi": "B：你好！你好吗？",
+          "pinyin": "Nǐ hǎo! Nǐ hǎo ma?",
+          "meaning": "Chào bạn! Bạn có khỏe không?"
+        },
+        {
+          "id": "s3",
+          "hanzi": "A：我很好，谢谢。你呢？",
+          "pinyin": "Wǒ hěn hǎo, xièxie. Nǐ ne?",
+          "meaning": "Tôi khỏe, cảm ơn. Còn bạn?"
+        },
+        {
+          "id": "s4",
+          "hanzi": "B：我也很好。",
+          "pinyin": "Wǒ yě hěn hǎo.",
+          "meaning": "Tôi cũng khỏe."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "sentences": [
+        {
+          "id": "s5",
+          "hanzi": "A：你是哪国人？",
+          "pinyin": "Nǐ shì nǎ guó rén?",
+          "meaning": "Bạn là người nước nào?"
+        },
+        {
+          "id": "s6",
+          "hanzi": "B：我是越南人。你呢？",
+          "pinyin": "Wǒ shì Yuènán rén. Nǐ ne?",
+          "meaning": "Tôi là người Việt Nam. Còn bạn?"
+        },
+        {
+          "id": "s7",
+          "hanzi": "A：我是中国人。",
+          "pinyin": "Wǒ shì Zhōngguó rén.",
+          "meaning": "Tôi là người Trung Quốc."
+        },
+        {
+          "id": "s8",
+          "hanzi": "B：认识你很高兴！",
+          "pinyin": "Rènshi nǐ hěn gāoxìng!",
+          "meaning": "Rất vui được làm quen với bạn!"
+        }
+      ]
+    }
+  ],
+  "illustration": "/illustrations/R01.svg"
+}

@@ -1,0 +1,130 @@
+{
+  "id": "R03",
+  "title": "在超市买东西",
+  "level": 3,
+  "source": "tự viết, theo dạng hội thoại mua bán của giáo trình cấp 3",
+  "audio": null,
+  "vocab": [
+    {
+      "hanzi": "超市",
+      "pinyin": "chāoshì",
+      "pos": "danh từ",
+      "meaning": "siêu thị"
+    },
+    {
+      "hanzi": "买",
+      "pinyin": "mǎi",
+      "pos": "động từ",
+      "meaning": "mua"
+    },
+    {
+      "hanzi": "苹果",
+      "pinyin": "píngguǒ",
+      "pos": "danh từ",
+      "meaning": "táo"
+    },
+    {
+      "hanzi": "斤",
+      "pinyin": "jīn",
+      "pos": "lượng từ",
+      "meaning": "cân (0,5 kg)"
+    },
+    {
+      "hanzi": "块",
+      "pinyin": "kuài",
+      "pos": "lượng từ",
+      "meaning": "đồng (tiền)"
+    },
+    {
+      "hanzi": "便宜",
+      "pinyin": "piányi",
+      "pos": "tính từ",
+      "meaning": "rẻ"
+    },
+    {
+      "hanzi": "别的",
+      "pinyin": "biéde",
+      "pos": "đại từ",
+      "meaning": "cái khác"
+    },
+    {
+      "hanzi": "付钱",
+      "pinyin": "fùqián",
+      "pos": "động từ",
+      "meaning": "trả tiền"
+    },
+    {
+      "hanzi": "找",
+      "pinyin": "zhǎo",
+      "pos": "động từ",
+      "meaning": "thối lại (tiền)"
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "id": "s1",
+          "hanzi": "周六下午，我去超市买东西。",
+          "pinyin": "Zhōuliù xiàwǔ, wǒ qù chāoshì mǎi dōngxi.",
+          "meaning": "Chiều thứ Bảy, tôi đi siêu thị mua đồ."
+        },
+        {
+          "id": "s2",
+          "hanzi": "A：请问，这个苹果怎么卖？",
+          "pinyin": "Qǐngwèn, zhège píngguǒ zěnme mài?",
+          "meaning": "Xin hỏi, táo này bán thế nào?"
+        },
+        {
+          "id": "s3",
+          "hanzi": "B：一斤十二块，很新鲜。",
+          "pinyin": "Yì jīn shí'èr kuài, hěn xīnxiān.",
+          "meaning": "Một cân mười hai đồng, rất tươi."
+        },
+        {
+          "id": "s4",
+          "hanzi": "A：好，给我三斤。",
+          "pinyin": "Hǎo, gěi wǒ sān jīn.",
+          "meaning": "Được, cho tôi ba cân."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "sentences": [
+        {
+          "id": "s5",
+          "hanzi": "B：还要别的吗？",
+          "pinyin": "Hái yào biéde ma?",
+          "meaning": "Còn cần gì khác không?"
+        },
+        {
+          "id": "s6",
+          "hanzi": "A：不要了，再来一瓶水。",
+          "pinyin": "Bú yào le, zài lái yì píng shuǐ.",
+          "meaning": "Không cần nữa, thêm một chai nước."
+        },
+        {
+          "id": "s7",
+          "hanzi": "B：一共五十二块，请付钱。",
+          "pinyin": "Yígòng wǔshí'èr kuài, qǐng fùqián.",
+          "meaning": "Tổng cộng năm mươi hai đồng, mời trả tiền."
+        },
+        {
+          "id": "s8",
+          "hanzi": "A：给你一百块，找我多少钱？",
+          "pinyin": "Gěi nǐ yìbǎi kuài, zhǎo wǒ duōshao qián?",
+          "meaning": "Đưa bạn một trăm đồng, thối lại tôi bao nhiêu?"
+        },
+        {
+          "id": "s9",
+          "hanzi": "B：找你四十八块，谢谢。",
+          "pinyin": "Zhǎo nǐ sìshíbā kuài, xièxie.",
+          "meaning": "Thối lại bạn bốn mươi tám đồng, cảm ơn."
+        }
+      ]
+    }
+  ],
+  "illustration": "/illustrations/R03.svg"
+}

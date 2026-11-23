@@ -1,0 +1,21 @@
+{
+  "id": "L00",
+  "book": "<tên sách>",
+  "unit": 0,
+  "order": 0,
+  "title": "<tên bài bằng chữ Hán>",
+  "title_vi": "<tên bài tiếng Việt>",
+  "vocab_ids": [],
+  "grammar_points": [
+    { "id": "L00-g1", "note": "<ghi chú ngữ pháp tự viết>", "example": "<câu ví dụ>" }
+  ],
+  "texts": [
+    { "title": "<tên đoạn hội thoại>", "lines": [ { "speaker": "A", "zh": "<câu>", "pinyin": "<bính âm>", "vi": "<nghĩa>" } ] }
+  ],
+  "exercises": [
+    { "id": "L00-e1", "type": "choose", "prompt": "<câu hỏi>", "options": ["A", "B", "C"], "answer": "B", "explanation": "<giải thích>" },
+    { "id": "L00-e2", "type": "fill", "prompt": "<câu có ___>", "answer": "<đáp án>" },
+    { "id": "L00-e3", "type": "match", "prompt": "Ghép chữ với nghĩa", "pairs": [ { "left": "<chữ>", "right": "<nghĩa>" }, { "left": "<chữ>", "right": "<nghĩa>" } ] },
+    { "id": "L00-e4", "type": "reorder", "prompt": "Sắp xếp thành câu", "options": ["<mảnh 1>", "<mảnh 2>"], "answer": ["<mảnh 1>", "<mảnh 2>"] }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+ "id": "L17",
+ "book": "Hán ngữ 2",
+ "unit": 17,
+ "order": 17,
+ "title": "他在做什么呢",
+ "title_vi": "Anh ấy đang làm gì thế",
+ "vocab_ids": [
+  "L17-出来",
+  "L17-汉英",
+  "L17-挤",
+  "L17-教",
+  "L17-课",
+  "L17-口语",
+  "L17-来",
+  "L17-录音",
+  "L17-没有",
+  "L17-门",
+  "L17-骑",
+  "L17-事",
+  "L17-书店",
+  "L17-体育",
+  "L17-听力",
+  "L17-文化",
+  "L17-想",
+  "L17-行",
+  "L17-音乐",
+  "L17-阅读",
+  "L17-在",
+  "L17-正",
+  "L17-正在"
+ ],
+ "exercises": [
+  {
+   "id": "L17-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Anh ấy đang làm gì thế?”",
+   "options": [
+    "他",
+    "在",
+    "做",
+    "什么",
+    "呢"
+   ],
+   "answer": [
+    "他",
+    "在",
+    "做",
+    "什么",
+    "呢"
+   ],
+   "explanation": "他在做什么呢 — Anh ấy đang làm gì thế?"
+  },
+  {
+   "id": "L17-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Anh ấy đang nghe nhạc.”",
+   "options": [
+    "他",
+    "正在",
+    "听",
+    "音乐",
+    "呢"
+   ],
+   "answer": [
+    "他",
+    "正在",
+    "听",
+    "音乐",
+    "呢"
+   ],
+   "explanation": "他正在听音乐呢 — Anh ấy đang nghe nhạc."
+  },
+  {
+   "id": "L17-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 我们有五___课。",
+   "answer": "门",
+   "explanation": "Chúng tôi có năm môn học."
+  }
+ ],
+ "texts": [
+  {
+   "title": "他在做什么呢",
+   "lines": [
+    {
+     "speaker": "玛丽",
+     "zh": "麦克在宿舍吗？",
+     "vi": "(Mary đi tìm Mike, hỏi bạn cùng phòng Edward) Mike có ở ký túc xá không?"
+    },
+    {
+     "speaker": "爱德华",
+     "zh": "在。",
+     "vi": "Có."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "他在做什么呢？",
+     "vi": "Cậu ấy đang làm gì thế?"
+    },
+    {
+     "speaker": "爱德华",
+     "zh": "我出来的时候，他正在听音乐呢。",
+     "vi": "Lúc tôi ra ngoài, cậu ấy đang nghe nhạc."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "你是不是在听音乐呢？",
+     "vi": "(Mary đến phòng Mike) Có phải bạn đang nghe nhạc không?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "没有，我正听课文录音呢。",
+     "vi": "Không, tôi đang nghe băng bài khóa."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "下午你有事儿吗？",
+     "vi": "Chiều nay bạn có việc gì không?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "没有事儿。",
+     "vi": "Không có việc gì."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我们一起去书店，好吗？",
+     "vi": "Chúng ta cùng đi hiệu sách nhé?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "你要买什么书？",
+     "vi": "Bạn muốn mua sách gì?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我想买一本《汉英词典》。",
+     "vi": "Tôi muốn mua một quyển Từ điển Hán–Anh."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "咱们怎么去呢？",
+     "vi": "Chúng ta đi bằng gì?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "坐车去吧。",
+     "vi": "Đi xe buýt đi."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "今天星期六，坐车太挤，骑车去怎么样？",
+     "vi": "Hôm nay thứ bảy, đi xe buýt chật lắm, đạp xe đi thì sao?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "行。",
+     "vi": "Được."
+    }
+   ]
+  },
+  {
+   "title": "谁教你们语法",
+   "lines": [
+    {
+     "speaker": "田芳",
+     "zh": "玛丽，你们有几门课？",
+     "vi": "Mary, các bạn có mấy môn học?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "现在只有四门课：综合课、口语课、听力课和阅读课。",
+     "vi": "Bây giờ chỉ có bốn môn: tổng hợp, khẩu ngữ, nghe và đọc hiểu."
+    },
+    {
+     "speaker": "田芳",
+     "zh": "有文化课和体育课吗？",
+     "vi": "Có môn văn hóa và thể dục không?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "没有。",
+     "vi": "Không có."
+    },
+    {
+     "speaker": "田芳",
+     "zh": "林老师教你们什么？",
+     "vi": "Cô Lâm dạy các bạn môn gì?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "她教我们听力和阅读。",
+     "vi": "Cô dạy chúng tôi nghe và đọc hiểu."
+    },
+    {
+     "speaker": "田芳",
+     "zh": "谁教你们综合课和口语课？",
+     "vi": "Ai dạy các bạn môn tổng hợp và khẩu ngữ?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "王老师。",
+     "vi": "Thầy Vương."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L17-g1",
+   "title": "Động tác đang tiếp diễn",
+   "note": "在/正在/正 + động từ (+ 呢) = đang làm gì. Phủ định: 没(有) + động từ.",
+   "examples": [
+    {
+     "zh": "他正在听音乐呢。",
+     "vi": "Cậu ấy đang nghe nhạc."
+    },
+    {
+     "zh": "没有，我正听课文录音呢。",
+     "vi": "Không, tôi đang nghe băng bài khóa."
+    }
+   ]
+  },
+  {
+   "id": "L17-g2",
+   "title": "Câu hai tân ngữ",
+   "note": "Động từ 教, 给, 问… + tân ngữ người + tân ngữ vật.",
+   "examples": [
+    {
+     "zh": "她教我们听力和阅读。",
+     "vi": "Cô dạy chúng tôi nghe và đọc hiểu."
+    }
+   ]
+  },
+  {
+   "id": "L17-g3",
+   "title": "Hỏi cách thức: 怎么 + động từ",
+   "note": "怎么去？ = đi bằng cách nào.",
+   "examples": [
+    {
+     "zh": "咱们怎么去呢？",
+     "vi": "Chúng ta đi bằng gì?"
+    }
+   ]
+  }
+ ]
+}

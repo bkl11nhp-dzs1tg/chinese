@@ -1,0 +1,276 @@
+{
+ "id": "L27",
+ "book": "Hán ngữ 2",
+ "unit": 27,
+ "order": 27,
+ "title": "玛丽哭了",
+ "title_vi": "Mary khóc rồi",
+ "vocab_ids": [
+  "L27-别",
+  "L27-病人",
+  "L27-肠炎",
+  "L27-打针",
+  "L27-大便",
+  "L27-得",
+  "L27-肚子",
+  "L27-后",
+  "L27-化验",
+  "L27-寂寞",
+  "L27-检查",
+  "L27-结果",
+  "L27-开（药）",
+  "L27-哭",
+  "L27-拉肚子",
+  "L27-礼堂",
+  "L27-厉害",
+  "L27-了",
+  "L27-难过",
+  "L27-牛肉",
+  "L27-片",
+  "L27-然后",
+  "L27-所以",
+  "L27-跳舞",
+  "L27-舞会",
+  "L27-消化",
+  "L27-小便",
+  "L27-鱼"
+ ],
+ "exercises": [
+  {
+   "id": "L27-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Mary khóc rồi.”",
+   "options": [
+    "玛丽",
+    "哭",
+    "了"
+   ],
+   "answer": [
+    "玛丽",
+    "哭",
+    "了"
+   ],
+   "explanation": "玛丽哭了 — Mary khóc rồi."
+  },
+  {
+   "id": "L27-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Tôi đau bụng dữ dội.”",
+   "options": [
+    "我",
+    "肚子",
+    "疼得",
+    "厉害"
+   ],
+   "answer": [
+    "我",
+    "肚子",
+    "疼得",
+    "厉害"
+   ],
+   "explanation": "我肚子疼得厉害 — Tôi đau bụng dữ dội."
+  },
+  {
+   "id": "L27-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 你___哭了，明天就好了。",
+   "answer": "别",
+   "explanation": "Đừng khóc nữa, mai là khỏe thôi."
+  }
+ ],
+ "texts": [
+  {
+   "title": "你怎么了",
+   "lines": [
+    {
+     "speaker": "大夫",
+     "zh": "你怎么了？",
+     "vi": "Anh bị làm sao?"
+    },
+    {
+     "speaker": "病人",
+     "zh": "肚子疼得厉害，在家吃了两片药，还不行。",
+     "vi": "Đau bụng dữ dội, ở nhà đã uống hai viên thuốc mà vẫn không đỡ."
+    },
+    {
+     "speaker": "大夫",
+     "zh": "拉肚子了吗？",
+     "vi": "Có bị tiêu chảy không?"
+    },
+    {
+     "speaker": "病人",
+     "zh": "拉了。",
+     "vi": "Có."
+    },
+    {
+     "speaker": "大夫",
+     "zh": "昨天吃什么了？",
+     "vi": "Hôm qua ăn gì?"
+    },
+    {
+     "speaker": "病人",
+     "zh": "就吃了一些鱼和牛肉。",
+     "vi": "Chỉ ăn một ít cá và thịt bò."
+    },
+    {
+     "speaker": "大夫",
+     "zh": "喝什么了？",
+     "vi": "Uống gì?"
+    },
+    {
+     "speaker": "病人",
+     "zh": "喝了一瓶啤酒。",
+     "vi": "Uống một chai bia."
+    },
+    {
+     "speaker": "大夫",
+     "zh": "发烧吗？",
+     "vi": "Có sốt không?"
+    },
+    {
+     "speaker": "病人",
+     "zh": "不发烧。",
+     "vi": "Không sốt."
+    },
+    {
+     "speaker": "大夫",
+     "zh": "你先去化验一下大便，然后我再给你检查检查。",
+     "vi": "Anh đi xét nghiệm phân trước, sau đó tôi sẽ khám cho anh."
+    },
+    {
+     "speaker": "病人",
+     "zh": "好吧。",
+     "vi": "Vâng."
+    },
+    {
+     "speaker": "大夫",
+     "zh": "化验结果出来了吗？",
+     "vi": "(Sau khi xét nghiệm) Có kết quả xét nghiệm chưa?"
+    },
+    {
+     "speaker": "病人",
+     "zh": "出来了。",
+     "vi": "Có rồi."
+    },
+    {
+     "speaker": "病人",
+     "zh": "大夫，我是不是得了肠炎？",
+     "vi": "(Bác sĩ xem kết quả) Bác sĩ, có phải tôi bị viêm ruột không?"
+    },
+    {
+     "speaker": "大夫",
+     "zh": "我看了化验结果。不是肠炎，只是消化不好。先给你开一些药。再给你打一针。",
+     "vi": "Tôi xem kết quả rồi. Không phải viêm ruột, chỉ là tiêu hóa không tốt. Trước tiên kê cho anh ít thuốc, rồi tiêm cho anh một mũi."
+    },
+    {
+     "speaker": "病人",
+     "zh": "这药怎么吃？",
+     "vi": "(Sau khi lấy thuốc) Thuốc này uống thế nào?"
+    },
+    {
+     "speaker": "护士",
+     "zh": "一天三次，一次两片，饭后吃。",
+     "vi": "Một ngày ba lần, mỗi lần hai viên, uống sau bữa ăn."
+    }
+   ]
+  },
+  {
+   "title": "玛丽哭了",
+   "lines": [
+    {
+     "speaker": "罗兰",
+     "zh": "玛丽，你怎么哭了？病了吗？",
+     "vi": "Mary, sao bạn khóc? Bị ốm à?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "不是。想家了。因为感到寂寞，心情不好，所以很难过。",
+     "vi": "Không phải. Nhớ nhà. Vì cảm thấy cô đơn, tâm trạng không tốt nên rất buồn."
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "别难过了。",
+     "vi": "Đừng buồn nữa."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "你不想家吗？",
+     "vi": "Bạn không nhớ nhà à?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "我也常想家，但是不感到寂寞。",
+     "vi": "Tôi cũng hay nhớ nhà, nhưng không cảm thấy cô đơn."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我有姐姐，还有弟弟。在家时，我们常常一起玩儿，所以感到寂寞时总想他们。",
+     "vi": "Tôi có chị gái, còn có em trai. Lúc ở nhà chúng tôi thường chơi cùng nhau, nên khi cô đơn tôi luôn nhớ họ."
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "今天晚上礼堂有舞会，我们一起去跳跳舞吧。玩玩儿就好了。",
+     "vi": "Tối nay hội trường có dạ hội khiêu vũ, chúng ta cùng đi nhảy đi. Chơi một chút là đỡ thôi."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "什么时候去？",
+     "vi": "Khi nào đi?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "吃了晚饭就去吧。你在宿舍等我，我来叫你。",
+     "vi": "Ăn tối xong đi luôn. Bạn đợi ở ký túc xá, tôi đến gọi bạn."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "好吧。",
+     "vi": "Được."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L27-g1",
+   "title": "Động tác hoàn thành: động từ + 了",
+   "note": "了 sau động từ chỉ hành động đã hoàn thành; tân ngữ sau thường có số lượng hoặc định ngữ.",
+   "examples": [
+    {
+     "zh": "在家吃了两片药。",
+     "vi": "Ở nhà đã uống hai viên thuốc."
+    },
+    {
+     "zh": "喝了一瓶啤酒。",
+     "vi": "Đã uống một chai bia."
+    }
+   ]
+  },
+  {
+   "id": "L27-g2",
+   "title": "因为…所以…",
+   "note": "Vì… nên… (nêu nguyên nhân – kết quả).",
+   "examples": [
+    {
+     "zh": "因为感到寂寞，心情不好，所以很难过。",
+     "vi": "Vì cảm thấy cô đơn, tâm trạng không tốt nên rất buồn."
+    }
+   ]
+  },
+  {
+   "id": "L27-g3",
+   "title": "怎么了？ / 别…了",
+   "note": "怎么了？ hỏi chuyện gì xảy ra; 别 + động từ + 了 = đừng … nữa.",
+   "examples": [
+    {
+     "zh": "你怎么哭了？",
+     "vi": "Sao bạn khóc?"
+    },
+    {
+     "zh": "别难过了。",
+     "vi": "Đừng buồn nữa."
+    }
+   ]
+  }
+ ]
+}

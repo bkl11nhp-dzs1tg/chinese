@@ -1,0 +1,278 @@
+{
+ "id": "L06",
+ "book": "Hán ngữ 1",
+ "unit": 6,
+ "order": 6,
+ "title": "我学习汉语",
+ "title_vi": "Tôi học tiếng Hán",
+ "vocab_ids": [
+  "L06-德国",
+  "L06-德语",
+  "L06-俄国",
+  "L06-俄文",
+  "L06-发音",
+  "L06-法国",
+  "L06-法文",
+  "L06-贵姓",
+  "L06-国",
+  "L06-韩国",
+  "L06-韩文",
+  "L06-叫",
+  "L06-美国",
+  "L06-名字",
+  "L06-哪",
+  "L06-那",
+  "L06-朋友",
+  "L06-请问",
+  "L06-人",
+  "L06-日本",
+  "L06-日文",
+  "L06-什么",
+  "L06-书",
+  "L06-谁",
+  "L06-文",
+  "L06-问",
+  "L06-西班牙文",
+  "L06-姓",
+  "L06-学习",
+  "L06-英国",
+  "L06-英文",
+  "L06-邮包",
+  "L06-杂志",
+  "L06-中国",
+  "L06-中文"
+ ],
+ "exercises": [
+  {
+   "id": "L06-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Bạn tên là gì?”",
+   "options": [
+    "你",
+    "叫",
+    "什么",
+    "名字"
+   ],
+   "answer": [
+    "你",
+    "叫",
+    "什么",
+    "名字"
+   ],
+   "explanation": "你叫什么名字 — Bạn tên là gì?"
+  },
+  {
+   "id": "L06-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Tôi là người Mỹ.”",
+   "options": [
+    "我",
+    "是",
+    "美国",
+    "人"
+   ],
+   "answer": [
+    "我",
+    "是",
+    "美国",
+    "人"
+   ],
+   "explanation": "我是美国人 — Tôi là người Mỹ."
+  },
+  {
+   "id": "L06-r3",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Đây là sách gì?”",
+   "options": [
+    "这",
+    "是",
+    "什么",
+    "书"
+   ],
+   "answer": [
+    "这",
+    "是",
+    "什么",
+    "书"
+   ],
+   "explanation": "这是什么书 — Đây là sách gì?"
+  },
+  {
+   "id": "L06-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 您贵___？",
+   "answer": "姓",
+   "explanation": "Ông/bà họ gì ạ?"
+  }
+ ],
+ "texts": [
+  {
+   "title": "我学习汉语",
+   "lines": [
+    {
+     "speaker": "麦克",
+     "zh": "请问，你贵姓？",
+     "vi": "Xin hỏi, bạn họ gì?"
+    },
+    {
+     "speaker": "张东",
+     "zh": "我姓张。",
+     "vi": "Tôi họ Trương."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "你叫什么名字？",
+     "vi": "Bạn tên là gì?"
+    },
+    {
+     "speaker": "张东",
+     "zh": "我叫张东。",
+     "vi": "Tôi tên là Trương Đông."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "你是哪国人？",
+     "vi": "Bạn là người nước nào?"
+    },
+    {
+     "speaker": "张东",
+     "zh": "我是中国人。你是哪国人？",
+     "vi": "Tôi là người Trung Quốc. Bạn là người nước nào?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "我是美国人。",
+     "vi": "Tôi là người Mỹ."
+    },
+    {
+     "speaker": "张东",
+     "zh": "你学习什么？",
+     "vi": "Bạn học gì?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "我学习汉语。",
+     "vi": "Tôi học tiếng Hán."
+    },
+    {
+     "speaker": "张东",
+     "zh": "汉语难吗？",
+     "vi": "Tiếng Hán có khó không?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "汉字很难，发音不太难。",
+     "vi": "Chữ Hán rất khó, phát âm không khó lắm."
+    }
+   ]
+  },
+  {
+   "title": "这是什么书",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "这是什么？",
+     "vi": "Đây là cái gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "这是书。",
+     "vi": "Đây là sách."
+    },
+    {
+     "speaker": "A",
+     "zh": "这是什么书？",
+     "vi": "Đây là sách gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "这是中文书。",
+     "vi": "Đây là sách tiếng Trung."
+    },
+    {
+     "speaker": "A",
+     "zh": "这是谁的书？",
+     "vi": "Đây là sách của ai?"
+    },
+    {
+     "speaker": "B",
+     "zh": "这是老师的书。",
+     "vi": "Đây là sách của thầy giáo."
+    },
+    {
+     "speaker": "A",
+     "zh": "那是什么？",
+     "vi": "Kia là cái gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "那是杂志。",
+     "vi": "Kia là tạp chí."
+    },
+    {
+     "speaker": "A",
+     "zh": "那是什么杂志？",
+     "vi": "Kia là tạp chí gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "那是英文杂志。",
+     "vi": "Kia là tạp chí tiếng Anh."
+    },
+    {
+     "speaker": "A",
+     "zh": "那是谁的杂志？",
+     "vi": "Kia là tạp chí của ai?"
+    },
+    {
+     "speaker": "B",
+     "zh": "那是我朋友的杂志。",
+     "vi": "Kia là tạp chí của bạn tôi."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L06-g1",
+   "title": "Họ tên người Trung Quốc; hỏi họ tên",
+   "note": "Họ đứng trước tên. Hỏi lịch sự: 您贵姓？ trả lời 我姓…; hỏi tên: 你叫什么名字？",
+   "examples": [
+    {
+     "zh": "请问，你贵姓？",
+     "vi": "Xin hỏi, bạn họ gì?"
+    },
+    {
+     "zh": "我叫张东。",
+     "vi": "Tôi tên là Trương Đông."
+    }
+   ]
+  },
+  {
+   "id": "L06-g2",
+   "title": "Đại từ nghi vấn 什么, 哪, 谁",
+   "note": "什么 = cái gì; 哪 + 国 = nước nào; 谁 = ai. Đặt đúng vị trí của thành phần được hỏi, không đảo câu.",
+   "examples": [
+    {
+     "zh": "你是哪国人？",
+     "vi": "Bạn là người nước nào?"
+    },
+    {
+     "zh": "这是谁的书？",
+     "vi": "Đây là sách của ai?"
+    }
+   ]
+  },
+  {
+   "id": "L06-g3",
+   "title": "的 chỉ sở hữu",
+   "note": "Danh từ/đại từ + 的 + danh từ = … của …",
+   "examples": [
+    {
+     "zh": "这是老师的书。",
+     "vi": "Đây là sách của thầy giáo."
+    }
+   ]
+  }
+ ]
+}

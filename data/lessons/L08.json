@@ -1,0 +1,190 @@
+{
+ "id": "L08",
+ "book": "Hán ngữ 1",
+ "unit": 8,
+ "order": 8,
+ "title": "苹果一斤多少钱",
+ "title_vi": "Táo bao nhiêu tiền một cân",
+ "vocab_ids": [
+  "L08-别的",
+  "L08-多",
+  "L08-多少",
+  "L08-分",
+  "L08-给",
+  "L08-公斤",
+  "L08-贵",
+  "L08-还",
+  "L08-角（毛）",
+  "L08-斤",
+  "L08-橘子",
+  "L08-块（元）",
+  "L08-两",
+  "L08-了",
+  "L08-买",
+  "L08-卖",
+  "L08-苹果",
+  "L08-少",
+  "L08-水果",
+  "L08-一共",
+  "L08-怎么",
+  "L08-找"
+ ],
+ "exercises": [
+  {
+   "id": "L08-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Táo bao nhiêu tiền một cân?”",
+   "options": [
+    "苹果",
+    "一斤",
+    "多少",
+    "钱"
+   ],
+   "answer": [
+    "苹果",
+    "一斤",
+    "多少",
+    "钱"
+   ],
+   "explanation": "苹果一斤多少钱 — Táo bao nhiêu tiền một cân?"
+  },
+  {
+   "id": "L08-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Ông còn cần gì khác không?”",
+   "options": [
+    "您",
+    "还",
+    "要",
+    "别的",
+    "吗"
+   ],
+   "answer": [
+    "您",
+    "还",
+    "要",
+    "别的",
+    "吗"
+   ],
+   "explanation": "您还要别的吗 — Ông còn cần gì khác không?"
+  },
+  {
+   "id": "L08-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 我要___斤苹果。",
+   "answer": "两",
+   "explanation": "Tôi muốn hai cân táo."
+  }
+ ],
+ "texts": [
+  {
+   "title": "苹果一斤多少钱",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "你买什么？",
+     "vi": "Bạn mua gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "我买水果。苹果一斤多少钱？",
+     "vi": "Tôi mua hoa quả. Táo bao nhiêu tiền một cân?"
+    },
+    {
+     "speaker": "A",
+     "zh": "三块。",
+     "vi": "Ba đồng."
+    },
+    {
+     "speaker": "B",
+     "zh": "三块？太贵了。两块五吧。",
+     "vi": "Ba đồng? Đắt quá. Hai đồng rưỡi nhé."
+    },
+    {
+     "speaker": "A",
+     "zh": "你要几斤？",
+     "vi": "Bạn lấy mấy cân?"
+    },
+    {
+     "speaker": "B",
+     "zh": "我买五斤。",
+     "vi": "Tôi mua năm cân."
+    },
+    {
+     "speaker": "A",
+     "zh": "还要别的吗？",
+     "vi": "Còn lấy gì khác không?"
+    },
+    {
+     "speaker": "B",
+     "zh": "橘子怎么卖？",
+     "vi": "Quýt bán thế nào?"
+    },
+    {
+     "speaker": "A",
+     "zh": "两块。",
+     "vi": "Hai đồng."
+    },
+    {
+     "speaker": "B",
+     "zh": "要两斤。一共多少钱？",
+     "vi": "Lấy hai cân. Tổng cộng bao nhiêu tiền?"
+    },
+    {
+     "speaker": "A",
+     "zh": "一共十六块五（毛）。你给十六块吧。",
+     "vi": "Tổng cộng mười sáu đồng năm hào. Bạn đưa mười sáu đồng thôi."
+    },
+    {
+     "speaker": "B",
+     "zh": "给你钱。",
+     "vi": "Gửi bạn tiền."
+    },
+    {
+     "speaker": "A",
+     "zh": "这是五十，找您三十四块。",
+     "vi": "Đây là năm mươi, trả lại ông ba mươi tư đồng."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L08-g1",
+   "title": "…吧",
+   "note": "吧 cuối câu làm giọng đề nghị/thương lượng nhẹ nhàng.",
+   "examples": [
+    {
+     "zh": "两块五吧。",
+     "vi": "Hai đồng rưỡi nhé."
+    },
+    {
+     "zh": "你给十六块吧。",
+     "vi": "Bạn đưa mười sáu đồng thôi."
+    }
+   ]
+  },
+  {
+   "id": "L08-g2",
+   "title": "2 + lượng từ: dùng 两",
+   "note": "Trước lượng từ, số 2 dùng 两 liǎng chứ không dùng 二: 两斤, 两块, 两个.",
+   "examples": [
+    {
+     "zh": "要两斤。",
+     "vi": "Lấy hai cân."
+    }
+   ]
+  },
+  {
+   "id": "L08-g3",
+   "title": "Cách nói tiền",
+   "note": "块 (元) – 毛 (角) – 分. Khẩu ngữ hay nói 块, 毛. 十六块五(毛) = 16,5 đồng.",
+   "examples": [
+    {
+     "zh": "苹果一斤多少钱？",
+     "vi": "Táo bao nhiêu tiền một cân?"
+    }
+   ]
+  }
+ ]
+}

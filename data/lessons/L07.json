@@ -1,0 +1,170 @@
+{
+ "id": "L07",
+ "book": "Hán ngữ 1",
+ "unit": 7,
+ "order": 7,
+ "title": "你吃什么",
+ "title_vi": "Bạn ăn gì",
+ "vocab_ids": [
+  "L07-包子",
+  "L07-吃",
+  "L07-蛋",
+  "L07-饭",
+  "L07-个",
+  "L07-鸡",
+  "L07-鸡蛋",
+  "L07-饺子",
+  "L07-酒",
+  "L07-馒头",
+  "L07-米",
+  "L07-米饭",
+  "L07-面条儿",
+  "L07-那些",
+  "L07-啤酒",
+  "L07-食堂",
+  "L07-汤",
+  "L07-碗",
+  "L07-些",
+  "L07-要",
+  "L07-一些",
+  "L07-这些",
+  "L07-中午"
+ ],
+ "exercises": [
+  {
+   "id": "L07-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Tôi muốn một bát cơm.”",
+   "options": [
+    "我",
+    "要",
+    "一",
+    "碗",
+    "米饭"
+   ],
+   "answer": [
+    "我",
+    "要",
+    "一",
+    "碗",
+    "米饭"
+   ],
+   "explanation": "我要一碗米饭 — Tôi muốn một bát cơm."
+  },
+  {
+   "id": "L07-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Buổi trưa bạn đi nhà ăn ăn cơm không?”",
+   "options": [
+    "中午",
+    "你",
+    "去",
+    "食堂",
+    "吃饭",
+    "吗"
+   ],
+   "answer": [
+    "中午",
+    "你",
+    "去",
+    "食堂",
+    "吃饭",
+    "吗"
+   ],
+   "explanation": "中午你去食堂吃饭吗 — Buổi trưa bạn đi nhà ăn ăn cơm không?"
+  },
+  {
+   "id": "L07-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 你吃什么？— 我吃___。",
+   "answer": "饺子",
+   "explanation": "Bạn ăn gì? — Tôi ăn sủi cảo."
+  }
+ ],
+ "texts": [
+  {
+   "title": "你吃什么",
+   "lines": [
+    {
+     "speaker": "麦克",
+     "zh": "中午你去哪儿吃饭？",
+     "vi": "(Trong phòng học) Trưa nay bạn đi đâu ăn cơm?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我去食堂。",
+     "vi": "Tôi đến nhà ăn."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "你吃什么？",
+     "vi": "(Trong nhà ăn) Bạn ăn gì?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我吃馒头。",
+     "vi": "Tôi ăn màn thầu."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "你要几个？",
+     "vi": "Bạn muốn mấy cái?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "一个。你吃吗？",
+     "vi": "Một cái. Bạn ăn không?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "不吃，我吃米饭。你喝什么？",
+     "vi": "Không ăn, tôi ăn cơm. Bạn uống gì?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我要一碗鸡蛋汤。你喝吗？",
+     "vi": "Tôi muốn một bát canh trứng. Bạn uống không?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "不喝，我喝啤酒。",
+     "vi": "Không, tôi uống bia."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "这些是什么？",
+     "vi": "Những cái này là gì?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "这是饺子，这是包子，那是面条。",
+     "vi": "Đây là sủi cảo, đây là bánh bao, kia là mì sợi."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L07-g1",
+   "title": "Biến điệu của 一",
+   "note": "一 đứng trước thanh 4 đọc yí (一个 yí ge); đứng trước thanh 1, 2, 3 đọc yì (一碗 yì wǎn); đứng một mình hoặc cuối từ đọc yī.",
+   "examples": [
+    {
+     "zh": "我要一碗鸡蛋汤。",
+     "vi": "Tôi muốn một bát canh trứng."
+    }
+   ]
+  },
+  {
+   "id": "L07-g2",
+   "title": "Lượng từ: số + lượng từ + danh từ",
+   "note": "Giữa số và danh từ phải có lượng từ: 一个馒头, 一碗米饭. 个 là lượng từ dùng phổ biến nhất.",
+   "examples": [
+    {
+     "zh": "你要几个？",
+     "vi": "Bạn muốn mấy cái?"
+    }
+   ]
+  }
+ ]
+}

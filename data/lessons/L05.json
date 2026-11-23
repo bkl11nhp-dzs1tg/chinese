@@ -1,0 +1,158 @@
+{
+ "id": "L05",
+ "book": "Hán ngữ 1",
+ "unit": 5,
+ "order": 5,
+ "title": "这是王老师",
+ "title_vi": "Đây là thầy giáo Vương",
+ "vocab_ids": [
+  "L05-不客气",
+  "L05-茶",
+  "L05-工作",
+  "L05-喝",
+  "L05-进",
+  "L05-客气",
+  "L05-老师",
+  "L05-您",
+  "L05-请",
+  "L05-日",
+  "L05-身体",
+  "L05-十",
+  "L05-是",
+  "L05-谢谢",
+  "L05-这",
+  "L05-坐"
+ ],
+ "exercises": [
+  {
+   "id": "L05-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Đây là thầy giáo Vương.”",
+   "options": [
+    "这",
+    "是",
+    "王",
+    "老师"
+   ],
+   "answer": [
+    "这",
+    "是",
+    "王",
+    "老师"
+   ],
+   "explanation": "这是王老师 — Đây là thầy giáo Vương."
+  },
+  {
+   "id": "L05-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Mời vào, mời ngồi.”",
+   "options": [
+    "请",
+    "进",
+    "请",
+    "坐"
+   ],
+   "answer": [
+    "请",
+    "进",
+    "请",
+    "坐"
+   ],
+   "explanation": "请进请坐 — Mời vào, mời ngồi."
+  },
+  {
+   "id": "L05-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 谢谢！— 不___。",
+   "answer": "客气",
+   "explanation": "Cảm ơn! — Không có gì."
+  }
+ ],
+ "texts": [
+  {
+   "title": "这是王老师",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "这是王老师，这是我爸爸。",
+     "vi": "Đây là thầy Vương, đây là bố tôi."
+    },
+    {
+     "speaker": "B",
+     "zh": "王老师，您好！",
+     "vi": "Chào thầy Vương!"
+    },
+    {
+     "speaker": "C",
+     "zh": "您好！请进！请坐！请喝茶！",
+     "vi": "Chào ông! Mời vào! Mời ngồi! Mời uống trà!"
+    },
+    {
+     "speaker": "B",
+     "zh": "谢谢！",
+     "vi": "Cảm ơn!"
+    },
+    {
+     "speaker": "C",
+     "zh": "不客气！",
+     "vi": "Không có gì!"
+    },
+    {
+     "speaker": "C",
+     "zh": "工作忙吗？",
+     "vi": "Công việc có bận không?"
+    },
+    {
+     "speaker": "B",
+     "zh": "不太忙。",
+     "vi": "Không bận lắm."
+    },
+    {
+     "speaker": "C",
+     "zh": "身体好吗？",
+     "vi": "Sức khỏe tốt chứ?"
+    },
+    {
+     "speaker": "B",
+     "zh": "很好！",
+     "vi": "Rất tốt!"
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L05-g1",
+   "title": "Ngữ âm: zh ch sh r và -i",
+   "note": "zh ch sh r là âm uốn lưỡi. Sau zh ch sh r, chữ i đọc thành âm -i (không phải i thường): 是 shì, 吃 chī.",
+   "examples": [
+    {
+     "zh": "这是王老师。",
+     "vi": "Đây là thầy Vương."
+    }
+   ]
+  },
+  {
+   "id": "L05-g2",
+   "title": "Câu chữ 是",
+   "note": "A 是 B = A là B. Phủ định: A 不是 B.",
+   "examples": [
+    {
+     "zh": "这是我爸爸。",
+     "vi": "Đây là bố tôi."
+    }
+   ]
+  },
+  {
+   "id": "L05-g3",
+   "title": "Câu mời với 请",
+   "note": "请 + động từ = xin mời…",
+   "examples": [
+    {
+     "zh": "请进！请坐！请喝茶！",
+     "vi": "Mời vào! Mời ngồi! Mời uống trà!"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+/* Màu, khoảng cách, font (mục 14). Tông kem/navy + điểm nhấn cam; cấu trúc theo phong cách iOS:
+   góc bo mềm, bóng nhẹ, đường kẻ mảnh. Dark mode dùng cùng tên token, giá trị khác. */
+:root {
+  --bg: #f5efe2;
+  --surface: #fffcf5;
+  --surface-2: #efe7d6;
+  --surface-blur: rgba(255, 252, 245, 0.82);
+  --ink: #1f2a44;
+  --ink-2: #3e4863;
+  --muted: #69708a;
+  --line: rgba(31, 42, 68, 0.14);
+  --line-strong: rgba(31, 42, 68, 0.28);
+  --accent: #ec8a4c;          /* nền nút chính, chữ trên đó là --on-accent */
+  --accent-press: #c96a2c;    /* "đáy" nút 3D */
+  --accent-ink: #a3501b;      /* chữ màu nhấn trên nền kem (đạt AA) */
+  --accent-soft: #fbe3d1;
+  --on-accent: #1f2a44;
+  --good: #23864c;
+  --good-press: #1a6a3b;
+  --good-bg: #dff3e5;
+  --bad: #c73b3b;
+  --bad-press: #9e2c2c;
+  --bad-bg: #fbe2df;
+  --chart: #2f4a7a;
+  --shadow: 0 1px 2px rgba(31, 42, 68, 0.06), 0 6px 20px rgba(31, 42, 68, 0.07);
+  --shadow-up: 0 -6px 24px rgba(31, 42, 68, 0.12);
+
+  --r-sm: 10px; --r: 14px; --r-lg: 20px; --r-pill: 999px;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
+  --tabbar-h: 58px;
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Noto Sans", Roboto, system-ui, sans-serif;
+  --font-han: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Hiragino Sans GB", "Source Han Sans SC", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10151f; --surface: #1b2130; --surface-2: #262d3f; --surface-blur: rgba(27, 33, 48, 0.82);
+    --ink: #f3ecdc; --ink-2: #d3d7e2; --muted: #9ea6ba; --line: rgba(243, 236, 220, 0.12); --line-strong: rgba(243, 236, 220, 0.26);
+    --accent: #f29a5f; --accent-press: #b8652d; --accent-ink: #f6b386; --accent-soft: #3b2a20; --on-accent: #10151f;
+    --good: #6fd296; --good-press: #3f9b63; --good-bg: #183526; --bad: #f08c84; --bad-press: #b6524b; --bad-bg: #3d2224;
+    --chart: #8fb0e8; --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25); --shadow-up: 0 -6px 24px rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10151f; --surface: #1b2130; --surface-2: #262d3f; --surface-blur: rgba(27, 33, 48, 0.82);
+  --ink: #f3ecdc; --ink-2: #d3d7e2; --muted: #9ea6ba; --line: rgba(243, 236, 220, 0.12); --line-strong: rgba(243, 236, 220, 0.26);
+  --accent: #f29a5f; --accent-press: #b8652d; --accent-ink: #f6b386; --accent-soft: #3b2a20; --on-accent: #10151f;
+  --good: #6fd296; --good-press: #3f9b63; --good-bg: #183526; --bad: #f08c84; --bad-press: #b6524b; --bad-bg: #3d2224;
+  --chart: #8fb0e8; --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25); --shadow-up: 0 -6px 24px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}

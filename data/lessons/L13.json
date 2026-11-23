@@ -1,0 +1,216 @@
+{
+ "id": "L13",
+ "book": "Hán ngữ 1",
+ "unit": 13,
+ "order": 13,
+ "title": "这是不是中药",
+ "title_vi": "Đây có phải là thuốc Đông y không",
+ "vocab_ids": [
+  "L13-本",
+  "L13-笔",
+  "L13-茶叶",
+  "L13-词典",
+  "L13-光盘",
+  "L13-黑",
+  "L13-红",
+  "L13-件",
+  "L13-旧",
+  "L13-里",
+  "L13-没（有）",
+  "L13-瓶",
+  "L13-轻",
+  "L13-日用品",
+  "L13-水",
+  "L13-西药",
+  "L13-香水",
+  "L13-箱子",
+  "L13-药",
+  "L13-椅子",
+  "L13-有",
+  "L13-雨",
+  "L13-雨伞",
+  "L13-张",
+  "L13-这儿",
+  "L13-支",
+  "L13-中药",
+  "L13-重"
+ ],
+ "exercises": [
+  {
+   "id": "L13-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Đây có phải thuốc Đông y không?”",
+   "options": [
+    "这",
+    "是不是",
+    "中药"
+   ],
+   "answer": [
+    "这",
+    "是不是",
+    "中药"
+   ],
+   "explanation": "这是不是中药 — Đây có phải thuốc Đông y không?"
+  },
+  {
+   "id": "L13-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Cái va li này rất nặng.”",
+   "options": [
+    "这个",
+    "箱子",
+    "很",
+    "重"
+   ],
+   "answer": [
+    "这个",
+    "箱子",
+    "很",
+    "重"
+   ],
+   "explanation": "这个箱子很重 — Cái va li này rất nặng."
+  },
+  {
+   "id": "L13-r3",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Trong va li có gì?”",
+   "options": [
+    "箱子",
+    "里",
+    "有",
+    "什么"
+   ],
+   "answer": [
+    "箱子",
+    "里",
+    "有",
+    "什么"
+   ],
+   "explanation": "箱子里有什么 — Trong va li có gì?"
+  },
+  {
+   "id": "L13-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 我有两___词典。",
+   "answer": "本",
+   "explanation": "Tôi có hai quyển từ điển."
+  }
+ ],
+ "texts": [
+  {
+   "title": "这个黑箱子很重",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "你没有箱子吗？",
+     "vi": "(Tại sân bay) Bạn không có va li à?"
+    },
+    {
+     "speaker": "B",
+     "zh": "有啊。我的在这儿呢。",
+     "vi": "Có chứ. Của tôi ở đây."
+    },
+    {
+     "speaker": "A",
+     "zh": "我的很重，你的重不重？",
+     "vi": "Của tôi rất nặng, của bạn có nặng không?"
+    },
+    {
+     "speaker": "B",
+     "zh": "这个黑的很重，那个红的比较轻。",
+     "vi": "Cái màu đen này rất nặng, cái màu đỏ kia tương đối nhẹ."
+    },
+    {
+     "speaker": "A",
+     "zh": "你的箱子很新，我的很旧。",
+     "vi": "Va li của bạn rất mới, của tôi rất cũ."
+    },
+    {
+     "speaker": "B",
+     "zh": "那个新的是朋友的。这个旧的是我的。",
+     "vi": "Cái mới kia là của bạn tôi. Cái cũ này là của tôi."
+    }
+   ]
+  },
+  {
+   "title": "这是不是中药",
+   "lines": [
+    {
+     "speaker": "A",
+     "zh": "先生，这些黑的是什么东西？",
+     "vi": "(Tại hải quan) Thưa ông, những thứ màu đen này là gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "这是一些药。",
+     "vi": "Đây là một ít thuốc."
+    },
+    {
+     "speaker": "A",
+     "zh": "什么药？",
+     "vi": "Thuốc gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "中药。",
+     "vi": "Thuốc Đông y."
+    },
+    {
+     "speaker": "A",
+     "zh": "这是不是药？",
+     "vi": "Đây có phải là thuốc không?"
+    },
+    {
+     "speaker": "B",
+     "zh": "这不是药，这是茶叶。",
+     "vi": "Đây không phải thuốc, đây là lá trà."
+    },
+    {
+     "speaker": "A",
+     "zh": "那个箱子里是什么？",
+     "vi": "Trong va li kia là gì?"
+    },
+    {
+     "speaker": "B",
+     "zh": "都是日用品。有两件衣服、一把雨伞和一瓶香水，还有一本书、一本词典、两张光盘和三支笔。",
+     "vi": "Đều là đồ dùng hằng ngày. Có hai bộ quần áo, một cái ô và một lọ nước hoa, còn có một quyển sách, một quyển từ điển, hai cái đĩa CD và ba cây bút."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L13-g1",
+   "title": "Câu vị ngữ tính từ",
+   "note": "Tính từ làm vị ngữ trực tiếp, không cần 是; thường có 很 đứng trước.",
+   "examples": [
+    {
+     "zh": "我的很重。",
+     "vi": "Của tôi rất nặng."
+    }
+   ]
+  },
+  {
+   "id": "L13-g2",
+   "title": "Câu hỏi chính phản",
+   "note": "Khẳng định + phủ định: 重不重, 是不是.",
+   "examples": [
+    {
+     "zh": "这是不是中药？",
+     "vi": "Đây có phải thuốc Đông y không?"
+    }
+   ]
+  },
+  {
+   "id": "L13-g3",
+   "title": "Cụm từ chữ 的",
+   "note": "Tính từ/danh từ/đại từ + 的 thay cho danh từ đã biết: 黑的 = cái màu đen.",
+   "examples": [
+    {
+     "zh": "那个新的是朋友的。",
+     "vi": "Cái mới kia là của bạn tôi."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,206 @@
+{
+ "id": "L15",
+ "book": "Hán ngữ 1",
+ "unit": 15,
+ "order": 15,
+ "title": "你们公司有多少职员",
+ "title_vi": "Công ty của ông có bao nhiêu nhân viên",
+ "vocab_ids": [
+  "L15-大概",
+  "L15-大夫",
+  "L15-多",
+  "L15-公司",
+  "L15-姐姐",
+  "L15-看",
+  "L15-律师",
+  "L15-全",
+  "L15-商店",
+  "L15-外国",
+  "L15-外贸",
+  "L15-小",
+  "L15-医院",
+  "L15-照片",
+  "L15-只",
+  "L15-做"
+ ],
+ "exercises": [
+  {
+   "id": "L15-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Nhà bạn có mấy người?”",
+   "options": [
+    "你家",
+    "有",
+    "几",
+    "口",
+    "人"
+   ],
+   "answer": [
+    "你家",
+    "有",
+    "几",
+    "口",
+    "人"
+   ],
+   "explanation": "你家有几口人 — Nhà bạn có mấy người?"
+  },
+  {
+   "id": "L15-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Công ty các bạn có bao nhiêu nhân viên?”",
+   "options": [
+    "你们",
+    "公司",
+    "有",
+    "多少",
+    "职员"
+   ],
+   "answer": [
+    "你们",
+    "公司",
+    "有",
+    "多少",
+    "职员"
+   ],
+   "explanation": "你们公司有多少职员 — Công ty các bạn có bao nhiêu nhân viên?"
+  },
+  {
+   "id": "L15-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 我___有两个弟弟。",
+   "answer": "只",
+   "explanation": "Tôi chỉ có hai em trai."
+  }
+ ],
+ "texts": [
+  {
+   "title": "你家有几口人",
+   "lines": [
+    {
+     "speaker": "麦克",
+     "zh": "你家有几口人？",
+     "vi": "(Mike và Mary đang xem ảnh) Nhà bạn có mấy người?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我家有五口人，爸爸、妈妈、哥哥、姐姐和我。",
+     "vi": "Nhà tôi có năm người: bố, mẹ, anh trai, chị gái và tôi."
+    },
+    {
+     "speaker": "麦克",
+     "zh": "你有没有全家的照片？",
+     "vi": "Bạn có ảnh cả nhà không?"
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "有一张。你看，这是我们全家的照片。你有哥哥姐姐吗？",
+     "vi": "Có một tấm. Bạn xem, đây là ảnh cả nhà tôi. Bạn có anh chị không?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "我没有哥哥，也没有姐姐，只有两个弟弟。",
+     "vi": "Tôi không có anh trai, cũng không có chị gái, chỉ có hai em trai."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "你爸爸、妈妈做什么工作？",
+     "vi": "Bố mẹ bạn làm nghề gì?"
+    },
+    {
+     "speaker": "麦克",
+     "zh": "我妈妈是大夫，在医院工作，爸爸是一家公司的经理。",
+     "vi": "Mẹ tôi là bác sĩ, làm việc ở bệnh viện; bố tôi là giám đốc một công ty."
+    },
+    {
+     "speaker": "玛丽",
+     "zh": "我妈妈在商店工作，爸爸是律师。",
+     "vi": "Mẹ tôi làm ở cửa hàng, bố tôi là luật sư."
+    }
+   ]
+  },
+  {
+   "title": "你们公司有多少职员",
+   "lines": [
+    {
+     "speaker": "王老师",
+     "zh": "你们是一家什么公司？",
+     "vi": "(Thầy Vương nói chuyện với giám đốc Quan) Các ông là công ty gì?"
+    },
+    {
+     "speaker": "关经理",
+     "zh": "是一家外贸公司。",
+     "vi": "Là một công ty thương mại quốc tế."
+    },
+    {
+     "speaker": "王老师",
+     "zh": "是一家大公司吗？",
+     "vi": "Là công ty lớn à?"
+    },
+    {
+     "speaker": "关经理",
+     "zh": "不大，是一家比较小的公司。",
+     "vi": "Không lớn, là một công ty tương đối nhỏ."
+    },
+    {
+     "speaker": "王老师",
+     "zh": "有多少职员？",
+     "vi": "Có bao nhiêu nhân viên?"
+    },
+    {
+     "speaker": "关经理",
+     "zh": "大概有一百多个职员。",
+     "vi": "Khoảng hơn một trăm nhân viên."
+    },
+    {
+     "speaker": "王老师",
+     "zh": "都是中国职员吗？",
+     "vi": "Đều là nhân viên Trung Quốc à?"
+    },
+    {
+     "speaker": "关经理",
+     "zh": "不都是中国职员，也有外国职员。",
+     "vi": "Không phải đều là nhân viên Trung Quốc, cũng có nhân viên nước ngoài."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L15-g1",
+   "title": "Câu chữ 有",
+   "note": "A 有 B = A có B; phủ định dùng 没有 (không dùng 不有).",
+   "examples": [
+    {
+     "zh": "我没有哥哥，也没有姐姐。",
+     "vi": "Tôi không có anh trai, cũng không có chị gái."
+    }
+   ]
+  },
+  {
+   "id": "L15-g2",
+   "title": "Hỏi số lượng: 几 và 多少",
+   "note": "几 dùng cho số nhỏ (dưới 10), cần lượng từ; 多少 dùng cho số bất kỳ, lượng từ có thể bỏ.",
+   "examples": [
+    {
+     "zh": "你家有几口人？",
+     "vi": "Nhà bạn có mấy người?"
+    },
+    {
+     "zh": "有多少职员？",
+     "vi": "Có bao nhiêu nhân viên?"
+    }
+   ]
+  },
+  {
+   "id": "L15-g3",
+   "title": "Số + lượng từ + danh từ; 多 chỉ số ước lượng",
+   "note": "一百多个 = hơn một trăm cái. 只 = chỉ.",
+   "examples": [
+    {
+     "zh": "大概有一百多个职员。",
+     "vi": "Khoảng hơn một trăm nhân viên."
+    }
+   ]
+  }
+ ]
+}

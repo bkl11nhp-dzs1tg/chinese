@@ -1,0 +1,221 @@
+{
+ "id": "L11",
+ "book": "Hán ngữ 1",
+ "unit": 11,
+ "order": 11,
+ "title": "我们都是留学生",
+ "title_vi": "Chúng tôi đều là lưu học sinh",
+ "vocab_ids": [
+  "L11-都",
+  "L11-和",
+  "L11-欢迎",
+  "L11-教授",
+  "L11-介绍",
+  "L11-俩",
+  "L11-留学",
+  "L11-留学生",
+  "L11-没什么",
+  "L11-秘书",
+  "L11-你们",
+  "L11-他们",
+  "L11-位",
+  "L11-我们",
+  "L11-先",
+  "L11-校长",
+  "L11-学生",
+  "L11-也",
+  "L11-一下儿"
+ ],
+ "exercises": [
+  {
+   "id": "L11-r1",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Chúng tôi đều là lưu học sinh.”",
+   "options": [
+    "我们",
+    "都",
+    "是",
+    "留学生"
+   ],
+   "answer": [
+    "我们",
+    "都",
+    "是",
+    "留学生"
+   ],
+   "explanation": "我们都是留学生 — Chúng tôi đều là lưu học sinh."
+  },
+  {
+   "id": "L11-r2",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Tôi giới thiệu một chút.”",
+   "options": [
+    "我",
+    "介绍",
+    "一下儿"
+   ],
+   "answer": [
+    "我",
+    "介绍",
+    "一下儿"
+   ],
+   "explanation": "我介绍一下儿 — Tôi giới thiệu một chút."
+  },
+  {
+   "id": "L11-r3",
+   "type": "reorder",
+   "prompt": "Sắp xếp thành câu: “Anh ấy cũng là giáo viên.”",
+   "options": [
+    "他",
+    "也",
+    "是",
+    "老师"
+   ],
+   "answer": [
+    "他",
+    "也",
+    "是",
+    "老师"
+   ],
+   "explanation": "他也是老师 — Anh ấy cũng là giáo viên."
+  },
+  {
+   "id": "L11-f1",
+   "type": "fill",
+   "prompt": "Điền vào chỗ trống: 我们___是留学生。",
+   "answer": "都",
+   "explanation": "Chúng tôi đều là lưu học sinh."
+  }
+ ],
+ "texts": [
+  {
+   "title": "这位是王教授",
+   "lines": [
+    {
+     "speaker": "秘书",
+     "zh": "我先介绍一下儿，这位是王教授。这是马校长。",
+     "vi": "(Thư ký giới thiệu giáo sư Vương với hiệu trưởng) Tôi xin giới thiệu trước, vị này là giáo sư Vương. Đây là hiệu trưởng Mã."
+    },
+    {
+     "speaker": "校长",
+     "zh": "欢迎您，王教授。",
+     "vi": "Hoan nghênh ông, giáo sư Vương."
+    },
+    {
+     "speaker": "王教授",
+     "zh": "谢谢！",
+     "vi": "Cảm ơn!"
+    }
+   ]
+  },
+  {
+   "title": "我们都是留学生",
+   "lines": [
+    {
+     "speaker": "田芳",
+     "zh": "你是留学生吗？",
+     "vi": "Bạn là lưu học sinh à?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "是。",
+     "vi": "Phải."
+    },
+    {
+     "speaker": "田芳",
+     "zh": "她也是留学生吗？",
+     "vi": "Cô ấy cũng là lưu học sinh à?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "她也是留学生。我们都是留学生。",
+     "vi": "Cô ấy cũng là lưu học sinh. Chúng tôi đều là lưu học sinh."
+    },
+    {
+     "speaker": "田芳",
+     "zh": "他们俩也都是留学生吗？",
+     "vi": "Hai người họ cũng đều là lưu học sinh à?"
+    },
+    {
+     "speaker": "罗兰",
+     "zh": "不，他们俩不是留学生。他们都是中国学生。",
+     "vi": "Không, hai người họ không phải lưu học sinh. Họ đều là sinh viên Trung Quốc."
+    }
+   ]
+  },
+  {
+   "title": "你也是中国人吗",
+   "lines": [
+    {
+     "speaker": "爱德华",
+     "zh": "他是中国人吗？",
+     "vi": "Anh ấy là người Trung Quốc à?"
+    },
+    {
+     "speaker": "李昌浩",
+     "zh": "是。",
+     "vi": "Phải."
+    },
+    {
+     "speaker": "爱德华",
+     "zh": "你也是中国人吗？",
+     "vi": "Bạn cũng là người Trung Quốc à?"
+    },
+    {
+     "speaker": "李昌浩",
+     "zh": "不是。我是韩国人。",
+     "vi": "Không phải. Tôi là người Hàn Quốc."
+    },
+    {
+     "speaker": "爱德华",
+     "zh": "对不起。",
+     "vi": "Xin lỗi."
+    },
+    {
+     "speaker": "李昌浩",
+     "zh": "没什么。",
+     "vi": "Không sao."
+    }
+   ]
+  }
+ ],
+ "grammar_points": [
+  {
+   "id": "L11-g1",
+   "title": "Câu hỏi với 吗",
+   "note": "Câu trần thuật + 吗？ hỏi có/không.",
+   "examples": [
+    {
+     "zh": "她也是留学生吗？",
+     "vi": "Cô ấy cũng là lưu học sinh à?"
+    }
+   ]
+  },
+  {
+   "id": "L11-g2",
+   "title": "Trạng ngữ",
+   "note": "Trạng ngữ (phó từ, từ chỉ thời gian…) đứng trước động từ/tính từ.",
+   "examples": [
+    {
+     "zh": "我先介绍一下儿。",
+     "vi": "Tôi giới thiệu trước một chút."
+    }
+   ]
+  },
+  {
+   "id": "L11-g3",
+   "title": "Phó từ 也 và 都",
+   "note": "也 = cũng, 都 = đều; đặt trước động từ. Khi có cả hai: 也都. 不都 = không phải đều; 都不 = đều không.",
+   "examples": [
+    {
+     "zh": "我们都是留学生。",
+     "vi": "Chúng tôi đều là lưu học sinh."
+    },
+    {
+     "zh": "他们俩也都是留学生吗？",
+     "vi": "Hai người họ cũng đều là lưu học sinh à?"
+    }
+   ]
+  }
+ ]
+}
