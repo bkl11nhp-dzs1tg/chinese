@@ -77,7 +77,8 @@ export async function render(root, ctx, { query = {} } = {}) {
 
   const deco = (name, cls) => h('img', { class: ['deco', cls], src: `./art/deco/${name}.webp`, alt: '', 'aria-hidden': 'true', decoding: 'async' });
   mount(root, h('div', { class: 'lp' },
-    deco('branch', 'lp-branch'),
+    // Đồ họa dính sát góc màn hình (ảnh có mép cắt vuông nên đặt vào góc).
+    h('div', { class: 'lp-bg', 'aria-hidden': 'true' }, deco('branch', 'lp-branch'), deco('mountains', 'lp-mtn'), deco('pavilion', 'lp-pavilion')),
     h('div', { class: 'lp-main' },
       h('section', { class: 'lp-hero' },
         h('div', { class: 'lp-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语')),
@@ -87,7 +88,7 @@ export async function render(root, ctx, { query = {} } = {}) {
       h('div', { class: 'lp-cta' },
         h('button', { class: 'btn primary big lp-go', type: 'button', onclick: start }, started ? 'Học tiếp' : 'Bắt đầu học', icon('chevron')),
         installArea),
-      h('section', { class: 'lp-scene' }, deco('mountains', 'lp-mtn'), deco('pavilion', 'lp-pavilion'), card)),
+      h('section', { class: 'lp-scene' }, card)),
     h('div', { class: 'lp-side' }, account)));
 
   if (query.auth) requestAnimationFrame(() => root.querySelector('.lp-acct')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));

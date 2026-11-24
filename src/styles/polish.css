@@ -428,3 +428,6 @@ input[type="search"], input[type="text"], input[type="url"], input[type="passwor
 .profile-scene { width: 100%; max-width: 420px; border-radius: 24px; display: block; }
 .page-wave { opacity: .35; }
 @media (min-width: 900px) { .ld-acct { margin-top: 80px; } }
+.today-hero > .deco-branch { transform: scaleX(-1); width: 170px; right: -26px; top: -14px; opacity: .3; }
+/* Cành đào trong ô mục tiêu: dính góc trên phải của thẻ */
+.today-hero > .deco-branch { top: 0; right: 0; width: 160px; transform: scaleX(-1); opacity: .35; }

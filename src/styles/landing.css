@@ -75,3 +75,45 @@
 .ld-install-btn > svg { width: 22px; height: 22px; color: var(--accent-ink); }
 @media (max-width: 899px) { .lp-branch { width: 120px; top: -24px; right: -34px; opacity: .35; } }
 @media (min-width: 900px) { .lp-acct > summary { display: none; } .lp-acct .auth-card { margin: 0; background: transparent; } .lp-copy h1 { font-size: 46px; } }
+/* Cành đào ở góc trên phải: gốc cành nằm ngoài mép phải, hoa vươn vào trong */
+.lp-branch { top: -18px; right: -28px; width: 190px; opacity: .9; transform: scaleX(-1); }
+@media (max-width: 899px) { .lp-branch { width: 150px; top: -20px; right: -30px; opacity: .55; } .lp-copy { position: relative; z-index: 1; } }
+@media (min-width: 900px) { .lp-branch { width: 300px; top: -24px; right: -36px; opacity: .9; } }
+/* Chừa chỗ cho cành đào ở góc trên phải để không đè chữ / thẻ đăng nhập */
+@media (max-width: 899px) { .lp { padding-top: 78px; } .lp-branch { width: 150px; top: -6px; right: -24px; opacity: .85; } }
+@media (min-width: 900px) { .lp-side { padding-top: 150px; } .lp-branch { width: 280px; top: -10px; right: -30px; opacity: .95; } }
+@media (max-width: 899px) { .lp { padding-top: 96px; } .lp-branch { width: 140px; top: -8px; } }
+/* Giãn dòng tiêu đề, nút không xuống dòng */
+.lp-copy h1 { line-height: 1.22; display: grid; gap: 4px; }
+.lp-copy h1 br { display: none; }
+.lp-copy h1 em { display: block; }
+.lp-copy { gap: 12px; }
+.lp-lead { line-height: 1.5; }
+.lp-acct.signed .btn { white-space: nowrap; flex: none; }
+.lp-acct.signed small { white-space: normal; }
+/* Xoay ngang điện thoại / màn thấp: 2 cột như máy tính, thu nhỏ */
+@media (orientation: landscape) and (max-height: 560px) {
+  .lp { grid-template-columns: 1.1fr .9fr; gap: 24px; padding-top: 12px; align-items: start; }
+  .lp-branch { width: 150px; top: -10px; right: -20px; }
+  .lp-vert .han { font-size: 56px; }
+  .lp-copy h1 { font-size: 28px; }
+  .lp-cta { grid-template-columns: auto; }
+  .lp-go { min-height: 48px; font-size: 16px; }
+  .demo-card { width: 220px; }
+  .lp-side { padding-top: 40px; }
+  .lp-acct > summary { display: flex; }
+}
+
+/* ---------- Đồ họa sát mép/góc màn hình ---------- */
+.lp-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.lp-bg .deco { position: absolute; opacity: 1; transform: none; }
+.lp-main, .lp-side { position: relative; z-index: 1; }
+.lp-bg .lp-branch { top: calc(57px + env(safe-area-inset-top)); right: 0; left: auto; width: clamp(130px, 34vw, 340px); transform: scaleX(-1); opacity: .9; }
+.lp-bg .lp-mtn { left: 0; bottom: 0; right: auto; width: clamp(180px, 46vw, 460px); opacity: .55; }
+.lp-bg .lp-pavilion { right: 0; bottom: 0; left: auto; width: clamp(150px, 38vw, 380px); opacity: .9; }
+.lp { overflow: visible; }
+.lp-scene { padding: 4px 0; }
+@media (min-width: 900px) { .lp-bg .lp-branch { top: 64px; } .lp-side { padding-top: 120px; } }
+@media (max-width: 899px) { .lp { padding-top: 84px; padding-bottom: 150px; } .lp-bg .lp-mtn, .lp-bg .lp-pavilion { opacity: .5; } }
+@media (orientation: landscape) and (max-height: 560px) { .lp-bg .lp-branch { width: 150px; } .lp-bg .lp-mtn, .lp-bg .lp-pavilion { width: 200px; opacity: .45; } .lp { padding-top: 12px; padding-bottom: 40px; } }
+.lp-acct summary small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .lp-acct summary .grow { min-width: 0; }
