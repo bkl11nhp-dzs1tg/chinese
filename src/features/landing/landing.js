@@ -62,7 +62,7 @@ export async function render(root, ctx) {
   mount(root, h('div', { class: 'ld' },
     // 1. Chữ 汉语 + lời nhắn + nút học
     h('section', { class: 'ld-hero' },
-      h('div', { class: 'ld-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语'), h('span', { class: 'ld-seal' }, icon('logo'))),
+      h('div', { class: 'ld-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语')),
       h('div', { class: 'ld-copy' },
         h('h1', {}, 'Tự học tiếng Trung', h('br'), h('em', {}, 'mỗi ngày.')),
         h('p', { class: 'ld-lead' }, started ? `Bạn đã học ${learned} từ. Thêm 15 phút hôm nay nhé!` : 'Tiếp thu mỗi bài học chỉ từ 15 phút.'),
