@@ -10,7 +10,7 @@ import { buildLessonTest, scoreTest } from '../../core/lessontest.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
 import { answerText, relatedCardIds } from '../../core/exercises.js';
 import { exerciseRunner } from './runner.js';
-import { resultView } from './result-view.js';
+import { reviewWords, resultView } from './result-view.js';
 
 export async function render(root, ctx, { params }) {
   const data = await ctx.loadAll();
@@ -71,10 +71,6 @@ export async function render(root, ctx, { params }) {
     await ctx.repo.setLessonStatus(lesson.id, st);
     const idx = after.lessons.findIndex((l) => l.id === lesson.id);
     const nextLesson = after.lessons[idx + 1];
-    if (result.passed && nextLesson) {
-      await ctx.repo.saveSettings({ active_lesson_id: nextLesson.id });
-      await ctx.refreshSettings();
-    }
     cue(result.passed ? 'done' : 'bad');
     shell.setProgress(1, '');
     const newlyDone = st === 'done' && before !== 'done';
@@ -85,8 +81,9 @@ export async function render(root, ctx, { params }) {
         score: result.score, correct: result.correct, total: result.total, activeMs: session.active_ms, passed: result.passed,
         note: result.passed
           ? (nextLesson ? `Bài tiếp theo: ${nextLesson.title}${nextLesson.title_vi ? ` (${nextLesson.title_vi})` : ''}` : 'Bạn đã xong toàn bộ các bài!')
-          : `Cần ${Math.round(s.pass_threshold * 100)}%. Các từ làm sai đã được đưa vào hàng ôn.`,
+          : `Cần ${Math.round(s.pass_threshold * 100)}% để hoàn thành bài.`,
       }),
+      reviewWords([...wrongIds].map((id) => lessonCards.find((c) => c.id === id)).filter(Boolean), { rate: s.tts_rate }),
       result.wrong.length ? h('div', {},
         h('div', { class: 'section-title' }, `Xem lại câu sai (${result.wrong.length})`),
         h('ul', { class: 'list group review-list' }, result.wrong.map((w) => h('li', {}, h('div', { class: 'item' },
@@ -96,8 +93,8 @@ export async function render(root, ctx, { params }) {
             h('div', { class: 'small', style: { color: 'var(--good)' } }, 'Đáp án: ', h('span', { class: 'han' }, answerText(w.question))))))))) : null);
     shell.setFooter(result.passed && nextLesson
       ? h('div', { class: 'row nowrap' },
-          h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate('lessons') }, 'Lộ trình'),
-          h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.4 }, onclick: () => ctx.navigate(`lesson/${encodeURIComponent(nextLesson.id)}`) }, 'Bài tiếp theo'))
+          h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, 'Về bài'),
+          h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.4 }, onclick: async () => { await ctx.repo.saveSettings({ active_lesson_id: nextLesson.id }); await ctx.refreshSettings(); ctx.navigate(`lesson/${encodeURIComponent(nextLesson.id)}`); } }, 'Bài tiếp theo'))
       : h('div', { class: 'row nowrap' },
           h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, 'Về bài'),
           h('button', { class: 'btn primary big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`test/${encodeURIComponent(lesson.id)}?r=${Date.now()}`) }, 'Làm lại')));

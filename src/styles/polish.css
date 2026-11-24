@@ -192,3 +192,14 @@ body.landing-mode .top-tabs, body.landing-mode .sync-btn, body.landing-mode [dat
 .grades .g-mastered, .grades .q5 { background: #34588f; color: #fff; }
 .hm-cell.lx { color: var(--muted); opacity: .6; }
 .sk-meta { color: color-mix(in srgb, var(--t) 65%, var(--ink)); }
+
+/* Từ cần ôn trên màn kết quả */
+.review-words { max-width: 520px; margin: 20px auto 0; padding: 14px; border-radius: var(--r-lg); background: var(--glass-strong); border: 1px solid var(--line); text-align: left; }
+.rw-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+.rw-head .btn { min-height: 38px; padding: 0 16px; white-space: nowrap; }
+.rw-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.rw-item { display: grid; gap: 1px; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-align: left; font: inherit; cursor: pointer; }
+.rw-item .han { font-size: 22px; }
+.rw-py { font-size: 13px; font-weight: 700; color: var(--accent-ink); }
+.rw-vi { font-size: 13px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cp-pill.due .dot { background: #e08a1e; }

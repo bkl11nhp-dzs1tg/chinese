@@ -146,6 +146,21 @@ export async function renderReader(root, ctx, { params }) {
 
   let playingAll = false;
   let stopSeg = null;
+  // Giọng của từng người nói: xen kẽ nữ / nam theo thứ tự xuất hiện; tên quen trong sách thì theo giới tính.
+  const FEMALE_NAMES = /玛丽|田芳|王兰|安娜|珍妮|罗兰|妈妈|姐姐|妹妹|阿姨|小姐|女/;
+  const MALE_NAMES = /大卫|麦克|爱德华|张东|李昌浩|山本|田中|王|林|关|爸爸|哥哥|弟弟|先生|男/;
+  const speakers = [...new Set(flat.map((x) => x.speaker).filter(Boolean))];
+  const voiceMap = new Map();
+  speakers.forEach((sp, i) => {
+    const g = FEMALE_NAMES.test(sp) ? 'female' : MALE_NAMES.test(sp) ? 'male' : null;
+    voiceMap.set(sp, g || (i % 2 === 0 ? 'female' : 'male'));
+  });
+  // Hai người cùng giới (vd A, B không rõ tên) → vẫn tách giọng.
+  if (speakers.length === 2 && voiceMap.get(speakers[0]) === voiceMap.get(speakers[1]) && !FEMALE_NAMES.test(speakers[1]) && !MALE_NAMES.test(speakers[1])) {
+    voiceMap.set(speakers[1], voiceMap.get(speakers[0]) === 'female' ? 'male' : 'female');
+  }
+  const voiceOf = (sp) => voiceMap.get(sp) || null;
+
   function playSentence(st, rate = prefs.rate) {
     return new Promise((resolve) => {
       if (audioEl && st.audio_ms) {
@@ -160,7 +175,7 @@ export async function renderReader(root, ctx, { params }) {
         return;
       }
       if (!ttsSupported()) return resolve();
-      speak(st.hanzi, rate).then(() => {
+      speak(st.hanzi, rate, { gender: st.speaker ? voiceOf(st.speaker) : null }).then(() => {
         const u = speechSynthesis;
         const wait = setInterval(() => { if (!u.speaking) { clearInterval(wait); resolve(); } }, 120);
         stopSeg = () => { clearInterval(wait); u.cancel(); resolve(); };
@@ -315,7 +330,7 @@ export async function renderReader(root, ctx, { params }) {
   const spkColor = new Map();
   const avatar = (sp) => {
     if (!spkColor.has(sp)) spkColor.set(sp, SPK[spkColor.size % SPK.length]);
-    return h('span', { class: 'spk-av han', style: { '--c': spkColor.get(sp) }, 'aria-hidden': 'true' }, [...sp][0]);
+    return h('span', { class: ['spk-av', 'han', voiceOf(sp) === 'male' ? 'm' : 'f'], style: { '--c': spkColor.get(sp) }, title: voiceOf(sp) === 'male' ? 'Giọng nam' : 'Giọng nữ', 'aria-hidden': 'true' }, [...sp][0]);
   };
 
   function sentenceEl(st, { big = false } = {}) {

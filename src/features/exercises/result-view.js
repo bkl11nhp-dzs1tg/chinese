@@ -1,6 +1,7 @@
 // Màn kết quả dùng chung: vòng điểm, số câu đúng, thời gian.
 
 import { h } from '../../ui/dom.js';
+import { speak } from '../../ui/speech.js';
 import { artOr } from '../../ui/icons.js';
 import { formatDuration } from '../../core/stats.js';
 
@@ -22,6 +23,15 @@ export function scoreRing(score, { size = 148, stroke = 14, passed = null } = {}
       stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - score)}" ${score < 0.01 ? 'visibility="hidden"' : ''} transform="rotate(-90 ${size / 2} ${size / 2})"/>
     <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" style="font:900 34px var(--font);fill:var(--ink)">${Math.round(score * 100)}%</text>`;
   return svg;
+}
+
+/** Danh sách từ làm sai (đã đưa vào hàng ôn) kèm nút "Ôn ngay". */
+export function reviewWords(cards, { rate = 1 } = {}) {
+  if (!cards.length) return null;
+  return h('section', { class: 'review-words' },
+    h('div', { class: 'rw-head' }, h('strong', {}, `Từ cần ôn (${cards.length})`), h('a', { class: 'btn primary', href: '#/session?mode=review' }, 'Ôn ngay')),
+    h('div', { class: 'rw-list' }, cards.map((c) => h('button', { class: 'rw-item', type: 'button', onclick: () => speak(c.hanzi, rate) },
+      h('span', { class: 'han', lang: 'zh-CN' }, c.hanzi), h('span', { class: 'rw-py' }, c.pinyin), h('span', { class: 'rw-vi' }, c.meaning)))));
 }
 
 export function resultView({ title, score, correct, total, activeMs, note, passed = null, emoji }) {

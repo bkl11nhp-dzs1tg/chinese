@@ -28,14 +28,30 @@ export function ttsSupported() {
   return 'speechSynthesis' in globalThis && 'SpeechSynthesisUtterance' in globalThis;
 }
 
-export async function speak(text, rate = 1) {
+// Giọng nữ/nam: dùng giọng riêng nếu máy có (Edge/Windows: Xiaoxiao, Yunxi…; iOS: Tingting…),
+// không có thì dùng cùng một giọng nhưng đổi cao độ để vẫn phân biệt được hai người nói.
+const FEMALE = /Xiaoxiao|Xiaoyi|Xiaohan|Xiaomo|Xiaoxuan|Xiaorui|Huihui|Yaoyao|Tingting|Meijia|Sinji|Lili|female|女/i;
+const MALE = /Yunxi|Yunyang|Yunjian|Yunfeng|Yunhao|Yunze|Kangkang|Liang|male|男/i;
+export async function genderVoice(gender) {
+  const voices = await loadVoices();
+  const zh = voices.filter((v) => /^zh[-_](CN|Hans)/i.test(v.lang) || /^cmn/i.test(v.lang));
+  const isFemale = (v) => FEMALE.test(v.name);
+  const isMale = (v) => MALE.test(v.name) && !/female/i.test(v.name);
+  return zh.find(gender === 'male' ? isMale : isFemale) || null;
+}
+
+/** speak(text, rate, { gender: 'female'|'male' }) */
+export async function speak(text, rate = 1, { gender = null } = {}) {
   if (!ttsSupported() || !text) return false;
-  const voice = await chineseVoice();
+  let voice = gender ? await genderVoice(gender) : null;
+  const exact = !!voice;
+  if (!voice) voice = await chineseVoice();
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'zh-CN';
   if (voice) u.voice = voice;
   u.rate = rate;
+  if (gender && !exact) u.pitch = gender === 'male' ? 0.6 : 1.25;
   speechSynthesis.speak(u);
   return !!voice;
 }

@@ -9,7 +9,7 @@ import { ttsSupported } from '../../ui/speech.js';
 import { SKILLS, buildSkillSet } from '../../core/practice.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
 import { exerciseRunner } from '../exercises/runner.js';
-import { resultView } from '../exercises/result-view.js';
+import { resultView, reviewWords } from '../exercises/result-view.js';
 import { GAMES } from '../games/games.js';
 
 export const GAME_ICONS = { match: 'link', race: 'bolt', build: 'blocks', listen: 'headphones' };
@@ -152,8 +152,7 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
         emoji: badgeIcon(skill.icon, r.score >= 0.7 ? 'good' : 'accent'),
         title: `${skill.label}: ${r.score >= 0.8 ? 'Tốt lắm!' : r.score >= 0.5 ? 'Khá ổn' : 'Luyện thêm nhé'}`,
         score: r.score, correct: r.correct, total: r.total, activeMs: session.active_ms,
-        note: wrong.size ? `${wrong.size} từ làm sai đã đưa vào hàng ôn.` : null,
-      }));
+      }), reviewWords([...wrong].map((id) => data.cardsById.get(id)).filter(Boolean), { rate: s.tts_rate }));
       shell.setFooter(h('div', { class: 'row nowrap' },
         h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, 'Kỹ năng khác'),
         h('button', { class: 'btn primary big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`practice/${skill.id}?scope=${scope}&r=${Date.now()}`) }, 'Luyện tiếp')));

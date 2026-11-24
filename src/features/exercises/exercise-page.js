@@ -5,7 +5,7 @@ import { focusShell } from '../../ui/focus.js';
 import { cue } from '../../ui/feedback.js';
 import { relatedCardIds } from '../../core/exercises.js';
 import { exerciseRunner, lessonExercises } from './runner.js';
-import { resultView } from './result-view.js';
+import { resultView, reviewWords } from './result-view.js';
 
 export async function render(root, ctx, { params }) {
   const data = await ctx.loadAll();
@@ -41,8 +41,8 @@ export async function render(root, ctx, { params }) {
       shell.main.replaceChildren(resultView({
         title: r.score >= 0.8 ? 'Luyện tập tốt lắm!' : 'Xong phần luyện tập',
         score: r.score, correct: r.correct, total: r.total, activeMs: session.active_ms,
-        note: wrongCards.size ? `${wrongCards.size} từ liên quan tới câu sai đã được đưa vào hàng ôn.` : 'Sẵn sàng làm kiểm tra cuối bài.',
-      }));
+        note: wrongCards.size ? null : 'Sẵn sàng làm kiểm tra cuối bài.',
+      }), reviewWords([...wrongCards].map((id) => data.cardsById.get(id)).filter(Boolean), { rate: ctx.settings.tts_rate }));
     },
   });
   return () => { runner.destroy(); shell.destroy(); return tracker.stop(); };

@@ -222,11 +222,8 @@ export async function render(root, ctx, { query }) {
       completed.length ? h('p', {}, 'Hoàn thành bài: ', completed.map((l) => h('span', { class: 'badge done han', style: { marginRight: '6px' } }, l.title))) : null,
       xp != null ? h('p', {}, `Mèo thư ký nhận ${xp} XP.`) : null));
     const lessonDone = lesson && lesson.vocab_ids.every((id) => after.statesById.get(id)?.last_reviewed_at != null);
-    shell.setFooter(lessonDone
-      ? h('div', { class: 'row nowrap' },
-          h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(backTo) }, 'Về bài'),
-          h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.3 }, onclick: () => ctx.navigate(`test/${encodeURIComponent(lesson.id)}`) }, 'Làm kiểm tra'))
-      : h('button', { class: 'btn primary big block', type: 'button', onclick: () => ctx.navigate(backTo) }, 'Xong'));
+    // Học xong từ của bài: về trang bài để làm bước tiếp theo (bài khóa → luyện tập → kiểm tra), không nhảy thẳng vào kiểm tra.
+    shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: () => ctx.navigate(backTo) }, lessonDone ? 'Về bài: bước tiếp theo' : 'Xong'));
     if (completed.length) toast(`Hoàn thành ${completed.length} bài!`);
   }
 

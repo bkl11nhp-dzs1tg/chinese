@@ -58,6 +58,7 @@ export async function render(root, ctx, { query }) {
   let groupBy = topic ? 'topic' : 'lesson';
   let shown = PAGE;
   let onlyWeak = query.m === 'weak';
+  let onlyDue = query.s === 'due';
 
   const search = h('input', { type: 'search', placeholder: 'Tìm chữ Hán, pinyin hoặc nghĩa…', 'aria-label': 'Tìm từ', value: query.q || '' });
   const gridEl = h('div', { class: 'word-list' });
@@ -74,6 +75,7 @@ export async function render(root, ctx, { query }) {
     onclick: () => { status = status === k ? '' : k; shown = PAGE; draw(); },
   }, h('span', { class: 'dot' }), v.label, h('b', {}, String(counts[k]))));
 
+  const dueChip = h('button', { class: 'cp-pill due', type: 'button', onclick: () => { onlyDue = !onlyDue; shown = PAGE; draw(); } }, h('span', { class: 'dot' }), 'Cần ôn', h('b', {}, String(due)));
   const weakChip = h('button', { class: 'cp-pill weak weak-chip', type: 'button', onclick: () => { onlyWeak = !onlyWeak; shown = PAGE; draw(); } });
   const topicCount = new Map();
   for (const c of all) topicCount.set(c.topic, (topicCount.get(c.topic) || 0) + 1);
@@ -144,6 +146,7 @@ export async function render(root, ctx, { query }) {
     const weakCount = all.filter((c) => marks.get(c.hanzi) === 'weak').length;
     weakChip.replaceChildren(h('span', { class: 'dot' }), 'Chưa nhớ', h('b', {}, String(weakCount)));
     weakChip.classList.toggle('selected', onlyWeak);
+    dueChip.classList.toggle('selected', onlyDue);
     statusTiles.forEach((t, i) => {
       const on = Object.keys(STATUS)[i] === status;
       t.classList.toggle('selected', on);
@@ -161,11 +164,12 @@ export async function render(root, ctx, { query }) {
       if (lesson && c.lesson_id !== lesson) return false;
       if (topic && c.topic !== topic) return false;
       if (onlyWeak && marks.get(c.hanzi) !== 'weak') return false;
+      if (onlyDue && !(data.statesById.get(c.id)?.due_at <= now)) return false;
       if (status && cardStatus(data.statesById.get(c.id)) !== status) return false;
       if (!q) return true;
       return c.hanzi.includes(raw) || fold(c.pinyin).replace(/\s+/g, '').includes(qn) || fold(c.meaning).includes(q);
     });
-    countEl.textContent = `${rows.length} từ${status ? ` · ${STATUS[status].label.toLowerCase()}` : ''}${onlyWeak ? ' · chưa nhớ' : ''}`;
+    countEl.textContent = `${rows.length} từ${status ? ` · ${STATUS[status].label.toLowerCase()}` : ''}${onlyWeak ? ' · chưa nhớ' : ''}${onlyDue ? ' · cần ôn' : ''}`;
     gridEl.replaceChildren(...(rows.length ? rows.slice(0, shown).map((c) => {
       const st = data.statesById.get(c.id);
       const m = marks.get(c.hanzi);
@@ -184,7 +188,7 @@ export async function render(root, ctx, { query }) {
     h('section', { class: 'cp-summary glass' },
       h('div', { class: 'cp-head' }, h('strong', {}, `${Math.round((counts.mastered / all.length) * 100)}% đã thuộc`), h('span', { class: 'muted small' }, `${counts.learning} đang học`)),
       meter,
-      h('div', { class: 'cp-pills' }, statusTiles, weakChip)),
+      h('div', { class: 'cp-pills' }, dueChip, statusTiles, weakChip)),
     due ? h('a', { class: 'due-banner', href: '#/session?mode=review' },
       h('span', { class: 'st-ic' }, icon('repeat')),
       h('span', { class: 'grow' }, h('strong', {}, `${due} thẻ đến hạn ôn`), h('span', { class: 'muted small' }, 'Ôn ngay để giữ trí nhớ')),

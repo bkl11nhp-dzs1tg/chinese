@@ -1,6 +1,7 @@
 // Lộ trình bài học theo sách (mục 9.3) và trang một bài với các bước:
 // 1. Học từ mới → 2. Nghe bài (MP3 của sách) → 3. Luyện tập → 4. Kiểm tra cuối bài.
 
+import { nextLessonStep } from '../../core/lessons.js';
 import { h, mount, toast, noteLines } from '../../ui/dom.js';
 import { cue } from '../../ui/feedback.js';
 import { icon } from '../../ui/icons.js';
@@ -99,13 +100,12 @@ export async function renderLesson(root, ctx, { params }) {
     ctx.navigate(`session?lesson=${encodeURIComponent(lesson.id)}`);
   };
   // Bước nên làm tiếp theo: học từ → kiểm tra.
-  const primary = !allLearned
-    ? h('button', { class: 'btn primary big block', type: 'button', onclick: startLearning }, icon('play'), st.learned ? `Học tiếp (${st.total - st.learned} từ)` : 'Bắt đầu học')
-    : textCount && !readProg
-      ? h('a', { class: 'btn primary big block', href: `#/read/${encodeURIComponent(`lesson:${lesson.id}`)}` }, icon('lessons'), 'Đọc bài khóa')
-    : !testPassed
-      ? h('a', { class: 'btn primary big block', href: `#/test/${encodeURIComponent(lesson.id)}` }, 'Làm kiểm tra cuối bài')
-      : next ? h('a', { class: 'btn primary big block', href: `#/lesson/${encodeURIComponent(next.id)}` }, 'Sang bài tiếp theo') : null;
+  const step = nextLessonStep(lesson, st, { readFinished: !!readProg?.finished, readStarted: !!readProg, threshold, next });
+  const primary = step.id === 'words'
+    ? h('button', { class: 'btn primary big block', type: 'button', onclick: startLearning }, icon('play'), step.label)
+    : step.id === 'next'
+      ? h('button', { class: 'btn primary big block', type: 'button', onclick: async () => { await ctx.repo.saveSettings({ active_lesson_id: next.id }); await ctx.refreshSettings(); ctx.navigate(`lesson/${encodeURIComponent(next.id)}`); } }, step.label, icon('chevron'))
+      : h('a', { class: 'btn primary big block', href: step.href }, step.label);
 
   mount(root, h('div', { class: 'lesson-page' }, h('div', { class: 'lp-aside' },
     h('p', { style: { margin: 0 } }, h('a', { class: 'btn ghost', href: '#/lessons', style: { paddingLeft: 0 } }, icon('back'), 'Lộ trình')),

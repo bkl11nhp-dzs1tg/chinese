@@ -4,7 +4,7 @@
 import { h, mount } from '../../ui/dom.js';
 import { icon, badgeIcon } from '../../ui/icons.js';
 import { newLearnedToday, timeTotals, streak, formatDuration, startOfDay } from '../../core/stats.js';
-import { newCardQueue } from '../../core/lessons.js';
+import { newCardQueue, nextLessonStep } from '../../core/lessons.js';
 import { SKILLS } from '../../core/practice.js';
 import { dayKey, addDays } from '../../core/stats.js';
 import { scoreRing } from '../exercises/result-view.js';
@@ -44,10 +44,9 @@ export async function render(root, ctx) {
   // Bước tiếp theo của bài đang học
   let lessonCta = null;
   if (active) {
-    const allLearned = activeSt.total > 0 && activeSt.learned === activeSt.total;
-    lessonCta = allLearned
-      ? { label: 'Làm kiểm tra cuối bài', href: `#/test/${encodeURIComponent(active.id)}` }
-      : { label: activeSt.learned ? 'Học tiếp bài này' : 'Bắt đầu bài này', href: `#/session?lesson=${encodeURIComponent(active.id)}` };
+    const rp = await ctx.repo.get('reading_progress', `lesson:${active.id}`);
+    const next = data.lessons[data.lessons.indexOf(active) + 1] || null;
+    lessonCta = nextLessonStep(active, activeSt, { readFinished: !!rp?.finished, readStarted: !!rp, threshold: s.pass_threshold, next });
   }
 
   mount(root,
@@ -87,7 +86,7 @@ export async function render(root, ctx) {
         h('div', { class: 'active-body' },
           h('div', { class: 'mini-steps' },
             miniStep('cards', 'Từ mới', `${activeSt.learned}/${activeSt.total}`, activeSt.total > 0 && activeSt.learned === activeSt.total),
-            miniStep('lessons', 'Bài khóa', active.texts?.length ? `${active.texts.reduce((n, t) => n + t.lines.length, 0)} câu` : '—', false),
+            miniStep('lessons', 'Bài khóa', active.texts?.length ? `${active.texts.reduce((n, t) => n + t.lines.length, 0)} câu` : '—', !['words', 'read'].includes(lessonCta.id)),
             miniStep('trophy', 'Kiểm tra', activeSt.test_best != null ? `${Math.round(activeSt.test_best * 100)}%` : 'chưa làm', activeSt.status === 'done')),
           h('a', { class: 'btn tinted block', href: lessonCta.href }, lessonCta.label))),
     ) : null),

@@ -25,7 +25,9 @@ describe('lessons', () => {
     const st = new Map([['L1', { status: 'done' }], ['L2', { status: 'todo' }], ['L3', { status: 'doing' }]]);
     expect(pickActiveLesson(ls, st).id).toBe('L3');
     expect(pickActiveLesson(ls, st, 'L2').id).toBe('L2');
-    expect(pickActiveLesson(ls, st, 'L1').id).toBe('L3');
+    // Bài đã chọn vẫn giữ dù đã xong (người học tự bấm sang bài sau).
+    expect(pickActiveLesson(ls, st, 'L1').id).toBe('L1');
+    expect(pickActiveLesson(ls, st, 'Lx').id).toBe('L3');
   });
 
   it('hàng đợi từ mới bắt đầu từ bài đang học, bỏ thẻ đã học', () => {

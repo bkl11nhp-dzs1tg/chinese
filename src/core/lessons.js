@@ -25,9 +25,10 @@ export function lessonStatus(lesson, statesById, progress, { threshold = 0.7 } =
   return { status, learned: learnedCount, total, best_score: progress?.best_score ?? null, test_best: testBest };
 }
 
-/** Bài đang học: bài được chọn (nếu chưa xong) → bài "đang học" đầu tiên → bài "chưa học" đầu tiên. */
+/** Bài đang học: bài người học đã chọn (kể cả khi đã xong – chỉ đổi khi họ tự sang bài khác)
+ *  → bài "đang học" đầu tiên → bài "chưa học" đầu tiên. */
 export function pickActiveLesson(sortedLessons, statusById, preferredId = null) {
-  if (preferredId && statusById.get(preferredId) && statusById.get(preferredId).status !== 'done') {
+  if (preferredId && statusById.get(preferredId)) {
     return sortedLessons.find((l) => l.id === preferredId) || null;
   }
   return (
@@ -35,6 +36,20 @@ export function pickActiveLesson(sortedLessons, statusById, preferredId = null) 
     sortedLessons.find((l) => statusById.get(l.id)?.status === 'todo') ||
     null
   );
+}
+
+/**
+ * Bước tiếp theo của một bài, theo đúng thứ tự: học từ → đọc bài khóa → luyện tập → kiểm tra → sang bài sau.
+ * Trả về { id, label, href }.
+ */
+export function nextLessonStep(lesson, st, { readFinished = false, readStarted = false, threshold = 0.7, next = null } = {}) {
+  const enc = encodeURIComponent;
+  if (st.total > 0 && st.learned < st.total) return { id: 'words', label: st.learned ? `Học tiếp (${st.total - st.learned} từ)` : 'Bắt đầu học từ mới', href: `#/session?lesson=${enc(lesson.id)}` };
+  if (lesson.texts?.length && !readFinished) return { id: 'read', label: readStarted ? 'Đọc tiếp bài khóa' : 'Đọc bài khóa', href: `#/read/${enc(`lesson:${lesson.id}`)}` };
+  if (st.best_score == null) return { id: 'exercise', label: 'Luyện tập', href: `#/exercise/${enc(lesson.id)}` };
+  if (st.test_best == null || st.test_best < threshold) return { id: 'test', label: 'Làm kiểm tra cuối bài', href: `#/test/${enc(lesson.id)}` };
+  if (next) return { id: 'next', label: 'Sang bài tiếp theo', href: `#/lesson/${enc(next.id)}` };
+  return { id: 'done', label: 'Xem lại bài', href: `#/lesson/${enc(lesson.id)}` };
 }
 
 /** Thẻ chưa học, bắt đầu từ bài đang học rồi lần lượt các bài sau, cuối cùng là thẻ không thuộc bài nào. */
