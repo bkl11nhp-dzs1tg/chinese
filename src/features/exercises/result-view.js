@@ -16,7 +16,7 @@ export function scoreRing(score, { size = 148, stroke = 14, passed = null } = {}
   svg.setAttribute('class', 'ring');
   svg.setAttribute('role', 'img');
   svg.setAttribute('aria-label', `Điểm ${Math.round(score * 100)}%`);
-  const color = passed === false ? 'var(--bad)' : passed === true ? 'var(--good)' : 'var(--accent)';
+  const color = passed === false ? 'var(--bad)' : passed === true || score >= 0.8 ? 'var(--good)' : score < 0.5 ? 'var(--bad)' : 'var(--accent)';
   svg.innerHTML = `
     <circle class="track" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke-width="${stroke}"/>
     <circle class="val" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke-width="${stroke}" style="stroke:${color}"
@@ -36,7 +36,7 @@ export function reviewWords(cards, { rate = 1 } = {}) {
 
 export function resultView({ title, score, correct, total, activeMs, note, passed = null, emoji }) {
   return h('div', { class: 'result' },
-    passed == null ? emoji || null : artOr(passed ? 'pass' : 'retry', emoji || null),
+    artOr((passed ?? score >= 0.7) ? 'pass' : 'retry', emoji || null),
     h('h1', {}, title),
     h('div', { style: { margin: '20px 0' } }, scoreRing(score, { passed })),
     h('div', { class: 'grid', style: { maxWidth: '360px', margin: '0 auto' } },

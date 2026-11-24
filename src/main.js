@@ -130,6 +130,8 @@ async function boot() {
   updateOnline();
 
   const main = h('main', { class: 'main', id: 'main', tabindex: '-1' });
+  document.documentElement.style.setProperty('--wave', `url(${new URL('./art/deco/wave.webp', location.href).href})`);
+  document.body.append(h('div', { class: 'page-wave', 'aria-hidden': 'true' }));
   mount(appEl, h('div', { class: 'shell' },
     h('header', { class: 'topbar' },
       h('a', { class: 'brand', href: '#/welcome', 'aria-label': 'Chinese – trang giới thiệu' }, icon('logo'), h('span', {}, 'Chinese')),
@@ -156,7 +158,7 @@ async function boot() {
   let lastSync = 0;
   async function autoSync({ force = false } = {}) {
     if (!loadAccount() || !navigator.onLine) return;
-    if (!force && Date.now() - lastSync < 60_000) return;
+    if (!force && Date.now() - lastSync < 55_000) return;
     lastSync = Date.now();
     paintSync('busy');
     try {
@@ -171,7 +173,8 @@ async function boot() {
   }
   window.addEventListener('sync:changed', () => { paintSync(); });
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') autoSync({ force: true }); else autoSync(); });
-  setInterval(() => autoSync(), 5 * 60_000);
+  // Tự đồng bộ mỗi phút khi đang mở app (không cần bấm).
+  setInterval(() => { if (document.visibilityState === 'visible') autoSync(); }, 60_000);
   window.addEventListener('hashchange', () => { if (/^#\/(today|stats|lessons)/.test(location.hash)) autoSync(); });
 
   if (!ctx.settings.onboarded && !location.hash) location.replace('#/welcome');

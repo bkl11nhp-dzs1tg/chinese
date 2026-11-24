@@ -57,6 +57,7 @@ export async function render(root, ctx) {
         s.cat_enabled ? h('span', { class: 'stat-chip', title: 'XP' }, icon('star'), String(s.xp_total || 0)) : null)),
 
     h('div', { class: 'today-top' }, h('div', { class: 'hero px-box today-hero' },
+      h('img', { class: 'deco deco-branch', src: './art/deco/branch.webp', alt: '', 'aria-hidden': 'true' }),
       h('div', { class: 'row nowrap', style: { alignItems: 'center', gap: '16px' } },
         h('div', { style: { flex: 1 } },
           h('div', { class: 'q-type' }, 'Mục tiêu hôm nay'),

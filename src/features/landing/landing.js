@@ -59,7 +59,10 @@ export async function render(root, ctx) {
   window.addEventListener('install:changed', paintInstall);
   paintInstall();
 
+  const deco = (name, cls) => h('img', { class: ['deco', cls], src: `./art/deco/${name}.webp`, alt: '', 'aria-hidden': 'true', decoding: 'async' });
   mount(root, h('div', { class: 'ld' },
+    deco('branch', 'ld-branch'),
+    deco('flower', 'ld-petal'), deco('flower', 'ld-petal p2'), deco('flower', 'ld-petal p3'),
     // 1. Chữ 汉语 + lời nhắn + nút học
     h('section', { class: 'ld-hero' },
       h('div', { class: 'ld-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语')),
@@ -70,7 +73,8 @@ export async function render(root, ctx) {
           h('button', { class: 'btn primary big ld-go', type: 'button', onclick: start }, started ? 'Học tiếp' : 'Bắt đầu học', icon('chevron')),
           installArea))),
     // 2. Thẻ lật thử, đứng riêng
-    h('section', { class: 'ld-try' },
+    h('section', { class: 'ld-try ld-scene' },
+      deco('mountains', 'deco-mtn'), deco('pagoda', 'deco-pagoda'),
       card),
   ));
 

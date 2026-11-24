@@ -203,7 +203,7 @@ export async function renderReader(root, ctx, { params }) {
       await repo.markWord(word, next);
       if (next) marks.set(word, next); else marks.delete(word);
       cue(next === 'weak' ? 'tap' : 'good');
-      toast(next === 'weak' ? 'Đã đánh dấu chưa nhớ: từ này sẽ được tô màu khi gặp lại.' : next === 'known' ? 'Đã đánh dấu đã nhớ.' : 'Đã bỏ đánh dấu.');
+      toast(next === 'weak' ? 'Đã đánh dấu chưa nhớ' : next === 'known' ? 'Đã đánh dấu đã nhớ' : 'Đã bỏ đánh dấu');
       closeSheet();
       rerender();
     };

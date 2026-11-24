@@ -33,7 +33,7 @@
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
   --tabbar-h: 58px;
 
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Noto Sans", Roboto, system-ui, sans-serif;
+  --font: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Noto Sans", Roboto, system-ui, sans-serif;
   --font-han: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Hiragino Sans GB", "Source Han Sans SC", sans-serif;
   --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
   color-scheme: light;

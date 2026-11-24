@@ -134,7 +134,7 @@ export async function render(root, ctx, { query }) {
       await ctx.repo.markWord(c.hanzi, next);
       if (next) marks.set(c.hanzi, next); else marks.delete(c.hanzi);
       cue(next === 'known' ? 'good' : 'tap');
-      if (next === 'weak') toast('Từ này sẽ được tô màu khi gặp trong bài khóa.');
+      if (next === 'weak') toast('Đã đánh dấu chưa nhớ');
       paint();
       draw();
     }
