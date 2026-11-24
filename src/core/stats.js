@@ -119,6 +119,7 @@ export function newLearnedToday(events, now) {
 }
 
 export function formatDuration(ms) {
+  if (ms > 0 && ms < 60000) return `${Math.max(1, Math.round(ms / 1000))} giây`;
   const min = Math.round(ms / 60000);
   if (min < 60) return `${min} phút`;
   const h = Math.floor(min / 60);

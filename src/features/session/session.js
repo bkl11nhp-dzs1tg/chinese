@@ -71,13 +71,15 @@ export async function render(root, ctx, { query }) {
   const steps = [...plan.steps];
   const relearnCount = new Map();
   const results = [];
-  const stats = { reviewed: 0, learned: 0, correct: 0, wrong: 0, exercise: null, game: null };
+  const stats = { reviewed: 0, learned: 0, relearned: 0, skipped: 0, correct: 0, wrong: 0, exercise: null, game: null };
   const statusBefore = new Map([...data.statusById].map(([k, v]) => [k, v.status]));
   let idx = 0;
   const history = []; // để nút "Quay lại" hoàn tác lần chấm trước
   async function goBack() {
     const e = history.pop();
     if (!e) return;
+    if (e.skipped) stats.skipped--;
+    if (e.relearn) { stats.relearned--; e.ok ? stats.correct-- : stats.wrong--; }
     if (!e.skipped) {
       await ctx.repo.undoReview({ cardId: e.cardId, previous: e.previous, eventId: e.eventId });
       if (!e.noState) {
@@ -112,7 +114,7 @@ export async function render(root, ctx, { query }) {
       current = flashcard({
         card, state: data.statesById.get(card.id) || null, kind: step.type, settings: s,
         onBack: history.length ? () => goBack() : null,
-        onSkip: () => { history.push({ idx, skipped: true }); idx++; showStep(); },
+        onSkip: () => { history.push({ idx, skipped: true }); stats.skipped++; idx++; showStep(); },
         onGrade: async (q, kindOfGrade) => {
           const ok = q >= 3;
           cue(ok ? 'tap' : 'bad');
@@ -122,6 +124,9 @@ export async function render(root, ctx, { query }) {
             entry.eventId = r.event.id;
             entry.previous = r.previous;
             entry.noState = true;
+            entry.relearn = true;
+            stats.relearned++;
+            ok ? stats.correct++ : stats.wrong++;
           } else {
             const r = await ctx.repo.recordReview({ cardId: card.id, quality: q, activity: step.type, sessionId: tracker.session.id, mode: kindOfGrade === 'mastered' ? 'mastered' : 'full' });
             Object.assign(entry, { eventId: r.event.id, previous: r.previous, prevMemState: data.statesById.get(card.id) });
@@ -203,13 +208,17 @@ export async function render(root, ctx, { query }) {
       early ? badgeIcon('thumb') : artOr('done', badgeIcon('party', 'good')),
       h('h1', {}, early ? 'Đã dừng buổi học' : 'Xong buổi học!'),
       h('p', { class: 'muted' }, early ? 'Phần đã học vẫn được lưu.' : 'Hẹn gặp lại lần sau.'),
-      h('div', { class: 'grid', style: { maxWidth: '400px', margin: '20px auto 0' } },
+      // Chỉ hiện ô có số liệu (không hiện hàng loạt số 0 khi buổi học chỉ có ôn lại/bỏ qua/trò chơi).
+      h('div', { class: 'grid', style: { maxWidth: '400px', margin: '20px auto 0' } }, [
         tile(formatDuration(session.active_ms), 'thời gian học'),
-        tile(total ? `${Math.round((stats.correct / total) * 100)}%` : '—', 'nhớ đúng'),
-        tile(stats.reviewed, 'thẻ đã ôn'),
-        tile(stats.learned, 'từ mới')),
+        total ? tile(`${Math.round((stats.correct / total) * 100)}%`, 'nhớ đúng') : null,
+        stats.learned ? tile(stats.learned, 'từ mới') : null,
+        stats.reviewed ? tile(stats.reviewed, 'thẻ đã ôn') : null,
+        stats.relearned ? tile(stats.relearned, 'lượt ôn lại') : null,
+        stats.skipped ? tile(stats.skipped, 'thẻ bỏ qua') : null,
+        stats.game && !stats.game.skipped ? tile(`${(stats.game.ms / 1000).toFixed(1)}s`, 'nối cặp') : null,
+      ].filter(Boolean)),
       stats.exercise ? h('p', { style: { marginTop: '16px' } }, `Bài tập: đúng ${stats.exercise.correct}/${stats.exercise.total}.`) : null,
-      stats.game && !stats.game.skipped ? h('p', {}, `Nối cặp: ${(stats.game.ms / 1000).toFixed(1)} giây.`) : null,
       completed.length ? h('p', {}, 'Hoàn thành bài: ', completed.map((l) => h('span', { class: 'badge done han', style: { marginRight: '6px' } }, l.title))) : null,
       xp != null ? h('p', {}, `Mèo thư ký nhận ${xp} XP.`) : null));
     const lessonDone = lesson && lesson.vocab_ids.every((id) => after.statesById.get(id)?.last_reviewed_at != null);
