@@ -186,7 +186,7 @@ input[type="url"], input[type="password"] { font: 17px var(--font); color: var(-
 /* Thanh chế độ đọc: cùng chiều cao và cỡ chữ với các nút tùy chọn */
 .reader-tools .seg { padding: 3px; border-radius: 999px; gap: 2px; }
 .reader-tools .seg-btn { min-height: 34px; padding: 0 16px; border-radius: 999px; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; }
-.reader-tools .seg-btn.on { background: var(--accent); color: var(--on-accent); box-shadow: none; }
+.reader-tools .seg-btn.on { background: var(--accent-fill); color: #fff; box-shadow: none; }
 .reader-tools .chip.opt { min-height: 40px; padding: 0 16px; font-size: 15px; border-radius: 999px; }
 @media (max-width: 560px) { .reader-tools .seg-btn { flex: 1 0 auto; padding: 0 12px; } }
 

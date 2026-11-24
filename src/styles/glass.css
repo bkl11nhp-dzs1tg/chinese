@@ -43,7 +43,8 @@ body { background: transparent; }
 }
 .reader-tools { border-radius: var(--r-lg); padding: 8px; margin: 12px 0 0; }
 .topbar, .nav { background: var(--glass-strong); border-color: var(--glass-border); }
-.chip, .btn:not(.primary):not(.good):not(.bad):not(.ghost):not(.tinted) { background: var(--glass-strong); }
+/* :where() giữ độ ưu tiên thấp để nút có màu riêng (vd .g-good, .g-mastered) không bị đè thành nền trắng. */
+.chip, .btn:where(:not(.primary, .good, .bad, .ghost, .tinted, .danger)) { background: var(--glass-strong); }
 .unit-head { background: linear-gradient(135deg, #b81f3a, #f0567a); border: 1px solid rgba(255, 255, 255, .08); }
 .hero.px-box { background: var(--glass-strong); }
 .btn.primary { background: linear-gradient(180deg, #ff6b84, var(--accent)); }

@@ -182,3 +182,13 @@ body.landing-mode .top-tabs, body.landing-mode .sync-btn, body.landing-mode [dat
 .note-lines li { position: relative; padding-left: 14px; line-height: 1.5; }
 .note-lines li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 .ph-note.note-lines { padding: 10px 12px; }
+
+/* ---------- Tương phản: nền đậm cho mọi nút/nhãn chữ trắng (cả giao diện sáng và tối) ---------- */
+.btn.primary { background: linear-gradient(180deg, var(--accent-fill-top), var(--accent-fill)); }
+.seg-btn.on, .install-fab, .pl-play, .mark-tag, .badge.weak-badge, .mark-btn.weak.on, .lp-num.on { background: var(--accent-fill); color: #fff; }
+.mark-btn.weak.on { border-color: var(--accent-fill); }
+.node.done, .grades .q4, .grades .g-good, .pop-fx.good, .btn.good, .mark-tag.known { background: var(--good-fill); color: #fff; }
+.mark-btn.known.on { background: var(--good-fill); border-color: var(--good-fill); color: #fff; }
+.grades .g-mastered, .grades .q5 { background: #34588f; color: #fff; }
+.hm-cell.lx { color: var(--muted); opacity: .6; }
+.sk-meta { color: color-mix(in srgb, var(--t) 65%, var(--ink)); }
