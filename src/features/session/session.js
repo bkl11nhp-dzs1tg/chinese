@@ -194,7 +194,7 @@ export async function render(root, ctx, { query }) {
       if (st !== 'todo' && p?.status !== st) await ctx.repo.setLessonStatus(l.id, st);
     }
     let xp = null;
-    if (s.cat_enabled) {
+    if (false && s.cat_enabled) { // Mèo thư ký: tạm ẩn
       const today = new Date().toDateString();
       const earned = s.xp_day === today ? s.xp_today || 0 : 0;
       xp = sessionXp({ activeMs: session.active_ms, lessonsCompleted: completed.length, results, earnedToday: earned });
@@ -220,7 +220,7 @@ export async function render(root, ctx, { query }) {
       ].filter(Boolean)),
       stats.exercise ? h('p', { style: { marginTop: '16px' } }, `Bài tập: đúng ${stats.exercise.correct}/${stats.exercise.total}.`) : null,
       completed.length ? h('p', {}, 'Hoàn thành bài: ', completed.map((l) => h('span', { class: 'badge done han', style: { marginRight: '6px' } }, l.title))) : null,
-      xp != null ? h('p', {}, `Mèo thư ký nhận ${xp} XP.`) : null));
+    ));
     const lessonDone = lesson && lesson.vocab_ids.every((id) => after.statesById.get(id)?.last_reviewed_at != null);
     // Học xong từ của bài: về trang bài để làm bước tiếp theo (bài khóa → luyện tập → kiểm tra), không nhảy thẳng vào kiểm tra.
     shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: () => ctx.navigate(backTo) }, lessonDone ? 'Về bài: bước tiếp theo' : 'Xong'));

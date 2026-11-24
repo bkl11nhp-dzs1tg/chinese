@@ -53,7 +53,7 @@ export async function render(root, ctx) {
       h('div', {}, h('div', { class: 'sub' }, `${WEEKDAYS[d.getDay()]}, ${d.getDate()}/${d.getMonth() + 1}`), h('h1', {}, 'Hôm nay')),
       h('div', { class: 'chips-row' },
         h('span', { class: 'stat-chip flame', title: 'Chuỗi ngày học', 'aria-label': `Chuỗi ${st} ngày` }, icon('flame'), String(st)),
-        s.cat_enabled ? h('span', { class: 'stat-chip', title: 'XP' }, icon('star'), String(s.xp_total || 0)) : null)),
+      )),
 
     h('div', { class: 'today-top' }, h('div', { class: 'hero px-box today-hero' },
       h('img', { class: 'deco deco-branch', src: './art/deco/branch.webp', alt: '', 'aria-hidden': 'true' }),

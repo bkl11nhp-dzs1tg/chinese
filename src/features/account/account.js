@@ -48,7 +48,7 @@ export function authCard(ctx, { register: startRegister = false } = {}) {
     return b;
   };
 
-  const userIn = h('input', { type: 'text', autocomplete: 'username', autocapitalize: 'off', autocorrect: 'off', spellcheck: false, inputmode: 'email', placeholder: 'vd: linh.hoc', value: remembered, maxlength: 64 });
+  const userIn = h('input', { type: 'text', autocomplete: 'username', autocapitalize: 'off', autocorrect: 'off', spellcheck: false, inputmode: 'email', value: remembered, maxlength: 64 });
   const passIn = h('input', { type: 'password', placeholder: '••••••••', maxlength: 200 });
   const pass2In = h('input', { type: 'password', autocomplete: 'new-password', placeholder: 'Nhập lại mật khẩu', maxlength: 200 });
   const fUser = field({ id: 'acc-user', label: 'Tên đăng nhập', ic: 'user', input: userIn });

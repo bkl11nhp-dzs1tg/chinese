@@ -108,7 +108,6 @@ export async function render(root, ctx) {
       selectRow('tts_rate', 'Tốc độ đọc', voice ? `Giọng: ${voice.name}` : 'Thiết bị chưa có giọng đọc tiếng Trung', RATES.map((r) => [r, `${r}×`]), Number),
       h('div', { class: 'form-row' }, h('label', { for: 'set-reminder' }, 'Giờ nhắc học', h('span', { class: 'hint' }, 'Dùng khi tích hợp Telegram (giai đoạn 4)')),
         h('input', { id: 'set-reminder', type: 'time', value: s.reminder_time, onchange: (e) => save({ reminder_time: e.target.value }) })),
-      switchRow('cat_enabled', 'Mèo thư ký (XP)', s.cat_enabled ? `Tổng ${s.xp_total || 0} XP` : 'Cộng XP theo thời gian học (thử nghiệm)'),
       selectRow('theme', 'Giao diện', null, [['auto', 'Theo hệ thống'], ['light', 'Sáng'], ['dark', 'Tối']])),
 
     h('section', { class: 'card px-box stack', style: { marginTop: '24px' } },

@@ -17,7 +17,8 @@
     "cut-kit": "node scripts/cut-kit2.js && node scripts/cut-branch.js",
     "icons": "node scripts/make-icons.js",
     "sync-server": "node scripts/sync-dev-server.js",
-    "worker:deploy": "cd worker && npx wrangler d1 migrations apply chinese-study --remote && npx wrangler deploy"
+    "worker:deploy": "cd worker && npx wrangler d1 migrations apply chinese-study --remote && npx wrangler deploy",
+    "audio:upload": "node scripts/upload-audio.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",

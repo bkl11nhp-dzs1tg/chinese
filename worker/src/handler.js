@@ -8,6 +8,7 @@
 // POST /api/account/delete {password}                 → {ok}   (xóa tài khoản và toàn bộ dữ liệu)
 // POST /api/sync/push  {changes:[{store,key,data}]}   → {cursor}   (data = null nghĩa là xóa)
 // GET  /api/sync/pull?cursor=N                         → {cursor, more, changes:[{store,key,data}]}
+// GET  /api/audio/L01.mp3?t=TOKEN                     → MP3 của sách từ R2 (chỉ người đã đăng nhập; hỗ trợ Range để tua)
 
 const STORES = new Set(['card_state', 'review_events', 'lesson_progress', 'study_sessions', 'settings', 'reading_progress', 'word_lookups', 'known_words', 'cards']);
 const PBKDF2_ITER = 100000; // giới hạn tối đa của Workers
@@ -46,8 +47,9 @@ function cors(request, env) {
   const ok = allowed.includes('*') || allowed.includes(origin);
   return {
     'Access-Control-Allow-Origin': ok ? (origin || '*') : allowed[0] || 'null',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'GET, HEAD, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, Range',
+    'Access-Control-Expose-Headers': 'Content-Range, Content-Length, Accept-Ranges',
     'Access-Control-Max-Age': '86400',
     Vary: 'Origin',
   };
@@ -78,8 +80,8 @@ async function newSession(db, userId, now) {
   return token;
 }
 
-async function auth(request, db, now) {
-  const m = (request.headers.get('Authorization') || '').match(/^Bearer\s+(\S+)$/);
+async function auth(request, db, now, queryToken = null) {
+  const m = (request.headers.get('Authorization') || '').match(/^Bearer\s+(\S+)$/) || (queryToken ? [null, queryToken] : null);
   if (!m) throw new HttpError(401, 'Chưa đăng nhập.');
   const row = await db.prepare('SELECT s.user_id, s.expires_at, u.username FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ?')
     .bind(await sha256(m[1])).first();
@@ -99,6 +101,24 @@ async function loginFail(db, username, now) {
       fails = CASE WHEN ? - window_start > ? THEN 1 ELSE fails + 1 END,
       window_start = CASE WHEN ? - window_start > ? THEN ? ELSE window_start END`)
     .bind(username, now, now, LOGIN_WINDOW_MS, now, LOGIN_WINDOW_MS, now).run();
+}
+
+async function serveAudio(request, bucket, key, headers) {
+  const head = await bucket.head(key);
+  if (!head) throw new HttpError(404, 'Không có file nghe của bài này.');
+  const size = head.size;
+  const base = { ...headers, 'Content-Type': 'audio/mpeg', 'Accept-Ranges': 'bytes', 'Cache-Control': 'private, max-age=86400', ETag: head.httpEtag };
+  if (request.method === 'HEAD') return new Response(null, { status: 200, headers: { ...base, 'Content-Length': String(size) } });
+  const m = (request.headers.get('Range') || '').match(/^bytes=(\d*)-(\d*)$/);
+  if (m && (m[1] || m[2])) {
+    let start = m[1] ? Number(m[1]) : Math.max(0, size - Number(m[2]));
+    let end = m[1] && m[2] ? Math.min(Number(m[2]), size - 1) : size - 1;
+    if (start >= size || start > end) return new Response(null, { status: 416, headers: { ...base, 'Content-Range': `bytes */${size}` } });
+    const obj = await bucket.get(key, { range: { offset: start, length: end - start + 1 } });
+    return new Response(obj.body, { status: 206, headers: { ...base, 'Content-Range': `bytes ${start}-${end}/${size}`, 'Content-Length': String(end - start + 1) } });
+  }
+  const obj = await bucket.get(key);
+  return new Response(obj.body, { status: 200, headers: { ...base, 'Content-Length': String(size) } });
 }
 
 export async function handle(request, env, { now = Date.now() } = {}) {
@@ -136,6 +156,14 @@ export async function handle(request, env, { now = Date.now() } = {}) {
       }
       await db.prepare('DELETE FROM login_attempts WHERE username = ?').bind(username).run();
       return json({ token: await newSession(db, u.id, now), user: { id: u.id, username } }, 200, headers);
+    }
+
+    // MP3 của sách: <audio> không gửi được header nên token đi qua ?t=.
+    const am = path.match(/^\/api\/audio\/(L\d{2}\.mp3)$/);
+    if (am && (request.method === 'GET' || request.method === 'HEAD')) {
+      await auth(request, db, now, url.searchParams.get('t'));
+      if (!env.AUDIO) throw new HttpError(404, 'Chưa cấu hình kho âm thanh.');
+      return serveAudio(request, env.AUDIO, am[1], headers);
     }
 
     const user = await auth(request, db, now);

@@ -4,7 +4,14 @@
 import { loadContentFiles } from './core/importer.js';
 
 export const CONTENT_URL = './content/pack.json';
+import { loadAccount } from './sync.js';
+
 export const audioUrl = (lessonId) => `./content/audio/${encodeURIComponent(lessonId)}.mp3`;
+/** MP3 từ kho R2 qua Worker đồng bộ (cần đăng nhập). */
+export const remoteAudioUrl = (lessonId) => {
+  const a = loadAccount();
+  return a?.url && a?.token ? `${a.url}/api/audio/${encodeURIComponent(lessonId)}.mp3?t=${encodeURIComponent(a.token)}` : null;
+};
 
 export async function syncContent(repo, settings) {
   let text;
@@ -32,11 +39,14 @@ export async function syncContent(repo, settings) {
 /** URL file nghe của bài trong content/audio/ (null nếu không có). */
 export async function lessonAudioSrc(lessonId) {
   if (!lessonId) return null;
-  const url = audioUrl(lessonId);
-  try {
-    const res = await fetch(url, { method: 'HEAD' });
-    return res.ok && /audio|octet/.test(res.headers.get('content-type') || 'audio') ? url : null;
-  } catch {
-    return null;
-  }
+  const ok = async (u) => {
+    try {
+      const res = await fetch(u, { method: 'HEAD' });
+      return res.ok && /audio|octet/.test(res.headers.get('content-type') || 'audio');
+    } catch { return false; }
+  };
+  const local = audioUrl(lessonId);
+  if (await ok(local)) return local;
+  const remote = remoteAudioUrl(lessonId);
+  return remote && (await ok(remote)) ? remote : null;
 }

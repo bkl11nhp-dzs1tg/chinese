@@ -11,3 +11,9 @@ binding = "DB"
 database_name = "chinese-study"
 database_id = "342a716b-31ff-4065-ac41-b4d1bd7ec802"
 migrations_dir = "migrations"
+
+# MP3 của sách (không đưa lên GitHub). Tạo kho: npx wrangler r2 bucket create chinese-audio
+# Tải file lên: npm run audio:upload
+[[r2_buckets]]
+binding = "AUDIO"
+bucket_name = "chinese-audio"
