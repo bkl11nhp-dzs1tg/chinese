@@ -1,5 +1,5 @@
-// Thẻ lật (mục 9.2). Mặt trước: chữ Hán lớn, bính âm ẩn (bấm để hiện).
-// Mặt sau: bính âm, nghĩa, ví dụ và 3 nút: Chưa nhớ / Đã nhớ / Đã thuộc. Dưới cùng: Quay lại · Bỏ qua.
+// Thẻ lật (mục 9.2). Mặt trước: chữ Hán lớn, pinyin ẩn (bấm để hiện).
+// Mặt sau: pinyin, nghĩa, ví dụ và 3 nút: Chưa nhớ / Đã nhớ / Đã thuộc. Dưới cùng: Quay lại · Bỏ qua.
 // Phím tắt: Space lật, 1–3 chọn, ← quay lại, → bỏ qua.
 
 import { h } from '../../ui/dom.js';
@@ -56,7 +56,7 @@ export function flashcard({ card, state, kind, settings, onGrade, onBack = null,
 
   function renderPinyin() {
     if (pinyinShown || flipped) pinyinSlot.replaceChildren(card.pinyin);
-    else pinyinSlot.replaceChildren(h('button', { class: 'reveal-pinyin', type: 'button', onclick: (e) => { e.stopPropagation(); pinyinShown = true; renderPinyin(); } }, 'Hiện bính âm'));
+    else pinyinSlot.replaceChildren(h('button', { class: 'reveal-pinyin', type: 'button', onclick: (e) => { e.stopPropagation(); pinyinShown = true; renderPinyin(); } }, 'Hiện pinyin'));
   }
   renderPinyin();
 

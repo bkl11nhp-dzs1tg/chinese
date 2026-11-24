@@ -66,10 +66,10 @@ export function icon(name, { title } = {}) {
   const svg = document.createElementNS(ns, 'svg');
   if (name === 'logo') {
     svg.setAttribute('viewBox', '0 0 24 24');
-    svg.innerHTML = '<rect x="1" y="1" width="22" height="22" rx="5" fill="#c4452f"/>'
-      + '<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="3.6" fill="none" stroke="#f7e6d4" stroke-width="1.1"/>'
-      + '<path d="M6.8 8.4h10.4v6.4H6.8z" fill="none" stroke="#fdf3e6" stroke-width="2.1" stroke-linejoin="round"/>'
-      + '<path d="M12 4.8v14.6" stroke="#fdf3e6" stroke-width="2.3" stroke-linecap="round"/>';
+    svg.innerHTML = '<rect x="1" y="1" width="22" height="22" rx="5" fill="#e8344f"/>'
+      + '<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="3.6" fill="none" stroke="#ffd1dc" stroke-width="1.1"/>'
+      + '<path d="M6.8 8.4h10.4v6.4H6.8z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/>'
+      + '<path d="M12 4.8v14.6" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>';
   } else {
     svg.setAttribute('viewBox', '0 0 24 24');
     svg.setAttribute('fill', 'none');
@@ -95,4 +95,15 @@ export function badgeIcon(name, tone = 'accent') {
   span.setAttribute('aria-hidden', 'true');
   span.append(icon(name));
   return span;
+}
+
+/** Hình minh họa chung (public/art/<name>.webp). Chưa có file thì dùng phần tử dự phòng (hoặc ẩn đi). */
+export function artOr(name, fallback = null) {
+  const img = document.createElement('img');
+  img.className = `art-img art-${name}`;
+  img.alt = '';
+  img.decoding = 'async';
+  img.src = `./art/${name}.webp`;
+  img.addEventListener('error', () => { if (fallback) img.replaceWith(fallback); else img.remove(); }, { once: true });
+  return img;
 }

@@ -15,7 +15,7 @@ export const PACK_FORMAT = 'chinese-study-pack';
 const issue = (source, line, message) => ({ source, line, message });
 const str = (v) => (v == null ? '' : String(v).trim());
 
-/** Chuẩn hóa NFC để chữ Hán và dấu bính âm so sánh được ổn định. */
+/** Chuẩn hóa NFC để chữ Hán và dấu pinyin so sánh được ổn định. */
 const nfc = (v) => str(v).normalize('NFC');
 
 // ---------------------------------------------------------------------------

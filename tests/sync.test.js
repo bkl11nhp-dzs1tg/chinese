@@ -105,3 +105,12 @@ describe('luật gộp', () => {
     expect(m).toMatchObject({ status: 'done', best_score: 0.9, attempts: 2, test_best: 0.7 });
   });
 });
+
+describe('đánh dấu từ (known_words)', () => {
+  it('lấy bản đánh dấu mới hơn: chưa nhớ → đã nhớ', () => {
+    const a = { word: '老师', status: 'weak', marked_at: 100 };
+    const b = { word: '老师', status: 'known', marked_at: 200 };
+    expect(mergeRecord('known_words', a, b).status).toBe('known');
+    expect(mergeRecord('known_words', b, a).status).toBe('known');
+  });
+});

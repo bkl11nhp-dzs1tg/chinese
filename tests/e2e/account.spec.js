@@ -4,13 +4,11 @@ import { test, expect } from '@playwright/test';
 const SYNC = 'http://localhost:8788';
 
 async function login(page, { register }) {
+  await page.evaluate((u) => localStorage.setItem('chinese-study-sync-url', u), SYNC);
   await page.goto('/#/account');
   if (register) await page.getByRole('button', { name: /Chưa có tài khoản/ }).click();
   await page.getByLabel('Tên đăng nhập').fill('hocvien1');
   await page.getByLabel('Mật khẩu').fill('matkhau123');
-  const url = page.getByLabel('Địa chỉ');
-  if (!(await url.isVisible())) await page.getByText('Máy chủ đồng bộ').click();
-  await url.fill(SYNC);
   await page.getByRole('button', { name: register ? /Tạo tài khoản và đồng bộ/ : /Đăng nhập và đồng bộ/ }).click();
   await expect(page.getByRole('button', { name: /Đồng bộ ngay/ })).toBeVisible({ timeout: 15000 });
 }
@@ -39,18 +37,18 @@ test('đồng bộ tiến độ giữa 2 thiết bị', async ({ browser }) => {
   await expect(B.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 20000 });
   await login(B, { register: false });
   await B.goto('/#/cards');
-  await expect(B.locator('.status-tile.mastered .st-num')).toHaveText('3');
+  await expect(B.locator('.cp-pill.mastered b')).toHaveText('3');
   await B.goto('/#/lesson/L01');
   await expect(B.getByText(/3\/12 từ đã học/)).toBeVisible();
   await B.screenshot({ path: 'test-results/screens/21-device-b.png' });
 
   // Sai mật khẩu báo lỗi
   const C = await (await browser.newContext()).newPage();
+  await C.goto('/#/today');
+  await C.evaluate((u) => localStorage.setItem('chinese-study-sync-url', u), SYNC);
   await C.goto('/#/account');
   await C.getByLabel('Tên đăng nhập').fill('hocvien1');
   await C.getByLabel('Mật khẩu').fill('saimatkhau');
-  if (!(await C.getByLabel('Địa chỉ').isVisible())) await C.getByText('Máy chủ đồng bộ').click();
-  await C.getByLabel('Địa chỉ').fill(SYNC);
   await C.getByRole('button', { name: /Đăng nhập và đồng bộ/ }).click();
   await expect(C.getByRole('alert')).toContainText('Sai tên đăng nhập hoặc mật khẩu');
 });

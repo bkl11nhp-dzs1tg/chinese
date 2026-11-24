@@ -4,7 +4,7 @@ import { parseVocabCsv, parseContentJson, loadContentFiles, planMerge, buildPack
 const HEADER = 'id,hanzi,pinyin,meaning,hsk_level,lesson_id,example,example_pinyin,example_meaning,tags';
 
 describe('parseVocabCsv', () => {
-  it('đọc đúng chữ Hán, dấu bính âm, tag, ô có dấu phẩy trong ngoặc kép', () => {
+  it('đọc đúng chữ Hán, dấu pinyin, tag, ô có dấu phẩy trong ngoặc kép', () => {
     const csv = `﻿${HEADER}\r\nv-1,你好,nǐ hǎo,"xin chào, chào bạn",1,L01,你好！,Nǐ hǎo!,Xin chào!,chào hỏi;cơ bản\r\n`;
     const r = parseVocabCsv(csv, 'a.csv');
     expect(r.errors).toEqual([]);

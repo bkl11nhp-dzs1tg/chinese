@@ -1,5 +1,8 @@
 // Phát âm bằng speechSynthesis (mục 9.6). Nếu máy không có giọng zh-CN thì báo, không lỗi.
 
+/** Các tốc độ đọc cho người học chọn (0.5× – 2×). */
+export const RATES = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+
 let voicesReady;
 function loadVoices() {
   if (!('speechSynthesis' in globalThis)) return Promise.resolve([]);

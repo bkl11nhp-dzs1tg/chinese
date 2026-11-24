@@ -87,7 +87,7 @@ function distractors(pool, correct, key, n, rand) {
 }
 
 /**
- * Tạo bài tập trắc nghiệm từ từ vựng: chữ Hán → nghĩa, nghĩa → chữ Hán, bính âm → chữ Hán.
+ * Tạo bài tập trắc nghiệm từ từ vựng: chữ Hán → nghĩa, nghĩa → chữ Hán, pinyin → chữ Hán.
  * lessonCards: từ của bài; pool: kho từ để lấy phương án nhiễu (nên rộng hơn bài).
  */
 export function autoExercises(lessonCards, pool, { rand = Math.random, lessonId = null } = {}) {

@@ -1,8 +1,8 @@
 // #/account: đăng nhập / tạo tài khoản để đồng bộ tiến độ giữa nhiều thiết bị.
 
 import { h, mount, toast, confirmDialog } from '../../ui/dom.js';
-import { icon, badgeIcon } from '../../ui/icons.js';
-import { loadAccount, signIn, signOut, deleteAccount, syncNow, DEFAULT_SYNC_URL } from '../../sync.js';
+import { icon, badgeIcon, artOr } from '../../ui/icons.js';
+import { loadAccount, signIn, signOut, deleteAccount, syncNow, syncUrl } from '../../sync.js';
 
 const fmtTime = (t) => (t ? new Date(t).toLocaleString('vi-VN') : 'chưa');
 
@@ -11,7 +11,6 @@ export async function render(root, ctx) {
   if (acct) return renderSignedIn(root, ctx, acct);
 
   let register = false;
-  const urlInput = h('input', { type: 'url', id: 'acc-url', placeholder: 'https://…', value: localStorage.getItem('chinese-study-sync-url') || DEFAULT_SYNC_URL, autocomplete: 'off' });
   const userInput = h('input', { type: 'text', id: 'acc-user', autocomplete: 'username', autocapitalize: 'off', spellcheck: false, placeholder: 'tên đăng nhập hoặc email' });
   const passInput = h('input', { type: 'password', id: 'acc-pass', autocomplete: 'current-password', placeholder: 'ít nhất 8 ký tự' });
   const err = h('p', { class: 'form-error', role: 'alert' });
@@ -33,8 +32,7 @@ export async function render(root, ctx) {
     err.textContent = '';
     submitBtn.disabled = true;
     try {
-      localStorage.setItem('chinese-study-sync-url', urlInput.value.trim());
-      await signIn({ url: urlInput.value, username: userInput.value, password: passInput.value, register });
+      await signIn({ url: syncUrl(), username: userInput.value, password: passInput.value, register });
       const r = await syncNow(ctx.repo);
       await ctx.refreshSettings();
       toast(r.pulled ? `Đã đồng bộ: nhận ${r.pulled}, gửi ${r.pushed} bản ghi.` : 'Đã đăng nhập và đồng bộ.');
@@ -49,9 +47,6 @@ export async function render(root, ctx) {
   title,
   h('label', { class: 'field' }, h('span', {}, 'Tên đăng nhập'), userInput),
   h('label', { class: 'field' }, h('span', {}, 'Mật khẩu'), passInput),
-  h('details', { class: 'field-adv', open: !urlInput.value },
-    h('summary', {}, 'Máy chủ đồng bộ'),
-    h('label', { class: 'field' }, h('span', {}, 'Địa chỉ'), urlInput),),
   err, submitBtn, switchBtn);
 
   mount(root,
@@ -59,7 +54,7 @@ export async function render(root, ctx) {
     h('div', { class: 'account-layout' },
       h('section', { class: 'card px-box' }, form),
       h('section', { class: 'card px-box account-info' },
-        badgeIcon('cloud'),
+        artOr('sync', badgeIcon('cloud')),
         h('h3', {}, 'Học trên điện thoại, tiếp tục trên máy tính'),
         h('ul', { class: 'check-list' },
           h('li', {}, icon('check'), 'Tiến độ thẻ, lịch ôn, điểm kiểm tra, thời gian học, từ đã lưu'),
@@ -89,7 +84,7 @@ function renderSignedIn(root, ctx, acct) {
       h('section', { class: 'card px-box stack' },
         h('div', { class: 'row nowrap', style: { gap: '14px' } },
           h('span', { class: 'avatar' }, (acct.username || '?')[0].toUpperCase()),
-          h('div', { class: 'grow' }, h('strong', { style: { fontSize: '19px' } }, acct.username), h('div', { class: 'muted small' }, acct.url))),
+          h('div', { class: 'grow' }, h('strong', { style: { fontSize: '19px' } }, acct.username), h('div', { class: 'muted small' }, 'Đang đồng bộ giữa các thiết bị'))),
         status, syncBtn,
         h('button', { class: 'btn block', type: 'button', onclick: async () => {
           if (!(await confirmDialog({ title: 'Đăng xuất?', body: 'Dữ liệu học vẫn giữ trên máy này; chỉ ngừng đồng bộ.', ok: 'Đăng xuất' }))) return;

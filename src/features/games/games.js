@@ -5,6 +5,7 @@ import { h, mount } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { speak, chineseVoice, ttsSupported } from '../../ui/speech.js';
 import { shuffle } from '../../core/exercises.js';
+import { flashText, bump } from '../../ui/feedback.js';
 
 export const GAMES = [
   { id: 'match', title: 'Nối cặp', desc: '6 cặp chữ – nghĩa, càng nhanh càng tốt.' },
@@ -79,6 +80,8 @@ export function matchGame({ cards, onResult, onDone }) {
       pairsEl.textContent = `${matched}/${pairs.length}`;
       comboEl.textContent = `×${combo}`;
       if (combo >= 2) popFx(b, `Combo ×${combo}`);
+      if (combo >= 3) flashText(`Combo ×${combo}!`);
+      bump(comboEl); bump(pairsEl);
       onResult?.(t.id, !missedOnce.has(t.id));
       if (matched === pairs.length) finish();
     } else {
@@ -134,6 +137,8 @@ export function raceGame({ cards, pool, onResult, onDone, seconds = 60 }) {
       if (ok) { correct++; combo++; } else combo = 0;
       score.textContent = String(correct);
       comboEl.textContent = `×${combo}`;
+      bump(comboEl); if (ok) bump(score);
+      if (ok && combo > 0 && combo % 5 === 0) flashText(`Combo ×${combo}!`);
       popFx(stage, ok ? (combo >= 3 ? `+1 · combo ×${combo}` : '+1') : 'Sai', ok);
       onResult?.(c.id, ok);
       btns.forEach((b) => { b.disabled = true; if (b.textContent === c.meaning) b.classList.add('correct'); else if (b.textContent === o) b.classList.add('wrong'); });
@@ -216,7 +221,7 @@ export function listenGame({ cards, pool, rate = 1, onResult, onDone, rounds = 1
     }
     mount(root, hud('Nghe chọn chữ', stat('Câu', h('b', {}, `${i + 1}/${qs.length}`)), stat('Đúng', h('b', {}, String(correct)))),
       h('div', { class: 'center' }, h('button', { class: 'btn primary big', type: 'button', onclick: () => speak(c.hanzi, rate) }, icon('speaker'), 'Nghe lại'),
-        ' ', h('button', { class: 'btn ghost', type: 'button', onclick: () => speak(c.hanzi, 0.7) }, 'Chậm 0.7×')),
+        ' ', h('button', { class: 'btn ghost', type: 'button', onclick: () => speak(c.hanzi, 0.5) }, 'Chậm 0.5×')),
       h('div', { class: 'options' }, btns), fb);
     speak(c.hanzi, rate);
   }

@@ -225,8 +225,12 @@ export function createRepo(db) {
     return card;
   }
 
-  const markKnown = (word, now = Date.now()) => put('known_words', { word, marked_at: now });
+  // Đánh dấu từ: 'known' (đã nhớ) hoặc 'weak' (chưa nhớ – tô màu khi gặp lại). null = bỏ đánh dấu.
+  const markWord = (word, status, now = Date.now()) => (status ? put('known_words', { word, status, marked_at: now }) : del('known_words', word));
+  const markKnown = (word, now = Date.now()) => markWord(word, 'known', now);
   const unmarkKnown = (word) => del('known_words', word);
+  /** Map từ → 'known' | 'weak' (bản ghi cũ không có status = đã nhớ). */
+  const wordMarks = async () => new Map((await getAll('known_words')).map((k) => [k.word, k.status || 'known']));
 
   // ---------------------------------------------------------------- buổi học
   const saveSession = (session) => put('study_sessions', session);
@@ -270,7 +274,7 @@ export function createRepo(db) {
     getSettings, saveSettings,
     recordReview, undoReview, makeDue,
     importContent, existingIds,
-    saveReadingProgress, recordLookup, lookupCount, saveReadingWord, markKnown, unmarkKnown,
+    saveReadingProgress, recordLookup, lookupCount, saveReadingWord, markKnown, unmarkKnown, markWord, wordMarks,
     lessonsOrdered, saveLessonScore, saveTestScore, setLessonStatus, markGrammar,
     saveSession,
     putAudio, getAudio, audioIndex,

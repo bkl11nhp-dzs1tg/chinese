@@ -1,4 +1,4 @@
-// Điền bính âm còn thiếu cho bài khóa, ví dụ ngữ pháp và câu bài đọc (không ghi đè bính âm có sẵn).
+// Điền pinyin còn thiếu cho bài khóa, ví dụ ngữ pháp và câu bài đọc (không ghi đè pinyin có sẵn).
 import { buildDictionary, segmentSentence } from './segment.js';
 import { sentencePinyin } from './pinyin-text.js';
 

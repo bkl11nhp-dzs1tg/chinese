@@ -1,26 +1,26 @@
 /* Giao diện kính (glass): nền gradient mềm cố định, thẻ trong mờ có viền sáng. */
 :root {
-  --glass-bg: rgba(255, 252, 245, 0.66);
-  --glass-strong: rgba(255, 252, 245, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.75);
-  --glass-shadow: 0 1px 0 rgba(255, 255, 255, .6) inset, 0 10px 30px rgba(31, 42, 68, 0.08);
-  --blob-1: #ffd9bd; --blob-2: #cfe3ff; --blob-3: #d9f2e3; --blob-4: #f6d6e8;
+  --glass-bg: rgba(255, 251, 244, 0.74);
+  --glass-strong: rgba(255, 252, 246, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 10px 30px rgba(120, 30, 60, 0.08);
+  --blob-1: #ffcfda; --blob-2: #fbe6c8; --blob-3: #ffdce3; --blob-4: #f6e3c6;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --glass-bg: rgba(30, 37, 54, 0.6);
-    --glass-strong: rgba(30, 37, 54, 0.82);
+    --glass-bg: rgba(40, 22, 33, 0.66);
+    --glass-strong: rgba(44, 24, 36, 0.88);
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-shadow: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 12px 32px rgba(0, 0, 0, 0.35);
-    --blob-1: #4a2a1c; --blob-2: #1c2d52; --blob-3: #173628; --blob-4: #3a1f36;
+    --blob-1: #4d1727; --blob-2: #2e1222; --blob-3: #3b1526; --blob-4: #3a1830;
   }
 }
 :root[data-theme="dark"] {
-  --glass-bg: rgba(30, 37, 54, 0.6);
-  --glass-strong: rgba(30, 37, 54, 0.82);
+  --glass-bg: rgba(40, 22, 33, 0.66);
+  --glass-strong: rgba(44, 24, 36, 0.88);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shadow: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 12px 32px rgba(0, 0, 0, 0.35);
-  --blob-1: #4a2a1c; --blob-2: #1c2d52; --blob-3: #173628; --blob-4: #3a1f36;
+  --blob-1: #4d1727; --blob-2: #2e1222; --blob-3: #3b1526; --blob-4: #3a1830;
 }
 
 body::before {
@@ -44,9 +44,9 @@ body { background: transparent; }
 .reader-tools { border-radius: var(--r-lg); padding: 8px; margin: 12px 0 0; }
 .topbar, .nav { background: var(--glass-strong); border-color: var(--glass-border); }
 .chip, .btn:not(.primary):not(.good):not(.bad):not(.ghost):not(.tinted) { background: var(--glass-strong); }
-.unit-head { background: linear-gradient(135deg, #24314f, #3a4b78); border: 1px solid rgba(255, 255, 255, .08); }
+.unit-head { background: linear-gradient(135deg, #b81f3a, #f0567a); border: 1px solid rgba(255, 255, 255, .08); }
 .hero.px-box { background: var(--glass-strong); }
-.btn.primary { background: linear-gradient(180deg, #f39a5c, var(--accent)); }
+.btn.primary { background: linear-gradient(180deg, #ff6b84, var(--accent)); }
 .focus { background: transparent !important; }
 body.focus-mode { background: transparent; }
 @media (min-width: 900px) { body.focus-mode::before { filter: saturate(.8); } .focus { background: var(--glass-bg) !important; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); } }

@@ -1,4 +1,4 @@
-import { badgeIcon } from '../../ui/icons.js';
+import { badgeIcon, artOr } from '../../ui/icons.js';
 // Chạy buổi học theo kế hoạch của planner (mục 3.1, 11), toàn màn hình.
 // #/session              buổi học thường
 // #/session?mode=review  chỉ ôn tập
@@ -200,7 +200,7 @@ export async function render(root, ctx, { query }) {
     const total = stats.correct + stats.wrong;
     const tile = (v, l) => h('div', { class: 'tile px-box' }, h('div', { class: 'value' }, v), h('div', { class: 'label' }, l));
     shell.main.replaceChildren(h('div', { class: 'result' },
-      early ? badgeIcon('thumb') : badgeIcon('party', 'good'),
+      early ? badgeIcon('thumb') : artOr('done', badgeIcon('party', 'good')),
       h('h1', {}, early ? 'Đã dừng buổi học' : 'Xong buổi học!'),
       h('p', { class: 'muted' }, early ? 'Phần đã học vẫn được lưu.' : 'Hẹn gặp lại lần sau.'),
       h('div', { class: 'grid', style: { maxWidth: '400px', margin: '20px auto 0' } },

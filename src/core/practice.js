@@ -7,12 +7,12 @@ export const SKILLS = [
   { id: 'speak', label: 'Nói', desc: 'Đọc to từ và câu, máy nghe và chấm', icon: 'mic', tone: 'red' },
   { id: 'reading', label: 'Đọc hiểu', desc: 'Đọc câu trong bài khóa, chọn nghĩa', icon: 'eye', tone: 'green' },
   { id: 'vocab', label: 'Từ vựng', desc: 'Chữ ↔ nghĩa, ghép cặp', icon: 'cards', tone: 'orange' },
-  { id: 'tones', label: 'Thanh điệu', desc: 'Chọn bính âm có dấu thanh đúng', icon: 'tone', tone: 'purple' },
-  { id: 'typing', label: 'Gõ bính âm', desc: 'Nhìn chữ, gõ cách đọc', icon: 'keyboard', tone: 'navy' },
+  { id: 'tones', label: 'Thanh điệu', desc: 'Chọn pinyin có dấu thanh đúng', icon: 'tone', tone: 'purple' },
+  { id: 'typing', label: 'Gõ pinyin', desc: 'Nhìn chữ, gõ cách đọc', icon: 'keyboard', tone: 'navy' },
   { id: 'sentence', label: 'Ghép câu', desc: 'Sắp xếp từ thành câu đúng ngữ pháp', icon: 'blocks', tone: 'teal' },
 ];
 
-// ---------------------------------------------------------------- bính âm
+// ---------------------------------------------------------------- pinyin
 const TONE_MARKS = ['\u0304', '\u0301', '\u030C', '\u0300']; // thanh 1–4
 const TONE_RE = /[\u0304\u0301\u030C\u0300]/;
 
@@ -28,7 +28,7 @@ export function normalizePinyin(s) {
     .replace(/[\d\s'’·\-.,!?。，？！]/g, '');
 }
 
-/** Các cách viết chấp nhận được của một mục bính âm: "shéi / shuí", "jiǎo (máo)", "méi (yǒu)". */
+/** Các cách viết chấp nhận được của một mục pinyin: "shéi / shuí", "jiǎo (máo)", "méi (yǒu)". */
 export function pinyinAnswers(pinyin) {
   const out = new Set();
   for (const part of String(pinyin).split('/')) {
@@ -121,11 +121,11 @@ export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], ran
     for (const c of pickWords(n * 2)) {
       if (out.length >= n) break;
       const variants = toneVariants(c.pinyin, 3, rand);
-      if (variants.length >= 2) out.push({ type: 'choose', prompt: `Chọn bính âm đúng của “${c.hanzi}” (${c.meaning})`, answer: c.pinyin, options: shuffle([c.pinyin, ...variants], rand), card_ids: [c.id], explanation: `${c.hanzi}: ${c.pinyin}` });
+      if (variants.length >= 2) out.push({ type: 'choose', prompt: `Chọn pinyin đúng của “${c.hanzi}” (${c.meaning})`, answer: c.pinyin, options: shuffle([c.pinyin, ...variants], rand), card_ids: [c.id], explanation: `${c.hanzi}: ${c.pinyin}` });
     }
   } else if (skill === 'typing') {
     for (const c of pickWords(n)) {
-      out.push({ type: 'pinyin', prompt: `Gõ bính âm của “${c.hanzi}” (${c.meaning})`, hanzi: c.hanzi, answer: c.pinyin, card_ids: [c.id], explanation: 'Không cần gõ dấu thanh; có thể gõ số (ni3hao3) hoặc v thay ü.' });
+      out.push({ type: 'pinyin', prompt: `Gõ pinyin của “${c.hanzi}” (${c.meaning})`, hanzi: c.hanzi, answer: c.pinyin, card_ids: [c.id], explanation: 'Không cần gõ dấu thanh; có thể gõ số (ni3hao3) hoặc v thay ü.' });
     }
   } else if (skill === 'sentence') {
     const ok = shuffle(shortLines.filter((l) => {

@@ -1,12 +1,12 @@
-// Tạo icon PWA dạng pixel (chữ 中 trên nền navy) mà không cần thư viện ảnh: tự ghi PNG bằng zlib.
+// Tạo icon PWA dạng pixel (chữ 中 trên nền đỏ) mà không cần thư viện ảnh: tự ghi PNG bằng zlib.
 // Chạy: npm run icons
 import { deflateSync } from 'node:zlib';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
 const GLYPH = ['...##...', '########', '#..##..#', '#..##..#', '########', '...##...', '...##...', '...##...'];
-const BG = [0x1f, 0x2a, 0x44];
-const FG = [0xf4, 0xed, 0xdc];
-const ACCENT = [0xe0, 0x86, 0x4a];
+const BG = [0xe8, 0x34, 0x4f];
+const FG = [0xff, 0xff, 0xff];
+const ACCENT = [0xff, 0xc4, 0xd2];
 
 function crc32(buf) {
   let c, crc = 0xffffffff;

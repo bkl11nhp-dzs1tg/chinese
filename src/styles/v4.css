@@ -41,7 +41,7 @@ body.focus-mode .topbar { display: none; }
 .mt-left.han { font-size: 26px; }
 @media (max-width: 420px) { .match-grid { column-gap: 34px; } .match-grid .chip { padding: 8px; font-size: 15px; } }
 
-/* ======================= Gõ bính âm & nói ======================= */
+/* ======================= Gõ pinyin & nói ======================= */
 .big-han { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 8px 0 18px; }
 .big-han .han { font-size: 64px; line-height: 1.1; font-weight: 500; }
 .speak-target .han { font-size: 44px; }

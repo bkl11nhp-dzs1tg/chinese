@@ -10,7 +10,7 @@ import { grade, answerText, shuffle, autoExercises } from '../../core/exercises.
 import { gradePinyin, gradeSpeech } from '../../core/practice.js';
 
 const isHan = (s) => /\p{Script=Han}/u.test(s || '');
-const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ bính âm', speak: 'Luyện nói' };
+const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ pinyin', speak: 'Luyện nói' };
 const PAIR_COLORS = ['#e07b39', '#3a7bd5', '#2e9d63', '#9b59b6', '#d4a017', '#c0392b'];
 
 /** Gom bài tập luyện của một bài: bài tập câu của bài + câu tự sinh từ từ vựng. */
@@ -113,7 +113,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         body.append(
           h('div', { class: 'center' },
             h('button', { class: 'btn primary listen-btn', type: 'button', 'aria-label': 'Nghe lại', onclick: play }, icon('speaker')),
-            h('button', { class: 'btn ghost', type: 'button', onclick: () => speak(ex.speak, 0.7) }, 'Nghe chậm')));
+            h('button', { class: 'btn ghost', type: 'button', onclick: () => speak(ex.speak, 0.5) }, 'Nghe chậm')));
         setTimeout(play, 250);
       }
       body.append(h('div', { class: ['options', hanOpts ? 'han-grid' : ''] }, opts));
@@ -239,7 +239,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       };
       keyHandler = (e) => { if (e.key === 'Enter' && !answered) submit(); };
     } else if (ex.type === 'pinyin') {
-      const input = h('input', { type: 'text', class: 'py-input', autocomplete: 'off', autocapitalize: 'off', spellcheck: false, enterkeyhint: 'done', 'aria-label': 'Bính âm', placeholder: 'vd: ni hao' });
+      const input = h('input', { type: 'text', class: 'py-input', autocomplete: 'off', autocapitalize: 'off', spellcheck: false, enterkeyhint: 'done', 'aria-label': 'Pinyin', placeholder: 'vd: ni hao' });
       input.addEventListener('input', () => setReady(input.value.trim() !== ''));
       body.append(
         h('div', { class: 'big-han' }, h('span', { class: 'han', lang: 'zh-CN' }, ex.hanzi),

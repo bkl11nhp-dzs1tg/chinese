@@ -5,7 +5,12 @@ import { SYNC_STORES, shouldSync, recordKey, mergeRecord, sameRecord, hashRecord
 
 const ACCOUNT_KEY = 'chinese-study-account';
 const PUSH_CHUNK = 1000;
-export const DEFAULT_SYNC_URL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SYNC_URL) || '';
+const ENV = (typeof import.meta !== 'undefined' && import.meta.env) || {};
+export const DEFAULT_SYNC_URL = ENV.VITE_SYNC_URL || (ENV.DEV ? 'http://localhost:8787' : '');
+/** Địa chỉ Worker đồng bộ (D1). Không có ô nhập: lấy từ lúc build; localStorage chỉ để test ghi đè. */
+export function syncUrl() {
+  try { return globalThis.localStorage?.getItem('chinese-study-sync-url') || DEFAULT_SYNC_URL; } catch { return DEFAULT_SYNC_URL; }
+}
 
 // ---------------------------------------------------------------- tài khoản (lưu riêng từng máy, không vào bản sao lưu)
 const storage = () => { try { return globalThis.localStorage; } catch { return null; } };
@@ -41,7 +46,7 @@ async function api(url, path, { method = 'GET', body, token, fetchImpl = fetch }
 }
 
 export async function signIn({ url, username, password, register = false, fetchImpl }) {
-  if (!cleanUrl(url)) throw new Error('Chưa có địa chỉ máy chủ đồng bộ.');
+  if (!cleanUrl(url)) throw new Error('Đồng bộ đang tạm tắt, thử lại sau.');
   const r = await api(url, register ? '/api/register' : '/api/login', { method: 'POST', body: { username, password }, fetchImpl });
   const acct = { url: cleanUrl(url), token: r.token, username: r.user.username, cursor: 0, last_sync_at: null };
   saveAccount(acct);

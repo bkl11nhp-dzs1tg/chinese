@@ -5,7 +5,7 @@ import { syncContent } from '../../content.js';
 import { loadAccount, resetSyncState } from '../../sync.js';
 import { toCsv } from '../../core/csv.js';
 import { applyTheme } from '../../app.js';
-import { chineseVoice, ttsSupported } from '../../ui/speech.js';
+import { chineseVoice, ttsSupported, RATES } from '../../ui/speech.js';
 import { setFeedbackEnabled } from '../../ui/feedback.js';
 import { icon } from '../../ui/icons.js';
 
@@ -96,20 +96,16 @@ export async function render(root, ctx) {
         h('div', { class: 'title' }, loadAccount() ? `Tài khoản: ${loadAccount().username}` : 'Tài khoản & đồng bộ'),
         h('div', { class: 'meta' }, loadAccount() ? 'Đang đồng bộ giữa các thiết bị' : 'Đăng nhập để học trên nhiều thiết bị')),
       icon('chevron')),
-    h('a', { class: 'group row-link account-row', href: '#/welcome' },
-      h('span', { class: 'icon-box' }, icon('download')),
-      h('span', { class: 'grow' }, h('div', { class: 'title' }, 'Giới thiệu & cài app'), h('div', { class: 'meta' }, 'Cài lên màn hình chính để mở nhanh')),
-      icon('chevron')),
     h('div', { class: 'section-title' }, 'Học tập'),
     h('section', { class: 'group' },
       numberRow('new_per_day', 'Số từ mới mỗi ngày', 'Mặc định 10', { min: 0, max: 100 }),
       selectRow('session_minutes', 'Thời lượng buổi học', 'Planner giữ tổng thời gian trong khoảng này', [[10, '10 phút'], [15, '15 phút'], [20, '20 phút'], [30, '30 phút']], Number),
       selectRow('pass_threshold', 'Ngưỡng hoàn thành bài', 'Điểm bài tập tối thiểu', [[0.6, '60%'], [0.7, '70%'], [0.8, '80%'], [0.9, '90%']], Number),
       selectRow('idle_minutes', 'Ngừng tính giờ khi không thao tác', 'Idle cutoff', [[1, '1 phút'], [2, '2 phút'], [3, '3 phút'], [5, '5 phút']], Number),
-      switchRow('show_pinyin_front', 'Hiện bính âm ở mặt trước thẻ', 'Tắt để tự nhớ cách đọc'),
+      switchRow('show_pinyin_front', 'Hiện pinyin ở mặt trước thẻ', 'Tắt để tự nhớ cách đọc'),
       switchRow('sound_enabled', 'Âm báo & rung', 'Khi trả lời đúng/sai'),
       switchRow('games_enabled', 'Trò chơi cuối buổi học', 'Một trò nối cặp ngắn'),
-      selectRow('tts_rate', 'Tốc độ đọc', voice ? `Giọng: ${voice.name}` : 'Thiết bị chưa có giọng đọc tiếng Trung', [[0.7, '0.7× (chậm)'], [0.85, '0.85×'], [1, '1×']], Number),
+      selectRow('tts_rate', 'Tốc độ đọc', voice ? `Giọng: ${voice.name}` : 'Thiết bị chưa có giọng đọc tiếng Trung', RATES.map((r) => [r, `${r}×`]), Number),
       h('div', { class: 'form-row' }, h('label', { for: 'set-reminder' }, 'Giờ nhắc học', h('span', { class: 'hint' }, 'Dùng khi tích hợp Telegram (giai đoạn 4)')),
         h('input', { id: 'set-reminder', type: 'time', value: s.reminder_time, onchange: (e) => save({ reminder_time: e.target.value }) })),
       switchRow('cat_enabled', 'Mèo thư ký (XP)', s.cat_enabled ? `Tổng ${s.xp_total || 0} XP` : 'Cộng XP theo thời gian học (thử nghiệm)'),

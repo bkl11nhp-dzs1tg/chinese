@@ -1,4 +1,4 @@
-// Bính âm cho câu (dùng pinyin-pro, MIT). Lấy bính âm theo ngữ cảnh cả câu (để 了 đọc le, 得 đọc de…),
+// Pinyin cho câu (dùng pinyin-pro, MIT). Lấy pinyin theo ngữ cảnh cả câu (để 了 đọc le, 得 đọc de…),
 // rồi ghép các âm tiết trong cùng một từ, viết hoa đầu câu, đổi dấu câu Trung sang dấu câu Latin.
 
 import { pinyin } from 'pinyin-pro';
@@ -6,18 +6,22 @@ import { isHanChar } from './segment.js';
 
 const PUNCT = { '，': ',', '。': '.', '？': '?', '！': '!', '：': ':', '；': ';', '、': ',', '“': '"', '”': '"', '‘': "'", '’': "'", '（': '(', '）': ')', '《': '«', '》': '»', '…': '…', '—': '—' };
 
-/** Bính âm từng chữ theo ngữ cảnh câu: mảng cùng độ dài [...text]. */
+const ERHUA = new Set([...'哪这那点会玩儿边块空事味门'].filter((c) => c !== '儿'));
+
+/** Pinyin từng chữ theo ngữ cảnh câu: mảng cùng độ dài [...text]. */
 export function charPinyin(text) {
   const all = pinyin(text, { type: 'all' });
-  return all.map((x) => (x.isZh ? x.pinyin : ''));
+  const chars = [...text];
+  // Âm cuốn lưỡi: 儿 sau 哪/这/那/点/会/玩… đọc "r" (nǎr, zhèr, yìdiǎnr) như sách, không phải "ér".
+  return all.map((x, i) => (!x.isZh ? '' : chars[i] === '儿' && i > 0 && ERHUA.has(chars[i - 1]) ? 'r' : x.pinyin));
 }
 
-/** Bính âm của một từ đứng riêng (dùng khi tra từ). */
+/** Pinyin của một từ đứng riêng (dùng khi tra từ). */
 export function wordPinyin(word) {
   return charPinyin(word).join('');
 }
 
-/** Bính âm in trong sách cho từ ≥ 2 chữ (giữ thanh nhẹ, viết hoa tên riêng). Chỉ dùng khi không mơ hồ. */
+/** Pinyin in trong sách cho từ ≥ 2 chữ (giữ thanh nhẹ, viết hoa tên riêng). Chỉ dùng khi không mơ hồ. */
 function bookPinyin(word, dictionary) {
   if (!dictionary || [...word].length < 2) return null;
   const cards = dictionary.map.get(word);

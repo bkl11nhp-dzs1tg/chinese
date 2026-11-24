@@ -1,6 +1,7 @@
 // Màn kết quả dùng chung: vòng điểm, số câu đúng, thời gian.
 
 import { h } from '../../ui/dom.js';
+import { artOr } from '../../ui/icons.js';
 import { formatDuration } from '../../core/stats.js';
 
 export function scoreRing(score, { size = 148, stroke = 14, passed = null } = {}) {
@@ -25,7 +26,7 @@ export function scoreRing(score, { size = 148, stroke = 14, passed = null } = {}
 
 export function resultView({ title, score, correct, total, activeMs, note, passed = null, emoji }) {
   return h('div', { class: 'result' },
-    emoji || null,
+    passed == null ? emoji || null : artOr(passed ? 'pass' : 'retry', emoji || null),
     h('h1', {}, title),
     h('div', { style: { margin: '20px 0' } }, scoreRing(score, { passed })),
     h('div', { class: 'grid', style: { maxWidth: '360px', margin: '0 auto' } },

@@ -12,16 +12,16 @@ test('đọc bài: tra từ, lưu từ mới, nhớ vị trí, bài khóa', asyn
   await page.getByRole('link', { name: /我的一天/ }).click();
 
   // Từ có trong từ vựng sách: hiện nghĩa
-  await page.locator('.tok', { hasText: '公司' }).first().click();
+  await page.locator('.tok[data-word="公司"]').first().click();
   await expect(page.locator('.word-sheet.open')).toContainText('công ty');
   await page.screenshot({ path: 'test-results/screens/11-word.png' });
   await page.locator('.scrim').click({ position: { x: 20, y: 20 } });
 
   // Từ chưa có trong từ vựng: không đoán nghĩa, tự điền rồi lưu
-  await page.locator('.tok', { hasText: '同' }).first().click();
+  await page.locator('.tok[data-word="同"]').first().click();
   await expect(page.locator('.word-sheet.open')).toContainText('không tự đoán nghĩa');
   await page.getByLabel('Nghĩa của từ').fill('cùng');
-  await page.getByRole('button', { name: 'Lưu từ mới' }).click();
+  await page.getByRole('button', { name: 'Lưu vào thẻ từ' }).click();
   await expect(page.locator('.tok.saved').first()).toBeVisible();
 
   // Bấm ▶ câu thứ 2 → mở lại vẫn ở câu 2

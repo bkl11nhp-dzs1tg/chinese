@@ -75,8 +75,10 @@ export function mergeRecord(store, local, remote) {
     case 'cards':
       // Giữ bản có nghĩa (người học có thể đã gõ nghĩa trên một thiết bị).
       return local.meaning && !/^\(chưa có nghĩa/.test(local.meaning) ? local : remote;
+    case 'known_words':
+      return (remote.marked_at ?? 0) > (local.marked_at ?? 0) ? remote : local;
     default:
-      // review_events, word_lookups, known_words: bất biến, giữ bản đang có.
+      // review_events, word_lookups: bất biến, giữ bản đang có.
       return local;
   }
 }

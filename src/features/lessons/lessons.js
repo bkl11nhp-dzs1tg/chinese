@@ -2,6 +2,7 @@
 // 1. Học từ mới → 2. Nghe bài (MP3 của sách) → 3. Luyện tập → 4. Kiểm tra cuối bài.
 
 import { h, mount, toast } from '../../ui/dom.js';
+import { cue } from '../../ui/feedback.js';
 import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { cardStatus } from '../../core/srs.js';
@@ -82,6 +83,7 @@ export async function renderLesson(root, ctx, { params }) {
   const gpTotal = lesson.grammar_points?.length || 0;
   const gpDone = new Set((progress?.grammar_done || []).filter((id) => lesson.grammar_points?.some((g) => g.id === id)));
   const readProg = await ctx.repo.get('reading_progress', `lesson:${lesson.id}`);
+  const marks = await ctx.repo.wordMarks();
   const testPassed = st.test_best != null && st.test_best >= threshold;
 
   const stepRow = ({ n, iconName, title, meta, done, href, onclick }) => h(href ? 'a' : 'button', {
@@ -135,13 +137,14 @@ export async function renderLesson(root, ctx, { params }) {
     h('div', { class: 'section-title' }, `Từ vựng (${cards.length})`),
     cards.length ? h('ul', { class: 'list group' }, cards.map((c) => {
       const s = cardStatus(data.statesById.get(c.id));
-      return h('li', {}, h('div', { class: 'item' },
+      const weak = marks.get(c.hanzi) === 'weak';
+      return h('li', {}, h('div', { class: ['item', weak ? 'vocab-weak' : ''] },
         h('span', { class: 'han', lang: 'zh-CN', style: { fontSize: '28px', minWidth: '2.4em' } }, c.hanzi),
         h('span', { style: { flex: 1, minWidth: 0 } },
           h('div', { style: { color: 'var(--accent-ink)', fontWeight: 700 } }, c.pinyin),
           h('div', {}, c.meaning),
           c.pos ? h('div', { class: 'muted small' }, c.pos) : null),
-        s !== 'new' ? h('span', { class: ['badge', s === 'mastered' ? 'done' : 'doing'] }, s === 'mastered' ? 'Thuộc' : 'Đang học') : null,
+        weak ? h('span', { class: 'badge weak-badge' }, 'Chưa nhớ') : s !== 'new' ? h('span', { class: ['badge', s === 'mastered' ? 'done' : 'doing'] }, s === 'mastered' ? 'Thuộc' : 'Đang học') : null,
         h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': `Nghe ${c.hanzi}`, onclick: () => speak(c.hanzi, rate) }, icon('speaker'))));
     })) : h('p', { class: 'muted' }, 'Bài này chưa có từ vựng.'),
 
@@ -151,8 +154,17 @@ export async function renderLesson(root, ctx, { params }) {
           h('h3', { style: { margin: 0 } }, `${gi + 1}. ${g.title || ''}`),
           h('button', {
             class: ['btn', 'gp-check', gpDone.has(g.id) ? 'good' : 'tinted'], type: 'button', 'aria-pressed': String(gpDone.has(g.id)),
-            onclick: async () => { await ctx.repo.markGrammar(lesson.id, g.id, !gpDone.has(g.id)); ctx.navigate(`lesson/${encodeURIComponent(lesson.id)}?g=${Date.now()}`); },
-          }, icon('check'), gpDone.has(g.id) ? 'Đã hiểu' : 'Đánh dấu đã hiểu')),
+            onclick: async (e) => {
+              const btn = e.currentTarget;
+              const on = !gpDone.has(g.id);
+              await ctx.repo.markGrammar(lesson.id, g.id, on);
+              if (on) gpDone.add(g.id); else gpDone.delete(g.id);
+              btn.classList.toggle('good', on); btn.classList.toggle('tinted', !on);
+              btn.setAttribute('aria-pressed', String(on));
+              btn.closest('.gp')?.classList.toggle('gp-done', on);
+              if (on) cue('good');
+            },
+          }, icon('check'), 'Đã hiểu')),
         g.note ? h('p', { style: { margin: '0 0 6px' } }, g.note) : null,
         g.example ? h('div', { class: 'han', style: { fontSize: '20px' } }, g.example) : null,
         (g.examples || []).map((e) => h('div', { class: 'ex' },

@@ -11,14 +11,14 @@ const dict = buildDictionary(words.concat(['我', '是', '很', '好'].map((h, i
 const mk = (zh, vi) => ({ zh, vi, tokens: segmentSentence(zh.replace(/[。？！]$/, ''), dict) });
 const lines = [mk('我去学校。', 'Tôi đến trường.'), mk('你好！', 'Xin chào!'), mk('妈妈是老师。', 'Mẹ là giáo viên.'), mk('朋友很好。', 'Bạn bè rất tốt.')];
 
-describe('bính âm', () => {
+describe('pinyin', () => {
   it('bỏ dấu thanh giữ ü; chuẩn hóa câu gõ', () => {
     expect(stripTones('nǚ lǜ')).toBe('nü lü');
     expect(normalizePinyin('Nǐ hǎo')).toBe('nihao');
     expect(normalizePinyin('ni3 hao3')).toBe('nihao');
     expect(normalizePinyin('nü')).toBe('nv');
   });
-  it('chấm gõ bính âm: bỏ qua dấu thanh/khoảng trắng, nhận cách viết thay thế', () => {
+  it('chấm gõ pinyin: bỏ qua dấu thanh/khoảng trắng, nhận cách viết thay thế', () => {
     expect(gradePinyin('nihao', 'nǐ hǎo')).toBe(true);
     expect(gradePinyin('xue xiao', 'xuéxiào')).toBe(true);
     expect(gradePinyin('shui', 'shéi / shuí')).toBe(true);
@@ -50,7 +50,7 @@ describe('buildSkillSet', () => {
       }
     });
   }
-  it('không dùng từ có nghĩa/bính âm mơ hồ làm câu hỏi', () => {
+  it('không dùng từ có nghĩa/pinyin mơ hồ làm câu hỏi', () => {
     const qs = buildSkillSet('vocab', { cards: words, lines, rand: mulberry32(1), n: 20 });
     expect(qs.some((q) => q.answer === 'ai' || q.answer === '谁')).toBe(false);
   });

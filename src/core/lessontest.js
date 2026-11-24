@@ -1,4 +1,4 @@
-// Kiểm tra cuối bài: đề trộn từ vựng của bài (chữ → nghĩa, nghĩa → chữ, bính âm → chữ, nghe → chữ)
+// Kiểm tra cuối bài: đề trộn từ vựng của bài (chữ → nghĩa, nghĩa → chữ, pinyin → chữ, nghe → chữ)
 // và các câu của bài (điền chỗ trống, sắp xếp câu). Chấm ở cuối, không gợi ý trong lúc làm.
 // Đạt ngưỡng (mặc định 70%) thì bài được tính là hoàn thành.
 

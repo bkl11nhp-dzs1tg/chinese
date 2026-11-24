@@ -47,12 +47,12 @@ describe('sentencePinyin', () => {
   });
 });
 
-describe('sentencePinyin theo bính âm trong sách', () => {
+describe('sentencePinyin theo pinyin trong sách', () => {
   const d = buildDictionary([
     { id: 'a', hanzi: '时候', pinyin: 'shíhou' }, { id: 'b', hanzi: '汉语', pinyin: 'Hànyǔ' },
     { id: 'c', hanzi: '我', pinyin: 'wǒ' }, { id: 'd', hanzi: '谁', pinyin: 'shéi / shuí' },
   ]);
-  it('dùng bính âm của từ trong từ vựng (thanh nhẹ, viết hoa tên riêng)', () => {
+  it('dùng pinyin của từ trong từ vựng (thanh nhẹ, viết hoa tên riêng)', () => {
     expect(sentencePinyin('我学汉语的时候。', segmentSentence('我学汉语的时候。', d), d)).toBe('Wǒ xué Hànyǔ de shíhou.');
   });
   it('得 sau động từ đọc de', () => {

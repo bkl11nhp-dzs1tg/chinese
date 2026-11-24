@@ -3,13 +3,13 @@
 // #/read/R01                một bài đọc
 // #/read/lesson:L05         bài khóa của bài 5
 //
-// Chế độ: Đọc thường · Từng câu · Kiểm tra · Không pinyin. Nút ▶ ở mỗi câu: nghe câu + hiện nghĩa.
+// Chế độ: Đọc thường · Từng câu · Kiểm tra (chọn nghĩa đúng của câu) · Không pinyin. Nút ▶ ở mỗi câu: nghe câu + hiện nghĩa.
 // "Nghe cả bài": đọc lần lượt từng câu, tô sáng câu đang đọc (MP3 + audio_ms nếu có, không thì giọng máy).
 // Bấm vào một từ: bảng tra từ (chữ, pinyin, nghĩa, giải thích từng chữ, câu ví dụ) + Lưu từ mới / Đã biết.
 
 import { h, mount, toast } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
-import { speak, ttsSupported } from '../../ui/speech.js';
+import { speak, ttsSupported, RATES } from '../../ui/speech.js';
 import { cue } from '../../ui/feedback.js';
 import { buildDictionary, segmentSentence, isHanChar } from '../../core/segment.js';
 import { cardStatus } from '../../core/srs.js';
@@ -99,7 +99,8 @@ export async function renderReader(root, ctx, { params }) {
   const [cards, states, known, progress] = await Promise.all([repo.getAll('cards'), repo.getAll('card_state'), repo.getAll('known_words'), repo.get('reading_progress', doc.id)]);
   const dict = buildDictionary(cards);
   const statesById = new Map(states.map((s) => [s.card_id, s]));
-  const knownSet = new Set(known.map((k) => k.word));
+  // Đánh dấu của người học: 'known' (đã nhớ) | 'weak' (chưa nhớ – luôn tô màu khi gặp).
+  const marks = new Map(known.map((k) => [k.word, k.status || 'known']));
   const s = ctx.settings;
   const prefs = {
     font: s.reading_font || 2,
@@ -110,7 +111,7 @@ export async function renderReader(root, ctx, { params }) {
   };
   let mode = s.reading_mode || 'normal';
 
-  // Câu phẳng, kèm token và bính âm từng chữ (nạp pinyin-pro khi cần).
+  // Câu phẳng, kèm token và pinyin từng chữ (nạp pinyin-pro khi cần).
   const flat = [];
   doc.paragraphs.forEach((p, pi) => p.sentences.forEach((st) => {
     flat.push({ ...st, pi, idx: flat.length, tokens: st.tokens?.length ? fillTokenGaps(st.hanzi, st.tokens) : segmentSentence(st.hanzi, dict), charPy: null });
@@ -182,7 +183,16 @@ export async function renderReader(root, ctx, { params }) {
     repo.recordLookup({ word, readingId: doc.id, sentenceIndex: st.idx });
     const lookups = await repo.lookupCount(word);
     const chars = [...word].filter(isHanChar);
-    const isKnown = knownSet.has(word);
+    const mark = marks.get(word) || null;
+    const setMark = async (m) => {
+      const next = mark === m ? null : m;
+      await repo.markWord(word, next);
+      if (next) marks.set(word, next); else marks.delete(word);
+      cue(next === 'weak' ? 'tap' : 'good');
+      toast(next === 'weak' ? 'Đã đánh dấu chưa nhớ: từ này sẽ được tô màu khi gặp lại.' : next === 'known' ? 'Đã đánh dấu đã nhớ.' : 'Đã bỏ đánh dấu.');
+      closeSheet();
+      rerender();
+    };
     const meaningInput = h('input', { type: 'text', placeholder: 'Nghĩa tiếng Việt', 'aria-label': 'Nghĩa của từ', autocomplete: 'off' });
     const body = h('div', { class: 'inner' },
       h('div', { class: 'row between nowrap' },
@@ -203,10 +213,13 @@ export async function renderReader(root, ctx, { params }) {
       })) : null,
       h('div', { class: 'example' }, h('div', { class: 'muted small' }, 'Trong bài:'), h('div', { class: 'han', style: { fontSize: '20px' } }, st.hanzi), st.meaning ? h('div', { class: 'small' }, st.meaning) : null),
       h('p', { class: 'muted small' }, [status ? `Trạng thái: ${status === 'mastered' ? 'đã thuộc' : status === 'learning' ? 'đang học' : 'chưa học'}` : null, `Đã tra ${lookups} lần`].filter(Boolean).join(' · ')),
-      h('div', { class: 'row nowrap' },
-        card
-          ? h('a', { class: 'btn big', style: { flex: 1 }, href: card.lesson_id ? `#/lesson/${encodeURIComponent(card.lesson_id)}` : '#/cards' }, card.lesson_id ? `Bài ${card.lesson_id.replace('L', '')}` : 'Xem thẻ')
-          : h('button', {
+      h('div', { class: 'mark-row', role: 'group', 'aria-label': 'Đánh dấu từ' },
+        h('button', { class: ['mark-btn', 'weak', mark === 'weak' ? 'on' : ''], type: 'button', 'aria-pressed': String(mark === 'weak'), onclick: () => setMark('weak') }, icon('flag'), 'Chưa nhớ'),
+        h('button', { class: ['mark-btn', 'known', mark === 'known' ? 'on' : ''], type: 'button', 'aria-pressed': String(mark === 'known'), onclick: () => setMark('known') }, icon('check'), 'Đã nhớ')),
+      card
+        ? (card.lesson_id ? h('a', { class: 'btn block', style: { marginTop: '10px' }, href: `#/lesson/${encodeURIComponent(card.lesson_id)}` }, icon('lessons'), `Xem bài ${card.lesson_id.replace('L', '')}`) : null)
+        : h('div', { class: 'row nowrap', style: { marginTop: '10px' } },
+          h('button', {
               class: 'btn primary big', type: 'button', style: { flex: 1 },
               onclick: async () => {
                 const c = await repo.saveReadingWord({ hanzi: word, pinyin: py, meaning: meaningInput.value.trim(), readingId: doc.id, sentenceIndex: st.idx, example: st.hanzi, exampleMeaning: st.meaning || '' });
@@ -216,15 +229,7 @@ export async function renderReader(root, ctx, { params }) {
                 closeSheet();
                 rerender();
               },
-            }, 'Lưu từ mới'),
-        h('button', {
-          class: ['btn', 'big', isKnown ? 'good' : ''], type: 'button', style: { flex: 1 },
-          onclick: async () => {
-            if (isKnown) { await repo.unmarkKnown(word); knownSet.delete(word); } else { await repo.markKnown(word); knownSet.add(word); }
-            closeSheet();
-            rerender();
-          },
-        }, isKnown ? 'Đã biết' : 'Đã biết')));
+            }, 'Lưu vào thẻ từ')));
     sheet.replaceChildren(body);
     scrim.classList.remove('hidden');
     sheet.classList.add('open');
@@ -282,25 +287,29 @@ export async function renderReader(root, ctx, { params }) {
     playBtn,
     h('button', { class: 'pl-btn', type: 'button', 'aria-label': 'Câu sau', onclick: () => jump(1) }, icon('skipFwd')),
     posLabel);
-  const rateBtn = h('button', {
-    class: 'pl-rate', type: 'button', 'aria-label': 'Tốc độ đọc',
-    onclick: async (e) => { prefs.rate = prefs.rate === 1 ? 0.7 : 1; e.currentTarget.textContent = `${prefs.rate}×`; },
-  }, `${prefs.rate}×`);
+  if (!RATES.includes(prefs.rate)) prefs.rate = 1;
+  const rateBtn = h('label', { class: 'pl-rate', title: 'Tốc độ đọc' },
+    h('select', {
+      'aria-label': 'Tốc độ đọc',
+      onchange: async (e) => { prefs.rate = Number(e.target.value); await ctx.repo.saveSettings({ tts_rate: prefs.rate }); },
+    }, RATES.map((r) => h('option', { value: String(r), selected: r === prefs.rate }, `${r}×`))));
 
   function tokenEl(st, t, i) {
     if (!t.word || ![...t.text].some(isHanChar)) return h('span', { class: 'punct' }, t.text);
     const inDict = dict.map.has(t.text);
     const entry = inDict ? dict.map.get(t.text)[0] : null;
     const saved = entry?.source === 'reading';
-    const unknown = !inDict && !knownSet.has(t.text);
-    const showPy = prefs.pinyin && mode !== 'plain' && mode !== 'quiz';
-    const py = showPy ? (st.charPy ? st.charPy.slice(t.start, t.end).join('') : '') : '';
-    const el = h(showPy && py ? 'ruby' : 'span', {
-      class: ['tok', saved ? 'saved' : '', prefs.highlight && unknown ? 'unknown' : ''], role: 'button', tabindex: '0',
+    const mark = marks.get(t.text);
+    const unknown = !inDict && !mark;
+    const showPy = prefs.pinyin && mode !== 'plain' && mode !== 'quiz' && st.charPy;
+    // Mỗi chữ một ruby riêng: pinyin nằm đúng trên chữ, không dính liền và không tràn sang từ bên cạnh.
+    const body = showPy ? [...t.text].map((ch, k) => h('ruby', {}, ch, h('rt', {}, st.charPy[t.start + k] || ''))) : t.text;
+    return h('span', {
+      class: ['tok', saved ? 'saved' : '', mark === 'weak' ? 'weak' : '', prefs.highlight && unknown ? 'unknown' : ''], role: 'button', tabindex: '0',
+      title: mark === 'weak' ? 'Chưa nhớ' : undefined, dataset: { word: t.text },
       onclick: (e) => { e.stopPropagation(); setCurrent(st.idx); openWord(t.text, st); },
       onkeydown: (e) => { if (e.key === 'Enter') { setCurrent(st.idx); openWord(t.text, st); } },
-    }, t.text, showPy && py ? h('rt', {}, py) : null);
-    return el;
+    }, body);
   }
 
   const SPK = ['#e07b39', '#3a7bd5', '#2e9d63', '#9b59b6', '#c0392b', '#d4a017'];
@@ -315,20 +324,7 @@ export async function renderReader(root, ctx, { params }) {
     const meaningEl = h('div', { class: ['s-meaning', showMeaning ? '' : 'hidden'] }, st.meaning || '');
     const pyLine = mode !== 'plain' && mode !== 'quiz' && prefs.pinyin && !st.charPy && st.pinyin ? h('div', { class: 's-pinyin' }, st.pinyin) : null;
     let quizBox = null;
-    if (mode === 'quiz') {
-      const reveal = h('div', { class: 'hidden quiz-reveal' }, h('div', { class: 's-pinyin' }, st.pinyin || ''), h('div', { class: 's-meaning' }, st.meaning || ''),
-        h('div', { class: 'row nowrap', style: { marginTop: '6px' } },
-          h('button', { class: 'btn good', type: 'button', onclick: () => guess(true) }, 'Mình đoán đúng'),
-          h('button', { class: 'btn', type: 'button', onclick: () => guess(false) }, 'Chưa đúng')));
-      const showBtn = h('button', { class: 'btn tinted', type: 'button', onclick: () => { reveal.classList.remove('hidden'); showBtn.classList.add('hidden'); setCurrent(st.idx); } }, 'Hiện bính âm & nghĩa');
-      async function guess(ok) {
-        const p = (await repo.get('reading_progress', doc.id)) || {};
-        await repo.saveReadingProgress(doc.id, { guess_correct: (p.guess_correct || 0) + (ok ? 1 : 0), guess_total: (p.guess_total || 0) + 1 });
-        cue(ok ? 'good' : 'tap');
-        reveal.querySelector('.row').replaceChildren(h('span', { class: ['badge', ok ? 'done' : ''] }, ok ? 'Đúng' : 'Ghi nhận'));
-      }
-      quizBox = h('div', { style: { marginTop: '6px' } }, showBtn, reveal);
-    }
+    if (mode === 'quiz') quizBox = quizEl(st);
     return h('div', { class: ['sent', big ? 'big' : '', st.idx === current ? 'active' : ''], dataset: { i: String(st.idx) } },
       h('div', { class: 'row nowrap', style: { alignItems: 'flex-start', gap: '10px' } },
         st.speaker ? avatar(st.speaker) : null,
@@ -342,6 +338,45 @@ export async function renderReader(root, ctx, { params }) {
           pyLine, meaningEl, quizBox)));
   }
 
+  // Kiểm tra: đọc câu (không pinyin) rồi chọn nghĩa đúng trong 3 phương án lấy từ các câu khác của bài.
+  const pool = [...new Set(flat.map((x) => x.meaning).filter(Boolean))];
+  const answered = new Map();
+  const scoreEl = h('span', { class: 'quiz-score' });
+  const quizScore = () => {
+    const right = [...answered].filter(([i, m]) => flat[i].meaning === m).length;
+    return answered.size ? `Đúng ${right}/${answered.size} câu` : '';
+  };
+  function quizEl(st) {
+    const reveal = h('div', { class: 'quiz-reveal' }, h('div', { class: 's-pinyin' }, st.pinyin || ''), h('div', { class: 's-meaning' }, st.meaning || ''));
+    if (!st.meaning || pool.length < 3) {
+      reveal.classList.add('hidden');
+      const showBtn = h('button', { class: 'btn tinted', type: 'button', onclick: () => { reveal.classList.remove('hidden'); showBtn.remove(); setCurrent(st.idx); } }, 'Xem pinyin & nghĩa');
+      return h('div', { class: 'quiz-box' }, showBtn, reveal);
+    }
+    const seed = hashStr(st.hanzi);
+    const order = (k) => (a, b) => ((seed * k ^ hashStr(a)) >>> 0) - ((seed * k ^ hashStr(b)) >>> 0);
+    const opts = [st.meaning, ...pool.filter((m) => m !== st.meaning).sort(order(3)).slice(0, 2)].sort(order(7));
+    const prev = answered.get(st.idx);
+    const box = h('div', { class: 'quiz-box' }, h('div', { class: 'q-ask' }, 'Câu này nghĩa là gì?'));
+    const list = h('div', { class: 'quiz-opts' }, opts.map((m) => h('button', {
+      class: ['quiz-opt', prev ? (m === st.meaning ? 'right' : m === prev ? 'wrong' : '') : ''], type: 'button', disabled: !!prev,
+      onclick: async () => {
+        const ok = m === st.meaning;
+        answered.set(st.idx, m);
+        setCurrent(st.idx);
+        list.querySelectorAll('.quiz-opt').forEach((b, k) => { b.disabled = true; b.classList.toggle('right', opts[k] === st.meaning); b.classList.toggle('wrong', opts[k] === m && !ok); });
+        box.append(reveal);
+        cue(ok ? 'good' : 'bad');
+        scoreEl.textContent = quizScore();
+        const p = (await repo.get('reading_progress', doc.id)) || {};
+        await repo.saveReadingProgress(doc.id, { guess_correct: (p.guess_correct || 0) + (ok ? 1 : 0), guess_total: (p.guess_total || 0) + 1 });
+      },
+    }, m)));
+    box.append(list);
+    if (prev) box.append(reveal);
+    return box;
+  }
+
   function renderStep() {
     const st = flat[current];
     content.replaceChildren(
@@ -349,7 +384,7 @@ export async function renderReader(root, ctx, { params }) {
       sentenceEl(st, { big: true }),
       h('div', { class: 'row nowrap', style: { marginTop: '16px' } },
         h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, disabled: current === 0, onclick: () => { setCurrent(current - 1); renderStep(); } }, icon('back'), 'Trước'),
-        h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => playSentence(st, 0.7) }, 'Chậm'),
+        h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => playSentence(st, 0.5) }, 'Chậm 0.5×'),
         h('button', {
           class: 'btn primary big', type: 'button', style: { flex: 1.3 },
           onclick: () => {
@@ -363,7 +398,8 @@ export async function renderReader(root, ctx, { params }) {
 
   function rerender() {
     if (mode === 'step') return renderStep();
-    content.replaceChildren(...doc.paragraphs.map((p, pi) => h('section', { class: 'para' },
+    scoreEl.textContent = mode === 'quiz' ? quizScore() : '';
+    content.replaceChildren(mode === 'quiz' ? h('p', { class: 'quiz-head' }, 'Đọc câu, chọn nghĩa đúng. ', scoreEl) : null,...doc.paragraphs.map((p, pi) => h('section', { class: 'para' },
       p.title ? h('h3', { class: 'para-title han' }, p.title) : null,
       flat.filter((st) => st.pi === pi).map((st) => sentenceEl(st)))));
   }
@@ -385,10 +421,10 @@ export async function renderReader(root, ctx, { params }) {
             audioEl ? h('span', {}, icon('headphones'), 'MP3 của sách') : null))),
       h('div', { class: 'reader-tools' },
         modeBar,
-        h('div', { class: 'tool-chips' }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ mới'), fontBtn)),
+        h('div', { class: 'tool-chips' }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ lạ'), fontBtn)),
       !audioEl && !ttsSupported() ? h('p', { class: 'notice small' }, 'Trình duyệt không hỗ trợ đọc giọng máy.') : null,
       h('div', { class: 'reader-card px-box' }, content),
-      h('p', { class: 'muted small center reader-hint' }, 'Bấm vào một từ để tra nghĩa · bấm ▶ để nghe câu'),
+      h('p', { class: 'muted small center reader-hint' }, 'Bấm vào một từ để tra nghĩa và đánh dấu chưa nhớ / đã nhớ'),
       h('div', { class: 'player-wrap' }, playerBar, rateBtn)),
     scrim, sheet);
   updatePlayBtn();
@@ -407,6 +443,8 @@ export async function renderReader(root, ctx, { params }) {
     return tracker.stop();
   };
 }
+
+function hashStr(t) { let x = 2166136261; for (const c of t) x = Math.imul(x ^ c.codePointAt(0), 16777619); return x >>> 0; }
 
 /** Token do người dùng cung cấp có thể không phủ hết câu: lấp các khoảng trống bằng từng ký tự. */
 function fillTokenGaps(text, tokens) {

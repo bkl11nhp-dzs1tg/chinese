@@ -19,4 +19,4 @@ const out = join(root, 'pack.json');
 const pack = buildPack(r);
 pack.content_version = createHash('sha1').update(JSON.stringify(pack)).digest('hex').slice(0, 12);
 writeFileSync(out, JSON.stringify(pack));
-console.log(`Đã tạo ${out}: ${r.counts.cards} thẻ, ${r.counts.lessons} bài, ${r.counts.exercises} bài tập, ${r.counts.readings} bài đọc (tự điền ${filled} dòng bính âm).`);
+console.log(`Đã tạo ${out}: ${r.counts.cards} thẻ, ${r.counts.lessons} bài, ${r.counts.exercises} bài tập, ${r.counts.readings} bài đọc (tự điền ${filled} dòng pinyin).`);

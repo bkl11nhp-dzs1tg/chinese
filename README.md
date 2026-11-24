@@ -60,5 +60,5 @@ Workflow `.github/workflows/pages.yml`: mỗi lần push lên `main` sẽ chạy
 - [x] Bài khóa + ngữ pháp 30 bài, bài đọc (mục 9.11)
 - [ ] Giai đoạn 2 còn lại: nói (SpeechRecognition), luyện viết chữ theo nét
 - [x] Giai đoạn 3: tài khoản + đồng bộ Workers + D1 (cần triển khai Worker)
-- [x] Luyện theo kỹ năng: nghe, nói, đọc hiểu, từ vựng, thanh điệu, gõ bính âm, ghép câu
+- [x] Luyện theo kỹ năng: nghe, nói, đọc hiểu, từ vựng, thanh điệu, gõ pinyin, ghép câu
 - [ ] Giai đoạn 4: tích hợp Personal Secretary

@@ -6,6 +6,7 @@ import './styles/app.css';
 import './styles/v4.css';
 import './styles/glass.css';
 import './styles/landing.css';
+import './styles/polish.css';
 import { openDb, createRepo } from './db/repo.js';
 import { createContext, applyTheme } from './app.js';
 import { createRouter } from './router.js';
@@ -85,7 +86,7 @@ async function boot() {
     themeBtn.replaceChildren(icon(dark ? 'sun' : 'moon'));
     themeBtn.setAttribute('aria-label', dark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối');
     themeBtn.title = themeBtn.getAttribute('aria-label');
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#10151f' : '#f5efe2');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#170c12' : '#fbf3e8');
   };
   themeBtn.onclick = async () => {
     const next = effectiveTheme(ctx.settings.theme) === 'dark' ? 'light' : 'dark';
@@ -108,8 +109,13 @@ async function boot() {
   };
   paintSync();
 
-  const installBtn = h('button', { class: 'icon-btn hidden', type: 'button', 'aria-label': 'Cài app', title: 'Cài app', onclick: () => promptInstall() }, icon('download'));
-  const paintInstall = () => installBtn.classList.toggle('hidden', !canInstall());
+  // Nút cài app nhỏ nổi ở góc (chỉ hiện khi trình duyệt cho cài; bấm × để ẩn).
+  const FAB_KEY = 'chinese-install-fab-hidden';
+  const fabHidden = () => { try { return localStorage.getItem(FAB_KEY) === '1'; } catch { return false; } };
+  const installBtn = h('button', { class: 'install-fab hidden', type: 'button', 'aria-label': 'Cài app lên máy', onclick: () => promptInstall().then(paintInstall) },
+    icon('download'), 'Cài app',
+    h('span', { class: 'x', role: 'button', 'aria-label': 'Ẩn', onclick: (e) => { e.stopPropagation(); try { localStorage.setItem(FAB_KEY, '1'); } catch { /* bỏ qua */ } paintInstall(); } }, icon('close')));
+  const paintInstall = () => installBtn.classList.toggle('hidden', !canInstall() || fabHidden() || document.body.classList.contains('landing-mode'));
   window.addEventListener('install:changed', paintInstall);
   const settingsBtn = h('a', { class: 'icon-btn', href: '#/settings', 'aria-label': 'Cài đặt', title: 'Cài đặt', dataset: { name: 'settings' } }, icon('settings'));
   const mkTabs = () => NAV.map((n) => h('a', { class: 'tab', href: `#/${n.name}`, dataset: { name: n.name } }, icon(n.icon), h('span', {}, n.label)));
@@ -124,11 +130,12 @@ async function boot() {
   const main = h('main', { class: 'main', id: 'main', tabindex: '-1' });
   mount(appEl, h('div', { class: 'shell' },
     h('header', { class: 'topbar' },
-      h('a', { class: 'brand', href: '#/today', 'aria-label': 'Chinese – về trang Hôm nay' }, icon('logo'), h('span', {}, 'Chinese')),
+      h('a', { class: 'brand', href: '#/welcome', 'aria-label': 'Chinese – trang giới thiệu' }, icon('logo'), h('span', {}, 'Chinese')),
       h('nav', { class: 'top-tabs', 'aria-label': 'Điều hướng chính' }, topTabs),
-      h('div', { class: 'top-actions' }, offline, installBtn, themeBtn, syncBtn, settingsBtn)),
+      h('div', { class: 'top-actions' }, offline, themeBtn, syncBtn, settingsBtn)),
     main,
-    h('nav', { class: 'nav', 'aria-label': 'Điều hướng chính (điện thoại)' }, bottomTabs)));
+    h('nav', { class: 'nav', 'aria-label': 'Điều hướng chính (điện thoại)' }, bottomTabs),
+    installBtn));
 
   const router = createRouter(routes, {
     onChange: (m) => {
@@ -138,6 +145,7 @@ async function boot() {
         else a.removeAttribute('aria-current');
       }
       document.body.classList.toggle('landing-mode', m.name === 'welcome');
+      paintInstall();
       if (m.name === 'settings') settingsBtn.setAttribute('aria-current', 'page'); else settingsBtn.removeAttribute('aria-current');
     },
   });
