@@ -14,7 +14,7 @@
     "audio": "node scripts/copy-audio.js",
     "cut-art": "node scripts/cut-illustrations.js",
     "cut-gpt": "node scripts/cut-gpt.js",
-    "cut-kit": "node scripts/cut-kit2.js && node scripts/cut-branch.js",
+    "cut-kit": "node scripts/cut-kit2.js && node scripts/cut-branch.js && node scripts/cut-wave.js",
     "icons": "node scripts/make-icons.js",
     "sync-server": "node scripts/sync-dev-server.js",
     "worker:deploy": "cd worker && npx wrangler d1 migrations apply chinese-study --remote && npx wrangler deploy",

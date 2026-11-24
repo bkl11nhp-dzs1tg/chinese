@@ -459,3 +459,6 @@ input[type="search"], input[type="text"], input[type="url"], input[type="passwor
 .seg-dark { background: rgba(255, 255, 255, .22) !important; }
 .seg-dark .seg-btn { color: rgba(255, 255, 255, .92) !important; }
 .seg-dark .seg-btn.on { background: #fff !important; color: #c42a46 !important; }
+/* Sóng đáy: một ảnh duy nhất, giữ tỉ lệ (phủ ngang, cắt bớt phía trên khi màn thấp) – không lặp, không kéo giãn */
+.page-wave { height: clamp(90px, 16vw, 200px) !important; background: var(--wave) center bottom / cover no-repeat !important; opacity: .3 !important; }
+.days-chart { overflow: hidden; } .goal-line { margin-bottom: 22px; }

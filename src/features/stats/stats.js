@@ -88,7 +88,7 @@ export async function render(root, ctx) {
       (() => {
         const last7 = series.slice(-7);
         const mins = last7.map((d) => minutes(d.ms));
-        const max = Math.max(s.session_minutes, ...mins, 1);
+        const max = Math.max(s.session_minutes * 1.25, ...mins, 1);
         const total = mins.reduce((a, b) => a + b, 0);
         return h('section', { class: 'card px-box st-card' },
           h('div', { class: 'st-head' }, h('h2', {}, 'Phút học 7 ngày'), h('span', { class: 'st-sum' }, h('b', {}, `${total}′`), ` · TB ${Math.round(total / 7)}′/ngày`)),
