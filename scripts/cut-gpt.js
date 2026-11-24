@@ -4,7 +4,7 @@
 import { chromium } from '@playwright/test';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
-const SRC = process.argv[2] || 'art/illustrations/gpt.png';
+const SRC = process.argv.slice(2).find((a) => !a.startsWith('--')) || 'art/illustrations/gpt.png';
 const GENERAL = ['done', 'pass', 'retry', 'empty', 'sync'];
 mkdirSync('public/art', { recursive: true });
 mkdirSync('public/lessons', { recursive: true });
@@ -60,5 +60,7 @@ console.log('Lưới:', JSON.stringify(result.layout));
 const save = (file, url) => writeFileSync(file, Buffer.from(url.split(',')[1], 'base64'));
 if (result.general.length === GENERAL.length) GENERAL.forEach((n, i) => save(`public/art/${n}.webp`, result.general[i]));
 else console.log(`Hàng đầu có ${result.general.length} hình (cần 5) → không ghi hình chung.`);
-if (result.lessons.length === 30) result.lessons.forEach((u, i) => save(`public/lessons/L${String(i + 1).padStart(2, '0')}.webp`, u));
+// Ảnh bài học chỉ ghi khi chạy với --lessons (mặc định giữ ảnh bài học hiện có).
+if (!process.argv.includes('--lessons')) console.log('Giữ nguyên ảnh bài học (thêm --lessons để thay).');
+else if (result.lessons.length === 30) result.lessons.forEach((u, i) => save(`public/lessons/L${String(i + 1).padStart(2, '0')}.webp`, u));
 else console.log(`Có ${result.lessons.length} hình bài học (cần 30) → không ghi.`);
