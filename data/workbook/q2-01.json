@@ -1,0 +1,12 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 水果","options":["shuǐguǒ","shuǐhuǒ"],"answer":"shuǐguǒ"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 少","options":["shǎo","xiǎo"],"answer":"shǎo"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 男","options":["nán","lán"],"answer":"nán"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (píngguǒ)","options":["苹果","水果","橘子"],"answer":"苹果"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (nán tóngxué)","options":["男同学","女同学","男老师"],"answer":"男同学"},
+ {"type":"match","prompt":"Nối từ trái nghĩa","pairs":[{"left":"大","right":"小"},{"left":"多","right":"少"},{"left":"长","right":"短"}]},
+ {"type":"reorder","vi":"Phòng của bạn to, phòng của tôi nhỏ.","words":["你的","房间","大","我的","房间","小"]},
+ {"type":"reorder","vi":"Bạn nam nhiều, bạn nữ ít.","words":["男同学","多","女同学","少"]},
+ {"type":"reorder","vi":"Buổi tối chúng tôi ăn hoa quả.","words":["晚上","我们","吃","水果"]},
+ {"type":"reorder","vi":"Học sinh nhiều, thầy cô ít.","words":["学生","多","老师","少"]}
+]

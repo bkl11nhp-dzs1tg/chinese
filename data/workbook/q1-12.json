@@ -1,0 +1,12 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 有","options":["yǒu","yòu"],"answer":"yǒu"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 两","options":["liǎng","liǎ"],"answer":"liǎng"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 个","options":["gè","kè"],"answer":"gè"},
+ {"type":"choose","prompt":"Chọn lượng từ đúng: 我有两___书。","options":["本","支","个"],"answer":"本"},
+ {"type":"choose","prompt":"Chọn lượng từ đúng: 我有两___笔。","options":["支","本","张"],"answer":"支"},
+ {"type":"choose","prompt":"Chọn lượng từ đúng: 他有一___妹妹。","options":["个","本","支"],"answer":"个"},
+ {"type":"choose","prompt":"Chọn từ đúng: 你有___个哥哥？","options":["几","两","谁"],"answer":"几"},
+ {"type":"reorder","vi":"Tôi có hai quyển sách.","words":["我","有","两","本","书"]},
+ {"type":"reorder","vi":"Bạn có mấy em gái?","words":["你","有","几","个","妹妹"]},
+ {"type":"reorder","vi":"Em trai có ba quyển vở.","words":["弟弟","有","三","本","书"]}
+]

@@ -1,268 +1,430 @@
 {
- "id": "L23",
- "book": "Hán ngữ 2",
- "unit": 23,
- "order": 23,
- "title": "学校里边有邮局吗",
- "title_vi": "Trong trường có bưu điện không",
- "vocab_ids": [
-  "L23-白色",
-  "L23-北边",
-  "L23-…边",
-  "L23-博物馆",
-  "L23-从",
-  "L23-打听",
-  "L23-到",
-  "L23-灯",
-  "L23-地方",
-  "L23-东边",
-  "L23-拐",
-  "L23-广场",
-  "L23-和平",
-  "L23-红绿灯",
-  "L23-后边",
-  "L23-近",
-  "L23-劳驾",
-  "L23-离",
-  "L23-里边",
-  "L23-路",
-  "L23-绿",
-  "L23-马路",
-  "L23-米",
-  "L23-南边",
-  "L23-前边",
-  "L23-上边",
-  "L23-外边",
-  "L23-往",
-  "L23-西边",
-  "L23-下边",
-  "L23-一直",
-  "L23-右",
-  "L23-右边",
-  "L23-远",
-  "L23-中间"
- ],
- "exercises": [
-  {
-   "id": "L23-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Trong trường có bưu điện không?”",
-   "options": [
-    "学校",
-    "里边",
-    "有",
-    "邮局",
-    "吗"
-   ],
-   "answer": [
-    "学校",
-    "里边",
-    "有",
-    "邮局",
-    "吗"
-   ],
-   "explanation": "学校里边有邮局吗 — Trong trường có bưu điện không?"
-  },
-  {
-   "id": "L23-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Ngân hàng có cách đây xa không?”",
-   "options": [
-    "银行",
-    "离",
-    "这儿",
-    "远",
-    "吗"
-   ],
-   "answer": [
-    "银行",
-    "离",
-    "这儿",
-    "远",
-    "吗"
-   ],
-   "explanation": "银行离这儿远吗 — Ngân hàng có cách đây xa không?"
-  },
-  {
-   "id": "L23-r3",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Đi thẳng, đến đèn giao thông rẽ phải.”",
-   "options": [
-    "一直",
-    "往前",
-    "走",
-    "到",
-    "红绿灯",
-    "往右",
-    "拐"
-   ],
-   "answer": [
-    "一直",
-    "往前",
-    "走",
-    "到",
-    "红绿灯",
-    "往右",
-    "拐"
-   ],
-   "explanation": "一直往前走到红绿灯往右拐 — Đi thẳng, đến đèn giao thông rẽ phải."
-  },
-  {
-   "id": "L23-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 邮局___学校不远。",
-   "answer": "离",
-   "explanation": "Bưu điện cách trường không xa."
-  }
- ],
- "texts": [
-  {
-   "title": "学校里边有邮局吗",
-   "lines": [
+  "id": "L23",
+  "book": "Hán ngữ 2",
+  "unit": 23,
+  "order": 23,
+  "title": "学校里边有邮局吗",
+  "title_vi": "Trong trường có bưu điện không",
+  "vocab_ids": [
+    "L23-白色",
+    "L23-北边",
+    "L23-…边",
+    "L23-博物馆",
+    "L23-从",
+    "L23-打听",
+    "L23-到",
+    "L23-灯",
+    "L23-地方",
+    "L23-东边",
+    "L23-拐",
+    "L23-广场",
+    "L23-和平",
+    "L23-红绿灯",
+    "L23-后边",
+    "L23-近",
+    "L23-劳驾",
+    "L23-离",
+    "L23-里边",
+    "L23-路",
+    "L23-绿",
+    "L23-马路",
+    "L23-米",
+    "L23-南边",
+    "L23-前边",
+    "L23-上边",
+    "L23-外边",
+    "L23-往",
+    "L23-西边",
+    "L23-下边",
+    "L23-一直",
+    "L23-右",
+    "L23-右边",
+    "L23-远",
+    "L23-中间"
+  ],
+  "exercises": [
     {
-     "speaker": "山本",
-     "zh": "学校里边有邮局吗？",
-     "vi": "Trong trường có bưu điện không?"
+      "id": "L23-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Trong trường có bưu điện không?”",
+      "options": [
+        "学校",
+        "里边",
+        "有",
+        "邮局",
+        "吗"
+      ],
+      "answer": [
+        "学校",
+        "里边",
+        "有",
+        "邮局",
+        "吗"
+      ],
+      "explanation": "学校里边有邮局吗 — Trong trường có bưu điện không?"
     },
     {
-     "speaker": "张东",
-     "zh": "有。",
-     "vi": "Có."
+      "id": "L23-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Ngân hàng có cách đây xa không?”",
+      "options": [
+        "银行",
+        "离",
+        "这儿",
+        "远",
+        "吗"
+      ],
+      "answer": [
+        "银行",
+        "离",
+        "这儿",
+        "远",
+        "吗"
+      ],
+      "explanation": "银行离这儿远吗 — Ngân hàng có cách đây xa không?"
     },
     {
-     "speaker": "山本",
-     "zh": "邮局在哪儿？",
-     "vi": "Bưu điện ở đâu?"
+      "id": "L23-r3",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Đi thẳng, đến đèn giao thông rẽ phải.”",
+      "options": [
+        "一直",
+        "往前",
+        "走",
+        "到",
+        "红绿灯",
+        "往右",
+        "拐"
+      ],
+      "answer": [
+        "一直",
+        "往前",
+        "走",
+        "到",
+        "红绿灯",
+        "往右",
+        "拐"
+      ],
+      "explanation": "一直往前走到红绿灯往右拐 — Đi thẳng, đến đèn giao thông rẽ phải."
     },
     {
-     "speaker": "张东",
-     "zh": "在图书馆西边。",
-     "vi": "Ở phía tây thư viện."
+      "id": "L23-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 邮局___学校不远。",
+      "answer": "离",
+      "explanation": "Bưu điện cách trường không xa."
     },
     {
-     "speaker": "山本",
-     "zh": "离这儿远吗？",
-     "vi": "Cách đây có xa không?"
+      "id": "L23-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 上边",
+      "options": [
+        "shàngbian",
+        "xiàbian"
+      ],
+      "answer": "shàngbian"
     },
     {
-     "speaker": "张东",
-     "zh": "不远。很近。",
-     "vi": "Không xa. Rất gần."
+      "id": "L23-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 右边",
+      "options": [
+        "yòubian",
+        "zuǒbian"
+      ],
+      "answer": "yòubian"
     },
     {
-     "speaker": "山本",
-     "zh": "图书馆东边是什么地方？",
-     "vi": "Phía đông thư viện là chỗ nào?"
+      "id": "L23-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 妈妈在爸爸___ (yòubian)。",
+      "options": [
+        "右边",
+        "下边",
+        "上边"
+      ],
+      "answer": "右边"
     },
     {
-     "speaker": "张东",
-     "zh": "图书馆东边是一个足球场。",
-     "vi": "Phía đông thư viện là một sân bóng đá."
+      "id": "L23-wb4",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Sách ở trên ghế.”",
+      "options": [
+        "椅子",
+        "书",
+        "在",
+        "上边"
+      ],
+      "answer": [
+        "书",
+        "在",
+        "椅子",
+        "上边"
+      ],
+      "explanation": "书在椅子上边 — Sách ở trên ghế."
+    },
+    {
+      "id": "L23-wb5",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Phòng học ở bên phải thư viện.”",
+      "options": [
+        "在",
+        "右边",
+        "图书馆",
+        "教室"
+      ],
+      "answer": [
+        "教室",
+        "在",
+        "图书馆",
+        "右边"
+      ],
+      "explanation": "教室在图书馆右边 — Phòng học ở bên phải thư viện."
+    },
+    {
+      "id": "L23-wb6",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 书___椅子上边。",
+      "options": [
+        "在",
+        "是",
+        "有"
+      ],
+      "answer": "在"
+    },
+    {
+      "id": "L23-wb7",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Trước nhà Tiểu Hoa là đường cái.”",
+      "options": [
+        "家",
+        "马路",
+        "是",
+        "我",
+        "前面"
+      ],
+      "answer": [
+        "我",
+        "家",
+        "前面",
+        "是",
+        "马路"
+      ],
+      "explanation": "我家前面是马路 — Trước nhà Tiểu Hoa là đường cái."
+    },
+    {
+      "id": "L23-wb8",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Đối diện công viên là chỗ nào?”",
+      "options": [
+        "是",
+        "什么",
+        "对面",
+        "公园",
+        "地方"
+      ],
+      "answer": [
+        "公园",
+        "对面",
+        "是",
+        "什么",
+        "地方"
+      ],
+      "explanation": "公园对面是什么地方 — Đối diện công viên là chỗ nào?"
+    },
+    {
+      "id": "L23-wb9",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 学校对___是银行。",
+      "options": [
+        "面",
+        "边",
+        "里"
+      ],
+      "answer": "面"
+    },
+    {
+      "id": "L23-wb10",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 小华家的对___是银行。",
+      "options": [
+        "面",
+        "边",
+        "前"
+      ],
+      "answer": "面"
+    },
+    {
+      "id": "L23-wb11",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "— 学校的对面是什么地方？ — ___",
+      "options": [
+        "是银行。",
+        "在医院的前面。",
+        "公园在医院的对面。"
+      ],
+      "answer": "是银行。"
     }
-   ]
-  },
-  {
-   "title": "从这儿到博物馆有多远",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "玛丽",
-     "zh": "劳驾，我打听一下儿，博物馆在哪儿？",
-     "vi": "Xin lỗi, cho tôi hỏi một chút, viện bảo tàng ở đâu?"
+      "title": "学校里边有邮局吗",
+      "lines": [
+        {
+          "speaker": "山本",
+          "zh": "学校里边有邮局吗？",
+          "vi": "Trong trường có bưu điện không?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "有。",
+          "vi": "Có."
+        },
+        {
+          "speaker": "山本",
+          "zh": "邮局在哪儿？",
+          "vi": "Bưu điện ở đâu?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "在图书馆西边。",
+          "vi": "Ở phía tây thư viện."
+        },
+        {
+          "speaker": "山本",
+          "zh": "离这儿远吗？",
+          "vi": "Cách đây có xa không?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "不远。很近。",
+          "vi": "Không xa. Rất gần."
+        },
+        {
+          "speaker": "山本",
+          "zh": "图书馆东边是什么地方？",
+          "vi": "Phía đông thư viện là chỗ nào?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "图书馆东边是一个足球场。",
+          "vi": "Phía đông thư viện là một sân bóng đá."
+        }
+      ]
     },
     {
-     "speaker": "路人",
-     "zh": "博物馆在东边，在和平公园和人民广场中间。",
-     "vi": "Viện bảo tàng ở phía đông, nằm giữa công viên Hòa Bình và quảng trường Nhân Dân."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "离这儿有多远？",
-     "vi": "Cách đây bao xa?"
-    },
-    {
-     "speaker": "路人",
-     "zh": "从这儿到那儿大概有七八百米。",
-     "vi": "Từ đây đến đó khoảng bảy tám trăm mét."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "怎么走呢？",
-     "vi": "Đi thế nào ạ?"
-    },
-    {
-     "speaker": "路人",
-     "zh": "你从这儿一直往东走，到红绿灯那儿往左拐，马路东边有一座白色的大楼，那就是博物馆。",
-     "vi": "Chị cứ đi thẳng về phía đông, đến chỗ đèn giao thông thì rẽ trái, phía đông con đường có một tòa nhà lớn màu trắng, đó chính là viện bảo tàng."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "谢谢您！",
-     "vi": "Cảm ơn ông!"
-    },
-    {
-     "speaker": "路人",
-     "zh": "不客气。",
-     "vi": "Không có gì."
+      "title": "从这儿到博物馆有多远",
+      "lines": [
+        {
+          "speaker": "玛丽",
+          "zh": "劳驾，我打听一下儿，博物馆在哪儿？",
+          "vi": "Xin lỗi, cho tôi hỏi một chút, viện bảo tàng ở đâu?"
+        },
+        {
+          "speaker": "路人",
+          "zh": "博物馆在东边，在和平公园和人民广场中间。",
+          "vi": "Viện bảo tàng ở phía đông, nằm giữa công viên Hòa Bình và quảng trường Nhân Dân."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "离这儿有多远？",
+          "vi": "Cách đây bao xa?"
+        },
+        {
+          "speaker": "路人",
+          "zh": "从这儿到那儿大概有七八百米。",
+          "vi": "Từ đây đến đó khoảng bảy tám trăm mét."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "怎么走呢？",
+          "vi": "Đi thế nào ạ?"
+        },
+        {
+          "speaker": "路人",
+          "zh": "你从这儿一直往东走，到红绿灯那儿往左拐，马路东边有一座白色的大楼，那就是博物馆。",
+          "vi": "Chị cứ đi thẳng về phía đông, đến chỗ đèn giao thông thì rẽ trái, phía đông con đường có một tòa nhà lớn màu trắng, đó chính là viện bảo tàng."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "谢谢您！",
+          "vi": "Cảm ơn ông!"
+        },
+        {
+          "speaker": "路人",
+          "zh": "不客气。",
+          "vi": "Không có gì."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L23-g1",
-   "title": "Phương vị từ",
-   "note": "边 ghép với 东/南/西/北/上/下/里/外/前/后/左/右 thành phương vị từ; đứng sau danh từ: 图书馆西边 = phía tây thư viện.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "邮局在图书馆西边。",
-     "vi": "Bưu điện ở phía tây thư viện."
-    }
-   ]
-  },
-  {
-   "id": "L23-g2",
-   "title": "Diễn đạt sự tồn tại: 在 / 有 / 是",
-   "note": "Vật + 在 + nơi chốn; Nơi chốn + 有 + vật; Nơi chốn + 是 + vật (biết chắc là gì).",
-   "examples": [
-    {
-     "zh": "学校里边有邮局吗？",
-     "vi": "Trong trường có bưu điện không?"
+      "id": "L23-g1",
+      "title": "Phương vị từ",
+      "note": "边 ghép với 东/南/西/北/上/下/里/外/前/后/左/右 thành phương vị từ; đứng sau danh từ: 图书馆西边 = phía tây thư viện.",
+      "examples": [
+        {
+          "zh": "邮局在图书馆西边。",
+          "vi": "Bưu điện ở phía tây thư viện."
+        }
+      ]
     },
     {
-     "zh": "图书馆东边是一个足球场。",
-     "vi": "Phía đông thư viện là một sân bóng."
-    }
-   ]
-  },
-  {
-   "id": "L23-g3",
-   "title": "Giới từ 离, 从, 往",
-   "note": "A 离 B 远/近 = A cách B xa/gần; 从…到… = từ… đến…; 往 + hướng + động từ = đi về hướng…",
-   "examples": [
-    {
-     "zh": "离这儿远吗？",
-     "vi": "Cách đây có xa không?"
+      "id": "L23-g2",
+      "title": "Diễn đạt sự tồn tại: 在 / 有 / 是",
+      "note": "Vật + 在 + nơi chốn; Nơi chốn + 有 + vật; Nơi chốn + 是 + vật (biết chắc là gì).",
+      "examples": [
+        {
+          "zh": "学校里边有邮局吗？",
+          "vi": "Trong trường có bưu điện không?"
+        },
+        {
+          "zh": "图书馆东边是一个足球场。",
+          "vi": "Phía đông thư viện là một sân bóng."
+        }
+      ]
     },
     {
-     "zh": "从这儿到那儿大概有七八百米。",
-     "vi": "Từ đây đến đó khoảng bảy tám trăm mét."
+      "id": "L23-g3",
+      "title": "Giới từ 离, 从, 往",
+      "note": "A 离 B 远/近 = A cách B xa/gần; 从…到… = từ… đến…; 往 + hướng + động từ = đi về hướng…",
+      "examples": [
+        {
+          "zh": "离这儿远吗？",
+          "vi": "Cách đây có xa không?"
+        },
+        {
+          "zh": "从这儿到那儿大概有七八百米。",
+          "vi": "Từ đây đến đó khoảng bảy tám trăm mét."
+        },
+        {
+          "zh": "往左拐。",
+          "vi": "Rẽ trái."
+        }
+      ]
     },
     {
-     "zh": "往左拐。",
-     "vi": "Rẽ trái."
+      "id": "L23-g4",
+      "title": "多 + tính từ？",
+      "note": "多远/多大/多长 = bao xa/bao lớn/bao lâu.",
+      "examples": [
+        {
+          "zh": "离这儿有多远？",
+          "vi": "Cách đây bao xa?"
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L23-g4",
-   "title": "多 + tính từ？",
-   "note": "多远/多大/多长 = bao xa/bao lớn/bao lâu.",
-   "examples": [
-    {
-     "zh": "离这儿有多远？",
-     "vi": "Cách đây bao xa?"
-    }
-   ]
-  }
- ]
+  ]
 }

@@ -1,260 +1,331 @@
 {
- "id": "L29",
- "book": "Hán ngữ 2",
- "unit": 29,
- "order": 29,
- "title": "我都做对了",
- "title_vi": "Tôi làm đúng hết rồi",
- "vocab_ids": [
-  "L29-办法",
-  "L29-成",
-  "L29-成绩",
-  "L29-词",
-  "L29-答",
-  "L29-打开",
-  "L29-道",
-  "L29-干",
-  "L29-干什么",
-  "L29-故事",
-  "L29-合上",
-  "L29-回信",
-  "L29-会话",
-  "L29-见",
-  "L29-句子",
-  "L29-看见",
-  "L29-考试",
-  "L29-念",
-  "L29-上",
-  "L29-熟",
-  "L29-题",
-  "L29-听见",
-  "L29-完",
-  "L29-笑",
-  "L29-页",
-  "L29-有意思",
-  "L29-再",
-  "L29-糟糕",
-  "TR2-安娜"
- ],
- "exercises": [
-  {
-   "id": "L29-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Lần thi này tôi làm đúng hết.”",
-   "options": [
-    "这次",
-    "考试",
-    "我",
-    "都",
-    "做对",
-    "了"
-   ],
-   "answer": [
-    "这次",
-    "考试",
-    "我",
-    "都",
-    "做对",
-    "了"
-   ],
-   "explanation": "这次考试我都做对了 — Lần thi này tôi làm đúng hết."
-  },
-  {
-   "id": "L29-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Mời mọi người mở sách.”",
-   "options": [
-    "请",
-    "大家",
-    "打开",
-    "书"
-   ],
-   "answer": [
-    "请",
-    "大家",
-    "打开",
-    "书"
-   ],
-   "explanation": "请大家打开书 — Mời mọi người mở sách."
-  },
-  {
-   "id": "L29-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 老师说的话你听___了吗？",
-   "answer": [
-    "懂",
-    "见"
-   ],
-   "explanation": "Lời thầy nói bạn nghe hiểu/thấy chưa?"
-  }
- ],
- "texts": [
-  {
-   "title": "我都做对了",
-   "lines": [
+  "id": "L29",
+  "book": "Hán ngữ 2",
+  "unit": 29,
+  "order": 29,
+  "title": "我都做对了",
+  "title_vi": "Tôi làm đúng hết rồi",
+  "vocab_ids": [
+    "L29-办法",
+    "L29-成",
+    "L29-成绩",
+    "L29-词",
+    "L29-答",
+    "L29-打开",
+    "L29-道",
+    "L29-干",
+    "L29-干什么",
+    "L29-故事",
+    "L29-合上",
+    "L29-回信",
+    "L29-会话",
+    "L29-见",
+    "L29-句子",
+    "L29-看见",
+    "L29-考试",
+    "L29-念",
+    "L29-上",
+    "L29-熟",
+    "L29-题",
+    "L29-听见",
+    "L29-完",
+    "L29-笑",
+    "L29-页",
+    "L29-有意思",
+    "L29-再",
+    "L29-糟糕",
+    "TR2-安娜"
+  ],
+  "exercises": [
     {
-     "speaker": "玛丽",
-     "zh": "你今天考得怎么样？",
-     "vi": "(Sau khi thi) Hôm nay bạn thi thế nào?"
+      "id": "L29-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Lần thi này tôi làm đúng hết.”",
+      "options": [
+        "这次",
+        "考试",
+        "我",
+        "都",
+        "做对",
+        "了"
+      ],
+      "answer": [
+        "这次",
+        "考试",
+        "我",
+        "都",
+        "做对",
+        "了"
+      ],
+      "explanation": "这次考试我都做对了 — Lần thi này tôi làm đúng hết."
     },
     {
-     "speaker": "罗兰",
-     "zh": "这次没考好。题太多了，我没有做完。你做完了没有？",
-     "vi": "Lần này thi không tốt. Đề nhiều quá, tôi làm không hết. Bạn làm xong chưa?"
+      "id": "L29-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Mời mọi người mở sách.”",
+      "options": [
+        "请",
+        "大家",
+        "打开",
+        "书"
+      ],
+      "answer": [
+        "请",
+        "大家",
+        "打开",
+        "书"
+      ],
+      "explanation": "请大家打开书 — Mời mọi người mở sách."
     },
     {
-     "speaker": "玛丽",
-     "zh": "我都做完了，但是没都做对，做错了两道题，所以成绩不会太好。",
-     "vi": "Tôi làm hết rồi, nhưng không đúng hết, sai hai câu, nên điểm sẽ không cao lắm."
+      "id": "L29-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 老师说的话你听___了吗？",
+      "answer": [
+        "懂",
+        "见"
+      ],
+      "explanation": "Lời thầy nói bạn nghe hiểu/thấy chưa?"
     },
     {
-     "speaker": "罗兰",
-     "zh": "语法题不太难，我觉得都做对了。听力比较难，很多句子我没听懂。",
-     "vi": "Câu ngữ pháp không khó lắm, tôi nghĩ làm đúng hết. Phần nghe tương đối khó, nhiều câu tôi nghe không hiểu."
+      "id": "L29-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 我去学___ (xiào)",
+      "options": [
+        "校",
+        "笑",
+        "小"
+      ],
+      "answer": "校"
     },
     {
-     "speaker": "玛丽",
-     "zh": "我也不知道做对了没有。我的词典呢？",
-     "vi": "Tôi cũng không biết làm đúng chưa. Từ điển của tôi đâu nhỉ?"
+      "id": "L29-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: ___答 (huí)",
+      "options": [
+        "回",
+        "会",
+        "喝"
+      ],
+      "answer": "回"
     },
     {
-     "speaker": "罗兰",
-     "zh": "我没看见你的词典。你找词典干什么？",
-     "vi": "Tôi không thấy từ điển của bạn. Bạn tìm từ điển làm gì?"
+      "id": "L29-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 姐姐不___球 (dǎ)",
+      "options": [
+        "打",
+        "大",
+        "答"
+      ],
+      "answer": "打"
     },
     {
-     "speaker": "玛丽",
-     "zh": "我查一个词，看看写对了没有。……糟糕，写错了，是这个“得”，我写成这个“的”了。",
-     "vi": "Tôi tra một từ, xem viết đúng chưa. … Thôi chết, viết sai rồi, phải là chữ “得” này, tôi lại viết thành chữ “的”."
+      "id": "L29-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 你___，我回答。",
+      "options": [
+        "问",
+        "吃",
+        "听"
+      ],
+      "answer": "问"
     },
     {
-     "speaker": "罗兰",
-     "zh": "别查了，休息休息吧。快打开电脑，看看你买的电影光盘吧。",
-     "vi": "Đừng tra nữa, nghỉ ngơi đi. Mau mở máy tính, xem đĩa phim bạn mua đi."
+      "id": "L29-wb5",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 回答",
+      "options": [
+        "huídá",
+        "huìdá"
+      ],
+      "answer": "huídá"
     },
     {
-     "speaker": "玛丽",
-     "zh": "我的衣服还没有洗完呢，还得给我妹妹回信。",
-     "vi": "Quần áo của tôi còn chưa giặt xong, còn phải viết thư trả lời em gái."
-    },
-    {
-     "speaker": "罗兰",
-     "zh": "看完电影再洗吧。",
-     "vi": "Xem phim xong rồi hãy giặt."
+      "id": "L29-wb6",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (wǎn)",
+      "options": [
+        "碗",
+        "晚",
+        "完"
+      ],
+      "answer": "碗"
     }
-   ]
-  },
-  {
-   "title": "看完电影再做作业",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "",
-     "zh": "吃完晚饭，我和玛丽回到宿舍。玛丽说，田芳借给她了一本书，书里都是小故事，很有意思。",
-     "vi": "Ăn tối xong, tôi và Mary về ký túc xá. Mary nói Điền Phương cho bạn ấy mượn một quyển sách, trong sách toàn là truyện ngắn, rất hay."
+      "title": "我都做对了",
+      "lines": [
+        {
+          "speaker": "玛丽",
+          "zh": "你今天考得怎么样？",
+          "vi": "(Sau khi thi) Hôm nay bạn thi thế nào?"
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "这次没考好。题太多了，我没有做完。你做完了没有？",
+          "vi": "Lần này thi không tốt. Đề nhiều quá, tôi làm không hết. Bạn làm xong chưa?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "我都做完了，但是没都做对，做错了两道题，所以成绩不会太好。",
+          "vi": "Tôi làm hết rồi, nhưng không đúng hết, sai hai câu, nên điểm sẽ không cao lắm."
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "语法题不太难，我觉得都做对了。听力比较难，很多句子我没听懂。",
+          "vi": "Câu ngữ pháp không khó lắm, tôi nghĩ làm đúng hết. Phần nghe tương đối khó, nhiều câu tôi nghe không hiểu."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "我也不知道做对了没有。我的词典呢？",
+          "vi": "Tôi cũng không biết làm đúng chưa. Từ điển của tôi đâu nhỉ?"
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "我没看见你的词典。你找词典干什么？",
+          "vi": "Tôi không thấy từ điển của bạn. Bạn tìm từ điển làm gì?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "我查一个词，看看写对了没有。……糟糕，写错了，是这个“得”，我写成这个“的”了。",
+          "vi": "Tôi tra một từ, xem viết đúng chưa. … Thôi chết, viết sai rồi, phải là chữ “得” này, tôi lại viết thành chữ “的”."
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "别查了，休息休息吧。快打开电脑，看看你买的电影光盘吧。",
+          "vi": "Đừng tra nữa, nghỉ ngơi đi. Mau mở máy tính, xem đĩa phim bạn mua đi."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "我的衣服还没有洗完呢，还得给我妹妹回信。",
+          "vi": "Quần áo của tôi còn chưa giặt xong, còn phải viết thư trả lời em gái."
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "看完电影再洗吧。",
+          "vi": "Xem phim xong rồi hãy giặt."
+        }
+      ]
     },
     {
-     "speaker": "",
-     "zh": "我问她，你看完了没有。她说，还没看完呢，才看到三十页。",
-     "vi": "Tôi hỏi bạn ấy đọc xong chưa. Bạn ấy nói chưa đọc xong, mới đọc đến trang ba mươi."
-    },
-    {
-     "speaker": "",
-     "zh": "我问玛丽：“都看懂了吗？”她回答：“有的看懂了，有的没看懂。”",
-     "vi": "Tôi hỏi Mary: “Đọc hiểu hết không?” Bạn ấy trả lời: “Có chỗ hiểu, có chỗ không hiểu.”"
-    },
-    {
-     "speaker": "",
-     "zh": "“可以让我看看吗？”“当然可以。”",
-     "vi": "“Cho tôi xem được không?” “Đương nhiên được.”"
-    },
-    {
-     "speaker": "",
-     "zh": "我看了两个故事，也觉得很有意思。看到有意思的地方，就想笑。",
-     "vi": "Tôi đọc hai truyện, cũng thấy rất hay. Đọc đến chỗ thú vị là muốn cười."
-    },
-    {
-     "speaker": "",
-     "zh": "我对玛丽说：“咱们可以用这些故事练习会话。”玛丽说：“怎么练习？”",
-     "vi": "Tôi nói với Mary: “Chúng ta có thể dùng những truyện này để luyện hội thoại.” Mary hỏi: “Luyện thế nào?”"
-    },
-    {
-     "speaker": "",
-     "zh": "“我念完一个故事，问你几个问题，看你能不能答对；你念完一个故事，也问我几个问题，看我能不能答对。”玛丽说：“这是个好办法。”",
-     "vi": "“Tôi đọc xong một truyện thì hỏi bạn mấy câu, xem bạn có trả lời đúng không; bạn đọc xong một truyện cũng hỏi tôi mấy câu, xem tôi có trả lời đúng không.” Mary nói: “Đây là cách hay.”"
-    },
-    {
-     "speaker": "",
-     "zh": "我念了一个故事，玛丽听懂了。问了她五个问题，她都答对了。",
-     "vi": "Tôi đọc một truyện, Mary nghe hiểu. Hỏi bạn ấy năm câu, bạn ấy trả lời đúng hết."
-    },
-    {
-     "speaker": "",
-     "zh": "她念了一个故事，合上书，问我听懂了没有。我说有的地方没听懂，她打开书，又念了一遍，我才听懂。她也问了五个问题，我答对了四个，答错了一个。",
-     "vi": "Bạn ấy đọc một truyện, gấp sách lại, hỏi tôi nghe hiểu chưa. Tôi nói có chỗ chưa hiểu, bạn ấy mở sách đọc lại một lần, tôi mới hiểu. Bạn ấy cũng hỏi năm câu, tôi trả lời đúng bốn, sai một."
-    },
-    {
-     "speaker": "",
-     "zh": "我们还没有练习完，就听见安娜在门外叫我们。我开开门问她：“什么事？”",
-     "vi": "Chúng tôi chưa luyện xong thì nghe thấy Anna gọi ngoài cửa. Tôi mở cửa hỏi: “Có chuyện gì?”"
-    },
-    {
-     "speaker": "",
-     "zh": "“晚上礼堂有电影，你们看吗？”“什么电影？”“是个新电影，我不知道叫什么名字。田芳说这个电影非常好。”",
-     "vi": "“Tối nay hội trường chiếu phim, các bạn có xem không?” “Phim gì?” “Phim mới, tôi không biết tên. Điền Phương nói phim này rất hay.”"
-    },
-    {
-     "speaker": "",
-     "zh": "“想看。但是我今天的作业还没有做完呢，课文也读得不太熟。”安娜说：“我也没做完呢，看完电影再做吧。”",
-     "vi": "“Muốn xem. Nhưng bài tập hôm nay tôi chưa làm xong, bài khóa cũng đọc chưa thạo lắm.” Anna nói: “Tôi cũng chưa làm xong, xem phim xong rồi làm.”"
+      "title": "看完电影再做作业",
+      "lines": [
+        {
+          "speaker": "",
+          "zh": "吃完晚饭，我和玛丽回到宿舍。玛丽说，田芳借给她了一本书，书里都是小故事，很有意思。",
+          "vi": "Ăn tối xong, tôi và Mary về ký túc xá. Mary nói Điền Phương cho bạn ấy mượn một quyển sách, trong sách toàn là truyện ngắn, rất hay."
+        },
+        {
+          "speaker": "",
+          "zh": "我问她，你看完了没有。她说，还没看完呢，才看到三十页。",
+          "vi": "Tôi hỏi bạn ấy đọc xong chưa. Bạn ấy nói chưa đọc xong, mới đọc đến trang ba mươi."
+        },
+        {
+          "speaker": "",
+          "zh": "我问玛丽：“都看懂了吗？”她回答：“有的看懂了，有的没看懂。”",
+          "vi": "Tôi hỏi Mary: “Đọc hiểu hết không?” Bạn ấy trả lời: “Có chỗ hiểu, có chỗ không hiểu.”"
+        },
+        {
+          "speaker": "",
+          "zh": "“可以让我看看吗？”“当然可以。”",
+          "vi": "“Cho tôi xem được không?” “Đương nhiên được.”"
+        },
+        {
+          "speaker": "",
+          "zh": "我看了两个故事，也觉得很有意思。看到有意思的地方，就想笑。",
+          "vi": "Tôi đọc hai truyện, cũng thấy rất hay. Đọc đến chỗ thú vị là muốn cười."
+        },
+        {
+          "speaker": "",
+          "zh": "我对玛丽说：“咱们可以用这些故事练习会话。”玛丽说：“怎么练习？”",
+          "vi": "Tôi nói với Mary: “Chúng ta có thể dùng những truyện này để luyện hội thoại.” Mary hỏi: “Luyện thế nào?”"
+        },
+        {
+          "speaker": "",
+          "zh": "“我念完一个故事，问你几个问题，看你能不能答对；你念完一个故事，也问我几个问题，看我能不能答对。”玛丽说：“这是个好办法。”",
+          "vi": "“Tôi đọc xong một truyện thì hỏi bạn mấy câu, xem bạn có trả lời đúng không; bạn đọc xong một truyện cũng hỏi tôi mấy câu, xem tôi có trả lời đúng không.” Mary nói: “Đây là cách hay.”"
+        },
+        {
+          "speaker": "",
+          "zh": "我念了一个故事，玛丽听懂了。问了她五个问题，她都答对了。",
+          "vi": "Tôi đọc một truyện, Mary nghe hiểu. Hỏi bạn ấy năm câu, bạn ấy trả lời đúng hết."
+        },
+        {
+          "speaker": "",
+          "zh": "她念了一个故事，合上书，问我听懂了没有。我说有的地方没听懂，她打开书，又念了一遍，我才听懂。她也问了五个问题，我答对了四个，答错了一个。",
+          "vi": "Bạn ấy đọc một truyện, gấp sách lại, hỏi tôi nghe hiểu chưa. Tôi nói có chỗ chưa hiểu, bạn ấy mở sách đọc lại một lần, tôi mới hiểu. Bạn ấy cũng hỏi năm câu, tôi trả lời đúng bốn, sai một."
+        },
+        {
+          "speaker": "",
+          "zh": "我们还没有练习完，就听见安娜在门外叫我们。我开开门问她：“什么事？”",
+          "vi": "Chúng tôi chưa luyện xong thì nghe thấy Anna gọi ngoài cửa. Tôi mở cửa hỏi: “Có chuyện gì?”"
+        },
+        {
+          "speaker": "",
+          "zh": "“晚上礼堂有电影，你们看吗？”“什么电影？”“是个新电影，我不知道叫什么名字。田芳说这个电影非常好。”",
+          "vi": "“Tối nay hội trường chiếu phim, các bạn có xem không?” “Phim gì?” “Phim mới, tôi không biết tên. Điền Phương nói phim này rất hay.”"
+        },
+        {
+          "speaker": "",
+          "zh": "“想看。但是我今天的作业还没有做完呢，课文也读得不太熟。”安娜说：“我也没做完呢，看完电影再做吧。”",
+          "vi": "“Muốn xem. Nhưng bài tập hôm nay tôi chưa làm xong, bài khóa cũng đọc chưa thạo lắm.” Anna nói: “Tôi cũng chưa làm xong, xem phim xong rồi làm.”"
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L29-g1",
-   "title": "Bổ ngữ kết quả",
-   "note": "Động từ + 完/对/错/懂/见/好… nói kết quả của hành động. Phủ định: 没(有) + động từ + bổ ngữ. Hỏi: … 了没有？",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "我都做完了。",
-     "vi": "Tôi làm xong hết rồi."
+      "id": "L29-g1",
+      "title": "Bổ ngữ kết quả",
+      "note": "Động từ + 完/对/错/懂/见/好… nói kết quả của hành động. Phủ định: 没(有) + động từ + bổ ngữ. Hỏi: … 了没有？",
+      "examples": [
+        {
+          "zh": "我都做完了。",
+          "vi": "Tôi làm xong hết rồi."
+        },
+        {
+          "zh": "很多句子我没听懂。",
+          "vi": "Nhiều câu tôi nghe không hiểu."
+        },
+        {
+          "zh": "我没看见你的词典。",
+          "vi": "Tôi không nhìn thấy từ điển của bạn."
+        }
+      ]
     },
     {
-     "zh": "很多句子我没听懂。",
-     "vi": "Nhiều câu tôi nghe không hiểu."
+      "id": "L29-g2",
+      "title": "Bổ ngữ kết quả 上、成、到",
+      "note": "上: khép lại/đạt tới (合上书); 成: thành ra (写成); 到: đạt tới đích (看到三十页).",
+      "examples": [
+        {
+          "zh": "我写成这个“的”了。",
+          "vi": "Tôi viết thành chữ “的” này rồi."
+        },
+        {
+          "zh": "才看到三十页。",
+          "vi": "Mới đọc đến trang ba mươi."
+        }
+      ]
     },
     {
-     "zh": "我没看见你的词典。",
-     "vi": "Tôi không nhìn thấy từ điển của bạn."
+      "id": "L29-g3",
+      "title": "Cụm chủ vị làm định ngữ",
+      "note": "Cụm chủ–vị + 的 + danh từ: 你买的电影光盘 = đĩa phim bạn mua.",
+      "examples": [
+        {
+          "zh": "看看你买的电影光盘吧。",
+          "vi": "Xem đĩa phim bạn mua đi."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L29-g2",
-   "title": "Bổ ngữ kết quả 上、成、到",
-   "note": "上: khép lại/đạt tới (合上书); 成: thành ra (写成); 到: đạt tới đích (看到三十页).",
-   "examples": [
-    {
-     "zh": "我写成这个“的”了。",
-     "vi": "Tôi viết thành chữ “的” này rồi."
-    },
-    {
-     "zh": "才看到三十页。",
-     "vi": "Mới đọc đến trang ba mươi."
-    }
-   ]
-  },
-  {
-   "id": "L29-g3",
-   "title": "Cụm chủ vị làm định ngữ",
-   "note": "Cụm chủ–vị + 的 + danh từ: 你买的电影光盘 = đĩa phim bạn mua.",
-   "examples": [
-    {
-     "zh": "看看你买的电影光盘吧。",
-     "vi": "Xem đĩa phim bạn mua đi."
-    }
-   ]
-  }
- ]
+  ]
 }

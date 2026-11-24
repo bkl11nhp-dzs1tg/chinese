@@ -1,0 +1,11 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 书","options":["shū","xū"],"answer":"shū"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 那","options":["nà","nǎ"],"answer":"nà"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 谁的","options":["shuí de","shuǐ de"],"answer":"shuí de"},
+ {"type":"choose","prompt":"Chọn chữ đúng: ___ (bǐ)","options":["笔","比","北"],"answer":"笔"},
+ {"type":"choose","prompt":"Chọn từ đúng: 这是___的书？","options":["谁","什么","哪"],"answer":"谁"},
+ {"type":"reorder","vi":"Đây là sách của ai?","words":["这","是","谁","的","书"]},
+ {"type":"reorder","vi":"Kia là bút của ai?","words":["那","是","谁","的","笔"]},
+ {"type":"reorder","vi":"Đây là sách của tôi.","words":["这","是","我","的","书"]},
+ {"type":"reorder","vi":"Cô ấy là chị gái của tôi.","words":["她","是","我","的","姐姐"]}
+]

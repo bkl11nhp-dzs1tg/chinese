@@ -1,0 +1,8 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 我喜欢喝茶，小华___喜欢。","options":["也","都","还"],"answer":"也"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 中文","options":["Zhōngwén","Zhōngwèn"],"answer":"Zhōngwén"},
+ {"type":"reorder","vi":"Anh trai cũng thường chơi bóng.","words":["哥哥","也","常","打","球"]},
+ {"type":"reorder","vi":"Em trai thích táo, cũng thích quýt.","words":["弟弟","喜欢","苹果","也","喜欢","橘子"]},
+ {"type":"reorder","vi":"Tôi cũng học tiếng Trung.","words":["我","也","学","中文"]},
+ {"type":"reorder","vi":"Tôi thích xem phim, Tiểu Hoa cũng thích.","words":["我","喜欢","看","电影","小华","也","喜欢"]}
+]

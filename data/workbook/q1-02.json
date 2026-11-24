@@ -1,0 +1,13 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 妈妈","options":["māma","mǎma"],"answer":"māma"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 爸爸","options":["bàba","bāba"],"answer":"bàba"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 弟弟","options":["dìdi","dídi"],"answer":"dìdi"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 妹妹","options":["mèimei","měimei"],"answer":"mèimei"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 哥哥","options":["gēge","gège"],"answer":"gēge"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___是我爸爸。","options":["他","她","我"],"answer":"他"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___是我妈妈。","options":["她","他","我"],"answer":"她"},
+ {"type":"reorder","vi":"Anh ấy là bố tôi.","words":["他","是","我","爸爸"]},
+ {"type":"reorder","vi":"Cô ấy là mẹ tôi.","words":["她","是","我","妈妈"]},
+ {"type":"reorder","vi":"Tôi yêu bố mẹ.","words":["我","爱","爸爸","妈妈"]},
+ {"type":"reorder","vi":"Chúng tôi yêu thầy/cô giáo.","words":["我们","爱","老师"]}
+]

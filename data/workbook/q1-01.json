@@ -1,0 +1,14 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 你好","options":["nǐ hǎo","nín hǎo"],"answer":"nǐ hǎo"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 老师","options":["lǎoshī","lǎoshi"],"answer":"lǎoshī"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 同学","options":["tóngxué","dòngxué"],"answer":"tóngxué"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 谢谢","options":["xièxie","jiějie"],"answer":"xièxie"},
+ {"type":"match","prompt":"Nối câu với câu đáp lại","pairs":[{"left":"你好！","right":"你好！"},{"left":"谢谢！","right":"不客气！"},{"left":"再见！","right":"再见！"}]},
+ {"type":"choose","prompt":"Chọn chữ đúng: 老___ (shī)","options":["师","是","十"],"answer":"师"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 你___ (hǎo)","options":["好","号","女"],"answer":"好"},
+ {"type":"reorder","vi":"Chào thầy/cô!","words":["老师","好"]},
+ {"type":"reorder","vi":"Chào các bạn!","words":["同学们","好"]},
+ {"type":"reorder","vi":"Tạm biệt thầy/cô!","words":["老师","再见"]},
+ {"type":"reorder","vi":"Cảm ơn thầy/cô!","words":["谢谢","老师"]},
+ {"type":"reorder","vi":"Cảm ơn các bạn!","words":["谢谢","你们"]}
+]

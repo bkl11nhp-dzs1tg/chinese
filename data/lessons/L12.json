@@ -1,202 +1,280 @@
 {
- "id": "L12",
- "book": "Hán ngữ 1",
- "unit": 12,
- "order": 12,
- "title": "你在哪儿学习",
- "title_vi": "Bạn học ở đâu",
- "vocab_ids": [
-  "L12-班",
-  "L12-比较",
-  "L12-大学",
-  "L12-但是",
-  "L12-读",
-  "L12-给",
-  "L12-觉得",
-  "L12-容易",
-  "L12-说",
-  "L12-听",
-  "L12-同屋",
-  "L12-同学",
-  "L12-写",
-  "L12-新",
-  "L12-语法",
-  "L12-语言",
-  "L12-怎么样"
- ],
- "exercises": [
-  {
-   "id": "L12-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Bạn học tiếng Hán ở đâu?”",
-   "options": [
-    "你",
-    "在",
-    "哪儿",
-    "学习",
-    "汉语"
-   ],
-   "answer": [
-    "你",
-    "在",
-    "哪儿",
-    "学习",
-    "汉语"
-   ],
-   "explanation": "你在哪儿学习汉语 — Bạn học tiếng Hán ở đâu?"
-  },
-  {
-   "id": "L12-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Ngữ pháp tiếng Hán tương đối khó.”",
-   "options": [
-    "汉语",
-    "语法",
-    "比较",
-    "难"
-   ],
-   "answer": [
-    "汉语",
-    "语法",
-    "比较",
-    "难"
-   ],
-   "explanation": "汉语语法比较难 — Ngữ pháp tiếng Hán tương đối khó."
-  },
-  {
-   "id": "L12-r3",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Bạn thấy tiếng Hán thế nào?”",
-   "options": [
-    "你",
-    "觉得",
-    "汉语",
-    "怎么样"
-   ],
-   "answer": [
-    "你",
-    "觉得",
-    "汉语",
-    "怎么样"
-   ],
-   "explanation": "你觉得汉语怎么样 — Bạn thấy tiếng Hán thế nào?"
-  },
-  {
-   "id": "L12-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 你___哪儿学习？",
-   "answer": "在",
-   "explanation": "Bạn học ở đâu?"
-  }
- ],
- "texts": [
-  {
-   "title": "你在哪儿学习汉语",
-   "lines": [
+  "id": "L12",
+  "book": "Hán ngữ 1",
+  "unit": 12,
+  "order": 12,
+  "title": "你在哪儿学习",
+  "title_vi": "Bạn học ở đâu",
+  "vocab_ids": [
+    "L12-班",
+    "L12-比较",
+    "L12-大学",
+    "L12-但是",
+    "L12-读",
+    "L12-给",
+    "L12-觉得",
+    "L12-容易",
+    "L12-说",
+    "L12-听",
+    "L12-同屋",
+    "L12-同学",
+    "L12-写",
+    "L12-新",
+    "L12-语法",
+    "L12-语言",
+    "L12-怎么样"
+  ],
+  "exercises": [
     {
-     "speaker": "A",
-     "zh": "你在哪儿学习汉语？",
-     "vi": "Bạn học tiếng Hán ở đâu?"
+      "id": "L12-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn học tiếng Hán ở đâu?”",
+      "options": [
+        "你",
+        "在",
+        "哪儿",
+        "学习",
+        "汉语"
+      ],
+      "answer": [
+        "你",
+        "在",
+        "哪儿",
+        "学习",
+        "汉语"
+      ],
+      "explanation": "你在哪儿学习汉语 — Bạn học tiếng Hán ở đâu?"
     },
     {
-     "speaker": "B",
-     "zh": "在北京语言大学。",
-     "vi": "Ở Đại học Ngôn ngữ Bắc Kinh."
+      "id": "L12-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Ngữ pháp tiếng Hán tương đối khó.”",
+      "options": [
+        "汉语",
+        "语法",
+        "比较",
+        "难"
+      ],
+      "answer": [
+        "汉语",
+        "语法",
+        "比较",
+        "难"
+      ],
+      "explanation": "汉语语法比较难 — Ngữ pháp tiếng Hán tương đối khó."
     },
     {
-     "speaker": "A",
-     "zh": "你们的老师怎么样？",
-     "vi": "Thầy cô của các bạn thế nào?"
+      "id": "L12-r3",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn thấy tiếng Hán thế nào?”",
+      "options": [
+        "你",
+        "觉得",
+        "汉语",
+        "怎么样"
+      ],
+      "answer": [
+        "你",
+        "觉得",
+        "汉语",
+        "怎么样"
+      ],
+      "explanation": "你觉得汉语怎么样 — Bạn thấy tiếng Hán thế nào?"
     },
     {
-     "speaker": "B",
-     "zh": "很好！",
-     "vi": "Rất tốt!"
+      "id": "L12-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 你___哪儿学习？",
+      "answer": "在",
+      "explanation": "Bạn học ở đâu?"
     },
     {
-     "speaker": "A",
-     "zh": "你觉得学习汉语难吗？",
-     "vi": "Bạn thấy học tiếng Hán có khó không?"
+      "id": "L12-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 同学",
+      "options": [
+        "tóngxué",
+        "dòngxué"
+      ],
+      "answer": "tóngxué"
     },
     {
-     "speaker": "B",
-     "zh": "我觉得语法不太难。听和说也比较容易，但是读和写很难。",
-     "vi": "Tôi thấy ngữ pháp không khó lắm. Nghe và nói cũng tương đối dễ, nhưng đọc và viết rất khó."
+      "id": "L12-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: ___生 (xué)",
+      "options": [
+        "学",
+        "写",
+        "谢"
+      ],
+      "answer": "学"
+    },
+    {
+      "id": "L12-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 他___米饭。",
+      "options": [
+        "吃",
+        "听",
+        "去"
+      ],
+      "answer": "吃"
+    },
+    {
+      "id": "L12-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (nán tóngxué)",
+      "options": [
+        "男同学",
+        "女同学",
+        "男老师"
+      ],
+      "answer": "男同学"
+    },
+    {
+      "id": "L12-wb5",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn nam nhiều, bạn nữ ít.”",
+      "options": [
+        "多",
+        "少",
+        "女同学",
+        "男同学"
+      ],
+      "answer": [
+        "男同学",
+        "多",
+        "女同学",
+        "少"
+      ],
+      "explanation": "男同学多女同学少 — Bạn nam nhiều, bạn nữ ít."
+    },
+    {
+      "id": "L12-wb6",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 今天的天气___。",
+      "options": [
+        "很好",
+        "很白",
+        "很新"
+      ],
+      "answer": "很好"
     }
-   ]
-  },
-  {
-   "title": "你们的老师是谁",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "A",
-     "zh": "我给你们介绍一下儿，这位是新同学，是我的同屋。",
-     "vi": "Tôi giới thiệu với các bạn một chút, đây là bạn học mới, là bạn cùng phòng của tôi."
+      "title": "你在哪儿学习汉语",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "你在哪儿学习汉语？",
+          "vi": "Bạn học tiếng Hán ở đâu?"
+        },
+        {
+          "speaker": "B",
+          "zh": "在北京语言大学。",
+          "vi": "Ở Đại học Ngôn ngữ Bắc Kinh."
+        },
+        {
+          "speaker": "A",
+          "zh": "你们的老师怎么样？",
+          "vi": "Thầy cô của các bạn thế nào?"
+        },
+        {
+          "speaker": "B",
+          "zh": "很好！",
+          "vi": "Rất tốt!"
+        },
+        {
+          "speaker": "A",
+          "zh": "你觉得学习汉语难吗？",
+          "vi": "Bạn thấy học tiếng Hán có khó không?"
+        },
+        {
+          "speaker": "B",
+          "zh": "我觉得语法不太难。听和说也比较容易，但是读和写很难。",
+          "vi": "Tôi thấy ngữ pháp không khó lắm. Nghe và nói cũng tương đối dễ, nhưng đọc và viết rất khó."
+        }
+      ]
     },
     {
-     "speaker": "B",
-     "zh": "你在哪个班学习？",
-     "vi": "Bạn học ở lớp nào?"
-    },
-    {
-     "speaker": "C",
-     "zh": "在103班。",
-     "vi": "Ở lớp 103."
-    },
-    {
-     "speaker": "B",
-     "zh": "你们的老师是谁？",
-     "vi": "Giáo viên của các bạn là ai?"
-    },
-    {
-     "speaker": "C",
-     "zh": "我们的老师是林老师。",
-     "vi": "Giáo viên của chúng tôi là cô Lâm."
+      "title": "你们的老师是谁",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "我给你们介绍一下儿，这位是新同学，是我的同屋。",
+          "vi": "Tôi giới thiệu với các bạn một chút, đây là bạn học mới, là bạn cùng phòng của tôi."
+        },
+        {
+          "speaker": "B",
+          "zh": "你在哪个班学习？",
+          "vi": "Bạn học ở lớp nào?"
+        },
+        {
+          "speaker": "C",
+          "zh": "在103班。",
+          "vi": "Ở lớp 103."
+        },
+        {
+          "speaker": "B",
+          "zh": "你们的老师是谁？",
+          "vi": "Giáo viên của các bạn là ai?"
+        },
+        {
+          "speaker": "C",
+          "zh": "我们的老师是林老师。",
+          "vi": "Giáo viên của chúng tôi là cô Lâm."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L12-g1",
-   "title": "Đại từ nghi vấn (怎么样, 哪儿, 谁)",
-   "note": "Hỏi bằng đại từ nghi vấn thì không thêm 吗.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "你们的老师怎么样？",
-     "vi": "Thầy cô các bạn thế nào?"
+      "id": "L12-g1",
+      "title": "Đại từ nghi vấn (怎么样, 哪儿, 谁)",
+      "note": "Hỏi bằng đại từ nghi vấn thì không thêm 吗.",
+      "examples": [
+        {
+          "zh": "你们的老师怎么样？",
+          "vi": "Thầy cô các bạn thế nào?"
+        },
+        {
+          "zh": "你们的老师是谁？",
+          "vi": "Giáo viên của các bạn là ai?"
+        }
+      ]
     },
     {
-     "zh": "你们的老师是谁？",
-     "vi": "Giáo viên của các bạn là ai?"
-    }
-   ]
-  },
-  {
-   "id": "L12-g2",
-   "title": "Định ngữ và trợ từ 的",
-   "note": "Định ngữ + 的 + trung tâm ngữ. Quan hệ thân thuộc có thể bỏ 的: 我妈妈.",
-   "examples": [
-    {
-     "zh": "我的同屋",
-     "vi": "bạn cùng phòng của tôi"
-    }
-   ]
-  },
-  {
-   "id": "L12-g3",
-   "title": "Giới từ 在 và 给",
-   "note": "在 + nơi chốn + động từ = làm gì ở đâu; 给 + người + động từ = làm gì cho ai.",
-   "examples": [
-    {
-     "zh": "你在哪儿学习汉语？",
-     "vi": "Bạn học tiếng Hán ở đâu?"
+      "id": "L12-g2",
+      "title": "Định ngữ và trợ từ 的",
+      "note": "Định ngữ + 的 + trung tâm ngữ. Quan hệ thân thuộc có thể bỏ 的: 我妈妈.",
+      "examples": [
+        {
+          "zh": "我的同屋",
+          "vi": "bạn cùng phòng của tôi"
+        }
+      ]
     },
     {
-     "zh": "我给你们介绍一下儿。",
-     "vi": "Tôi giới thiệu với các bạn một chút."
+      "id": "L12-g3",
+      "title": "Giới từ 在 và 给",
+      "note": "在 + nơi chốn + động từ = làm gì ở đâu; 给 + người + động từ = làm gì cho ai.",
+      "examples": [
+        {
+          "zh": "你在哪儿学习汉语？",
+          "vi": "Bạn học tiếng Hán ở đâu?"
+        },
+        {
+          "zh": "我给你们介绍一下儿。",
+          "vi": "Tôi giới thiệu với các bạn một chút."
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

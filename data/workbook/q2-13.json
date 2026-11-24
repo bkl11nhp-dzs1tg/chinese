@@ -1,0 +1,10 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 我和妹妹___吃鸡蛋。","options":["都","也","很"],"answer":"都"},
+ {"type":"choose","prompt":"Chọn từ đúng: 你几___了？","options":["岁","个","年"],"answer":"岁"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (diànshì)","options":["电视","电话","电脑"],"answer":"电视"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (jīdàn)","options":["鸡蛋","米饭","面条儿"],"answer":"鸡蛋"},
+ {"type":"reorder","vi":"Tôi và em gái đều ăn trứng gà.","words":["我","和","妹妹","都","吃","鸡蛋"]},
+ {"type":"reorder","vi":"Các bạn đều viết chữ Hán.","words":["同学们","都","写","汉字"]},
+ {"type":"reorder","vi":"Bạn mấy tuổi rồi?","words":["你","几","岁","了"]},
+ {"type":"reorder","vi":"Chúng tôi đều là học sinh.","words":["我们","都","是","学生"]}
+]

@@ -1,247 +1,395 @@
 {
- "id": "L28",
- "book": "Hán ngữ 2",
- "unit": 28,
- "order": 28,
- "title": "我吃了早饭就来了",
- "title_vi": "Tôi ăn sáng xong là đến ngay",
- "vocab_ids": [
-  "L28-才",
-  "L28-层",
-  "L28-车站",
-  "L28-厨房",
-  "L28-地铁",
-  "L28-堵车",
-  "L28-方便",
-  "L28-房子",
-  "L28-房租",
-  "L28-附近",
-  "L28-赶",
-  "L28-公共汽车",
-  "L28-河",
-  "L28-还是",
-  "L28-环境",
-  "L28-交通",
-  "L28-客厅",
-  "L28-乱",
-  "L28-满意",
-  "L28-面积",
-  "L28-旁边",
-  "L28-平（方）米",
-  "L28-妻子",
-  "L28-情况",
-  "L28-上去",
-  "L28-虽然",
-  "L28-套",
-  "L28-体育馆",
-  "L28-条",
-  "L28-卧室",
-  "L28-阳光",
-  "L28-要是",
-  "L28-有的",
-  "L28-站",
-  "L28-真"
- ],
- "exercises": [
-  {
-   "id": "L28-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi ăn sáng xong là đến ngay.”",
-   "options": [
-    "我",
-    "吃了",
-    "早饭",
-    "就",
-    "来了"
-   ],
-   "answer": [
-    "我",
-    "吃了",
-    "早饭",
-    "就",
-    "来了"
-   ],
-   "explanation": "我吃了早饭就来了 — Tôi ăn sáng xong là đến ngay."
-  },
-  {
-   "id": "L28-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Hôm nay tắc đường, 9 giờ tôi mới đến.”",
-   "options": [
-    "今天",
-    "堵车",
-    "我",
-    "九点",
-    "才",
-    "到"
-   ],
-   "answer": [
-    "今天",
-    "堵车",
-    "我",
-    "九点",
-    "才",
-    "到"
-   ],
-   "explanation": "今天堵车我九点才到 — Hôm nay tắc đường, 9 giờ tôi mới đến."
-  },
-  {
-   "id": "L28-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 他八点就来了，我九点___来。",
-   "answer": "才",
-   "explanation": "Anh ấy 8 giờ đã đến, 9 giờ tôi mới đến."
-  }
- ],
- "texts": [
-  {
-   "title": "我吃了早饭就来了",
-   "lines": [
+  "id": "L28",
+  "book": "Hán ngữ 2",
+  "unit": 28,
+  "order": 28,
+  "title": "我吃了早饭就来了",
+  "title_vi": "Tôi ăn sáng xong là đến ngay",
+  "vocab_ids": [
+    "L28-才",
+    "L28-层",
+    "L28-车站",
+    "L28-厨房",
+    "L28-地铁",
+    "L28-堵车",
+    "L28-方便",
+    "L28-房子",
+    "L28-房租",
+    "L28-附近",
+    "L28-赶",
+    "L28-公共汽车",
+    "L28-河",
+    "L28-还是",
+    "L28-环境",
+    "L28-交通",
+    "L28-客厅",
+    "L28-乱",
+    "L28-满意",
+    "L28-面积",
+    "L28-旁边",
+    "L28-平（方）米",
+    "L28-妻子",
+    "L28-情况",
+    "L28-上去",
+    "L28-虽然",
+    "L28-套",
+    "L28-体育馆",
+    "L28-条",
+    "L28-卧室",
+    "L28-阳光",
+    "L28-要是",
+    "L28-有的",
+    "L28-站",
+    "L28-真"
+  ],
+  "exercises": [
     {
-     "speaker": "小张",
-     "zh": "我吃了早饭就来了。",
-     "vi": "(Chỗ Tiểu Trương ở cách công ty quá xa, anh muốn thuê nhà gần hơn; hôm nay nghỉ, anh lại đi xem nhà) Tôi ăn sáng xong là đến ngay."
+      "id": "L28-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi ăn sáng xong là đến ngay.”",
+      "options": [
+        "我",
+        "吃了",
+        "早饭",
+        "就",
+        "来了"
+      ],
+      "answer": [
+        "我",
+        "吃了",
+        "早饭",
+        "就",
+        "来了"
+      ],
+      "explanation": "我吃了早饭就来了 — Tôi ăn sáng xong là đến ngay."
     },
     {
-     "speaker": "业务员",
-     "zh": "我也是，接了你的电话，八点半就到这儿了。上次您看了几套房子？",
-     "vi": "Tôi cũng vậy, nhận điện thoại của anh là tám rưỡi đã đến đây. Lần trước anh xem mấy căn rồi?"
+      "id": "L28-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Hôm nay tắc đường, 9 giờ tôi mới đến.”",
+      "options": [
+        "今天",
+        "堵车",
+        "我",
+        "九点",
+        "才",
+        "到"
+      ],
+      "answer": [
+        "今天",
+        "堵车",
+        "我",
+        "九点",
+        "才",
+        "到"
+      ],
+      "explanation": "今天堵车我九点才到 — Hôm nay tắc đường, 9 giờ tôi mới đến."
     },
     {
-     "speaker": "小张",
-     "zh": "看了三套，都不太满意。有的太小，有的周围环境太乱。",
-     "vi": "Xem ba căn, đều không hài lòng lắm. Có căn quá nhỏ, có căn xung quanh quá lộn xộn."
+      "id": "L28-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 他八点就来了，我九点___来。",
+      "answer": "才",
+      "explanation": "Anh ấy 8 giờ đã đến, 9 giờ tôi mới đến."
     },
     {
-     "speaker": "业务员",
-     "zh": "我再带你去看几套吧。",
-     "vi": "Tôi đưa anh đi xem thêm mấy căn nữa nhé."
+      "id": "L28-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (yǐzi)",
+      "options": [
+        "椅子",
+        "箱子",
+        "房子"
+      ],
+      "answer": "椅子"
     },
     {
-     "speaker": "小张",
-     "zh": "这几套房子，厨房、卧室还可以，但是客厅面积小了点儿。有没有大一点儿的？",
-     "vi": "(Sau khi xem nhà) Mấy căn này bếp và phòng ngủ cũng được, nhưng diện tích phòng khách hơi nhỏ. Có căn nào rộng hơn không?"
+      "id": "L28-wb2",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Sủi cảo ngon thật!”",
+      "options": [
+        "好吃",
+        "饺子",
+        "啊",
+        "真"
+      ],
+      "answer": [
+        "饺子",
+        "真",
+        "好吃",
+        "啊"
+      ],
+      "explanation": "饺子真好吃啊 — Sủi cảo ngon thật!"
     },
     {
-     "speaker": "业务员",
-     "zh": "有，楼上18层有一套，客厅30多平（方）米。咱们上去看看吧。",
-     "vi": "Có, tầng 18 phía trên có một căn, phòng khách hơn 30 mét vuông. Chúng ta lên xem nhé."
+      "id": "L28-wb3",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tấm ảnh này đẹp thật!”",
+      "options": [
+        "张",
+        "真",
+        "啊",
+        "这",
+        "照片",
+        "好看"
+      ],
+      "answer": [
+        "这",
+        "张",
+        "照片",
+        "真",
+        "好看",
+        "啊"
+      ],
+      "explanation": "这张照片真好看啊 — Tấm ảnh này đẹp thật!"
     },
     {
-     "speaker": "小张",
-     "zh": "这套房子下午就没有阳光了吧？",
-     "vi": "Căn này buổi chiều không có nắng nữa phải không?"
+      "id": "L28-wb4",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Hôm nay chúng tôi vui thật!”",
+      "options": [
+        "我们",
+        "高兴",
+        "真",
+        "啊",
+        "今天"
+      ],
+      "answer": [
+        "今天",
+        "我们",
+        "真",
+        "高兴",
+        "啊"
+      ],
+      "explanation": "今天我们真高兴啊 — Hôm nay chúng tôi vui thật!"
     },
     {
-     "speaker": "业务员",
-     "zh": "是的。",
-     "vi": "Đúng vậy."
+      "id": "L28-wb5",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Sân tập trường các bạn to thật!”",
+      "options": [
+        "啊",
+        "操场",
+        "大",
+        "真",
+        "你们",
+        "的",
+        "学校"
+      ],
+      "answer": [
+        "你们",
+        "学校",
+        "的",
+        "操场",
+        "真",
+        "大",
+        "啊"
+      ],
+      "explanation": "你们学校的操场真大啊 — Sân tập trường các bạn to thật!"
     },
     {
-     "speaker": "小张",
-     "zh": "我还是想要上下午都有阳光的。",
-     "vi": "Tôi vẫn muốn căn sáng chiều đều có nắng."
+      "id": "L28-wb6",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 这个苹果真___啊！",
+      "options": [
+        "好吃",
+        "好看",
+        "好听"
+      ],
+      "answer": "好吃"
+    },
+    {
+      "id": "L28-wb7",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn lượng từ đúng: 这___衣服是我的。",
+      "options": [
+        "件",
+        "条",
+        "本"
+      ],
+      "answer": "件"
+    },
+    {
+      "id": "L28-wb8",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 妈妈不___爬山。",
+      "options": [
+        "常",
+        "很",
+        "真"
+      ],
+      "answer": "常"
+    },
+    {
+      "id": "L28-wb9",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 这件衣服___大了！",
+      "options": [
+        "太",
+        "很",
+        "真"
+      ],
+      "answer": "太"
     }
-   ]
-  },
-  {
-   "title": "我早就下班了",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "小张",
-     "zh": "怎么现在才下班？",
-     "vi": "(Vợ Tiểu Trương về nhà) Sao giờ mới tan làm?"
+      "title": "我吃了早饭就来了",
+      "lines": [
+        {
+          "speaker": "小张",
+          "zh": "我吃了早饭就来了。",
+          "vi": "(Chỗ Tiểu Trương ở cách công ty quá xa, anh muốn thuê nhà gần hơn; hôm nay nghỉ, anh lại đi xem nhà) Tôi ăn sáng xong là đến ngay."
+        },
+        {
+          "speaker": "业务员",
+          "zh": "我也是，接了你的电话，八点半就到这儿了。上次您看了几套房子？",
+          "vi": "Tôi cũng vậy, nhận điện thoại của anh là tám rưỡi đã đến đây. Lần trước anh xem mấy căn rồi?"
+        },
+        {
+          "speaker": "小张",
+          "zh": "看了三套，都不太满意。有的太小，有的周围环境太乱。",
+          "vi": "Xem ba căn, đều không hài lòng lắm. Có căn quá nhỏ, có căn xung quanh quá lộn xộn."
+        },
+        {
+          "speaker": "业务员",
+          "zh": "我再带你去看几套吧。",
+          "vi": "Tôi đưa anh đi xem thêm mấy căn nữa nhé."
+        },
+        {
+          "speaker": "小张",
+          "zh": "这几套房子，厨房、卧室还可以，但是客厅面积小了点儿。有没有大一点儿的？",
+          "vi": "(Sau khi xem nhà) Mấy căn này bếp và phòng ngủ cũng được, nhưng diện tích phòng khách hơi nhỏ. Có căn nào rộng hơn không?"
+        },
+        {
+          "speaker": "业务员",
+          "zh": "有，楼上18层有一套，客厅30多平（方）米。咱们上去看看吧。",
+          "vi": "Có, tầng 18 phía trên có một căn, phòng khách hơn 30 mét vuông. Chúng ta lên xem nhé."
+        },
+        {
+          "speaker": "小张",
+          "zh": "这套房子下午就没有阳光了吧？",
+          "vi": "Căn này buổi chiều không có nắng nữa phải không?"
+        },
+        {
+          "speaker": "业务员",
+          "zh": "是的。",
+          "vi": "Đúng vậy."
+        },
+        {
+          "speaker": "小张",
+          "zh": "我还是想要上下午都有阳光的。",
+          "vi": "Tôi vẫn muốn căn sáng chiều đều có nắng."
+        }
+      ]
     },
     {
-     "speaker": "妻子",
-     "zh": "我早就下班了。路上堵车堵得厉害。我下了班就往回赶，到现在才到家。……你今天看了几套房子？",
-     "vi": "Em tan làm lâu rồi. Đường tắc kinh khủng. Tan làm là em vội về ngay, đến giờ mới về đến nhà. … Hôm nay anh xem mấy căn?"
-    },
-    {
-     "speaker": "小张",
-     "zh": "看了七八套。有一套我觉得不错。等你休息的时候，再一起去看看。要是你也满意，咱们就租了。",
-     "vi": "Xem bảy tám căn. Có một căn anh thấy khá được. Đợi em được nghỉ, mình cùng đi xem. Nếu em cũng hài lòng thì mình thuê."
-    },
-    {
-     "speaker": "妻子",
-     "zh": "房租多少钱？",
-     "vi": "Tiền thuê bao nhiêu?"
-    },
-    {
-     "speaker": "小张",
-     "zh": "一个月三千块。",
-     "vi": "Ba nghìn đồng một tháng."
-    },
-    {
-     "speaker": "妻子",
-     "zh": "怎么这么贵！",
-     "vi": "Sao đắt thế!"
-    },
-    {
-     "speaker": "小张",
-     "zh": "虽然贵了点儿，但是房子真好。",
-     "vi": "Tuy hơi đắt một chút nhưng nhà thật sự tốt."
-    },
-    {
-     "speaker": "妻子",
-     "zh": "周围环境怎么样？",
-     "vi": "Môi trường xung quanh thế nào?"
-    },
-    {
-     "speaker": "小张",
-     "zh": "环境特别好。西边是山，山下边有一条小河，河边是一个很大的公园。周围非常安静。",
-     "vi": "Môi trường đặc biệt tốt. Phía tây là núi, dưới núi có một con sông nhỏ, bên sông là một công viên rất lớn. Xung quanh rất yên tĩnh."
-    },
-    {
-     "speaker": "妻子",
-     "zh": "交通方便不方便？",
-     "vi": "Giao thông có thuận tiện không?"
-    },
-    {
-     "speaker": "小张",
-     "zh": "交通很方便。楼下就有公共汽车站，坐车十分钟就到公司了。汽车站旁边就是地铁站。附近有学校、医院和体育馆……",
-     "vi": "Giao thông rất thuận tiện. Ngay dưới nhà có bến xe buýt, đi xe mười phút là đến công ty. Cạnh bến xe buýt là ga tàu điện ngầm. Gần đó có trường học, bệnh viện và nhà thi đấu…"
+      "title": "我早就下班了",
+      "lines": [
+        {
+          "speaker": "小张",
+          "zh": "怎么现在才下班？",
+          "vi": "(Vợ Tiểu Trương về nhà) Sao giờ mới tan làm?"
+        },
+        {
+          "speaker": "妻子",
+          "zh": "我早就下班了。路上堵车堵得厉害。我下了班就往回赶，到现在才到家。……你今天看了几套房子？",
+          "vi": "Em tan làm lâu rồi. Đường tắc kinh khủng. Tan làm là em vội về ngay, đến giờ mới về đến nhà. … Hôm nay anh xem mấy căn?"
+        },
+        {
+          "speaker": "小张",
+          "zh": "看了七八套。有一套我觉得不错。等你休息的时候，再一起去看看。要是你也满意，咱们就租了。",
+          "vi": "Xem bảy tám căn. Có một căn anh thấy khá được. Đợi em được nghỉ, mình cùng đi xem. Nếu em cũng hài lòng thì mình thuê."
+        },
+        {
+          "speaker": "妻子",
+          "zh": "房租多少钱？",
+          "vi": "Tiền thuê bao nhiêu?"
+        },
+        {
+          "speaker": "小张",
+          "zh": "一个月三千块。",
+          "vi": "Ba nghìn đồng một tháng."
+        },
+        {
+          "speaker": "妻子",
+          "zh": "怎么这么贵！",
+          "vi": "Sao đắt thế!"
+        },
+        {
+          "speaker": "小张",
+          "zh": "虽然贵了点儿，但是房子真好。",
+          "vi": "Tuy hơi đắt một chút nhưng nhà thật sự tốt."
+        },
+        {
+          "speaker": "妻子",
+          "zh": "周围环境怎么样？",
+          "vi": "Môi trường xung quanh thế nào?"
+        },
+        {
+          "speaker": "小张",
+          "zh": "环境特别好。西边是山，山下边有一条小河，河边是一个很大的公园。周围非常安静。",
+          "vi": "Môi trường đặc biệt tốt. Phía tây là núi, dưới núi có một con sông nhỏ, bên sông là một công viên rất lớn. Xung quanh rất yên tĩnh."
+        },
+        {
+          "speaker": "妻子",
+          "zh": "交通方便不方便？",
+          "vi": "Giao thông có thuận tiện không?"
+        },
+        {
+          "speaker": "小张",
+          "zh": "交通很方便。楼下就有公共汽车站，坐车十分钟就到公司了。汽车站旁边就是地铁站。附近有学校、医院和体育馆……",
+          "vi": "Giao thông rất thuận tiện. Ngay dưới nhà có bến xe buýt, đi xe mười phút là đến công ty. Cạnh bến xe buýt là ga tàu điện ngầm. Gần đó có trường học, bệnh viện và nhà thi đấu…"
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L28-g1",
-   "title": "就 và 才",
-   "note": "就: sớm, nhanh, thuận lợi (hơn dự kiến); 才: muộn, chậm, khó khăn. Câu có 就 thường có 了 cuối câu, câu có 才 thì không.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "我吃了早饭就来了。",
-     "vi": "Tôi ăn sáng xong là đến ngay."
+      "id": "L28-g1",
+      "title": "就 và 才",
+      "note": "就: sớm, nhanh, thuận lợi (hơn dự kiến); 才: muộn, chậm, khó khăn. Câu có 就 thường có 了 cuối câu, câu có 才 thì không.",
+      "examples": [
+        {
+          "zh": "我吃了早饭就来了。",
+          "vi": "Tôi ăn sáng xong là đến ngay."
+        },
+        {
+          "zh": "到现在才到家。",
+          "vi": "Đến giờ mới về đến nhà."
+        }
+      ]
     },
     {
-     "zh": "到现在才到家。",
-     "vi": "Đến giờ mới về đến nhà."
-    }
-   ]
-  },
-  {
-   "id": "L28-g2",
-   "title": "要是…(的话)，就…",
-   "note": "Nếu … thì …",
-   "examples": [
+      "id": "L28-g2",
+      "title": "要是…(的话)，就…",
+      "note": "Nếu … thì …",
+      "examples": [
+        {
+          "zh": "要是你也满意，咱们就租了。",
+          "vi": "Nếu em cũng hài lòng thì mình thuê."
+        }
+      ]
+    },
     {
-     "zh": "要是你也满意，咱们就租了。",
-     "vi": "Nếu em cũng hài lòng thì mình thuê."
+      "id": "L28-g3",
+      "title": "虽然…但是…",
+      "note": "Tuy … nhưng …",
+      "examples": [
+        {
+          "zh": "虽然贵了点儿，但是房子真好。",
+          "vi": "Tuy hơi đắt một chút nhưng nhà thật sự tốt."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L28-g3",
-   "title": "虽然…但是…",
-   "note": "Tuy … nhưng …",
-   "examples": [
-    {
-     "zh": "虽然贵了点儿，但是房子真好。",
-     "vi": "Tuy hơi đắt một chút nhưng nhà thật sự tốt."
-    }
-   ]
-  }
- ]
+  ]
 }

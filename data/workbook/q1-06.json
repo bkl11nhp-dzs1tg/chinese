@@ -1,0 +1,95 @@
+[
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 学校",
+  "options": [
+   "xuéxiào",
+   "xuésheng"
+  ],
+  "answer": "xuéxiào"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 去哪儿",
+  "options": [
+   "qù nǎr",
+   "qù nàr"
+  ],
+  "answer": "qù nǎr"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 医院",
+  "options": [
+   "yīyuàn",
+   "yīshēng"
+  ],
+  "answer": "yīyuàn"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 早上",
+  "options": [
+   "zǎoshang",
+   "wǎnshang"
+  ],
+  "answer": "zǎoshang"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___上 (zǎo)",
+  "options": [
+   "早",
+   "找",
+   "在"
+  ],
+  "answer": "早"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: 我去学___ (xiào)",
+  "options": [
+   "校",
+   "笑",
+   "小"
+  ],
+  "answer": "校"
+ },
+ {
+  "type": "reorder",
+  "vi": "Chúng tôi đi đến trường.",
+  "words": [
+   "我们",
+   "去",
+   "学校"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Họ đi đâu?",
+  "words": [
+   "他们",
+   "去",
+   "哪儿"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Buổi sáng mẹ đi bệnh viện.",
+  "words": [
+   "早上",
+   "妈妈",
+   "去",
+   "医院"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Anh trai đi đến trường.",
+  "words": [
+   "哥哥",
+   "去",
+   "学校"
+  ]
+ }
+]

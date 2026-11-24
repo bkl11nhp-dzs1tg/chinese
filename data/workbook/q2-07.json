@@ -1,0 +1,10 @@
+[
+ {"type":"choose","prompt":"Chọn lượng từ đúng: 这___衣服是我的。","options":["件","条","本"],"answer":"件"},
+ {"type":"choose","prompt":"Chọn lượng từ đúng: 这___裤子不是我的。","options":["条","件","张"],"answer":"条"},
+ {"type":"choose","prompt":"Chọn từ đúng: 你的帽子是什么___的？","options":["颜色","衣服","名字"],"answer":"颜色"},
+ {"type":"match","prompt":"Nối màu với nghĩa","pairs":[{"left":"红","right":"đỏ"},{"left":"白","right":"trắng"},{"left":"黑","right":"đen"}]},
+ {"type":"reorder","vi":"Cái áo này là của bố.","words":["这","件","衣服","是","爸爸","的"]},
+ {"type":"reorder","vi":"Quần của em trai màu đỏ.","words":["弟弟","的","裤子","是","红","的"]},
+ {"type":"reorder","vi":"Áo của mẹ màu xanh lam.","words":["妈妈","的","衣服","是","蓝","的"]},
+ {"type":"reorder","vi":"Áo của bạn màu gì?","words":["你","的","衣服","是","什么","颜色","的"]}
+]

@@ -1,201 +1,566 @@
 {
- "id": "L22",
- "book": "Hán ngữ 2",
- "unit": 22,
- "order": 22,
- "title": "我打算请老师教我京剧",
- "title_vi": "Tôi định mời thầy dạy tôi kinh kịch",
- "vocab_ids": [
-  "L22-爱好",
-  "L22-唱",
-  "L22-大家",
-  "L22-电脑",
-  "L22-对",
-  "L22-非常",
-  "L22-感到",
-  "L22-感兴趣",
-  "L22-高兴",
-  "L22-画",
-  "L22-画儿",
-  "L22-叫",
-  "L22-京剧",
-  "L22-就",
-  "L22-派",
-  "L22-让",
-  "L22-书法",
-  "L22-谈",
-  "L22-特别",
-  "L22-玩",
-  "L22-喜欢",
-  "L22-下课",
-  "L22-心情",
-  "L22-兴趣",
-  "L22-业余",
-  "L22-以前",
-  "L22-愉快",
-  "TR2-田中"
- ],
- "exercises": [
-  {
-   "id": "L22-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi định mời thầy dạy tôi kinh kịch.”",
-   "options": [
-    "我",
-    "打算",
-    "请",
-    "老师",
-    "教",
-    "我",
-    "京剧"
-   ],
-   "answer": [
-    "我",
-    "打算",
-    "请",
-    "老师",
-    "教",
-    "我",
-    "京剧"
-   ],
-   "explanation": "我打算请老师教我京剧 — Tôi định mời thầy dạy tôi kinh kịch."
-  },
-  {
-   "id": "L22-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi rất hứng thú với thư pháp.”",
-   "options": [
-    "我",
-    "对",
-    "书法",
-    "很",
-    "感兴趣"
-   ],
-   "answer": [
-    "我",
-    "对",
-    "书法",
-    "很",
-    "感兴趣"
-   ],
-   "explanation": "我对书法很感兴趣 — Tôi rất hứng thú với thư pháp."
-  },
-  {
-   "id": "L22-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 你的爱好是什么？— 我喜欢___歌。",
-   "answer": "唱",
-   "explanation": "Sở thích của bạn là gì? — Tôi thích hát."
-  }
- ],
- "texts": [
-  {
-   "title": "我打算请老师教我京剧",
-   "lines": [
+  "id": "L22",
+  "book": "Hán ngữ 2",
+  "unit": 22,
+  "order": 22,
+  "title": "我打算请老师教我京剧",
+  "title_vi": "Tôi định mời thầy dạy tôi kinh kịch",
+  "vocab_ids": [
+    "L22-爱好",
+    "L22-唱",
+    "L22-大家",
+    "L22-电脑",
+    "L22-对",
+    "L22-非常",
+    "L22-感到",
+    "L22-感兴趣",
+    "L22-高兴",
+    "L22-画",
+    "L22-画儿",
+    "L22-叫",
+    "L22-京剧",
+    "L22-就",
+    "L22-派",
+    "L22-让",
+    "L22-书法",
+    "L22-谈",
+    "L22-特别",
+    "L22-玩",
+    "L22-喜欢",
+    "L22-下课",
+    "L22-心情",
+    "L22-兴趣",
+    "L22-业余",
+    "L22-以前",
+    "L22-愉快",
+    "TR2-田中"
+  ],
+  "exercises": [
     {
-     "speaker": "老师",
-     "zh": "今天想请大家谈谈自己的爱好。谁先说？",
-     "vi": "(Trong giờ học, thầy Vương bảo các bạn nói về sở thích) Hôm nay thầy muốn mời mọi người nói về sở thích của mình. Ai nói trước?"
+      "id": "L22-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi định mời thầy dạy tôi kinh kịch.”",
+      "options": [
+        "我",
+        "打算",
+        "请",
+        "老师",
+        "教",
+        "我",
+        "京剧"
+      ],
+      "answer": [
+        "我",
+        "打算",
+        "请",
+        "老师",
+        "教",
+        "我",
+        "京剧"
+      ],
+      "explanation": "我打算请老师教我京剧 — Tôi định mời thầy dạy tôi kinh kịch."
     },
     {
-     "speaker": "玛丽",
-     "zh": "老师，让我先说吧。",
-     "vi": "Thưa thầy, để em nói trước ạ."
+      "id": "L22-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi rất hứng thú với thư pháp.”",
+      "options": [
+        "我",
+        "对",
+        "书法",
+        "很",
+        "感兴趣"
+      ],
+      "answer": [
+        "我",
+        "对",
+        "书法",
+        "很",
+        "感兴趣"
+      ],
+      "explanation": "我对书法很感兴趣 — Tôi rất hứng thú với thư pháp."
     },
     {
-     "speaker": "老师",
-     "zh": "好，你说吧。你有什么爱好？",
-     "vi": "Được, em nói đi. Em có sở thích gì?"
+      "id": "L22-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 你的爱好是什么？— 我喜欢___歌。",
+      "answer": "唱",
+      "explanation": "Sở thích của bạn là gì? — Tôi thích hát."
     },
     {
-     "speaker": "玛丽",
-     "zh": "我的爱好是看京剧。",
-     "vi": "Sở thích của em là xem kinh kịch."
+      "id": "L22-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 下课",
+      "options": [
+        "xià kè",
+        "xiā kè"
+      ],
+      "answer": "xià kè"
     },
     {
-     "speaker": "老师",
-     "zh": "你喜欢看京剧？",
-     "vi": "Em thích xem kinh kịch à?"
+      "id": "L22-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 早上我___学校 (qù)",
+      "options": [
+        "去",
+        "取",
+        "趣"
+      ],
+      "answer": "去"
     },
     {
-     "speaker": "玛丽",
-     "zh": "是啊，非常喜欢。我还想学唱京剧，打算请一个老师教我。",
-     "vi": "Vâng, rất thích. Em còn muốn học hát kinh kịch, định mời một thầy dạy em."
+      "id": "L22-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 电脑",
+      "options": [
+        "diànnǎo",
+        "diànshì"
+      ],
+      "answer": "diànnǎo"
     },
     {
-     "speaker": "老师",
-     "zh": "麦克，你喜欢做什么？",
-     "vi": "Mike, em thích làm gì?"
+      "id": "L22-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (diànnǎo)",
+      "options": [
+        "电脑",
+        "电视",
+        "电话"
+      ],
+      "answer": "电脑"
     },
     {
-     "speaker": "麦克",
-     "zh": "我喜欢玩电脑。",
-     "vi": "Em thích chơi máy tính."
+      "id": "L22-wb5",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (zhàopiàn)",
+      "options": [
+        "照片",
+        "电影",
+        "画儿"
+      ],
+      "answer": "照片"
     },
     {
-     "speaker": "老师",
-     "zh": "罗兰呢？",
-     "vi": "Còn Rollan?"
+      "id": "L22-wb6",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Nhà bạn có máy tính không?”",
+      "options": [
+        "家",
+        "吗",
+        "电脑",
+        "你",
+        "有"
+      ],
+      "answer": [
+        "你",
+        "家",
+        "有",
+        "电脑",
+        "吗"
+      ],
+      "explanation": "你家有电脑吗 — Nhà bạn có máy tính không?"
     },
     {
-     "speaker": "罗兰",
-     "zh": "我喜欢听音乐，下课以后，听听音乐或者跟朋友聊聊天儿，感到心情很愉快。",
-     "vi": "Em thích nghe nhạc. Tan học nghe nhạc hoặc nói chuyện với bạn bè, em thấy tâm trạng rất vui vẻ."
+      "id": "L22-wb7",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我___有电脑。",
+      "options": [
+        "没",
+        "不",
+        "有"
+      ],
+      "answer": "没"
     },
     {
-     "speaker": "老师",
-     "zh": "田中业余时间常常做什么？",
-     "vi": "Tanaka lúc rảnh thường làm gì?"
+      "id": "L22-wb8",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 高兴",
+      "options": [
+        "gāoxìng",
+        "gāoxīng"
+      ],
+      "answer": "gāoxìng"
     },
     {
-     "speaker": "田中",
-     "zh": "我来中国以前就对书法特别感兴趣。今年公司派我来中国，我非常高兴。现在我正跟一个老师学书法，还学画中国画儿。",
-     "vi": "Trước khi sang Trung Quốc em đã đặc biệt hứng thú với thư pháp. Năm nay công ty cử em sang Trung Quốc, em rất vui. Bây giờ em đang theo một thầy học thư pháp, còn học vẽ tranh Trung Quốc nữa."
+      "id": "L22-wb9",
+      "source": "workbook",
+      "type": "match",
+      "prompt": "Nối từ với nghĩa",
+      "pairs": [
+        {
+          "left": "今天",
+          "right": "hôm nay"
+        },
+        {
+          "left": "天气",
+          "right": "thời tiết"
+        },
+        {
+          "left": "高兴",
+          "right": "vui vẻ"
+        }
+      ]
+    },
+    {
+      "id": "L22-wb10",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúng tôi rất vui.”",
+      "options": [
+        "很",
+        "我们",
+        "高兴"
+      ],
+      "answer": [
+        "我们",
+        "很",
+        "高兴"
+      ],
+      "explanation": "我们很高兴 — Chúng tôi rất vui."
+    },
+    {
+      "id": "L22-wb11",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 非常",
+      "options": [
+        "fēicháng",
+        "fēichǎng"
+      ],
+      "answer": "fēicháng"
+    },
+    {
+      "id": "L22-wb12",
+      "source": "workbook",
+      "type": "match",
+      "prompt": "Nối từ với nghĩa",
+      "pairs": [
+        {
+          "left": "非常",
+          "right": "rất, vô cùng"
+        },
+        {
+          "left": "喜欢",
+          "right": "thích"
+        },
+        {
+          "left": "忙",
+          "right": "bận"
+        }
+      ]
+    },
+    {
+      "id": "L22-wb13",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Thầy cô trường chúng tôi rất bận.”",
+      "options": [
+        "非常",
+        "老师",
+        "的",
+        "忙",
+        "学校",
+        "我们"
+      ],
+      "answer": [
+        "我们",
+        "学校",
+        "的",
+        "老师",
+        "非常",
+        "忙"
+      ],
+      "explanation": "我们学校的老师非常忙 — Thầy cô trường chúng tôi rất bận."
+    },
+    {
+      "id": "L22-wb14",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi thích chó.”",
+      "options": [
+        "狗",
+        "我",
+        "喜欢"
+      ],
+      "answer": [
+        "我",
+        "喜欢",
+        "狗"
+      ],
+      "explanation": "我喜欢狗 — Tôi thích chó."
+    },
+    {
+      "id": "L22-wb15",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 这儿的水果非___好吃。",
+      "options": [
+        "常",
+        "长",
+        "场"
+      ],
+      "answer": "常"
+    },
+    {
+      "id": "L22-wb16",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 她很___欢这张照片。",
+      "options": [
+        "喜",
+        "西",
+        "洗"
+      ],
+      "answer": "喜"
+    },
+    {
+      "id": "L22-wb17",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 他们非常高___。",
+      "options": [
+        "兴",
+        "星",
+        "姓"
+      ],
+      "answer": "兴"
+    },
+    {
+      "id": "L22-wb18",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (diànhuà)",
+      "options": [
+        "电话",
+        "电脑",
+        "电视"
+      ],
+      "answer": "电话"
+    },
+    {
+      "id": "L22-wb19",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我喜欢喝茶，小华___喜欢。",
+      "options": [
+        "也",
+        "都",
+        "还"
+      ],
+      "answer": "也"
+    },
+    {
+      "id": "L22-wb20",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Em trai thích táo, cũng thích quýt.”",
+      "options": [
+        "喜欢",
+        "也",
+        "苹果",
+        "弟弟",
+        "橘子",
+        "喜欢"
+      ],
+      "answer": [
+        "弟弟",
+        "喜欢",
+        "苹果",
+        "也",
+        "喜欢",
+        "橘子"
+      ],
+      "explanation": "弟弟喜欢苹果也喜欢橘子 — Em trai thích táo, cũng thích quýt."
+    },
+    {
+      "id": "L22-wb21",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi thích xem phim, Tiểu Hoa cũng thích.”",
+      "options": [
+        "小华",
+        "也",
+        "电影",
+        "我",
+        "喜欢",
+        "看",
+        "喜欢"
+      ],
+      "answer": [
+        "我",
+        "喜欢",
+        "看",
+        "电影",
+        "小华",
+        "也",
+        "喜欢"
+      ],
+      "explanation": "我喜欢看电影小华也喜欢 — Tôi thích xem phim, Tiểu Hoa cũng thích."
+    },
+    {
+      "id": "L22-wb22",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (diànshì)",
+      "options": [
+        "电视",
+        "电话",
+        "电脑"
+      ],
+      "answer": "电视"
+    },
+    {
+      "id": "L22-wb23",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我和小红___是二班的学生。",
+      "options": [
+        "都",
+        "常",
+        "非常"
+      ],
+      "answer": "都"
+    },
+    {
+      "id": "L22-wb24",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "— 饺子好吃吗？ — ___",
+      "options": [
+        "非常好吃。",
+        "我不吃。",
+        "你呢？"
+      ],
+      "answer": "非常好吃。"
+    },
+    {
+      "id": "L22-wb25",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 喜欢",
+      "options": [
+        "xǐhuan",
+        "xīhuan"
+      ],
+      "answer": "xǐhuan"
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L22-g1",
-   "title": "Câu kiêm ngữ",
-   "note": "Động từ 1 (请, 让, 叫, 派) + tân ngữ (cũng là chủ ngữ của động từ 2) + động từ 2.",
-   "examples": [
+  ],
+  "texts": [
     {
-     "zh": "我打算请老师教我京剧。",
-     "vi": "Tôi định mời thầy dạy tôi kinh kịch."
+      "title": "我打算请老师教我京剧",
+      "lines": [
+        {
+          "speaker": "老师",
+          "zh": "今天想请大家谈谈自己的爱好。谁先说？",
+          "vi": "(Trong giờ học, thầy Vương bảo các bạn nói về sở thích) Hôm nay thầy muốn mời mọi người nói về sở thích của mình. Ai nói trước?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "老师，让我先说吧。",
+          "vi": "Thưa thầy, để em nói trước ạ."
+        },
+        {
+          "speaker": "老师",
+          "zh": "好，你说吧。你有什么爱好？",
+          "vi": "Được, em nói đi. Em có sở thích gì?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "我的爱好是看京剧。",
+          "vi": "Sở thích của em là xem kinh kịch."
+        },
+        {
+          "speaker": "老师",
+          "zh": "你喜欢看京剧？",
+          "vi": "Em thích xem kinh kịch à?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "是啊，非常喜欢。我还想学唱京剧，打算请一个老师教我。",
+          "vi": "Vâng, rất thích. Em còn muốn học hát kinh kịch, định mời một thầy dạy em."
+        },
+        {
+          "speaker": "老师",
+          "zh": "麦克，你喜欢做什么？",
+          "vi": "Mike, em thích làm gì?"
+        },
+        {
+          "speaker": "麦克",
+          "zh": "我喜欢玩电脑。",
+          "vi": "Em thích chơi máy tính."
+        },
+        {
+          "speaker": "老师",
+          "zh": "罗兰呢？",
+          "vi": "Còn Rollan?"
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "我喜欢听音乐，下课以后，听听音乐或者跟朋友聊聊天儿，感到心情很愉快。",
+          "vi": "Em thích nghe nhạc. Tan học nghe nhạc hoặc nói chuyện với bạn bè, em thấy tâm trạng rất vui vẻ."
+        },
+        {
+          "speaker": "老师",
+          "zh": "田中业余时间常常做什么？",
+          "vi": "Tanaka lúc rảnh thường làm gì?"
+        },
+        {
+          "speaker": "田中",
+          "zh": "我来中国以前就对书法特别感兴趣。今年公司派我来中国，我非常高兴。现在我正跟一个老师学书法，还学画中国画儿。",
+          "vi": "Trước khi sang Trung Quốc em đã đặc biệt hứng thú với thư pháp. Năm nay công ty cử em sang Trung Quốc, em rất vui. Bây giờ em đang theo một thầy học thư pháp, còn học vẽ tranh Trung Quốc nữa."
+        }
+      ]
+    }
+  ],
+  "grammar_points": [
+    {
+      "id": "L22-g1",
+      "title": "Câu kiêm ngữ",
+      "note": "Động từ 1 (请, 让, 叫, 派) + tân ngữ (cũng là chủ ngữ của động từ 2) + động từ 2.",
+      "examples": [
+        {
+          "zh": "我打算请老师教我京剧。",
+          "vi": "Tôi định mời thầy dạy tôi kinh kịch."
+        },
+        {
+          "zh": "老师，让我先说吧。",
+          "vi": "Thầy để em nói trước ạ."
+        },
+        {
+          "zh": "公司派我来中国。",
+          "vi": "Công ty cử tôi sang Trung Quốc."
+        }
+      ]
     },
     {
-     "zh": "老师，让我先说吧。",
-     "vi": "Thầy để em nói trước ạ."
+      "id": "L22-g2",
+      "title": "以前 và 以后",
+      "note": "… 以前 = trước khi …; … 以后 = sau khi …",
+      "examples": [
+        {
+          "zh": "我来中国以前就对书法特别感兴趣。",
+          "vi": "Trước khi sang Trung Quốc tôi đã rất hứng thú với thư pháp."
+        }
+      ]
     },
     {
-     "zh": "公司派我来中国。",
-     "vi": "Công ty cử tôi sang Trung Quốc."
+      "id": "L22-g3",
+      "title": "对 … 感兴趣",
+      "note": "对 + sự vật + 感兴趣 = có hứng thú với …",
+      "examples": [
+        {
+          "zh": "我对书法很感兴趣。",
+          "vi": "Tôi rất hứng thú với thư pháp."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L22-g2",
-   "title": "以前 và 以后",
-   "note": "… 以前 = trước khi …; … 以后 = sau khi …",
-   "examples": [
-    {
-     "zh": "我来中国以前就对书法特别感兴趣。",
-     "vi": "Trước khi sang Trung Quốc tôi đã rất hứng thú với thư pháp."
-    }
-   ]
-  },
-  {
-   "id": "L22-g3",
-   "title": "对 … 感兴趣",
-   "note": "对 + sự vật + 感兴趣 = có hứng thú với …",
-   "examples": [
-    {
-     "zh": "我对书法很感兴趣。",
-     "vi": "Tôi rất hứng thú với thư pháp."
-    }
-   ]
-  }
- ]
+  ]
 }

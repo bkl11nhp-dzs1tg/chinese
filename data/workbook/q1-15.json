@@ -1,0 +1,112 @@
+[
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 我有一个妹妹，你___？",
+  "options": [
+   "呢",
+   "吗",
+   "的"
+  ],
+  "answer": "呢"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 这是___书？",
+  "options": [
+   "谁的",
+   "哪儿",
+   "吗"
+  ],
+  "answer": "谁的"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 你有___支笔？",
+  "options": [
+   "几",
+   "什么",
+   "哪儿"
+  ],
+  "answer": "几"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 妈妈___是老师。",
+  "options": [
+   "不",
+   "没",
+   "有"
+  ],
+  "answer": "不"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 我___有电脑。",
+  "options": [
+   "没",
+   "不",
+   "有"
+  ],
+  "answer": "没"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 书___椅子上边。",
+  "options": [
+   "在",
+   "是",
+   "有"
+  ],
+  "answer": "在"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn lượng từ đúng: 房间里有两___床。",
+  "options": [
+   "张",
+   "个",
+   "本"
+  ],
+  "answer": "张"
+ },
+ {
+  "type": "choose",
+  "prompt": "— 你姓什么？ — ___",
+  "options": [
+   "我姓张。",
+   "我叫玛丽。",
+   "我是学生。"
+  ],
+  "answer": "我姓张。"
+ },
+ {
+  "type": "choose",
+  "prompt": "— 你叫什么名字？ — ___",
+  "options": [
+   "我叫玛丽。",
+   "我姓王。",
+   "我是学生。"
+  ],
+  "answer": "我叫玛丽。"
+ },
+ {
+  "type": "choose",
+  "prompt": "— 你去哪儿？ — ___",
+  "options": [
+   "我去操场。",
+   "我姓张。",
+   "我有三支笔。"
+  ],
+  "answer": "我去操场。"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: ___ (lánqiú)",
+  "options": [
+   "篮球",
+   "足球",
+   "排球"
+  ],
+  "answer": "篮球"
+ }
+]

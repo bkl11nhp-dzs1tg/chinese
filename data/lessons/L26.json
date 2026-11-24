@@ -1,293 +1,396 @@
 {
- "id": "L26",
- "book": "Hán ngữ 2",
- "unit": 26,
- "order": 26,
- "title": "田芳去哪儿了",
- "title_vi": "Điền Phương đi đâu rồi",
- "vocab_ids": [
-  "L26-阿姨",
-  "L26-哎",
-  "L26-比",
-  "L26-比赛",
-  "L26-出",
-  "L26-出国",
-  "L26-打（电话）",
-  "L26-队",
-  "L26-对了",
-  "L26-关",
-  "L26-关机",
-  "L26-接",
-  "L26-开",
-  "L26-开机",
-  "L26-考",
-  "L26-陪",
-  "L26-上",
-  "L26-输",
-  "L26-踢",
-  "L26-托福",
-  "L26-忘",
-  "L26-喂",
-  "L26-响",
-  "L26-已经",
-  "L26-赢",
-  "L26-又"
- ],
- "exercises": [
-  {
-   "id": "L26-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Điền Phương đi đâu rồi?”",
-   "options": [
-    "田芳",
-    "去",
-    "哪儿",
-    "了"
-   ],
-   "answer": [
-    "田芳",
-    "去",
-    "哪儿",
-    "了"
-   ],
-   "explanation": "田芳去哪儿了 — Điền Phương đi đâu rồi?"
-  },
-  {
-   "id": "L26-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Cô ấy đi cùng bạn đến bệnh viện rồi.”",
-   "options": [
-    "她",
-    "陪",
-    "朋友",
-    "去",
-    "医院",
-    "了"
-   ],
-   "answer": [
-    "她",
-    "陪",
-    "朋友",
-    "去",
-    "医院",
-    "了"
-   ],
-   "explanation": "她陪朋友去医院了 — Cô ấy đi cùng bạn đến bệnh viện rồi."
-  },
-  {
-   "id": "L26-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 我给你打电话，你的手机___机了。",
-   "answer": "关",
-   "explanation": "Tôi gọi cho bạn, điện thoại bạn tắt máy rồi."
-  }
- ],
- "texts": [
-  {
-   "title": "田芳去哪儿了",
-   "lines": [
+  "id": "L26",
+  "book": "Hán ngữ 2",
+  "unit": 26,
+  "order": 26,
+  "title": "田芳去哪儿了",
+  "title_vi": "Điền Phương đi đâu rồi",
+  "vocab_ids": [
+    "L26-阿姨",
+    "L26-哎",
+    "L26-比",
+    "L26-比赛",
+    "L26-出",
+    "L26-出国",
+    "L26-打（电话）",
+    "L26-队",
+    "L26-对了",
+    "L26-关",
+    "L26-关机",
+    "L26-接",
+    "L26-开",
+    "L26-开机",
+    "L26-考",
+    "L26-陪",
+    "L26-上",
+    "L26-输",
+    "L26-踢",
+    "L26-托福",
+    "L26-忘",
+    "L26-喂",
+    "L26-响",
+    "L26-已经",
+    "L26-赢",
+    "L26-又"
+  ],
+  "exercises": [
     {
-     "speaker": "张东",
-     "zh": "喂！是田芳吗？",
-     "vi": "(Trương Đông gọi điện tìm Điền Phương) A lô! Có phải Điền Phương không?"
+      "id": "L26-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Điền Phương đi đâu rồi?”",
+      "options": [
+        "田芳",
+        "去",
+        "哪儿",
+        "了"
+      ],
+      "answer": [
+        "田芳",
+        "去",
+        "哪儿",
+        "了"
+      ],
+      "explanation": "田芳去哪儿了 — Điền Phương đi đâu rồi?"
     },
     {
-     "speaker": "田芳妈",
-     "zh": "田芳不在。是张东吧。",
-     "vi": "Điền Phương không có nhà. Là Trương Đông phải không?"
+      "id": "L26-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Cô ấy đi cùng bạn đến bệnh viện rồi.”",
+      "options": [
+        "她",
+        "陪",
+        "朋友",
+        "去",
+        "医院",
+        "了"
+      ],
+      "answer": [
+        "她",
+        "陪",
+        "朋友",
+        "去",
+        "医院",
+        "了"
+      ],
+      "explanation": "她陪朋友去医院了 — Cô ấy đi cùng bạn đến bệnh viện rồi."
     },
     {
-     "speaker": "张东",
-     "zh": "阿姨，您好！田芳去哪儿了？",
-     "vi": "Cháu chào cô! Điền Phương đi đâu rồi ạ?"
+      "id": "L26-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 我给你打电话，你的手机___机了。",
+      "answer": "关",
+      "explanation": "Tôi gọi cho bạn, điện thoại bạn tắt máy rồi."
     },
     {
-     "speaker": "田芳妈",
-     "zh": "她四点多就去同学家了。她的一个中学同学要出国，她去看看她。",
-     "vi": "Hơn bốn giờ nó đã đến nhà bạn rồi. Một người bạn học cấp hai sắp ra nước ngoài, nó đi thăm bạn ấy."
+      "id": "L26-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: ___上 (zǎo)",
+      "options": [
+        "早",
+        "找",
+        "在"
+      ],
+      "answer": "早"
     },
     {
-     "speaker": "张东",
-     "zh": "她什么时候能回来？",
-     "vi": "Khi nào bạn ấy về được ạ?"
+      "id": "L26-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: ___课了 (xià)",
+      "options": [
+        "下",
+        "上",
+        "大"
+      ],
+      "answer": "下"
     },
     {
-     "speaker": "田芳妈",
-     "zh": "她没说，你打她的手机吧。",
-     "vi": "Nó không nói, cháu gọi di động cho nó đi."
+      "id": "L26-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: ___ (bǐ)",
+      "options": [
+        "笔",
+        "比",
+        "北"
+      ],
+      "answer": "笔"
     },
     {
-     "speaker": "张东",
-     "zh": "我打了。可是她关机了。",
-     "vi": "Cháu gọi rồi, nhưng bạn ấy tắt máy."
+      "id": "L26-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 他是我的朋___。",
+      "options": [
+        "友",
+        "有",
+        "又"
+      ],
+      "answer": "友"
     },
     {
-     "speaker": "田芳妈",
-     "zh": "是吗，你过一会儿再打吧。",
-     "vi": "Thế à, lát nữa cháu gọi lại nhé."
+      "id": "L26-wb5",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 学校前___是马路。",
+      "options": [
+        "面",
+        "里",
+        "上"
+      ],
+      "answer": "面"
     },
     {
-     "speaker": "张东",
-     "zh": "阿姨，田芳回来了没有？",
-     "vi": "(Trương Đông lại gọi điện) Cô ơi, Điền Phương về chưa ạ?"
+      "id": "L26-wb6",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (mǎlù)",
+      "options": [
+        "马路",
+        "马上",
+        "路口"
+      ],
+      "answer": "马路"
     },
     {
-     "speaker": "田芳妈",
-     "zh": "还没有呢。",
-     "vi": "Vẫn chưa."
+      "id": "L26-wb7",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 早上他们___上学。",
+      "options": [
+        "一起",
+        "一下儿",
+        "一点儿"
+      ],
+      "answer": "一起"
+    },
+    {
+      "id": "L26-wb8",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi sáng họ cùng nhau đi học.”",
+      "options": [
+        "他们",
+        "早上",
+        "一起",
+        "上学"
+      ],
+      "answer": [
+        "早上",
+        "他们",
+        "一起",
+        "上学"
+      ],
+      "explanation": "早上他们一起上学 — Buổi sáng họ cùng nhau đi học."
     }
-   ]
-  },
-  {
-   "title": "他又来电话了",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "田芳",
-     "zh": "妈，我回来了。",
-     "vi": "Mẹ, con về rồi."
+      "title": "田芳去哪儿了",
+      "lines": [
+        {
+          "speaker": "张东",
+          "zh": "喂！是田芳吗？",
+          "vi": "(Trương Đông gọi điện tìm Điền Phương) A lô! Có phải Điền Phương không?"
+        },
+        {
+          "speaker": "田芳妈",
+          "zh": "田芳不在。是张东吧。",
+          "vi": "Điền Phương không có nhà. Là Trương Đông phải không?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "阿姨，您好！田芳去哪儿了？",
+          "vi": "Cháu chào cô! Điền Phương đi đâu rồi ạ?"
+        },
+        {
+          "speaker": "田芳妈",
+          "zh": "她四点多就去同学家了。她的一个中学同学要出国，她去看看她。",
+          "vi": "Hơn bốn giờ nó đã đến nhà bạn rồi. Một người bạn học cấp hai sắp ra nước ngoài, nó đi thăm bạn ấy."
+        },
+        {
+          "speaker": "张东",
+          "zh": "她什么时候能回来？",
+          "vi": "Khi nào bạn ấy về được ạ?"
+        },
+        {
+          "speaker": "田芳妈",
+          "zh": "她没说，你打她的手机吧。",
+          "vi": "Nó không nói, cháu gọi di động cho nó đi."
+        },
+        {
+          "speaker": "张东",
+          "zh": "我打了。可是她关机了。",
+          "vi": "Cháu gọi rồi, nhưng bạn ấy tắt máy."
+        },
+        {
+          "speaker": "田芳妈",
+          "zh": "是吗，你过一会儿再打吧。",
+          "vi": "Thế à, lát nữa cháu gọi lại nhé."
+        },
+        {
+          "speaker": "张东",
+          "zh": "阿姨，田芳回来了没有？",
+          "vi": "(Trương Đông lại gọi điện) Cô ơi, Điền Phương về chưa ạ?"
+        },
+        {
+          "speaker": "田芳妈",
+          "zh": "还没有呢。",
+          "vi": "Vẫn chưa."
+        }
+      ]
     },
     {
-     "speaker": "妈妈",
-     "zh": "张东给你打电话了没有？",
-     "vi": "Trương Đông có gọi điện cho con không?"
-    },
-    {
-     "speaker": "田芳",
-     "zh": "没有啊。",
-     "vi": "Không có ạ."
-    },
-    {
-     "speaker": "妈妈",
-     "zh": "他来电话找你，说打你的手机，你关机了。",
-     "vi": "Cậu ấy gọi điện tìm con, nói gọi di động thì con tắt máy."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "啊！对了，我忘开机了。",
-     "vi": "A! Đúng rồi, con quên mở máy."
-    },
-    {
-     "speaker": "妈妈",
-     "zh": "快！电话又响了，你去接吧。",
-     "vi": "Nhanh lên! Điện thoại lại reo rồi, con ra nghe đi."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "下午你给我打电话了吧？",
-     "vi": "(Điền Phương nghe điện thoại) Chiều nay bạn gọi cho tôi phải không?"
-    },
-    {
-     "speaker": "张东",
-     "zh": "打了，你怎么关机了？",
-     "vi": "Gọi rồi, sao bạn tắt máy?"
-    },
-    {
-     "speaker": "田芳",
-     "zh": "对不起。我忘开机了。下午你做什么了？",
-     "vi": "Xin lỗi, tôi quên mở máy. Chiều nay bạn làm gì?"
-    },
-    {
-     "speaker": "张东",
-     "zh": "我去踢足球了。今天我们跟留学生代表队比赛了。",
-     "vi": "Tôi đi đá bóng. Hôm nay chúng tôi thi đấu với đội tuyển lưu học sinh."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "你们队又输了吧？",
-     "vi": "Đội các bạn lại thua rồi phải không?"
-    },
-    {
-     "speaker": "张东",
-     "zh": "没有。这次我们赢了。",
-     "vi": "Không. Lần này chúng tôi thắng."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "几比几？",
-     "vi": "Mấy – mấy?"
-    },
-    {
-     "speaker": "张东",
-     "zh": "二比一。",
-     "vi": "Hai – một."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "祝贺你们！哎，你有什么事吗？",
-     "vi": "Chúc mừng các bạn! À, bạn có việc gì không?"
-    },
-    {
-     "speaker": "张东",
-     "zh": "我想问问你，你不是要上托福班吗？报名了没有？",
-     "vi": "Tôi muốn hỏi bạn, chẳng phải bạn định học lớp TOEFL sao? Đăng ký chưa?"
-    },
-    {
-     "speaker": "田芳",
-     "zh": "已经报了。你是不是也想考托福？",
-     "vi": "Đăng ký rồi. Có phải bạn cũng muốn thi TOEFL không?"
-    },
-    {
-     "speaker": "张东",
-     "zh": "是。我想明天去报名，你陪我一起去，好吗？",
-     "vi": "Phải. Tôi định mai đi đăng ký, bạn đi cùng tôi nhé?"
-    },
-    {
-     "speaker": "田芳",
-     "zh": "好的。",
-     "vi": "Được."
+      "title": "他又来电话了",
+      "lines": [
+        {
+          "speaker": "田芳",
+          "zh": "妈，我回来了。",
+          "vi": "Mẹ, con về rồi."
+        },
+        {
+          "speaker": "妈妈",
+          "zh": "张东给你打电话了没有？",
+          "vi": "Trương Đông có gọi điện cho con không?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "没有啊。",
+          "vi": "Không có ạ."
+        },
+        {
+          "speaker": "妈妈",
+          "zh": "他来电话找你，说打你的手机，你关机了。",
+          "vi": "Cậu ấy gọi điện tìm con, nói gọi di động thì con tắt máy."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "啊！对了，我忘开机了。",
+          "vi": "A! Đúng rồi, con quên mở máy."
+        },
+        {
+          "speaker": "妈妈",
+          "zh": "快！电话又响了，你去接吧。",
+          "vi": "Nhanh lên! Điện thoại lại reo rồi, con ra nghe đi."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "下午你给我打电话了吧？",
+          "vi": "(Điền Phương nghe điện thoại) Chiều nay bạn gọi cho tôi phải không?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "打了，你怎么关机了？",
+          "vi": "Gọi rồi, sao bạn tắt máy?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "对不起。我忘开机了。下午你做什么了？",
+          "vi": "Xin lỗi, tôi quên mở máy. Chiều nay bạn làm gì?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "我去踢足球了。今天我们跟留学生代表队比赛了。",
+          "vi": "Tôi đi đá bóng. Hôm nay chúng tôi thi đấu với đội tuyển lưu học sinh."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "你们队又输了吧？",
+          "vi": "Đội các bạn lại thua rồi phải không?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "没有。这次我们赢了。",
+          "vi": "Không. Lần này chúng tôi thắng."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "几比几？",
+          "vi": "Mấy – mấy?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "二比一。",
+          "vi": "Hai – một."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "祝贺你们！哎，你有什么事吗？",
+          "vi": "Chúc mừng các bạn! À, bạn có việc gì không?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "我想问问你，你不是要上托福班吗？报名了没有？",
+          "vi": "Tôi muốn hỏi bạn, chẳng phải bạn định học lớp TOEFL sao? Đăng ký chưa?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "已经报了。你是不是也想考托福？",
+          "vi": "Đăng ký rồi. Có phải bạn cũng muốn thi TOEFL không?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "是。我想明天去报名，你陪我一起去，好吗？",
+          "vi": "Phải. Tôi định mai đi đăng ký, bạn đi cùng tôi nhé?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "好的。",
+          "vi": "Được."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L26-g1",
-   "title": "Trợ từ ngữ khí 了 (1)",
-   "note": "了 cuối câu xác nhận một sự việc đã xảy ra. Câu hỏi: … 了没有？/ … 了吗？ Phủ định: 没(有) + động từ, bỏ 了.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "田芳去哪儿了？",
-     "vi": "Điền Phương đi đâu rồi?"
+      "id": "L26-g1",
+      "title": "Trợ từ ngữ khí 了 (1)",
+      "note": "了 cuối câu xác nhận một sự việc đã xảy ra. Câu hỏi: … 了没有？/ … 了吗？ Phủ định: 没(有) + động từ, bỏ 了.",
+      "examples": [
+        {
+          "zh": "田芳去哪儿了？",
+          "vi": "Điền Phương đi đâu rồi?"
+        },
+        {
+          "zh": "田芳回来了没有？",
+          "vi": "Điền Phương về chưa?"
+        },
+        {
+          "zh": "还没有呢。",
+          "vi": "Vẫn chưa."
+        }
+      ]
     },
     {
-     "zh": "田芳回来了没有？",
-     "vi": "Điền Phương về chưa?"
+      "id": "L26-g2",
+      "title": "再 và 又",
+      "note": "再: lặp lại trong tương lai (lần nữa, sẽ); 又: đã lặp lại (lại).",
+      "examples": [
+        {
+          "zh": "你过一会儿再打吧。",
+          "vi": "Lát nữa bạn gọi lại nhé."
+        },
+        {
+          "zh": "电话又响了。",
+          "vi": "Điện thoại lại reo rồi."
+        }
+      ]
     },
     {
-     "zh": "还没有呢。",
-     "vi": "Vẫn chưa."
+      "id": "L26-g3",
+      "title": "…了吧？ / 不是…吗？ / 是不是",
+      "note": "…了吧？ đoán và hỏi xác nhận; 不是…吗？ = chẳng phải… sao; 是不是 đặt trong câu để hỏi xác nhận.",
+      "examples": [
+        {
+          "zh": "你不是要上托福班吗？",
+          "vi": "Chẳng phải bạn định học lớp TOEFL sao?"
+        },
+        {
+          "zh": "你是不是也想考托福？",
+          "vi": "Có phải bạn cũng muốn thi TOEFL không?"
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L26-g2",
-   "title": "再 và 又",
-   "note": "再: lặp lại trong tương lai (lần nữa, sẽ); 又: đã lặp lại (lại).",
-   "examples": [
-    {
-     "zh": "你过一会儿再打吧。",
-     "vi": "Lát nữa bạn gọi lại nhé."
-    },
-    {
-     "zh": "电话又响了。",
-     "vi": "Điện thoại lại reo rồi."
-    }
-   ]
-  },
-  {
-   "id": "L26-g3",
-   "title": "…了吧？ / 不是…吗？ / 是不是",
-   "note": "…了吧？ đoán và hỏi xác nhận; 不是…吗？ = chẳng phải… sao; 是不是 đặt trong câu để hỏi xác nhận.",
-   "examples": [
-    {
-     "zh": "你不是要上托福班吗？",
-     "vi": "Chẳng phải bạn định học lớp TOEFL sao?"
-    },
-    {
-     "zh": "你是不是也想考托福？",
-     "vi": "Có phải bạn cũng muốn thi TOEFL không?"
-    }
-   ]
-  }
- ]
+  ]
 }

@@ -1,0 +1,16 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 我们___学校。","options":["去","是","叫"],"answer":"去"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___了，我们去打球吧！","options":["下课","上课","回家"],"answer":"下课"},
+ {"type":"choose","prompt":"Chọn từ đúng: 上课了，同学们回___吧！","options":["教室","医院","厕所"],"answer":"教室"},
+ {"type":"choose","prompt":"Chọn từ đúng: 妈妈是大夫，早上她去___。","options":["医院","回家","学校"],"answer":"医院"},
+ {"type":"choose","prompt":"Chọn từ đúng: 老师___，同学们听。","options":["讲","吃","跳"],"answer":"讲"},
+ {"type":"choose","prompt":"Chọn từ đúng: 你___，我回答。","options":["问","吃","听"],"answer":"问"},
+ {"type":"choose","prompt":"Chọn từ đúng: 晚上，我___米饭。","options":["吃","打","跳"],"answer":"吃"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 早上我___学校 (qù)","options":["去","取","趣"],"answer":"去"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 我们回___ (jiā)","options":["家","加","假"],"answer":"家"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (zhōngwǔ)","options":["中午","早上","晚上"],"answer":"中午"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 回答","options":["huídá","huìdá"],"answer":"huídá"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 吃饭","options":["chī fàn","chí fàn"],"answer":"chī fàn"},
+ {"type":"reorder","vi":"Buổi sáng tôi đến trường.","words":["早上","我","去","学校"]},
+ {"type":"reorder","vi":"Thầy giáo giảng bài, chúng tôi nghe giảng.","words":["老师","讲课","我们","听课"]}
+]

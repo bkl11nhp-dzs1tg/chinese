@@ -1,229 +1,272 @@
 {
- "id": "L20",
- "book": "Hán ngữ 2",
- "unit": 20,
- "order": 20,
- "title": "祝你生日快乐",
- "title_vi": "Chúc bạn sinh nhật vui vẻ",
- "vocab_ids": [
-  "L20-毕业",
-  "L20-参加",
-  "L20-打算",
-  "L20-点（钟）",
-  "L20-多",
-  "L20-多大",
-  "L20-狗",
-  "L20-过",
-  "L20-号",
-  "L20-后年",
-  "L20-今年",
-  "L20-就",
-  "L20-举行",
-  "L20-快乐",
-  "L20-明年",
-  "L20-年",
-  "L20-去年",
-  "L20-生日",
-  "L20-时间",
-  "L20-属",
-  "L20-岁",
-  "L20-晚会",
-  "L20-一定",
-  "L20-月",
-  "L20-正好"
- ],
- "exercises": [
-  {
-   "id": "L20-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Chúc bạn sinh nhật vui vẻ!”",
-   "options": [
-    "祝",
-    "你",
-    "生日",
-    "快乐"
-   ],
-   "answer": [
-    "祝",
-    "你",
-    "生日",
-    "快乐"
-   ],
-   "explanation": "祝你生日快乐 — Chúc bạn sinh nhật vui vẻ!"
-  },
-  {
-   "id": "L20-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Năm nay bạn bao nhiêu tuổi?”",
-   "options": [
-    "你",
-    "今年",
-    "多大"
-   ],
-   "answer": [
-    "你",
-    "今年",
-    "多大"
-   ],
-   "explanation": "你今年多大 — Năm nay bạn bao nhiêu tuổi?"
-  },
-  {
-   "id": "L20-r3",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Sinh nhật tôi là ngày 9 tháng 5.”",
-   "options": [
-    "我的",
-    "生日",
-    "是",
-    "五月",
-    "九号"
-   ],
-   "answer": [
-    "我的",
-    "生日",
-    "是",
-    "五月",
-    "九号"
-   ],
-   "explanation": "我的生日是五月九号 — Sinh nhật tôi là ngày 9 tháng 5."
-  },
-  {
-   "id": "L20-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 你属什么？— 我属___。",
-   "answer": "狗",
-   "explanation": "Bạn tuổi gì? — Tôi tuổi Tuất (chó)."
-  }
- ],
- "texts": [
-  {
-   "title": "你哪一年大学毕业",
-   "lines": [
+  "id": "L20",
+  "book": "Hán ngữ 2",
+  "unit": 20,
+  "order": 20,
+  "title": "祝你生日快乐",
+  "title_vi": "Chúc bạn sinh nhật vui vẻ",
+  "vocab_ids": [
+    "L20-毕业",
+    "L20-参加",
+    "L20-打算",
+    "L20-点（钟）",
+    "L20-多",
+    "L20-多大",
+    "L20-狗",
+    "L20-过",
+    "L20-号",
+    "L20-后年",
+    "L20-今年",
+    "L20-就",
+    "L20-举行",
+    "L20-快乐",
+    "L20-明年",
+    "L20-年",
+    "L20-去年",
+    "L20-生日",
+    "L20-时间",
+    "L20-属",
+    "L20-岁",
+    "L20-晚会",
+    "L20-一定",
+    "L20-月",
+    "L20-正好"
+  ],
+  "exercises": [
     {
-     "speaker": "A",
-     "zh": "你哪一年大学毕业？",
-     "vi": "Năm nào bạn tốt nghiệp đại học?"
+      "id": "L20-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúc bạn sinh nhật vui vẻ!”",
+      "options": [
+        "祝",
+        "你",
+        "生日",
+        "快乐"
+      ],
+      "answer": [
+        "祝",
+        "你",
+        "生日",
+        "快乐"
+      ],
+      "explanation": "祝你生日快乐 — Chúc bạn sinh nhật vui vẻ!"
     },
     {
-     "speaker": "B",
-     "zh": "明年。你呢？",
-     "vi": "Sang năm. Còn bạn?"
+      "id": "L20-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Năm nay bạn bao nhiêu tuổi?”",
+      "options": [
+        "你",
+        "今年",
+        "多大"
+      ],
+      "answer": [
+        "你",
+        "今年",
+        "多大"
+      ],
+      "explanation": "你今年多大 — Năm nay bạn bao nhiêu tuổi?"
     },
     {
-     "speaker": "A",
-     "zh": "我后年。你今年多大？",
-     "vi": "Tôi năm sau nữa. Năm nay bạn bao nhiêu tuổi?"
+      "id": "L20-r3",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Sinh nhật tôi là ngày 9 tháng 5.”",
+      "options": [
+        "我的",
+        "生日",
+        "是",
+        "五月",
+        "九号"
+      ],
+      "answer": [
+        "我的",
+        "生日",
+        "是",
+        "五月",
+        "九号"
+      ],
+      "explanation": "我的生日是五月九号 — Sinh nhật tôi là ngày 9 tháng 5."
     },
     {
-     "speaker": "B",
-     "zh": "我二十一岁。",
-     "vi": "Tôi 21 tuổi."
+      "id": "L20-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 你属什么？— 我属___。",
+      "answer": "狗",
+      "explanation": "Bạn tuổi gì? — Tôi tuổi Tuất (chó)."
     },
     {
-     "speaker": "A",
-     "zh": "属什么的？",
-     "vi": "Bạn tuổi con gì?"
+      "id": "L20-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我有一___小狗。",
+      "options": [
+        "个",
+        "本",
+        "张"
+      ],
+      "answer": "个"
     },
     {
-     "speaker": "B",
-     "zh": "属狗的。",
-     "vi": "Tuổi Tuất (con chó)."
+      "id": "L20-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 你几___了？",
+      "options": [
+        "岁",
+        "个",
+        "年"
+      ],
+      "answer": "岁"
+    },
+    {
+      "id": "L20-wb3",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn mấy tuổi rồi?”",
+      "options": [
+        "了",
+        "你",
+        "几",
+        "岁"
+      ],
+      "answer": [
+        "你",
+        "几",
+        "岁",
+        "了"
+      ],
+      "explanation": "你几岁了 — Bạn mấy tuổi rồi?"
     }
-   ]
-  },
-  {
-   "title": "祝你生日快乐",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "A",
-     "zh": "你的生日是几月几号？",
-     "vi": "Sinh nhật bạn là ngày mấy tháng mấy?"
+      "title": "你哪一年大学毕业",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "你哪一年大学毕业？",
+          "vi": "Năm nào bạn tốt nghiệp đại học?"
+        },
+        {
+          "speaker": "B",
+          "zh": "明年。你呢？",
+          "vi": "Sang năm. Còn bạn?"
+        },
+        {
+          "speaker": "A",
+          "zh": "我后年。你今年多大？",
+          "vi": "Tôi năm sau nữa. Năm nay bạn bao nhiêu tuổi?"
+        },
+        {
+          "speaker": "B",
+          "zh": "我二十一岁。",
+          "vi": "Tôi 21 tuổi."
+        },
+        {
+          "speaker": "A",
+          "zh": "属什么的？",
+          "vi": "Bạn tuổi con gì?"
+        },
+        {
+          "speaker": "B",
+          "zh": "属狗的。",
+          "vi": "Tuổi Tuất (con chó)."
+        }
+      ]
     },
     {
-     "speaker": "B",
-     "zh": "我的生日是十月十八号，正好是星期六。",
-     "vi": "Sinh nhật tôi là ngày 18 tháng 10, đúng vào thứ bảy."
-    },
-    {
-     "speaker": "A",
-     "zh": "是吗？你打算怎么过？",
-     "vi": "Thế à? Bạn định tổ chức thế nào?"
-    },
-    {
-     "speaker": "B",
-     "zh": "我准备举行一个生日晚会。你也来参加，好吗？",
-     "vi": "Tôi chuẩn bị tổ chức một bữa tiệc sinh nhật. Bạn cũng đến dự nhé?"
-    },
-    {
-     "speaker": "A",
-     "zh": "什么时间举行？",
-     "vi": "Tổ chức lúc nào?"
-    },
-    {
-     "speaker": "B",
-     "zh": "星期六晚上七点。",
-     "vi": "Bảy giờ tối thứ bảy."
-    },
-    {
-     "speaker": "A",
-     "zh": "在哪儿？",
-     "vi": "Ở đâu?"
-    },
-    {
-     "speaker": "B",
-     "zh": "就在我的房间。",
-     "vi": "Ngay tại phòng tôi."
-    },
-    {
-     "speaker": "A",
-     "zh": "好。我一定去。祝你生日快乐！",
-     "vi": "Được. Tôi nhất định sẽ đến. Chúc bạn sinh nhật vui vẻ!"
-    },
-    {
-     "speaker": "B",
-     "zh": "谢谢！",
-     "vi": "Cảm ơn!"
+      "title": "祝你生日快乐",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "你的生日是几月几号？",
+          "vi": "Sinh nhật bạn là ngày mấy tháng mấy?"
+        },
+        {
+          "speaker": "B",
+          "zh": "我的生日是十月十八号，正好是星期六。",
+          "vi": "Sinh nhật tôi là ngày 18 tháng 10, đúng vào thứ bảy."
+        },
+        {
+          "speaker": "A",
+          "zh": "是吗？你打算怎么过？",
+          "vi": "Thế à? Bạn định tổ chức thế nào?"
+        },
+        {
+          "speaker": "B",
+          "zh": "我准备举行一个生日晚会。你也来参加，好吗？",
+          "vi": "Tôi chuẩn bị tổ chức một bữa tiệc sinh nhật. Bạn cũng đến dự nhé?"
+        },
+        {
+          "speaker": "A",
+          "zh": "什么时间举行？",
+          "vi": "Tổ chức lúc nào?"
+        },
+        {
+          "speaker": "B",
+          "zh": "星期六晚上七点。",
+          "vi": "Bảy giờ tối thứ bảy."
+        },
+        {
+          "speaker": "A",
+          "zh": "在哪儿？",
+          "vi": "Ở đâu?"
+        },
+        {
+          "speaker": "B",
+          "zh": "就在我的房间。",
+          "vi": "Ngay tại phòng tôi."
+        },
+        {
+          "speaker": "A",
+          "zh": "好。我一定去。祝你生日快乐！",
+          "vi": "Được. Tôi nhất định sẽ đến. Chúc bạn sinh nhật vui vẻ!"
+        },
+        {
+          "speaker": "B",
+          "zh": "谢谢！",
+          "vi": "Cảm ơn!"
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L20-g1",
-   "title": "Câu vị ngữ danh từ",
-   "note": "Danh từ/cụm số lượng làm vị ngữ khi nói tuổi, ngày tháng, giá tiền, quê quán; không cần 是.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "我二十一岁。",
-     "vi": "Tôi 21 tuổi."
+      "id": "L20-g1",
+      "title": "Câu vị ngữ danh từ",
+      "note": "Danh từ/cụm số lượng làm vị ngữ khi nói tuổi, ngày tháng, giá tiền, quê quán; không cần 是.",
+      "examples": [
+        {
+          "zh": "我二十一岁。",
+          "vi": "Tôi 21 tuổi."
+        },
+        {
+          "zh": "今天十月十八号。",
+          "vi": "Hôm nay ngày 18 tháng 10."
+        }
+      ]
     },
     {
-     "zh": "今天十月十八号。",
-     "vi": "Hôm nay ngày 18 tháng 10."
-    }
-   ]
-  },
-  {
-   "id": "L20-g2",
-   "title": "Năm, tháng, ngày",
-   "note": "Thứ tự: năm → tháng → ngày → thứ. Năm đọc từng chữ số. 号 (khẩu ngữ) = 日.",
-   "examples": [
+      "id": "L20-g2",
+      "title": "Năm, tháng, ngày",
+      "note": "Thứ tự: năm → tháng → ngày → thứ. Năm đọc từng chữ số. 号 (khẩu ngữ) = 日.",
+      "examples": [
+        {
+          "zh": "你的生日是几月几号？",
+          "vi": "Sinh nhật bạn ngày mấy tháng mấy?"
+        }
+      ]
+    },
     {
-     "zh": "你的生日是几月几号？",
-     "vi": "Sinh nhật bạn ngày mấy tháng mấy?"
+      "id": "L20-g3",
+      "title": "Câu hỏi bằng ngữ điệu",
+      "note": "Câu trần thuật đọc lên giọng cuối câu cũng thành câu hỏi. 是吗？ = thế à?",
+      "examples": [
+        {
+          "zh": "是吗？你打算怎么过？",
+          "vi": "Thế à? Bạn định tổ chức thế nào?"
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L20-g3",
-   "title": "Câu hỏi bằng ngữ điệu",
-   "note": "Câu trần thuật đọc lên giọng cuối câu cũng thành câu hỏi. 是吗？ = thế à?",
-   "examples": [
-    {
-     "zh": "是吗？你打算怎么过？",
-     "vi": "Thế à? Bạn định tổ chức thế nào?"
-    }
-   ]
-  }
- ]
+  ]
 }

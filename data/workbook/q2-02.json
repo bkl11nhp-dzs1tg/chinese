@@ -1,0 +1,10 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 天气","options":["tiānqì","tiānqi"],"answer":"tiānqì"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 高兴","options":["gāoxìng","gāoxīng"],"answer":"gāoxìng"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (gāoxìng)","options":["高兴","快乐","漂亮"],"answer":"高兴"},
+ {"type":"match","prompt":"Nối từ với nghĩa","pairs":[{"left":"今天","right":"hôm nay"},{"left":"天气","right":"thời tiết"},{"left":"高兴","right":"vui vẻ"}]},
+ {"type":"reorder","vi":"Hôm nay thời tiết rất đẹp.","words":["今天","的","天气","很","好"]},
+ {"type":"reorder","vi":"Chúng tôi rất vui.","words":["我们","很","高兴"]},
+ {"type":"reorder","vi":"Sân tập của trường rất rộng.","words":["学校","的","操场","很","大"]},
+ {"type":"reorder","vi":"Xe đạp của tôi rất mới.","words":["我的","自行车","很","新"]}
+]

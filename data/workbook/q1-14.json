@@ -1,0 +1,98 @@
+[
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 椅子",
+  "options": [
+   "yǐzi",
+   "yízi"
+  ],
+  "answer": "yǐzi"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 上边",
+  "options": [
+   "shàngbian",
+   "xiàbian"
+  ],
+  "answer": "shàngbian"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 右边",
+  "options": [
+   "yòubian",
+   "zuǒbian"
+  ],
+  "answer": "yòubian"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: ___ (yǐzi)",
+  "options": [
+   "椅子",
+   "箱子",
+   "房子"
+  ],
+  "answer": "椅子"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 妈妈在爸爸___ (yòubian)。",
+  "options": [
+   "右边",
+   "下边",
+   "上边"
+  ],
+  "answer": "右边"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 篮球在椅子___ (xiàbian)。",
+  "options": [
+   "下边",
+   "上边",
+   "里边"
+  ],
+  "answer": "下边"
+ },
+ {
+  "type": "reorder",
+  "vi": "Sách ở trên ghế.",
+  "words": [
+   "书",
+   "在",
+   "椅子",
+   "上边"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Quả bóng rổ ở dưới ghế.",
+  "words": [
+   "篮球",
+   "在",
+   "椅子",
+   "下边"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Thư viện ở đâu?",
+  "words": [
+   "图书馆",
+   "在",
+   "哪儿"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Phòng học ở bên phải thư viện.",
+  "words": [
+   "教室",
+   "在",
+   "图书馆",
+   "右边"
+  ]
+ }
+]

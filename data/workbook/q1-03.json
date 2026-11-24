@@ -1,0 +1,13 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 学生","options":["xuésheng","xuěsheng"],"answer":"xuésheng"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 不是","options":["bú shì","bù shì"],"answer":"bú shì"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 不好","options":["bù hǎo","bú hǎo"],"answer":"bù hǎo"},
+ {"type":"choose","prompt":"Chọn từ đúng: 他是老师___？","options":["吗","好","妈"],"answer":"吗"},
+ {"type":"choose","prompt":"Chọn từ đúng: 弟弟___老师。","options":["不是","不","吗"],"answer":"不是"},
+ {"type":"choose","prompt":"Chọn chữ đúng: ___生 (xué)","options":["学","写","谢"],"answer":"学"},
+ {"type":"reorder","vi":"Bố là thầy giáo.","words":["爸爸","是","老师"]},
+ {"type":"reorder","vi":"Mẹ là bác sĩ.","words":["妈妈","是","大夫"]},
+ {"type":"reorder","vi":"Em gái không phải là học sinh.","words":["妹妹","不","是","学生"]},
+ {"type":"reorder","vi":"Tôi là học sinh.","words":["我","是","学生"]},
+ {"type":"reorder","vi":"Bạn là bác sĩ à?","words":["你","是","大夫","吗"]}
+]

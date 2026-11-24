@@ -1,0 +1,108 @@
+[
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 篮球",
+  "options": [
+   "lánqiú",
+   "lǎnqiú"
+  ],
+  "answer": "lánqiú"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 下课",
+  "options": [
+   "xià kè",
+   "xiā kè"
+  ],
+  "answer": "xià kè"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___课了 (xià)",
+  "options": [
+   "下",
+   "上",
+   "大"
+  ],
+  "answer": "下"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: 姐姐不___球 (dǎ)",
+  "options": [
+   "打",
+   "大",
+   "答"
+  ],
+  "answer": "打"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___和我打球？ (shuí)",
+  "options": [
+   "谁",
+   "水",
+   "睡"
+  ],
+  "answer": "谁"
+ },
+ {
+  "type": "match",
+  "prompt": "Nối từ với nghĩa",
+  "pairs": [
+   {
+    "left": "打篮球",
+    "right": "chơi bóng rổ"
+   },
+   {
+    "left": "听课",
+    "right": "nghe giảng"
+   },
+   {
+    "left": "吃饭",
+    "right": "ăn cơm"
+   }
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Anh trai chơi bóng.",
+  "words": [
+   "哥哥",
+   "打",
+   "球"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Chị gái chơi bóng rổ.",
+  "words": [
+   "姐姐",
+   "打",
+   "篮球"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Anh trai đi học cùng ai?",
+  "words": [
+   "哥哥",
+   "和",
+   "谁",
+   "去",
+   "学校"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Tan học rồi, các bạn chơi bóng rổ.",
+  "words": [
+   "下课",
+   "了",
+   "同学们",
+   "打",
+   "篮球"
+  ]
+ }
+]

@@ -1,0 +1,10 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 银行","options":["yínháng","yínxíng"],"answer":"yínháng"},
+ {"type":"choose","prompt":"Chọn từ đúng: 学校前___是马路。","options":["面","里","上"],"answer":"面"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (mǎlù)","options":["马路","马上","路口"],"answer":"马路"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (diànhuà)","options":["电话","电脑","电视"],"answer":"电话"},
+ {"type":"reorder","vi":"Đối diện trường học là ngân hàng.","words":["学校","对面","是","银行"]},
+ {"type":"reorder","vi":"Trước nhà Tiểu Hoa là đường cái.","words":["我","家","前面","是","马路"]},
+ {"type":"reorder","vi":"Bên trái tôi là bố.","words":["我","左边","是","爸爸"]},
+ {"type":"reorder","vi":"Đối diện công viên là chỗ nào?","words":["公园","对面","是","什么","地方"]}
+]

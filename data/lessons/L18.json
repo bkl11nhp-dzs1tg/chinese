@@ -1,211 +1,211 @@
 {
- "id": "L18",
- "book": "Hán ngữ 2",
- "unit": 18,
- "order": 18,
- "title": "我去邮局寄包裹",
- "title_vi": "Tôi đến bưu điện gửi bưu kiện",
- "vocab_ids": [
-  "L18-办",
-  "L18-帮",
-  "L18-包裹",
-  "L18-报",
-  "L18-不用",
-  "L18-参观",
-  "L18-代表",
-  "L18-当",
-  "L18-翻译",
-  "L18-飞",
-  "L18-飞机",
-  "L18-份",
-  "L18-花",
-  "L18-回来",
-  "L18-火车",
-  "L18-浇",
-  "L18-旅行",
-  "L18-没问题",
-  "L18-拿",
-  "L18-青年",
-  "L18-顺便",
-  "L18-替",
-  "L18-团",
-  "L18-问题",
-  "L18-用",
-  "L18-邮票",
-  "TR2-上海",
-  "TR2-珍妮"
- ],
- "exercises": [
-  {
-   "id": "L18-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi đến bưu điện gửi bưu kiện.”",
-   "options": [
-    "我",
-    "去",
-    "邮局",
-    "寄",
-    "包裹"
-   ],
-   "answer": [
-    "我",
-    "去",
-    "邮局",
-    "寄",
-    "包裹"
-   ],
-   "explanation": "我去邮局寄包裹 — Tôi đến bưu điện gửi bưu kiện."
-  },
-  {
-   "id": "L18-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Bạn tiện thể mua giúp tôi mấy con tem.”",
-   "options": [
-    "你",
-    "顺便",
-    "替",
-    "我",
-    "买",
-    "几张",
-    "邮票"
-   ],
-   "answer": [
-    "你",
-    "顺便",
-    "替",
-    "我",
-    "买",
-    "几张",
-    "邮票"
-   ],
-   "explanation": "你顺便替我买几张邮票 — Bạn tiện thể mua giúp tôi mấy con tem."
-  },
-  {
-   "id": "L18-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 这件事我替你办，没___。",
-   "answer": "问题",
-   "explanation": "Việc này tôi làm giúp bạn, không vấn đề gì."
-  }
- ],
- "texts": [
-  {
-   "title": "我去邮局寄包裹",
-   "lines": [
+  "id": "L18",
+  "book": "Hán ngữ 2",
+  "unit": 18,
+  "order": 18,
+  "title": "我去邮局寄包裹",
+  "title_vi": "Tôi đến bưu điện gửi bưu kiện",
+  "vocab_ids": [
+    "L18-办",
+    "L18-帮",
+    "L18-包裹",
+    "L18-报",
+    "L18-不用",
+    "L18-参观",
+    "L18-代表",
+    "L18-当",
+    "L18-翻译",
+    "L18-飞",
+    "L18-飞机",
+    "L18-份",
+    "L18-花",
+    "L18-回来",
+    "L18-火车",
+    "L18-浇",
+    "L18-旅行",
+    "L18-没问题",
+    "L18-拿",
+    "L18-青年",
+    "L18-顺便",
+    "L18-替",
+    "L18-团",
+    "L18-问题",
+    "L18-用",
+    "L18-邮票",
+    "TR2-上海",
+    "TR2-珍妮"
+  ],
+  "exercises": [
     {
-     "speaker": "田芳",
-     "zh": "张东，你要去哪儿？",
-     "vi": "(Điền Phương gặp Trương Đông trước cửa) Trương Đông, bạn định đi đâu?"
+      "id": "L18-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi đến bưu điện gửi bưu kiện.”",
+      "options": [
+        "我",
+        "去",
+        "邮局",
+        "寄",
+        "包裹"
+      ],
+      "answer": [
+        "我",
+        "去",
+        "邮局",
+        "寄",
+        "包裹"
+      ],
+      "explanation": "我去邮局寄包裹 — Tôi đến bưu điện gửi bưu kiện."
     },
     {
-     "speaker": "张东",
-     "zh": "我去邮局寄包裹，顺便去书店买一本书。你去吗？",
-     "vi": "Tôi đi bưu điện gửi bưu kiện, tiện thể ghé hiệu sách mua một quyển sách. Bạn đi không?"
+      "id": "L18-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn tiện thể mua giúp tôi mấy con tem.”",
+      "options": [
+        "你",
+        "顺便",
+        "替",
+        "我",
+        "买",
+        "几张",
+        "邮票"
+      ],
+      "answer": [
+        "你",
+        "顺便",
+        "替",
+        "我",
+        "买",
+        "几张",
+        "邮票"
+      ],
+      "explanation": "你顺便替我买几张邮票 — Bạn tiện thể mua giúp tôi mấy con tem."
     },
     {
-     "speaker": "田芳",
-     "zh": "不去，一会儿玛丽来找我。你顺便替我买几张邮票和一份青年报吧。",
-     "vi": "Không đi, lát nữa Mary đến tìm tôi. Bạn tiện thể mua giúp tôi mấy con tem và một tờ Báo Thanh niên nhé."
-    },
-    {
-     "speaker": "张东",
-     "zh": "好的。",
-     "vi": "Được."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "我给你拿钱。",
-     "vi": "Tôi đưa tiền cho bạn."
-    },
-    {
-     "speaker": "张东",
-     "zh": "不用，先用我的钱买吧。",
-     "vi": "Không cần, cứ dùng tiền của tôi mua trước đã."
+      "id": "L18-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 这件事我替你办，没___。",
+      "answer": "问题",
+      "explanation": "Việc này tôi làm giúp bạn, không vấn đề gì."
     }
-   ]
-  },
-  {
-   "title": "外贸代表团明天去上海参观",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "珍妮",
-     "zh": "玛丽，我明天去上海。",
-     "vi": "(Janet đến ký túc xá tìm Mary) Mary, mai tôi đi Thượng Hải."
+      "title": "我去邮局寄包裹",
+      "lines": [
+        {
+          "speaker": "田芳",
+          "zh": "张东，你要去哪儿？",
+          "vi": "(Điền Phương gặp Trương Đông trước cửa) Trương Đông, bạn định đi đâu?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "我去邮局寄包裹，顺便去书店买一本书。你去吗？",
+          "vi": "Tôi đi bưu điện gửi bưu kiện, tiện thể ghé hiệu sách mua một quyển sách. Bạn đi không?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "不去，一会儿玛丽来找我。你顺便替我买几张邮票和一份青年报吧。",
+          "vi": "Không đi, lát nữa Mary đến tìm tôi. Bạn tiện thể mua giúp tôi mấy con tem và một tờ Báo Thanh niên nhé."
+        },
+        {
+          "speaker": "张东",
+          "zh": "好的。",
+          "vi": "Được."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "我给你拿钱。",
+          "vi": "Tôi đưa tiền cho bạn."
+        },
+        {
+          "speaker": "张东",
+          "zh": "不用，先用我的钱买吧。",
+          "vi": "Không cần, cứ dùng tiền của tôi mua trước đã."
+        }
+      ]
     },
     {
-     "speaker": "玛丽",
-     "zh": "你去上海旅行吗？",
-     "vi": "Bạn đi du lịch Thượng Hải à?"
-    },
-    {
-     "speaker": "珍妮",
-     "zh": "不，明天一个外贸代表团去上海参观，我去给他们当翻译。",
-     "vi": "Không, mai một đoàn đại biểu thương mại đi tham quan Thượng Hải, tôi đi làm phiên dịch cho họ."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "坐飞机去还是坐火车去？",
-     "vi": "Đi máy bay hay đi tàu hỏa?"
-    },
-    {
-     "speaker": "珍妮",
-     "zh": "坐飞机去。",
-     "vi": "Đi máy bay."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "什么时候回来？",
-     "vi": "Khi nào về?"
-    },
-    {
-     "speaker": "珍妮",
-     "zh": "八号回来。替我办一件事，行吗？",
-     "vi": "Mùng 8 về. Bạn làm giúp tôi một việc được không?"
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "什么事？你说吧。",
-     "vi": "Việc gì? Bạn nói đi."
-    },
-    {
-     "speaker": "珍妮",
-     "zh": "帮我浇一下儿花。",
-     "vi": "Tưới hoa giúp tôi một chút."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "行，没问题。",
-     "vi": "Được, không vấn đề gì."
+      "title": "外贸代表团明天去上海参观",
+      "lines": [
+        {
+          "speaker": "珍妮",
+          "zh": "玛丽，我明天去上海。",
+          "vi": "(Janet đến ký túc xá tìm Mary) Mary, mai tôi đi Thượng Hải."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "你去上海旅行吗？",
+          "vi": "Bạn đi du lịch Thượng Hải à?"
+        },
+        {
+          "speaker": "珍妮",
+          "zh": "不，明天一个外贸代表团去上海参观，我去给他们当翻译。",
+          "vi": "Không, mai một đoàn đại biểu thương mại đi tham quan Thượng Hải, tôi đi làm phiên dịch cho họ."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "坐飞机去还是坐火车去？",
+          "vi": "Đi máy bay hay đi tàu hỏa?"
+        },
+        {
+          "speaker": "珍妮",
+          "zh": "坐飞机去。",
+          "vi": "Đi máy bay."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "什么时候回来？",
+          "vi": "Khi nào về?"
+        },
+        {
+          "speaker": "珍妮",
+          "zh": "八号回来。替我办一件事，行吗？",
+          "vi": "Mùng 8 về. Bạn làm giúp tôi một việc được không?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "什么事？你说吧。",
+          "vi": "Việc gì? Bạn nói đi."
+        },
+        {
+          "speaker": "珍妮",
+          "zh": "帮我浇一下儿花。",
+          "vi": "Tưới hoa giúp tôi một chút."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "行，没问题。",
+          "vi": "Được, không vấn đề gì."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L18-g1",
-   "title": "Câu liên động",
-   "note": "Một chủ ngữ có hai động từ nối tiếp: động từ sau là mục đích của động từ trước (去 + nơi chốn + làm gì), hoặc động từ trước là phương thức.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "我去邮局寄包裹。",
-     "vi": "Tôi đi bưu điện gửi bưu kiện."
+      "id": "L18-g1",
+      "title": "Câu liên động",
+      "note": "Một chủ ngữ có hai động từ nối tiếp: động từ sau là mục đích của động từ trước (去 + nơi chốn + làm gì), hoặc động từ trước là phương thức.",
+      "examples": [
+        {
+          "zh": "我去邮局寄包裹。",
+          "vi": "Tôi đi bưu điện gửi bưu kiện."
+        },
+        {
+          "zh": "坐飞机去。",
+          "vi": "Đi bằng máy bay."
+        }
+      ]
     },
     {
-     "zh": "坐飞机去。",
-     "vi": "Đi bằng máy bay."
+      "id": "L18-g2",
+      "title": "顺便、替",
+      "note": "顺便 = tiện thể; 替 + người + động từ = làm thay/giúp ai.",
+      "examples": [
+        {
+          "zh": "你顺便替我买几张邮票吧。",
+          "vi": "Bạn tiện thể mua giúp tôi mấy con tem nhé."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L18-g2",
-   "title": "顺便、替",
-   "note": "顺便 = tiện thể; 替 + người + động từ = làm thay/giúp ai.",
-   "examples": [
-    {
-     "zh": "你顺便替我买几张邮票吧。",
-     "vi": "Bạn tiện thể mua giúp tôi mấy con tem nhé."
-    }
-   ]
-  }
- ]
+  ]
 }

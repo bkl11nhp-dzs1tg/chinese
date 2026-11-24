@@ -1,214 +1,461 @@
 {
- "id": "L16",
- "book": "Hán ngữ 2",
- "unit": 16,
- "order": 16,
- "title": "你常去图书馆吗",
- "title_vi": "Bạn có thường đến thư viện không",
- "vocab_ids": [
-  "L16-安静",
-  "L16-查",
-  "L16-常（常）",
-  "L16-超市",
-  "L16-电视",
-  "L16-电视剧",
-  "L16-电影",
-  "L16-东西",
-  "L16-发",
-  "L16-复习",
-  "L16-跟",
-  "L16-公园",
-  "L16-或者",
-  "L16-借",
-  "L16-课文",
-  "L16-练习",
-  "L16-聊天儿",
-  "L16-上网",
-  "L16-生词",
-  "L16-时候",
-  "L16-收",
-  "L16-收发",
-  "L16-宿舍",
-  "L16-晚上",
-  "L16-网",
-  "L16-现在",
-  "L16-休息",
-  "L16-一起",
-  "L16-伊妹儿",
-  "L16-有时候",
-  "L16-预习",
-  "L16-咱们"
- ],
- "exercises": [
-  {
-   "id": "L16-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Bạn có thường đến thư viện không?”",
-   "options": [
-    "你",
-    "常",
-    "去",
-    "图书馆",
-    "吗"
-   ],
-   "answer": [
-    "你",
-    "常",
-    "去",
-    "图书馆",
-    "吗"
-   ],
-   "explanation": "你常去图书馆吗 — Bạn có thường đến thư viện không?"
-  },
-  {
-   "id": "L16-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Buổi tối tôi ôn bài khóa.”",
-   "options": [
-    "晚上",
-    "我",
-    "复习",
-    "课文"
-   ],
-   "answer": [
-    "晚上",
-    "我",
-    "复习",
-    "课文"
-   ],
-   "explanation": "晚上我复习课文 — Buổi tối tôi ôn bài khóa."
-  },
-  {
-   "id": "L16-r3",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Chúng ta cùng đi siêu thị.”",
-   "options": [
-    "我们",
-    "一起",
-    "去",
-    "超市"
-   ],
-   "answer": [
-    "我们",
-    "一起",
-    "去",
-    "超市"
-   ],
-   "explanation": "我们一起去超市 — Chúng ta cùng đi siêu thị."
-  },
-  {
-   "id": "L16-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 我有时候去图书馆，有时候在宿舍上___。",
-   "answer": "网",
-   "explanation": "Tôi có lúc đến thư viện, có lúc lên mạng ở ký túc xá."
-  }
- ],
- "texts": [
-  {
-   "title": "你常去图书馆吗",
-   "lines": [
+  "id": "L16",
+  "book": "Hán ngữ 2",
+  "unit": 16,
+  "order": 16,
+  "title": "你常去图书馆吗",
+  "title_vi": "Bạn có thường đến thư viện không",
+  "vocab_ids": [
+    "L16-安静",
+    "L16-查",
+    "L16-常（常）",
+    "L16-超市",
+    "L16-电视",
+    "L16-电视剧",
+    "L16-电影",
+    "L16-东西",
+    "L16-发",
+    "L16-复习",
+    "L16-跟",
+    "L16-公园",
+    "L16-或者",
+    "L16-借",
+    "L16-课文",
+    "L16-练习",
+    "L16-聊天儿",
+    "L16-上网",
+    "L16-生词",
+    "L16-时候",
+    "L16-收",
+    "L16-收发",
+    "L16-宿舍",
+    "L16-晚上",
+    "L16-网",
+    "L16-现在",
+    "L16-休息",
+    "L16-一起",
+    "L16-伊妹儿",
+    "L16-有时候",
+    "L16-预习",
+    "L16-咱们"
+  ],
+  "exercises": [
     {
-     "speaker": "玛丽",
-     "zh": "我现在去图书馆，你跟我一起去，好吗？",
-     "vi": "Bây giờ tôi đi thư viện, bạn đi cùng tôi nhé?"
+      "id": "L16-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn có thường đến thư viện không?”",
+      "options": [
+        "你",
+        "常",
+        "去",
+        "图书馆",
+        "吗"
+      ],
+      "answer": [
+        "你",
+        "常",
+        "去",
+        "图书馆",
+        "吗"
+      ],
+      "explanation": "你常去图书馆吗 — Bạn có thường đến thư viện không?"
     },
     {
-     "speaker": "麦克",
-     "zh": "好，咱们走吧。……你常去图书馆吗？",
-     "vi": "Được, chúng ta đi thôi. … Bạn có thường đến thư viện không?"
+      "id": "L16-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi tối tôi ôn bài khóa.”",
+      "options": [
+        "晚上",
+        "我",
+        "复习",
+        "课文"
+      ],
+      "answer": [
+        "晚上",
+        "我",
+        "复习",
+        "课文"
+      ],
+      "explanation": "晚上我复习课文 — Buổi tối tôi ôn bài khóa."
     },
     {
-     "speaker": "玛丽",
-     "zh": "常去。我常借书，也常在那儿看书。你呢？常去吗？",
-     "vi": "Thường đến. Tôi hay mượn sách, cũng hay đọc sách ở đó. Còn bạn? Có hay đi không?"
+      "id": "L16-r3",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúng ta cùng đi siêu thị.”",
+      "options": [
+        "我们",
+        "一起",
+        "去",
+        "超市"
+      ],
+      "answer": [
+        "我们",
+        "一起",
+        "去",
+        "超市"
+      ],
+      "explanation": "我们一起去超市 — Chúng ta cùng đi siêu thị."
     },
     {
-     "speaker": "麦克",
-     "zh": "我也常去。有时候借书，有时候上网查资料，但不常在那儿看书。我总在宿舍看书。",
-     "vi": "Tôi cũng thường đến. Có lúc mượn sách, có lúc lên mạng tra tài liệu, nhưng không hay đọc sách ở đó. Tôi luôn đọc sách ở ký túc xá."
+      "id": "L16-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 我有时候去图书馆，有时候在宿舍上___。",
+      "answer": "网",
+      "explanation": "Tôi có lúc đến thư viện, có lúc lên mạng ở ký túc xá."
     },
     {
-     "speaker": "玛丽",
-     "zh": "你的宿舍安静吗？",
-     "vi": "Ký túc xá của bạn có yên tĩnh không?"
+      "id": "L16-wb1",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi tối chúng tôi ăn sủi cảo.”",
+      "options": [
+        "我们",
+        "吃",
+        "饺子",
+        "晚上"
+      ],
+      "answer": [
+        "晚上",
+        "我们",
+        "吃",
+        "饺子"
+      ],
+      "explanation": "晚上我们吃饺子 — Buổi tối chúng tôi ăn sủi cảo."
     },
     {
-     "speaker": "麦克",
-     "zh": "很安静。",
-     "vi": "Rất yên tĩnh."
+      "id": "L16-wb2",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bố và mẹ đi công viên.”",
+      "options": [
+        "妈妈",
+        "公园",
+        "和",
+        "爸爸",
+        "去"
+      ],
+      "answer": [
+        "爸爸",
+        "和",
+        "妈妈",
+        "去",
+        "公园"
+      ],
+      "explanation": "爸爸和妈妈去公园 — Bố và mẹ đi công viên."
+    },
+    {
+      "id": "L16-wb3",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi tối chúng tôi ăn hoa quả.”",
+      "options": [
+        "水果",
+        "晚上",
+        "我们",
+        "吃"
+      ],
+      "answer": [
+        "晚上",
+        "我们",
+        "吃",
+        "水果"
+      ],
+      "explanation": "晚上我们吃水果 — Buổi tối chúng tôi ăn hoa quả."
+    },
+    {
+      "id": "L16-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 公园里有很___人。",
+      "options": [
+        "多",
+        "少",
+        "大"
+      ],
+      "answer": "多"
+    },
+    {
+      "id": "L16-wb5",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Trong công viên có rất nhiều người.”",
+      "options": [
+        "里",
+        "很",
+        "人",
+        "公园",
+        "多",
+        "有"
+      ],
+      "answer": [
+        "公园",
+        "里",
+        "有",
+        "很",
+        "多",
+        "人"
+      ],
+      "explanation": "公园里有很多人 — Trong công viên có rất nhiều người."
+    },
+    {
+      "id": "L16-wb6",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 常常",
+      "options": [
+        "chángcháng",
+        "chǎngchǎng"
+      ],
+      "answer": "chángcháng"
+    },
+    {
+      "id": "L16-wb7",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi thường đến thư viện.”",
+      "options": [
+        "常",
+        "图书馆",
+        "我",
+        "去"
+      ],
+      "answer": [
+        "我",
+        "常",
+        "去",
+        "图书馆"
+      ],
+      "explanation": "我常去图书馆 — Tôi thường đến thư viện."
+    },
+    {
+      "id": "L16-wb8",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi tối bạn thường làm gì?”",
+      "options": [
+        "常常",
+        "做",
+        "你",
+        "晚上",
+        "什么"
+      ],
+      "answer": [
+        "晚上",
+        "你",
+        "常常",
+        "做",
+        "什么"
+      ],
+      "explanation": "晚上你常常做什么 — Buổi tối bạn thường làm gì?"
+    },
+    {
+      "id": "L16-wb9",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Anh ấy thường ăn cơm, không thường ăn sủi cảo.”",
+      "options": [
+        "吃",
+        "常",
+        "吃",
+        "他",
+        "米饭",
+        "饺子",
+        "常",
+        "不"
+      ],
+      "answer": [
+        "他",
+        "常",
+        "吃",
+        "米饭",
+        "不",
+        "常",
+        "吃",
+        "饺子"
+      ],
+      "explanation": "他常吃米饭不常吃饺子 — Anh ấy thường ăn cơm, không thường ăn sủi cảo."
+    },
+    {
+      "id": "L16-wb10",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Mẹ thường uống trà, không thường uống rượu.”",
+      "options": [
+        "酒",
+        "常",
+        "喝",
+        "不",
+        "妈妈",
+        "喝",
+        "茶",
+        "常"
+      ],
+      "answer": [
+        "妈妈",
+        "常",
+        "喝",
+        "茶",
+        "不",
+        "常",
+        "喝",
+        "酒"
+      ],
+      "explanation": "妈妈常喝茶不常喝酒 — Mẹ thường uống trà, không thường uống rượu."
+    },
+    {
+      "id": "L16-wb11",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi chiều tôi và em trai cùng về nhà.”",
+      "options": [
+        "我",
+        "回家",
+        "弟弟",
+        "下午",
+        "一起",
+        "和"
+      ],
+      "answer": [
+        "下午",
+        "我",
+        "和",
+        "弟弟",
+        "一起",
+        "回家"
+      ],
+      "explanation": "下午我和弟弟一起回家 — Buổi chiều tôi và em trai cùng về nhà."
+    },
+    {
+      "id": "L16-wb12",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Người trong công viên đông quá!”",
+      "options": [
+        "里",
+        "多",
+        "太",
+        "了",
+        "人",
+        "的",
+        "公园"
+      ],
+      "answer": [
+        "公园",
+        "里",
+        "的",
+        "人",
+        "太",
+        "多",
+        "了"
+      ],
+      "explanation": "公园里的人太多了 — Người trong công viên đông quá!"
     }
-   ]
-  },
-  {
-   "title": "晚上你常做什么",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "A",
-     "zh": "晚上你常做什么？",
-     "vi": "Buổi tối bạn thường làm gì?"
+      "title": "你常去图书馆吗",
+      "lines": [
+        {
+          "speaker": "玛丽",
+          "zh": "我现在去图书馆，你跟我一起去，好吗？",
+          "vi": "Bây giờ tôi đi thư viện, bạn đi cùng tôi nhé?"
+        },
+        {
+          "speaker": "麦克",
+          "zh": "好，咱们走吧。……你常去图书馆吗？",
+          "vi": "Được, chúng ta đi thôi. … Bạn có thường đến thư viện không?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "常去。我常借书，也常在那儿看书。你呢？常去吗？",
+          "vi": "Thường đến. Tôi hay mượn sách, cũng hay đọc sách ở đó. Còn bạn? Có hay đi không?"
+        },
+        {
+          "speaker": "麦克",
+          "zh": "我也常去。有时候借书，有时候上网查资料，但不常在那儿看书。我总在宿舍看书。",
+          "vi": "Tôi cũng thường đến. Có lúc mượn sách, có lúc lên mạng tra tài liệu, nhưng không hay đọc sách ở đó. Tôi luôn đọc sách ở ký túc xá."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "你的宿舍安静吗？",
+          "vi": "Ký túc xá của bạn có yên tĩnh không?"
+        },
+        {
+          "speaker": "麦克",
+          "zh": "很安静。",
+          "vi": "Rất yên tĩnh."
+        }
+      ]
     },
     {
-     "speaker": "B",
-     "zh": "复习课文，预习生词，或者做练习。有时候上网跟朋友聊天儿或者收发伊妹儿。",
-     "vi": "Ôn bài khóa, chuẩn bị từ mới, hoặc làm bài tập. Có lúc lên mạng nói chuyện với bạn bè hoặc gửi nhận email."
-    },
-    {
-     "speaker": "A",
-     "zh": "我也是，我还常看中文电影和电视剧的DVD。你常看吗？",
-     "vi": "Tôi cũng vậy, tôi còn hay xem DVD phim và phim truyền hình tiếng Trung. Bạn có hay xem không?"
-    },
-    {
-     "speaker": "B",
-     "zh": "我很少看。",
-     "vi": "Tôi rất ít xem."
-    },
-    {
-     "speaker": "A",
-     "zh": "星期六和星期日你做什么？",
-     "vi": "Thứ bảy và chủ nhật bạn làm gì?"
-    },
-    {
-     "speaker": "B",
-     "zh": "有时候在宿舍休息，有时候跟朋友一起去公园玩儿或者去超市买东西。",
-     "vi": "Có lúc nghỉ ở ký túc xá, có lúc cùng bạn bè đi công viên chơi hoặc đi siêu thị mua đồ."
+      "title": "晚上你常做什么",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "晚上你常做什么？",
+          "vi": "Buổi tối bạn thường làm gì?"
+        },
+        {
+          "speaker": "B",
+          "zh": "复习课文，预习生词，或者做练习。有时候上网跟朋友聊天儿或者收发伊妹儿。",
+          "vi": "Ôn bài khóa, chuẩn bị từ mới, hoặc làm bài tập. Có lúc lên mạng nói chuyện với bạn bè hoặc gửi nhận email."
+        },
+        {
+          "speaker": "A",
+          "zh": "我也是，我还常看中文电影和电视剧的DVD。你常看吗？",
+          "vi": "Tôi cũng vậy, tôi còn hay xem DVD phim và phim truyền hình tiếng Trung. Bạn có hay xem không?"
+        },
+        {
+          "speaker": "B",
+          "zh": "我很少看。",
+          "vi": "Tôi rất ít xem."
+        },
+        {
+          "speaker": "A",
+          "zh": "星期六和星期日你做什么？",
+          "vi": "Thứ bảy và chủ nhật bạn làm gì?"
+        },
+        {
+          "speaker": "B",
+          "zh": "有时候在宿舍休息，有时候跟朋友一起去公园玩儿或者去超市买东西。",
+          "vi": "Có lúc nghỉ ở ký túc xá, có lúc cùng bạn bè đi công viên chơi hoặc đi siêu thị mua đồ."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L16-g1",
-   "title": "Từ chỉ thời gian làm trạng ngữ",
-   "note": "Từ chỉ thời gian đứng trước động từ, hoặc đầu câu.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "晚上你常做什么？",
-     "vi": "Buổi tối bạn thường làm gì?"
-    }
-   ]
-  },
-  {
-   "id": "L16-g2",
-   "title": "还是 và 或者",
-   "note": "还是 dùng trong câu hỏi lựa chọn; 或者 dùng trong câu trần thuật (hoặc là).",
-   "examples": [
+      "id": "L16-g1",
+      "title": "Từ chỉ thời gian làm trạng ngữ",
+      "note": "Từ chỉ thời gian đứng trước động từ, hoặc đầu câu.",
+      "examples": [
+        {
+          "zh": "晚上你常做什么？",
+          "vi": "Buổi tối bạn thường làm gì?"
+        }
+      ]
+    },
     {
-     "zh": "复习课文，预习生词，或者做练习。",
-     "vi": "Ôn bài khóa, chuẩn bị từ mới, hoặc làm bài tập."
-    }
-   ]
-  },
-  {
-   "id": "L16-g3",
-   "title": "你跟我一起去，好吗？ / 咱们走吧",
-   "note": "跟…一起 = cùng với…; …好吗？ hỏi ý kiến. 咱们 bao gồm cả người nghe.",
-   "examples": [
+      "id": "L16-g2",
+      "title": "还是 và 或者",
+      "note": "还是 dùng trong câu hỏi lựa chọn; 或者 dùng trong câu trần thuật (hoặc là).",
+      "examples": [
+        {
+          "zh": "复习课文，预习生词，或者做练习。",
+          "vi": "Ôn bài khóa, chuẩn bị từ mới, hoặc làm bài tập."
+        }
+      ]
+    },
     {
-     "zh": "你跟我一起去，好吗？",
-     "vi": "Bạn đi cùng tôi nhé?"
+      "id": "L16-g3",
+      "title": "你跟我一起去，好吗？ / 咱们走吧",
+      "note": "跟…一起 = cùng với…; …好吗？ hỏi ý kiến. 咱们 bao gồm cả người nghe.",
+      "examples": [
+        {
+          "zh": "你跟我一起去，好吗？",
+          "vi": "Bạn đi cùng tôi nhé?"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

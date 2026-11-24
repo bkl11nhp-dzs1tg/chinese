@@ -1,0 +1,10 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 这件衣服___大了！","options":["太","很","真"],"answer":"太"},
+ {"type":"choose","prompt":"Chọn từ đúng: 早上他们___上学。","options":["一起","一下儿","一点儿"],"answer":"一起"},
+ {"type":"reorder","vi":"Buổi sáng họ cùng nhau đi học.","words":["早上","他们","一起","上学"]},
+ {"type":"reorder","vi":"Buổi chiều tôi và em trai cùng về nhà.","words":["下午","我","和","弟弟","一起","回家"]},
+ {"type":"reorder","vi":"Ngày mai chúng tôi cùng đi hiệu sách.","words":["明天","我们","一起","去","书店"]},
+ {"type":"reorder","vi":"Đôi giày da này đắt quá!","words":["这","双","皮鞋","太","贵","了"]},
+ {"type":"reorder","vi":"Người trong công viên đông quá!","words":["公园","里","的","人","太","多","了"]},
+ {"type":"reorder","vi":"Tốt quá!","words":["太","好","了"]}
+]

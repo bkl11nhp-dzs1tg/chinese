@@ -5,6 +5,8 @@ import { icon, artOr } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { cardStatus } from '../../core/srs.js';
 import { cue } from '../../ui/feedback.js';
+import { TOPICS } from '../../core/topics.js';
+import { phrasesView } from './phrases.js';
 
 const STATUS = {
   new: { label: 'Mới', hint: 'chưa học', icon: 'sparkle' },
@@ -31,6 +33,19 @@ export async function render(root, ctx, { query }) {
     mount(root, h('div', { class: 'large-title' }, h('h1', {}, 'Thẻ')), h('p', { class: 'notice' }, 'Chưa có từ vựng.'));
     return;
   }
+  const view = ['sentences', 'patterns'].includes(query.v) ? query.v : 'words';
+  const viewSeg = h('div', { class: 'seg seg-fit', role: 'tablist', 'aria-label': 'Loại thẻ' },
+    [['words', 'Từ vựng'], ['sentences', 'Câu'], ['patterns', 'Mẫu câu']].map(([id, label]) => h('a', {
+      class: ['seg-btn', view === id ? 'on' : ''], role: 'tab', 'aria-selected': String(view === id), href: id === 'words' ? '#/cards' : `#/cards?v=${id}`,
+    }, label)));
+  const titleRow = (sub) => h('div', { class: 'large-title' },
+    h('div', {}, h('div', { class: 'sub' }, sub), h('h1', {}, 'Thẻ')),
+    h('a', { class: 'icon-btn tinted-round', href: '#/games', 'aria-label': 'Trò chơi', title: 'Trò chơi' }, icon('game')));
+  if (view !== 'words') {
+    const n = view === 'sentences' ? data.lessons.reduce((a, l) => a + (l.texts || []).reduce((b, t) => b + t.lines.length, 0), 0) : data.lessons.reduce((a, l) => a + (l.grammar_points?.length || 0), 0);
+    mount(root, titleRow(`${n} ${view === 'sentences' ? 'câu' : 'mẫu câu'}`), viewSeg, phrasesView({ kind: view, lessons: data.lessons, rate }));
+    return;
+  }
   const lessonOrder = new Map(data.lessons.map((l, i) => [l.id, i]));
   const all = [...data.cards].sort((a, b) => (lessonOrder.get(a.lesson_id) ?? 1e9) - (lessonOrder.get(b.lesson_id) ?? 1e9));
   const counts = { new: 0, learning: 0, mastered: 0 };
@@ -39,6 +54,8 @@ export async function render(root, ctx, { query }) {
 
   let status = STATUS[query.s] ? query.s : '';
   let lesson = query.l || '';
+  let topic = query.t || '';
+  let groupBy = topic ? 'topic' : 'lesson';
   let shown = PAGE;
   let onlyWeak = query.m === 'weak';
 
@@ -58,6 +75,16 @@ export async function render(root, ctx, { query }) {
   }, h('span', { class: 'dot' }), v.label, h('b', {}, String(counts[k]))));
 
   const weakChip = h('button', { class: 'cp-pill weak weak-chip', type: 'button', onclick: () => { onlyWeak = !onlyWeak; shown = PAGE; draw(); } });
+  const topicCount = new Map();
+  for (const c of all) topicCount.set(c.topic, (topicCount.get(c.topic) || 0) + 1);
+  const topicChips = h('div', { class: 'chip-scroll', role: 'group', 'aria-label': 'Lọc theo chủ đề' },
+    [{ id: '', label: 'Tất cả chủ đề' }, ...TOPICS.filter((t) => topicCount.get(t.id)).map((t) => ({ id: t.id, label: `${t.label} · ${topicCount.get(t.id)}` }))]
+      .map((x) => h('button', { class: 'chip opt', type: 'button', dataset: { id: x.id }, onclick: () => { topic = x.id; shown = PAGE; draw(); } }, x.label)));
+  const groupSeg = h('div', { class: 'seg small-seg group-seg', role: 'tablist', 'aria-label': 'Lọc theo' },
+    [['lesson', 'Theo bài'], ['topic', 'Theo chủ đề']].map(([id, label]) => h('button', {
+      class: 'seg-btn', type: 'button', role: 'tab', dataset: { id },
+      onclick: () => { groupBy = id; if (id === 'lesson') topic = ''; else lesson = ''; shown = PAGE; draw(); },
+    }, label)));
   const lessonChips = h('div', { class: 'chip-scroll', role: 'group', 'aria-label': 'Lọc theo bài' },
     [{ id: '', label: 'Tất cả bài' }, ...data.lessons.map((l) => ({ id: l.id, label: `Bài ${l.unit ?? l.id}` }))]
       .map((x) => h('button', { class: 'chip opt', type: 'button', dataset: { id: x.id }, onclick: () => { lesson = x.id; shown = PAGE; draw(); } }, x.label)));
@@ -123,11 +150,16 @@ export async function render(root, ctx, { query }) {
       t.setAttribute('aria-pressed', String(on));
     });
     lessonChips.querySelectorAll('.chip:not(.weak-chip)').forEach((b) => b.classList.toggle('selected', b.dataset.id === lesson));
+    topicChips.querySelectorAll('.chip').forEach((b) => b.classList.toggle('selected', b.dataset.id === topic));
+    groupSeg.querySelectorAll('.seg-btn').forEach((b) => { const on = b.dataset.id === groupBy; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+    lessonChips.classList.toggle('hidden', groupBy !== 'lesson');
+    topicChips.classList.toggle('hidden', groupBy !== 'topic');
     const raw = search.value.trim();
     const q = fold(raw);
     const qn = q.replace(/\s+/g, '');
     const rows = all.filter((c) => {
       if (lesson && c.lesson_id !== lesson) return false;
+      if (topic && c.topic !== topic) return false;
       if (onlyWeak && marks.get(c.hanzi) !== 'weak') return false;
       if (status && cardStatus(data.statesById.get(c.id)) !== status) return false;
       if (!q) return true;
@@ -147,9 +179,8 @@ export async function render(root, ctx, { query }) {
   search.addEventListener('input', () => { shown = PAGE; draw(); });
 
   mount(root,
-    h('div', { class: 'large-title' },
-      h('div', {}, h('div', { class: 'sub' }, `${all.length} từ vựng`), h('h1', {}, 'Thẻ từ')),
-      h('a', { class: 'icon-btn tinted-round', href: '#/games', 'aria-label': 'Trò chơi', title: 'Trò chơi' }, icon('game'))),
+    titleRow(`${all.length} từ vựng`),
+    viewSeg,
     h('section', { class: 'cp-summary glass' },
       h('div', { class: 'cp-head' }, h('strong', {}, `${Math.round((counts.mastered / all.length) * 100)}% đã thuộc`), h('span', { class: 'muted small' }, `${counts.learning} đang học`)),
       meter,
@@ -158,7 +189,7 @@ export async function render(root, ctx, { query }) {
       h('span', { class: 'st-ic' }, icon('repeat')),
       h('span', { class: 'grow' }, h('strong', {}, `${due} thẻ đến hạn ôn`), h('span', { class: 'muted small' }, 'Ôn ngay để giữ trí nhớ')),
       icon('chevron')) : null,
-    h('div', { class: 'filters' }, search, lessonChips),
+    h('div', { class: 'filters' }, search, groupSeg, lessonChips, topicChips),
     countEl, gridEl, moreBtn);
   draw();
   if (lesson) lessonChips.querySelector('.selected')?.scrollIntoView({ inline: 'center', block: 'nearest' });

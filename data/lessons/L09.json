@@ -1,163 +1,175 @@
 {
- "id": "L09",
- "book": "Hán ngữ 1",
- "unit": 9,
- "order": 9,
- "title": "我换人民币",
- "title_vi": "Tôi đổi tiền nhân dân tệ",
- "vocab_ids": [
-  "L09-百",
-  "L09-等",
-  "L09-港币",
-  "L09-换",
-  "L09-美元",
-  "L09-欧元",
-  "L09-千",
-  "L09-人民",
-  "L09-人民币",
-  "L09-日元",
-  "L09-上午",
-  "L09-数",
-  "L09-图书馆",
-  "L09-万",
-  "L09-下午",
-  "L09-先生",
-  "L09-小姐",
-  "L09-要",
-  "L09-一会儿",
-  "L09-营业员"
- ],
- "exercises": [
-  {
-   "id": "L09-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi đổi nhân dân tệ.”",
-   "options": [
-    "我",
-    "换",
-    "人民币"
-   ],
-   "answer": [
-    "我",
-    "换",
-    "人民币"
-   ],
-   "explanation": "我换人民币 — Tôi đổi nhân dân tệ."
-  },
-  {
-   "id": "L09-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Xin đợi một lát.”",
-   "options": [
-    "请",
-    "等",
-    "一会儿"
-   ],
-   "answer": [
-    "请",
-    "等",
-    "一会儿"
-   ],
-   "explanation": "请等一会儿 — Xin đợi một lát."
-  },
-  {
-   "id": "L09-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 下午我去___换钱。",
-   "answer": "银行",
-   "explanation": "Buổi chiều tôi đi ngân hàng đổi tiền."
-  }
- ],
- "texts": [
-  {
-   "title": "我换人民币",
-   "lines": [
+  "id": "L09",
+  "book": "Hán ngữ 1",
+  "unit": 9,
+  "order": 9,
+  "title": "我换人民币",
+  "title_vi": "Tôi đổi tiền nhân dân tệ",
+  "vocab_ids": [
+    "L09-百",
+    "L09-等",
+    "L09-港币",
+    "L09-换",
+    "L09-美元",
+    "L09-欧元",
+    "L09-千",
+    "L09-人民",
+    "L09-人民币",
+    "L09-日元",
+    "L09-上午",
+    "L09-数",
+    "L09-图书馆",
+    "L09-万",
+    "L09-下午",
+    "L09-先生",
+    "L09-小姐",
+    "L09-要",
+    "L09-一会儿",
+    "L09-营业员"
+  ],
+  "exercises": [
     {
-     "speaker": "玛丽",
-     "zh": "下午我去图书馆，你去不去？",
-     "vi": "Chiều nay tôi đi thư viện, bạn có đi không?"
+      "id": "L09-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi đổi nhân dân tệ.”",
+      "options": [
+        "我",
+        "换",
+        "人民币"
+      ],
+      "answer": [
+        "我",
+        "换",
+        "人民币"
+      ],
+      "explanation": "我换人民币 — Tôi đổi nhân dân tệ."
     },
     {
-     "speaker": "麦克",
-     "zh": "我不去。我要去银行换钱。",
-     "vi": "Tôi không đi. Tôi phải đi ngân hàng đổi tiền."
+      "id": "L09-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Xin đợi một lát.”",
+      "options": [
+        "请",
+        "等",
+        "一会儿"
+      ],
+      "answer": [
+        "请",
+        "等",
+        "一会儿"
+      ],
+      "explanation": "请等一会儿 — Xin đợi một lát."
     },
     {
-     "speaker": "麦克",
-     "zh": "小姐，我换钱。",
-     "vi": "(Đổi tiền ở Ngân hàng Trung Quốc) Chị ơi, tôi đổi tiền."
+      "id": "L09-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 下午我去___换钱。",
+      "answer": "银行",
+      "explanation": "Buổi chiều tôi đi ngân hàng đổi tiền."
     },
     {
-     "speaker": "营业员",
-     "zh": "您换什么钱？",
-     "vi": "Anh đổi tiền gì?"
-    },
-    {
-     "speaker": "麦克",
-     "zh": "我换人民币。",
-     "vi": "Tôi đổi nhân dân tệ."
-    },
-    {
-     "speaker": "营业员",
-     "zh": "换多少？",
-     "vi": "Đổi bao nhiêu?"
-    },
-    {
-     "speaker": "麦克",
-     "zh": "二百美元。",
-     "vi": "Hai trăm đô la Mỹ."
-    },
-    {
-     "speaker": "营业员",
-     "zh": "请等一会儿……先生，给您钱。请数数。",
-     "vi": "Xin đợi một lát… Thưa anh, gửi anh tiền. Mời anh đếm lại."
-    },
-    {
-     "speaker": "麦克",
-     "zh": "对了。谢谢！",
-     "vi": "Đúng rồi. Cảm ơn!"
-    },
-    {
-     "speaker": "营业员",
-     "zh": "不客气！",
-     "vi": "Không có gì!"
+      "id": "L09-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 我爸爸是老___。",
+      "options": [
+        "师",
+        "生",
+        "是"
+      ],
+      "answer": "师"
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L09-g1",
-   "title": "先生、小姐",
-   "note": "Cách gọi lịch sự: 先生 = ông/anh; 小姐 = cô/chị (người trẻ).",
-   "examples": [
+  ],
+  "texts": [
     {
-     "zh": "小姐，我换钱。",
-     "vi": "Chị ơi, tôi đổi tiền."
+      "title": "我换人民币",
+      "lines": [
+        {
+          "speaker": "玛丽",
+          "zh": "下午我去图书馆，你去不去？",
+          "vi": "Chiều nay tôi đi thư viện, bạn có đi không?"
+        },
+        {
+          "speaker": "麦克",
+          "zh": "我不去。我要去银行换钱。",
+          "vi": "Tôi không đi. Tôi phải đi ngân hàng đổi tiền."
+        },
+        {
+          "speaker": "麦克",
+          "zh": "小姐，我换钱。",
+          "vi": "(Đổi tiền ở Ngân hàng Trung Quốc) Chị ơi, tôi đổi tiền."
+        },
+        {
+          "speaker": "营业员",
+          "zh": "您换什么钱？",
+          "vi": "Anh đổi tiền gì?"
+        },
+        {
+          "speaker": "麦克",
+          "zh": "我换人民币。",
+          "vi": "Tôi đổi nhân dân tệ."
+        },
+        {
+          "speaker": "营业员",
+          "zh": "换多少？",
+          "vi": "Đổi bao nhiêu?"
+        },
+        {
+          "speaker": "麦克",
+          "zh": "二百美元。",
+          "vi": "Hai trăm đô la Mỹ."
+        },
+        {
+          "speaker": "营业员",
+          "zh": "请等一会儿……先生，给您钱。请数数。",
+          "vi": "Xin đợi một lát… Thưa anh, gửi anh tiền. Mời anh đếm lại."
+        },
+        {
+          "speaker": "麦克",
+          "zh": "对了。谢谢！",
+          "vi": "Đúng rồi. Cảm ơn!"
+        },
+        {
+          "speaker": "营业员",
+          "zh": "不客气！",
+          "vi": "Không có gì!"
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L09-g2",
-   "title": "请等一会儿",
-   "note": "一会儿 = một lát, đặt sau động từ chỉ thời gian ngắn.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "请等一会儿。",
-     "vi": "Xin đợi một lát."
-    }
-   ]
-  },
-  {
-   "id": "L09-g3",
-   "title": "Ngữ âm: ba thanh 3 liền nhau",
-   "note": "Ba thanh 3 liền nhau thường đọc thành 2–2–3 hoặc 3(nửa)–2–3 tùy cách ngắt nhóm từ.",
-   "examples": [
+      "id": "L09-g1",
+      "title": "先生、小姐",
+      "note": "Cách gọi lịch sự: 先生 = ông/anh; 小姐 = cô/chị (người trẻ).",
+      "examples": [
+        {
+          "zh": "小姐，我换钱。",
+          "vi": "Chị ơi, tôi đổi tiền."
+        }
+      ]
+    },
     {
-     "zh": "我很好。",
-     "vi": "Tôi rất khỏe."
+      "id": "L09-g2",
+      "title": "请等一会儿",
+      "note": "一会儿 = một lát, đặt sau động từ chỉ thời gian ngắn.",
+      "examples": [
+        {
+          "zh": "请等一会儿。",
+          "vi": "Xin đợi một lát."
+        }
+      ]
+    },
+    {
+      "id": "L09-g3",
+      "title": "Ngữ âm: ba thanh 3 liền nhau",
+      "note": "Ba thanh 3 liền nhau thường đọc thành 2–2–3 hoặc 3(nửa)–2–3 tùy cách ngắt nhóm từ.",
+      "examples": [
+        {
+          "zh": "我很好。",
+          "vi": "Tôi rất khỏe."
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

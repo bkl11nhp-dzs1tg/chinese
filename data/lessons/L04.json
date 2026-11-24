@@ -1,182 +1,262 @@
 {
- "id": "L04",
- "book": "Hán ngữ 1",
- "unit": 4,
- "order": 4,
- "title": "你去哪儿",
- "title_vi": "Bạn đi đâu",
- "vocab_ids": [
-  "L04-对不起",
-  "L04-二",
-  "L04-回",
-  "L04-几",
-  "L04-今天",
-  "L04-没关系",
-  "L04-哪儿",
-  "L04-那儿",
-  "L04-三",
-  "L04-四",
-  "L04-天",
-  "L04-我",
-  "L04-星期",
-  "L04-星期二",
-  "L04-星期六",
-  "L04-星期三",
-  "L04-星期四",
-  "L04-星期天",
-  "L04-星期五",
-  "L04-星期一",
-  "L04-学校",
-  "L04-再见",
-  "L04-昨天"
- ],
- "exercises": [
-  {
-   "id": "L04-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Bạn đi đâu?”",
-   "options": [
-    "你",
-    "去",
-    "哪儿"
-   ],
-   "answer": [
-    "你",
-    "去",
-    "哪儿"
-   ],
-   "explanation": "你去哪儿 — Bạn đi đâu?"
-  },
-  {
-   "id": "L04-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Hôm nay thứ mấy?”",
-   "options": [
-    "今天",
-    "星期",
-    "几"
-   ],
-   "answer": [
-    "今天",
-    "星期",
-    "几"
-   ],
-   "explanation": "今天星期几 — Hôm nay thứ mấy?"
-  },
-  {
-   "id": "L04-r3",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi về trường.”",
-   "options": [
-    "我",
-    "回",
-    "学校"
-   ],
-   "answer": [
-    "我",
-    "回",
-    "学校"
-   ],
-   "explanation": "我回学校 — Tôi về trường."
-  },
-  {
-   "id": "L04-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 对不起！— 没___。",
-   "answer": "关系",
-   "explanation": "Xin lỗi! — Không sao."
-  }
- ],
- "texts": [
-  {
-   "title": "你去哪儿",
-   "lines": [
+  "id": "L04",
+  "book": "Hán ngữ 1",
+  "unit": 4,
+  "order": 4,
+  "title": "你去哪儿",
+  "title_vi": "Bạn đi đâu",
+  "vocab_ids": [
+    "L04-对不起",
+    "L04-二",
+    "L04-回",
+    "L04-几",
+    "L04-今天",
+    "L04-没关系",
+    "L04-哪儿",
+    "L04-那儿",
+    "L04-三",
+    "L04-四",
+    "L04-天",
+    "L04-我",
+    "L04-星期",
+    "L04-星期二",
+    "L04-星期六",
+    "L04-星期三",
+    "L04-星期四",
+    "L04-星期天",
+    "L04-星期五",
+    "L04-星期一",
+    "L04-学校",
+    "L04-再见",
+    "L04-昨天"
+  ],
+  "exercises": [
     {
-     "speaker": "A",
-     "zh": "今天星期几？",
-     "vi": "Hôm nay thứ mấy?"
+      "id": "L04-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn đi đâu?”",
+      "options": [
+        "你",
+        "去",
+        "哪儿"
+      ],
+      "answer": [
+        "你",
+        "去",
+        "哪儿"
+      ],
+      "explanation": "你去哪儿 — Bạn đi đâu?"
     },
     {
-     "speaker": "B",
-     "zh": "今天星期二（一、三、四、五、六、天）。",
-     "vi": "Hôm nay thứ ba (thứ hai, thứ tư, thứ năm, thứ sáu, thứ bảy, chủ nhật)."
+      "id": "L04-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Hôm nay thứ mấy?”",
+      "options": [
+        "今天",
+        "星期",
+        "几"
+      ],
+      "answer": [
+        "今天",
+        "星期",
+        "几"
+      ],
+      "explanation": "今天星期几 — Hôm nay thứ mấy?"
     },
     {
-     "speaker": "A",
-     "zh": "你去哪儿？",
-     "vi": "Bạn đi đâu?"
+      "id": "L04-r3",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi về trường.”",
+      "options": [
+        "我",
+        "回",
+        "学校"
+      ],
+      "answer": [
+        "我",
+        "回",
+        "学校"
+      ],
+      "explanation": "我回学校 — Tôi về trường."
     },
     {
-     "speaker": "B",
-     "zh": "我去天安门，你去不去？",
-     "vi": "Tôi đi Thiên An Môn, bạn có đi không?"
+      "id": "L04-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 对不起！— 没___。",
+      "answer": "关系",
+      "explanation": "Xin lỗi! — Không sao."
     },
     {
-     "speaker": "A",
-     "zh": "不去，我回学校。",
-     "vi": "Không đi, tôi về trường."
+      "id": "L04-wb1",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi yêu bố mẹ.”",
+      "options": [
+        "爱",
+        "爸爸",
+        "妈妈",
+        "我"
+      ],
+      "answer": [
+        "我",
+        "爱",
+        "爸爸",
+        "妈妈"
+      ],
+      "explanation": "我爱爸爸妈妈 — Tôi yêu bố mẹ."
     },
     {
-     "speaker": "B",
-     "zh": "再见！",
-     "vi": "Tạm biệt!"
+      "id": "L04-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 对不起",
+      "options": [
+        "duìbuqǐ",
+        "bú kèqi"
+      ],
+      "answer": "duìbuqǐ"
     },
     {
-     "speaker": "A",
-     "zh": "再见！",
-     "vi": "Tạm biệt!"
+      "id": "L04-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 再见",
+      "options": [
+        "zàijiàn",
+        "zàijiān"
+      ],
+      "answer": "zàijiàn"
+    },
+    {
+      "id": "L04-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 学校",
+      "options": [
+        "xuéxiào",
+        "xuésheng"
+      ],
+      "answer": "xuéxiào"
+    },
+    {
+      "id": "L04-wb5",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 去哪儿",
+      "options": [
+        "qù nǎr",
+        "qù nàr"
+      ],
+      "answer": "qù nǎr"
+    },
+    {
+      "id": "L04-wb6",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Anh trai đi đến trường.”",
+      "options": [
+        "去",
+        "学校",
+        "哥哥"
+      ],
+      "answer": [
+        "哥哥",
+        "去",
+        "学校"
+      ],
+      "explanation": "哥哥去学校 — Anh trai đi đến trường."
     }
-   ]
-  },
-  {
-   "title": "对不起",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "A",
-     "zh": "对不起！",
-     "vi": "Xin lỗi!"
+      "title": "你去哪儿",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "今天星期几？",
+          "vi": "Hôm nay thứ mấy?"
+        },
+        {
+          "speaker": "B",
+          "zh": "今天星期二（一、三、四、五、六、天）。",
+          "vi": "Hôm nay thứ ba (thứ hai, thứ tư, thứ năm, thứ sáu, thứ bảy, chủ nhật)."
+        },
+        {
+          "speaker": "A",
+          "zh": "你去哪儿？",
+          "vi": "Bạn đi đâu?"
+        },
+        {
+          "speaker": "B",
+          "zh": "我去天安门，你去不去？",
+          "vi": "Tôi đi Thiên An Môn, bạn có đi không?"
+        },
+        {
+          "speaker": "A",
+          "zh": "不去，我回学校。",
+          "vi": "Không đi, tôi về trường."
+        },
+        {
+          "speaker": "B",
+          "zh": "再见！",
+          "vi": "Tạm biệt!"
+        },
+        {
+          "speaker": "A",
+          "zh": "再见！",
+          "vi": "Tạm biệt!"
+        }
+      ]
     },
     {
-     "speaker": "B",
-     "zh": "没关系！",
-     "vi": "Không sao!"
+      "title": "对不起",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "对不起！",
+          "vi": "Xin lỗi!"
+        },
+        {
+          "speaker": "B",
+          "zh": "没关系！",
+          "vi": "Không sao!"
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L04-g1",
-   "title": "Ngữ âm: z c s; thanh nhẹ; biến điệu 不",
-   "note": "Học thanh mẫu z c s. 不 bù đứng trước thanh 4 đọc thành bú: 不去 bú qù, 不是 bú shì.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "我不去。",
-     "vi": "Tôi không đi."
-    }
-   ]
-  },
-  {
-   "id": "L04-g2",
-   "title": "Hỏi thứ trong tuần",
-   "note": "星期 + 一…六 = thứ hai … thứ bảy; 星期天/星期日 = chủ nhật. Hỏi: 今天星期几？",
-   "examples": [
+      "id": "L04-g1",
+      "title": "Ngữ âm: z c s; thanh nhẹ; biến điệu 不",
+      "note": "Học thanh mẫu z c s. 不 bù đứng trước thanh 4 đọc thành bú: 不去 bú qù, 不是 bú shì.",
+      "examples": [
+        {
+          "zh": "我不去。",
+          "vi": "Tôi không đi."
+        }
+      ]
+    },
     {
-     "zh": "今天星期几？",
-     "vi": "Hôm nay thứ mấy?"
-    }
-   ]
-  },
-  {
-   "id": "L04-g3",
-   "title": "Câu hỏi chính phản (động từ + 不 + động từ)",
-   "note": "Lặp động từ ở dạng khẳng định + phủ định để hỏi: 去不去 = có đi không.",
-   "examples": [
+      "id": "L04-g2",
+      "title": "Hỏi thứ trong tuần",
+      "note": "星期 + 一…六 = thứ hai … thứ bảy; 星期天/星期日 = chủ nhật. Hỏi: 今天星期几？",
+      "examples": [
+        {
+          "zh": "今天星期几？",
+          "vi": "Hôm nay thứ mấy?"
+        }
+      ]
+    },
     {
-     "zh": "你去不去？",
-     "vi": "Bạn có đi không?"
+      "id": "L04-g3",
+      "title": "Câu hỏi chính phản (động từ + 不 + động từ)",
+      "note": "Lặp động từ ở dạng khẳng định + phủ định để hỏi: 去不去 = có đi không.",
+      "examples": [
+        {
+          "zh": "你去不去？",
+          "vi": "Bạn có đi không?"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

@@ -86,3 +86,9 @@ export function readFileText(file) {
 }
 
 export const pct = (x) => `${Math.round(x * 100)}%`;
+
+/** Ghi chú dài → từng câu một dòng (tách sau dấu . ; và xuống dòng; giữ nguyên dấu). */
+export function noteLines(text, cls = 'note-lines') {
+  const parts = String(text || '').split(/(?<=[.;。；])\s+|\n+/).map((s) => s.trim()).filter(Boolean);
+  return h('ul', { class: cls }, parts.map((p) => h('li', {}, p)));
+}

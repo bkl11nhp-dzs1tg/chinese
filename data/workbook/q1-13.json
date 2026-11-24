@@ -1,0 +1,11 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 电脑","options":["diànnǎo","diànshì"],"answer":"diànnǎo"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 照片","options":["zhàopiàn","zhào xiàng"],"answer":"zhàopiàn"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 操场","options":["cāochǎng","cǎochǎng"],"answer":"cāochǎng"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (diànnǎo)","options":["电脑","电视","电话"],"answer":"电脑"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (zìxíngchē)","options":["自行车","汽车","出租车"],"answer":"自行车"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (zhàopiàn)","options":["照片","电影","画儿"],"answer":"照片"},
+ {"type":"reorder","vi":"Nhà bạn có máy tính không?","words":["你","家","有","电脑","吗"]},
+ {"type":"reorder","vi":"Trường không có sân tập.","words":["学校","没有","操场"]},
+ {"type":"reorder","vi":"Bạn có từ điển không?","words":["你","有","词典","吗"]}
+]

@@ -1,238 +1,598 @@
 {
- "id": "L21",
- "book": "Hán ngữ 2",
- "unit": 21,
- "order": 21,
- "title": "我们明天七点一刻出发",
- "title_vi": "Ngày mai 7 giờ 15 chúng ta xuất phát",
- "vocab_ids": [
-  "L21-半",
-  "L21-操场",
-  "L21-差",
-  "L21-出发",
-  "L21-床",
-  "L21-带",
-  "L21-点",
-  "L21-锻炼",
-  "L21-分（钟）",
-  "L21-集合",
-  "L21-教室",
-  "L21-节",
-  "L21-刻",
-  "L21-快",
-  "L21-每",
-  "L21-们",
-  "L21-年级",
-  "L21-爬",
-  "L21-起床",
-  "L21-前",
-  "L21-山",
-  "L21-上车",
-  "L21-上课",
-  "L21-睡觉",
-  "L21-晚饭",
-  "L21-午饭",
-  "L21-洗",
-  "L21-洗澡",
-  "L21-下车",
-  "L21-以后",
-  "L21-早饭",
-  "L21-早上",
-  "TR2-山本"
- ],
- "exercises": [
-  {
-   "id": "L21-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Ngày mai 7 giờ 15 chúng ta xuất phát.”",
-   "options": [
-    "我们",
-    "明天",
-    "七点",
-    "一刻",
-    "出发"
-   ],
-   "answer": [
-    "我们",
-    "明天",
-    "七点",
-    "一刻",
-    "出发"
-   ],
-   "explanation": "我们明天七点一刻出发 — Ngày mai 7 giờ 15 chúng ta xuất phát."
-  },
-  {
-   "id": "L21-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Mỗi sáng tôi dậy lúc 6 giờ rưỡi.”",
-   "options": [
-    "我",
-    "每天",
-    "早上",
-    "六点半",
-    "起床"
-   ],
-   "answer": [
-    "我",
-    "每天",
-    "早上",
-    "六点半",
-    "起床"
-   ],
-   "explanation": "我每天早上六点半起床 — Mỗi sáng tôi dậy lúc 6 giờ rưỡi."
-  },
-  {
-   "id": "L21-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 你们每天几点___课？",
-   "answer": "上",
-   "explanation": "Các bạn mấy giờ vào học mỗi ngày?"
-  }
- ],
- "texts": [
-  {
-   "title": "我的一天",
-   "lines": [
+  "id": "L21",
+  "book": "Hán ngữ 2",
+  "unit": 21,
+  "order": 21,
+  "title": "我们明天七点一刻出发",
+  "title_vi": "Ngày mai 7 giờ 15 chúng ta xuất phát",
+  "vocab_ids": [
+    "L21-半",
+    "L21-操场",
+    "L21-差",
+    "L21-出发",
+    "L21-床",
+    "L21-带",
+    "L21-点",
+    "L21-锻炼",
+    "L21-分（钟）",
+    "L21-集合",
+    "L21-教室",
+    "L21-节",
+    "L21-刻",
+    "L21-快",
+    "L21-每",
+    "L21-们",
+    "L21-年级",
+    "L21-爬",
+    "L21-起床",
+    "L21-前",
+    "L21-山",
+    "L21-上车",
+    "L21-上课",
+    "L21-睡觉",
+    "L21-晚饭",
+    "L21-午饭",
+    "L21-洗",
+    "L21-洗澡",
+    "L21-下车",
+    "L21-以后",
+    "L21-早饭",
+    "L21-早上",
+    "TR2-山本"
+  ],
+  "exercises": [
     {
-     "speaker": "",
-     "zh": "我每天早上六点半起床，七点吃早饭。",
-     "vi": "Mỗi sáng tôi dậy lúc sáu giờ rưỡi, bảy giờ ăn sáng."
+      "id": "L21-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Ngày mai 7 giờ 15 chúng ta xuất phát.”",
+      "options": [
+        "我们",
+        "明天",
+        "七点",
+        "一刻",
+        "出发"
+      ],
+      "answer": [
+        "我们",
+        "明天",
+        "七点",
+        "一刻",
+        "出发"
+      ],
+      "explanation": "我们明天七点一刻出发 — Ngày mai 7 giờ 15 chúng ta xuất phát."
     },
     {
-     "speaker": "",
-     "zh": "差十分八点去教室，八点上课。",
-     "vi": "Tám giờ kém mười đến lớp, tám giờ vào học."
+      "id": "L21-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Mỗi sáng tôi dậy lúc 6 giờ rưỡi.”",
+      "options": [
+        "我",
+        "每天",
+        "早上",
+        "六点半",
+        "起床"
+      ],
+      "answer": [
+        "我",
+        "每天",
+        "早上",
+        "六点半",
+        "起床"
+      ],
+      "explanation": "我每天早上六点半起床 — Mỗi sáng tôi dậy lúc 6 giờ rưỡi."
     },
     {
-     "speaker": "",
-     "zh": "上午我们有四节课，十二点下课。",
-     "vi": "Buổi sáng chúng tôi có bốn tiết, mười hai giờ tan học."
+      "id": "L21-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 你们每天几点___课？",
+      "answer": "上",
+      "explanation": "Các bạn mấy giờ vào học mỗi ngày?"
     },
     {
-     "speaker": "",
-     "zh": "中午我去食堂吃午饭。",
-     "vi": "Buổi trưa tôi đến nhà ăn ăn cơm trưa."
+      "id": "L21-wb1",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chào các bạn!”",
+      "options": [
+        "好",
+        "同学们"
+      ],
+      "answer": [
+        "同学们",
+        "好"
+      ],
+      "explanation": "同学们好 — Chào các bạn!"
     },
     {
-     "speaker": "",
-     "zh": "午饭以后，我常常去朋友那儿聊天儿。",
-     "vi": "Sau bữa trưa, tôi thường đến chỗ bạn nói chuyện."
+      "id": "L21-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 早上",
+      "options": [
+        "zǎoshang",
+        "wǎnshang"
+      ],
+      "answer": "zǎoshang"
     },
     {
-     "speaker": "",
-     "zh": "下午没有课的时候，我去图书馆看书，或者跟中国朋友一起练习口语。",
-     "vi": "Buổi chiều lúc không có giờ học, tôi đến thư viện đọc sách, hoặc cùng bạn Trung Quốc luyện khẩu ngữ."
+      "id": "L21-wb3",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi sáng mẹ đi bệnh viện.”",
+      "options": [
+        "医院",
+        "早上",
+        "妈妈",
+        "去"
+      ],
+      "answer": [
+        "早上",
+        "妈妈",
+        "去",
+        "医院"
+      ],
+      "explanation": "早上妈妈去医院 — Buổi sáng mẹ đi bệnh viện."
     },
     {
-     "speaker": "",
-     "zh": "有时候在宿舍看电影光盘。",
-     "vi": "Có lúc ở ký túc xá xem đĩa phim."
+      "id": "L21-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 上课",
+      "options": [
+        "shàng kè",
+        "shāng kè"
+      ],
+      "answer": "shàng kè"
     },
     {
-     "speaker": "",
-     "zh": "四点我去操场锻炼身体。",
-     "vi": "Bốn giờ tôi ra sân tập rèn luyện thân thể."
+      "id": "L21-wb5",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我___教室。",
+      "options": [
+        "去",
+        "听",
+        "问"
+      ],
+      "answer": "去"
     },
     {
-     "speaker": "",
-     "zh": "五点回宿舍洗澡，洗衣服，六点半或者七点吃晚饭。",
-     "vi": "Năm giờ về ký túc xá tắm, giặt quần áo, sáu giờ rưỡi hoặc bảy giờ ăn tối."
+      "id": "L21-wb6",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Vào học rồi.”",
+      "options": [
+        "了",
+        "上课"
+      ],
+      "answer": [
+        "上课",
+        "了"
+      ],
+      "explanation": "上课了 — Vào học rồi."
     },
     {
-     "speaker": "",
-     "zh": "晚上我做练习、写汉字、预习课文和生词，然后看看电视、听听音乐，十一点睡觉。",
-     "vi": "Buổi tối tôi làm bài tập, viết chữ Hán, chuẩn bị bài khóa và từ mới, sau đó xem ti vi, nghe nhạc một chút, mười một giờ đi ngủ."
+      "id": "L21-wb7",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Các bạn nghe giảng.”",
+      "options": [
+        "听",
+        "课",
+        "同学们"
+      ],
+      "answer": [
+        "同学们",
+        "听",
+        "课"
+      ],
+      "explanation": "同学们听课 — Các bạn nghe giảng."
+    },
+    {
+      "id": "L21-wb8",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: ___ (wèn)",
+      "options": [
+        "问",
+        "们",
+        "门"
+      ],
+      "answer": "问"
+    },
+    {
+      "id": "L21-wb9",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (wǎnshang)",
+      "options": [
+        "晚上",
+        "早上",
+        "中午"
+      ],
+      "answer": "晚上"
+    },
+    {
+      "id": "L21-wb10",
+      "source": "workbook",
+      "type": "match",
+      "prompt": "Nối từ với nghĩa",
+      "pairs": [
+        {
+          "left": "早饭",
+          "right": "cơm sáng"
+        },
+        {
+          "left": "午饭",
+          "right": "cơm trưa"
+        },
+        {
+          "left": "晚饭",
+          "right": "cơm tối"
+        }
+      ]
+    },
+    {
+      "id": "L21-wb11",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúng tôi ăn cơm trưa.”",
+      "options": [
+        "吃",
+        "我们",
+        "午饭"
+      ],
+      "answer": [
+        "我们",
+        "吃",
+        "午饭"
+      ],
+      "explanation": "我们吃午饭 — Chúng tôi ăn cơm trưa."
+    },
+    {
+      "id": "L21-wb12",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi sáng tôi ăn mì.”",
+      "options": [
+        "我",
+        "早上",
+        "吃",
+        "面条儿"
+      ],
+      "answer": [
+        "早上",
+        "我",
+        "吃",
+        "面条儿"
+      ],
+      "explanation": "早上我吃面条儿 — Buổi sáng tôi ăn mì."
+    },
+    {
+      "id": "L21-wb13",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 妈妈是大夫，早上她去___。",
+      "options": [
+        "医院",
+        "回家",
+        "学校"
+      ],
+      "answer": "医院"
+    },
+    {
+      "id": "L21-wb14",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (zhōngwǔ)",
+      "options": [
+        "中午",
+        "早上",
+        "晚上"
+      ],
+      "answer": "中午"
+    },
+    {
+      "id": "L21-wb15",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi sáng tôi đến trường.”",
+      "options": [
+        "我",
+        "学校",
+        "早上",
+        "去"
+      ],
+      "answer": [
+        "早上",
+        "我",
+        "去",
+        "学校"
+      ],
+      "explanation": "早上我去学校 — Buổi sáng tôi đến trường."
+    },
+    {
+      "id": "L21-wb16",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 操场",
+      "options": [
+        "cāochǎng",
+        "cǎochǎng"
+      ],
+      "answer": "cāochǎng"
+    },
+    {
+      "id": "L21-wb17",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Trường không có sân tập.”",
+      "options": [
+        "没有",
+        "学校",
+        "操场"
+      ],
+      "answer": [
+        "学校",
+        "没有",
+        "操场"
+      ],
+      "explanation": "学校没有操场 — Trường không có sân tập."
+    },
+    {
+      "id": "L21-wb18",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn lượng từ đúng: 房间里有两___床。",
+      "options": [
+        "张",
+        "个",
+        "本"
+      ],
+      "answer": "张"
+    },
+    {
+      "id": "L21-wb19",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "— 你去哪儿？ — ___",
+      "options": [
+        "我去操场。",
+        "我姓张。",
+        "我有三支笔。"
+      ],
+      "answer": "我去操场。"
+    },
+    {
+      "id": "L21-wb20",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Sân tập của trường rất rộng.”",
+      "options": [
+        "操场",
+        "很",
+        "大",
+        "学校",
+        "的"
+      ],
+      "answer": [
+        "学校",
+        "的",
+        "操场",
+        "很",
+        "大"
+      ],
+      "explanation": "学校的操场很大 — Sân tập của trường rất rộng."
+    },
+    {
+      "id": "L21-wb21",
+      "source": "workbook",
+      "type": "match",
+      "prompt": "Nối từ với nghĩa",
+      "pairs": [
+        {
+          "left": "好看",
+          "right": "đẹp, ưa nhìn"
+        },
+        {
+          "left": "好吃",
+          "right": "ngon"
+        },
+        {
+          "left": "爬山",
+          "right": "leo núi"
+        }
+      ]
+    },
+    {
+      "id": "L21-wb22",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Buổi sáng tôi và bố đi leo núi.”",
+      "options": [
+        "我",
+        "爬",
+        "爸爸",
+        "山",
+        "早上",
+        "和",
+        "去"
+      ],
+      "answer": [
+        "早上",
+        "我",
+        "和",
+        "爸爸",
+        "去",
+        "爬",
+        "山"
+      ],
+      "explanation": "早上我和爸爸去爬山 — Buổi sáng tôi và bố đi leo núi."
+    },
+    {
+      "id": "L21-wb23",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Các bạn đều viết chữ Hán.”",
+      "options": [
+        "都",
+        "汉字",
+        "同学们",
+        "写"
+      ],
+      "answer": [
+        "同学们",
+        "都",
+        "写",
+        "汉字"
+      ],
+      "explanation": "同学们都写汉字 — Các bạn đều viết chữ Hán."
     }
-   ]
-  },
-  {
-   "title": "明天早上七点一刻出发",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "老师",
-     "zh": "同学们，明天我们去爬山。",
-     "vi": "Các em, ngày mai chúng ta đi leo núi."
+      "title": "我的一天",
+      "lines": [
+        {
+          "speaker": "",
+          "zh": "我每天早上六点半起床，七点吃早饭。",
+          "vi": "Mỗi sáng tôi dậy lúc sáu giờ rưỡi, bảy giờ ăn sáng."
+        },
+        {
+          "speaker": "",
+          "zh": "差十分八点去教室，八点上课。",
+          "vi": "Tám giờ kém mười đến lớp, tám giờ vào học."
+        },
+        {
+          "speaker": "",
+          "zh": "上午我们有四节课，十二点下课。",
+          "vi": "Buổi sáng chúng tôi có bốn tiết, mười hai giờ tan học."
+        },
+        {
+          "speaker": "",
+          "zh": "中午我去食堂吃午饭。",
+          "vi": "Buổi trưa tôi đến nhà ăn ăn cơm trưa."
+        },
+        {
+          "speaker": "",
+          "zh": "午饭以后，我常常去朋友那儿聊天儿。",
+          "vi": "Sau bữa trưa, tôi thường đến chỗ bạn nói chuyện."
+        },
+        {
+          "speaker": "",
+          "zh": "下午没有课的时候，我去图书馆看书，或者跟中国朋友一起练习口语。",
+          "vi": "Buổi chiều lúc không có giờ học, tôi đến thư viện đọc sách, hoặc cùng bạn Trung Quốc luyện khẩu ngữ."
+        },
+        {
+          "speaker": "",
+          "zh": "有时候在宿舍看电影光盘。",
+          "vi": "Có lúc ở ký túc xá xem đĩa phim."
+        },
+        {
+          "speaker": "",
+          "zh": "四点我去操场锻炼身体。",
+          "vi": "Bốn giờ tôi ra sân tập rèn luyện thân thể."
+        },
+        {
+          "speaker": "",
+          "zh": "五点回宿舍洗澡，洗衣服，六点半或者七点吃晚饭。",
+          "vi": "Năm giờ về ký túc xá tắm, giặt quần áo, sáu giờ rưỡi hoặc bảy giờ ăn tối."
+        },
+        {
+          "speaker": "",
+          "zh": "晚上我做练习、写汉字、预习课文和生词，然后看看电视、听听音乐，十一点睡觉。",
+          "vi": "Buổi tối tôi làm bài tập, viết chữ Hán, chuẩn bị bài khóa và từ mới, sau đó xem ti vi, nghe nhạc một chút, mười một giờ đi ngủ."
+        }
+      ]
     },
     {
-     "speaker": "山本",
-     "zh": "太好了！老师，您去吗？",
-     "vi": "Tuyệt quá! Thầy có đi không ạ?"
-    },
-    {
-     "speaker": "老师",
-     "zh": "去。一年级的老师和学生都去。",
-     "vi": "Có. Giáo viên và học sinh năm thứ nhất đều đi."
-    },
-    {
-     "speaker": "山本",
-     "zh": "明天什么时候出发？",
-     "vi": "Ngày mai mấy giờ xuất phát ạ?"
-    },
-    {
-     "speaker": "老师",
-     "zh": "明天早上七点在楼前集合上车，七点一刻准时出发。",
-     "vi": "Bảy giờ sáng mai tập trung trước tòa nhà lên xe, bảy giờ mười lăm xuất phát đúng giờ."
-    },
-    {
-     "speaker": "山本",
-     "zh": "中午回来吗？",
-     "vi": "Buổi trưa có về không ạ?"
-    },
-    {
-     "speaker": "老师",
-     "zh": "不回来，要带午饭。",
-     "vi": "Không về, phải mang theo cơm trưa."
-    },
-    {
-     "speaker": "山本",
-     "zh": "什么时候回来？",
-     "vi": "Mấy giờ về ạ?"
-    },
-    {
-     "speaker": "老师",
-     "zh": "下午四点。",
-     "vi": "Bốn giờ chiều."
+      "title": "明天早上七点一刻出发",
+      "lines": [
+        {
+          "speaker": "老师",
+          "zh": "同学们，明天我们去爬山。",
+          "vi": "Các em, ngày mai chúng ta đi leo núi."
+        },
+        {
+          "speaker": "山本",
+          "zh": "太好了！老师，您去吗？",
+          "vi": "Tuyệt quá! Thầy có đi không ạ?"
+        },
+        {
+          "speaker": "老师",
+          "zh": "去。一年级的老师和学生都去。",
+          "vi": "Có. Giáo viên và học sinh năm thứ nhất đều đi."
+        },
+        {
+          "speaker": "山本",
+          "zh": "明天什么时候出发？",
+          "vi": "Ngày mai mấy giờ xuất phát ạ?"
+        },
+        {
+          "speaker": "老师",
+          "zh": "明天早上七点在楼前集合上车，七点一刻准时出发。",
+          "vi": "Bảy giờ sáng mai tập trung trước tòa nhà lên xe, bảy giờ mười lăm xuất phát đúng giờ."
+        },
+        {
+          "speaker": "山本",
+          "zh": "中午回来吗？",
+          "vi": "Buổi trưa có về không ạ?"
+        },
+        {
+          "speaker": "老师",
+          "zh": "不回来，要带午饭。",
+          "vi": "Không về, phải mang theo cơm trưa."
+        },
+        {
+          "speaker": "山本",
+          "zh": "什么时候回来？",
+          "vi": "Mấy giờ về ạ?"
+        },
+        {
+          "speaker": "老师",
+          "zh": "下午四点。",
+          "vi": "Bốn giờ chiều."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L21-g1",
-   "title": "Cách nói giờ",
-   "note": "点 = giờ, 分 = phút, 刻 = 15 phút, 半 = rưỡi, 差 = kém. Thời gian đứng trước động từ.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "七点一刻准时出发。",
-     "vi": "Bảy giờ mười lăm xuất phát đúng giờ."
+      "id": "L21-g1",
+      "title": "Cách nói giờ",
+      "note": "点 = giờ, 分 = phút, 刻 = 15 phút, 半 = rưỡi, 差 = kém. Thời gian đứng trước động từ.",
+      "examples": [
+        {
+          "zh": "七点一刻准时出发。",
+          "vi": "Bảy giờ mười lăm xuất phát đúng giờ."
+        },
+        {
+          "zh": "差十分八点去教室。",
+          "vi": "Tám giờ kém mười đến lớp."
+        }
+      ]
     },
     {
-     "zh": "差十分八点去教室。",
-     "vi": "Tám giờ kém mười đến lớp."
-    }
-   ]
-  },
-  {
-   "id": "L21-g2",
-   "title": "我去朋友那儿聊天儿",
-   "note": "Người + 这儿/那儿 = chỗ của người đó (tiếng Hán không nói 去朋友).",
-   "examples": [
+      "id": "L21-g2",
+      "title": "我去朋友那儿聊天儿",
+      "note": "Người + 这儿/那儿 = chỗ của người đó (tiếng Hán không nói 去朋友).",
+      "examples": [
+        {
+          "zh": "我常常去朋友那儿聊天儿。",
+          "vi": "Tôi thường đến chỗ bạn nói chuyện."
+        }
+      ]
+    },
     {
-     "zh": "我常常去朋友那儿聊天儿。",
-     "vi": "Tôi thường đến chỗ bạn nói chuyện."
+      "id": "L21-g3",
+      "title": "们 sau danh từ chỉ người",
+      "note": "同学们 = các bạn học; khi đã có số từ thì không dùng 们.",
+      "examples": [
+        {
+          "zh": "同学们，明天我们去爬山。",
+          "vi": "Các em, ngày mai chúng ta đi leo núi."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L21-g3",
-   "title": "们 sau danh từ chỉ người",
-   "note": "同学们 = các bạn học; khi đã có số từ thì không dùng 们.",
-   "examples": [
-    {
-     "zh": "同学们，明天我们去爬山。",
-     "vi": "Các em, ngày mai chúng ta đi leo núi."
-    }
-   ]
-  }
- ]
+  ]
 }

@@ -1,240 +1,283 @@
 {
- "id": "L14",
- "book": "Hán ngữ 1",
- "unit": 14,
- "order": 14,
- "title": "你的车是新的还是旧的",
- "title_vi": "Xe của bạn mới hay cũ",
- "vocab_ids": [
-  "L14-啊",
-  "L14-杯",
-  "L14-车",
-  "L14-出租车",
-  "L14-点儿",
-  "L14-刚",
-  "L14-还是",
-  "L14-好久",
-  "L14-咖啡",
-  "L14-开",
-  "L14-开学",
-  "L14-来",
-  "L14-蓝",
-  "L14-辆",
-  "L14-马马虎虎",
-  "L14-摩托车",
-  "L14-汽车",
-  "L14-颜色",
-  "L14-有（一）点儿",
-  "L14-自行车",
-  "L14-最近"
- ],
- "exercises": [
-  {
-   "id": "L14-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Xe của bạn mới hay cũ?”",
-   "options": [
-    "你的",
-    "车",
-    "是",
-    "新的",
-    "还是",
-    "旧的"
-   ],
-   "answer": [
-    "你的",
-    "车",
-    "是",
-    "新的",
-    "还是",
-    "旧的"
-   ],
-   "explanation": "你的车是新的还是旧的 — Xe của bạn mới hay cũ?"
-  },
-  {
-   "id": "L14-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Bạn uống trà hay uống cà phê?”",
-   "options": [
-    "你",
-    "喝",
-    "茶",
-    "还是",
-    "喝",
-    "咖啡"
-   ],
-   "answer": [
-    "你",
-    "喝",
-    "茶",
-    "还是",
-    "喝",
-    "咖啡"
-   ],
-   "explanation": "你喝茶还是喝咖啡 — Bạn uống trà hay uống cà phê?"
-  },
-  {
-   "id": "L14-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 我的自行车是蓝___。",
-   "answer": "的",
-   "explanation": "Xe đạp của tôi màu xanh lam."
-  }
- ],
- "texts": [
-  {
-   "title": "您身体好吗",
-   "lines": [
+  "id": "L14",
+  "book": "Hán ngữ 1",
+  "unit": 14,
+  "order": 14,
+  "title": "你的车是新的还是旧的",
+  "title_vi": "Xe của bạn mới hay cũ",
+  "vocab_ids": [
+    "L14-啊",
+    "L14-杯",
+    "L14-车",
+    "L14-出租车",
+    "L14-点儿",
+    "L14-刚",
+    "L14-还是",
+    "L14-好久",
+    "L14-咖啡",
+    "L14-开",
+    "L14-开学",
+    "L14-来",
+    "L14-蓝",
+    "L14-辆",
+    "L14-马马虎虎",
+    "L14-摩托车",
+    "L14-汽车",
+    "L14-颜色",
+    "L14-有（一）点儿",
+    "L14-自行车",
+    "L14-最近"
+  ],
+  "exercises": [
     {
-     "speaker": "关经理",
-     "zh": "王老师，好久不见了。",
-     "vi": "Thầy Vương, lâu lắm rồi không gặp."
+      "id": "L14-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Xe của bạn mới hay cũ?”",
+      "options": [
+        "你的",
+        "车",
+        "是",
+        "新的",
+        "还是",
+        "旧的"
+      ],
+      "answer": [
+        "你的",
+        "车",
+        "是",
+        "新的",
+        "还是",
+        "旧的"
+      ],
+      "explanation": "你的车是新的还是旧的 — Xe của bạn mới hay cũ?"
     },
     {
-     "speaker": "王老师",
-     "zh": "啊！关经理，欢迎，欢迎！",
-     "vi": "A! Giám đốc Quan, hoan nghênh, hoan nghênh!"
+      "id": "L14-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn uống trà hay uống cà phê?”",
+      "options": [
+        "你",
+        "喝",
+        "茶",
+        "还是",
+        "喝",
+        "咖啡"
+      ],
+      "answer": [
+        "你",
+        "喝",
+        "茶",
+        "还是",
+        "喝",
+        "咖啡"
+      ],
+      "explanation": "你喝茶还是喝咖啡 — Bạn uống trà hay uống cà phê?"
     },
     {
-     "speaker": "关经理",
-     "zh": "您身体好吗？",
-     "vi": "Thầy có khỏe không?"
+      "id": "L14-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 我的自行车是蓝___。",
+      "answer": "的",
+      "explanation": "Xe đạp của tôi màu xanh lam."
     },
     {
-     "speaker": "王老师",
-     "zh": "很好。您身体怎么样？",
-     "vi": "Rất khỏe. Sức khỏe của ông thế nào?"
+      "id": "L14-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___ (zìxíngchē)",
+      "options": [
+        "自行车",
+        "汽车",
+        "出租车"
+      ],
+      "answer": "自行车"
     },
     {
-     "speaker": "关经理",
-     "zh": "马马虎虎。",
-     "vi": "Tàm tạm."
+      "id": "L14-wb2",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Xe đạp của tôi rất mới.”",
+      "options": [
+        "很",
+        "我的",
+        "新",
+        "自行车"
+      ],
+      "answer": [
+        "我的",
+        "自行车",
+        "很",
+        "新"
+      ],
+      "explanation": "我的自行车很新 — Xe đạp của tôi rất mới."
     },
     {
-     "speaker": "王老师",
-     "zh": "最近工作忙不忙？",
-     "vi": "Dạo này công việc có bận không?"
-    },
-    {
-     "speaker": "关经理",
-     "zh": "不太忙，您呢？",
-     "vi": "Không bận lắm, còn thầy?"
-    },
-    {
-     "speaker": "王老师",
-     "zh": "刚开学，有点儿忙。喝点儿什么？茶还是咖啡？",
-     "vi": "Vừa khai giảng nên hơi bận. Ông uống chút gì nhé? Trà hay cà phê?"
-    },
-    {
-     "speaker": "关经理",
-     "zh": "喝杯茶吧！",
-     "vi": "Uống cốc trà vậy!"
+      "id": "L14-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: ___个杯子是妈妈的？",
+      "options": [
+        "哪",
+        "那",
+        "吗"
+      ],
+      "answer": "哪"
     }
-   ]
-  },
-  {
-   "title": "你的自行车是新的还是旧的",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "田芳",
-     "zh": "我的车呢？",
-     "vi": "(Dưới lầu có rất nhiều xe đạp, tan học Điền Phương tìm xe) Xe của tôi đâu nhỉ?"
+      "title": "您身体好吗",
+      "lines": [
+        {
+          "speaker": "关经理",
+          "zh": "王老师，好久不见了。",
+          "vi": "Thầy Vương, lâu lắm rồi không gặp."
+        },
+        {
+          "speaker": "王老师",
+          "zh": "啊！关经理，欢迎，欢迎！",
+          "vi": "A! Giám đốc Quan, hoan nghênh, hoan nghênh!"
+        },
+        {
+          "speaker": "关经理",
+          "zh": "您身体好吗？",
+          "vi": "Thầy có khỏe không?"
+        },
+        {
+          "speaker": "王老师",
+          "zh": "很好。您身体怎么样？",
+          "vi": "Rất khỏe. Sức khỏe của ông thế nào?"
+        },
+        {
+          "speaker": "关经理",
+          "zh": "马马虎虎。",
+          "vi": "Tàm tạm."
+        },
+        {
+          "speaker": "王老师",
+          "zh": "最近工作忙不忙？",
+          "vi": "Dạo này công việc có bận không?"
+        },
+        {
+          "speaker": "关经理",
+          "zh": "不太忙，您呢？",
+          "vi": "Không bận lắm, còn thầy?"
+        },
+        {
+          "speaker": "王老师",
+          "zh": "刚开学，有点儿忙。喝点儿什么？茶还是咖啡？",
+          "vi": "Vừa khai giảng nên hơi bận. Ông uống chút gì nhé? Trà hay cà phê?"
+        },
+        {
+          "speaker": "关经理",
+          "zh": "喝杯茶吧！",
+          "vi": "Uống cốc trà vậy!"
+        }
+      ]
     },
     {
-     "speaker": "张东",
-     "zh": "你的车是什么颜色的？",
-     "vi": "Xe của bạn màu gì?"
-    },
-    {
-     "speaker": "田芳",
-     "zh": "蓝的。",
-     "vi": "Màu xanh lam."
-    },
-    {
-     "speaker": "张东",
-     "zh": "是新的还是旧的？",
-     "vi": "Mới hay cũ?"
-    },
-    {
-     "speaker": "田芳",
-     "zh": "新的。",
-     "vi": "Mới."
-    },
-    {
-     "speaker": "张东",
-     "zh": "那辆蓝的是不是你的？",
-     "vi": "Chiếc màu xanh lam kia có phải của bạn không?"
-    },
-    {
-     "speaker": "田芳",
-     "zh": "哪辆？",
-     "vi": "Chiếc nào?"
-    },
-    {
-     "speaker": "张东",
-     "zh": "那辆。",
-     "vi": "Chiếc kia."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "不是。……啊，我的车在那儿呢。",
-     "vi": "Không phải. … A, xe của tôi ở đằng kia."
+      "title": "你的自行车是新的还是旧的",
+      "lines": [
+        {
+          "speaker": "田芳",
+          "zh": "我的车呢？",
+          "vi": "(Dưới lầu có rất nhiều xe đạp, tan học Điền Phương tìm xe) Xe của tôi đâu nhỉ?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "你的车是什么颜色的？",
+          "vi": "Xe của bạn màu gì?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "蓝的。",
+          "vi": "Màu xanh lam."
+        },
+        {
+          "speaker": "张东",
+          "zh": "是新的还是旧的？",
+          "vi": "Mới hay cũ?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "新的。",
+          "vi": "Mới."
+        },
+        {
+          "speaker": "张东",
+          "zh": "那辆蓝的是不是你的？",
+          "vi": "Chiếc màu xanh lam kia có phải của bạn không?"
+        },
+        {
+          "speaker": "田芳",
+          "zh": "哪辆？",
+          "vi": "Chiếc nào?"
+        },
+        {
+          "speaker": "张东",
+          "zh": "那辆。",
+          "vi": "Chiếc kia."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "不是。……啊，我的车在那儿呢。",
+          "vi": "Không phải. … A, xe của tôi ở đằng kia."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L14-g1",
-   "title": "有(一)点儿 + tính từ",
-   "note": "Chỉ mức độ nhẹ, thường mang ý không như mong muốn.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "刚开学，有点儿忙。",
-     "vi": "Vừa khai giảng nên hơi bận."
-    }
-   ]
-  },
-  {
-   "id": "L14-g2",
-   "title": "Câu vị ngữ chủ vị",
-   "note": "Vị ngữ là một cụm chủ–vị: 您身体好吗？ (sức khỏe của ông tốt không).",
-   "examples": [
-    {
-     "zh": "您身体好吗？",
-     "vi": "Ông có khỏe không?"
-    }
-   ]
-  },
-  {
-   "id": "L14-g3",
-   "title": "Câu hỏi lựa chọn …还是…？",
-   "note": "Đưa ra hai khả năng để người nghe chọn; không thêm 吗.",
-   "examples": [
-    {
-     "zh": "茶还是咖啡？",
-     "vi": "Trà hay cà phê?"
+      "id": "L14-g1",
+      "title": "有(一)点儿 + tính từ",
+      "note": "Chỉ mức độ nhẹ, thường mang ý không như mong muốn.",
+      "examples": [
+        {
+          "zh": "刚开学，有点儿忙。",
+          "vi": "Vừa khai giảng nên hơi bận."
+        }
+      ]
     },
     {
-     "zh": "是新的还是旧的？",
-     "vi": "Mới hay cũ?"
-    }
-   ]
-  },
-  {
-   "id": "L14-g4",
-   "title": "Câu hỏi tỉnh lược …呢？",
-   "note": "Danh từ/đại từ + 呢 hỏi lại điều vừa nói: 你呢？ = còn bạn?",
-   "examples": [
-    {
-     "zh": "不太忙，您呢？",
-     "vi": "Không bận lắm, còn ông?"
+      "id": "L14-g2",
+      "title": "Câu vị ngữ chủ vị",
+      "note": "Vị ngữ là một cụm chủ–vị: 您身体好吗？ (sức khỏe của ông tốt không).",
+      "examples": [
+        {
+          "zh": "您身体好吗？",
+          "vi": "Ông có khỏe không?"
+        }
+      ]
     },
     {
-     "zh": "我的车呢？",
-     "vi": "Xe của tôi đâu nhỉ?"
+      "id": "L14-g3",
+      "title": "Câu hỏi lựa chọn …还是…？",
+      "note": "Đưa ra hai khả năng để người nghe chọn; không thêm 吗.",
+      "examples": [
+        {
+          "zh": "茶还是咖啡？",
+          "vi": "Trà hay cà phê?"
+        },
+        {
+          "zh": "是新的还是旧的？",
+          "vi": "Mới hay cũ?"
+        }
+      ]
+    },
+    {
+      "id": "L14-g4",
+      "title": "Câu hỏi tỉnh lược …呢？",
+      "note": "Danh từ/đại từ + 呢 hỏi lại điều vừa nói: 你呢？ = còn bạn?",
+      "examples": [
+        {
+          "zh": "不太忙，您呢？",
+          "vi": "Không bận lắm, còn ông?"
+        },
+        {
+          "zh": "我的车呢？",
+          "vi": "Xe của tôi đâu nhỉ?"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

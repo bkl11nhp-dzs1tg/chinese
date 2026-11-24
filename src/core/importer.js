@@ -6,7 +6,7 @@ import { parseCsv } from './csv.js';
 export const VOCAB_COLUMNS = [
   'id', 'hanzi', 'pinyin', 'meaning', 'hsk_level', 'lesson_id',
   'example', 'example_pinyin', 'example_meaning', 'tags',
-  'pos', 'han_viet', // tùy chọn: từ loại, âm Hán Việt
+  'pos', 'han_viet', 'topic', // tùy chọn: từ loại, âm Hán Việt, chủ đề
 ];
 export const REQUIRED_COLUMNS = ['id', 'hanzi', 'pinyin', 'meaning'];
 export const EXERCISE_TYPES = ['choose', 'fill', 'match', 'reorder'];
@@ -83,6 +83,7 @@ function buildCard(rec, source, line, errors) {
     tags,
     pos: nfc(rec.pos),
     han_viet: nfc(rec.han_viet),
+    topic: nfc(rec.topic) || null,
   };
 }
 

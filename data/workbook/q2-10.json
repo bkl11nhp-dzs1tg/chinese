@@ -1,0 +1,9 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: ___个碗是你的？","options":["哪","谁","什么"],"answer":"哪"},
+ {"type":"choose","prompt":"Chọn từ đúng: 房间___有一部电话。","options":["里","上","下"],"answer":"里"},
+ {"type":"choose","prompt":"Chọn từ đúng: 学校对___是银行。","options":["面","边","里"],"answer":"面"},
+ {"type":"choose","prompt":"— 这个杯子是谁的？ — ___","options":["这个杯子是我的。","这个杯子是红的。","杯子很漂亮。"],"answer":"这个杯子是我的。"},
+ {"type":"choose","prompt":"— 学校前面是什么地方？ — ___","options":["学校前面是马路。","学校后面是马路。","学校左边是马路。"],"answer":"学校前面是马路。"},
+ {"type":"choose","prompt":"— 你的裤子是什么颜色的？ — ___","options":["我的裤子是黑的。","这条裤子很长。","这条裤子是我的。"],"answer":"我的裤子是黑的。"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___ (wǎn)","options":["碗","晚","完"],"answer":"碗"}
+]

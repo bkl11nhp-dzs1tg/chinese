@@ -41,6 +41,7 @@ export async function renderGame(root, ctx, { params }) {
   const stage = shell.main;
   const record = (id, ok) => (cue(ok ? 'tap' : 'bad'), ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 2, activity: 'game', sessionId: tracker.session.id, mode: 'light' }));
   let current;
+  const onProgress = (f, label) => shell.setProgress(f, label);
 
   const again = () => ctx.navigate(`game/${game.id}?r=${Date.now()}`);
   const resultView = (title, lines) => {
@@ -54,7 +55,7 @@ export async function renderGame(root, ctx, { params }) {
   };
 
   if (game.id === 'match') {
-    current = matchGame({
+    current = matchGame({ onProgress,
       cards: gameCards(data, 6), onResult: record,
       onDone: async (r) => {
         const isBest = !s.best_match_ms || r.ms < s.best_match_ms;
@@ -81,7 +82,7 @@ export async function renderGame(root, ctx, { params }) {
       mount(root, h('div', { class: 'large-title' }, h('h1', {}, 'Xây câu')), h('p', { class: 'notice' }, 'Chưa có câu nào. Thêm bài tập dạng "reorder" vào file bài học để chơi trò này.'));
       return;
     }
-    current = buildGame({
+    current = buildGame({ onProgress,
       sentences,
       onDone: async (r) => {
         await ctx.repo.saveSettings({ build_done: (s.build_done || 0) + r.done });
@@ -94,7 +95,7 @@ export async function renderGame(root, ctx, { params }) {
     if (!voice) {
       stage.append(h('p', { class: 'notice' }, 'Thiết bị chưa có giọng đọc tiếng Trung nên chưa phát được âm.'));
     }
-    current = listenGame({
+    current = listenGame({ onProgress,
       cards: gameCards(data, 10), pool: data.cards, rate: s.tts_rate, onResult: record,
       onDone: async (r) => {
         if (s.best_listen == null || r.correct > s.best_listen) await ctx.repo.saveSettings({ best_listen: r.correct });

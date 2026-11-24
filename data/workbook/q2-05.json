@@ -1,0 +1,11 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 西瓜大，苹果___。","options":["小","有","个"],"answer":"小"},
+ {"type":"choose","prompt":"Chọn từ đúng: 今天的天气___。","options":["很好","很白","很新"],"answer":"很好"},
+ {"type":"choose","prompt":"Chọn từ đúng: 这个苹果真___啊！","options":["好吃","好看","好听"],"answer":"好吃"},
+ {"type":"choose","prompt":"Chọn từ đúng: 今天的风___大啊！","options":["真","只","个"],"answer":"真"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 这儿的水果非___好吃。","options":["常","长","场"],"answer":"常"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 他是我的朋___。","options":["友","有","又"],"answer":"友"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 她很___欢这张照片。","options":["喜","西","洗"],"answer":"喜"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 他们非常高___。","options":["兴","星","姓"],"answer":"兴"},
+ {"type":"choose","prompt":"— 这个苹果好吃吗？ — ___","options":["很好吃。","很好看。","很好听。"],"answer":"很好吃。"}
+]

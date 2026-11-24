@@ -1,0 +1,10 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 这本书是___的？","options":["谁","什么","哪儿"],"answer":"谁"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___个杯子是妈妈的？","options":["哪","那","吗"],"answer":"哪"},
+ {"type":"reorder","vi":"Quyển sách kia là của ai?","words":["那","本","书","是","谁","的"]},
+ {"type":"reorder","vi":"Cái bát này là của bạn à?","words":["这","个","碗","是","你","的","吗"]},
+ {"type":"reorder","vi":"Quyển sách này là của em gái.","words":["这","本","书","是","妹妹","的"]},
+ {"type":"reorder","vi":"Cái máy tính kia là của thầy Vương.","words":["那","台","电脑","是","王","老师","的"]},
+ {"type":"reorder","vi":"Tấm ảnh này là của ai?","words":["这","张","照片","是","谁","的"]},
+ {"type":"reorder","vi":"Quả táo nào là của em trai?","words":["哪","个","苹果","是","弟弟","的"]}
+]

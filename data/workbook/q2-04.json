@@ -1,0 +1,10 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 非常","options":["fēicháng","fēichǎng"],"answer":"fēicháng"},
+ {"type":"choose","prompt":"Chọn từ đúng: 我有一___小狗。","options":["个","本","张"],"answer":"个"},
+ {"type":"choose","prompt":"Chọn từ trái nghĩa với 多","options":["少","大","小"],"answer":"少"},
+ {"type":"match","prompt":"Nối từ với nghĩa","pairs":[{"left":"非常","right":"rất, vô cùng"},{"left":"喜欢","right":"thích"},{"left":"忙","right":"bận"}]},
+ {"type":"reorder","vi":"Bố rất mệt.","words":["爸爸","非常","累"]},
+ {"type":"reorder","vi":"Hoa rất đẹp.","words":["花","非常","漂亮"]},
+ {"type":"reorder","vi":"Thầy cô trường chúng tôi rất bận.","words":["我们","学校","的","老师","非常","忙"]},
+ {"type":"reorder","vi":"Tôi thích chó.","words":["我","喜欢","狗"]}
+]

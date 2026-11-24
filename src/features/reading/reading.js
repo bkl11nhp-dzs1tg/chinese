@@ -3,7 +3,7 @@
 // #/read/R01                một bài đọc
 // #/read/lesson:L05         bài khóa của bài 5
 //
-// Chế độ: Đọc thường · Từng câu · Kiểm tra (chọn nghĩa đúng của câu) · Không pinyin. Nút ▶ ở mỗi câu: nghe câu + hiện nghĩa.
+// Chế độ: Đọc thường · Từng câu · Kiểm tra (chọn nghĩa đúng của câu). Pinyin/Nghĩa bật tắt bằng nút riêng. Nút ▶ ở mỗi câu: nghe câu + hiện nghĩa.
 // "Nghe cả bài": đọc lần lượt từng câu, tô sáng câu đang đọc (MP3 + audio_ms nếu có, không thì giọng máy).
 // Bấm vào một từ: bảng tra từ (chữ, pinyin, nghĩa, giải thích từng chữ, câu ví dụ) + Lưu từ mới / Đã biết.
 
@@ -20,7 +20,6 @@ const MODES = [
   { id: 'normal', label: 'Đọc' },
   { id: 'step', label: 'Từng câu' },
   { id: 'quiz', label: 'Kiểm tra' },
-  { id: 'plain', label: 'Ẩn pinyin' },
 ];
 const FONT = { 1: 22, 2: 28, 3: 36 };
 
@@ -109,7 +108,7 @@ export async function renderReader(root, ctx, { params }) {
     highlight: s.reading_highlight !== false,
     rate: s.tts_rate || 1,
   };
-  let mode = s.reading_mode || 'normal';
+  let mode = MODES.some((m) => m.id === s.reading_mode) ? s.reading_mode : 'normal';
 
   // Câu phẳng, kèm token và pinyin từng chữ (nạp pinyin-pro khi cần).
   const flat = [];

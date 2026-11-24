@@ -1,0 +1,161 @@
+[
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___课 (tīng)",
+  "options": [
+   "听",
+   "请",
+   "进"
+  ],
+  "answer": "听"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___室 (jiào)",
+  "options": [
+   "教",
+   "叫",
+   "觉"
+  ],
+  "answer": "教"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___答 (huí)",
+  "options": [
+   "回",
+   "会",
+   "喝"
+  ],
+  "answer": "回"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___ (wèn)",
+  "options": [
+   "问",
+   "们",
+   "门"
+  ],
+  "answer": "问"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 他___米饭。",
+  "options": [
+   "吃",
+   "听",
+   "去"
+  ],
+  "answer": "吃"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: 中___他吃面条儿。",
+  "options": [
+   "午",
+   "早",
+   "晚"
+  ],
+  "answer": "午"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 我___妈妈去公园。",
+  "options": [
+   "和",
+   "吧",
+   "所"
+  ],
+  "answer": "和"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: ___ (mǐfàn)",
+  "options": [
+   "米饭",
+   "面条儿",
+   "饺子"
+  ],
+  "answer": "米饭"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: ___ (wǎnshang)",
+  "options": [
+   "晚上",
+   "早上",
+   "中午"
+  ],
+  "answer": "晚上"
+ },
+ {
+  "type": "match",
+  "prompt": "Nối từ với nghĩa",
+  "pairs": [
+   {
+    "left": "早饭",
+    "right": "cơm sáng"
+   },
+   {
+    "left": "午饭",
+    "right": "cơm trưa"
+   },
+   {
+    "left": "晚饭",
+    "right": "cơm tối"
+   }
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Chúng tôi ăn cơm trưa.",
+  "words": [
+   "我们",
+   "吃",
+   "午饭"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Buổi sáng tôi ăn mì.",
+  "words": [
+   "早上",
+   "我",
+   "吃",
+   "面条儿"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Buổi tối chúng tôi ăn sủi cảo.",
+  "words": [
+   "晚上",
+   "我们",
+   "吃",
+   "饺子"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Bố và mẹ đi công viên.",
+  "words": [
+   "爸爸",
+   "和",
+   "妈妈",
+   "去",
+   "公园"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Tôi và em gái là học sinh.",
+  "words": [
+   "我",
+   "和",
+   "妹妹",
+   "是",
+   "学生"
+  ]
+ }
+]

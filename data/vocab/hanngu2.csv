@@ -1,439 +1,439 @@
-id,hanzi,pinyin,meaning,hsk_level,lesson_id,example,example_pinyin,example_meaning,tags,pos,han_viet
-L16-安静,安静,ānjìng,yên lặng,,L16,,,,Hán ngữ 2,tính từ,
-L16-查,查,chá,"kiểm tra, tra",,L16,,,,Hán ngữ 2,động từ,
-L16-常（常）,常（常）,cháng (cháng),thường,,L16,,,,Hán ngữ 2,phó từ,
-L16-超市,超市,chāoshì,siêu thị,,L16,,,,Hán ngữ 2,danh từ,
-L16-电视,电视,diànshì,ti vi,,L16,,,,Hán ngữ 2,danh từ,
-L16-电视剧,电视剧,diànshìjù,phim truyền hình,,L16,,,,Hán ngữ 2,danh từ,
-L16-电影,电影,diànyǐng,phim (điện ảnh),,L16,,,,Hán ngữ 2,danh từ,
-L16-东西,东西,dōngxi,đồ vật,,L16,,,,Hán ngữ 2,danh từ,
-L16-发,发,fā,"gửi, phát",,L16,,,,Hán ngữ 2,động từ,
-L16-复习,复习,fùxí,ôn tập,,L16,,,,Hán ngữ 2,động từ,
-L16-跟,跟,gēn,"cùng, với",,L16,,,,Hán ngữ 2,"giới từ, liên từ, động từ",
-L16-公园,公园,gōngyuán,công viên,,L16,,,,Hán ngữ 2,danh từ,
-L16-或者,或者,huòzhě,hoặc là,,L16,,,,Hán ngữ 2,liên từ,
-L16-借,借,jiè,mượn,,L16,,,,Hán ngữ 2,động từ,
-L16-课文,课文,kèwén,bài khóa,,L16,,,,Hán ngữ 2,danh từ,
-L16-练习,练习,liànxí,"luyện tập, bài tập",,L16,,,,Hán ngữ 2,"động từ, danh từ",
-L16-聊天儿,聊天儿,liáo tiānr,"nói chuyện, tán gẫu",,L16,,,,Hán ngữ 2,,
-L16-上网,上网,shàng wǎng,lên mạng,,L16,,,,Hán ngữ 2,,
-L16-生词,生词,shēngcí,từ mới,,L16,,,,Hán ngữ 2,danh từ,
-L16-时候,时候,shíhou,lúc,,L16,,,,Hán ngữ 2,danh từ,
-L16-收,收,shōu,"thu, nhận",,L16,,,,Hán ngữ 2,động từ,
-L16-收发,收发,shōufā,thu phát,,L16,,,,Hán ngữ 2,động từ,
-L16-宿舍,宿舍,sùshè,ký túc xá,,L16,,,,Hán ngữ 2,danh từ,
-L16-晚上,晚上,wǎnshang,buổi tối,,L16,,,,Hán ngữ 2,danh từ,
-L16-网,网,wǎng,mạng,,L16,,,,Hán ngữ 2,danh từ,
-L16-现在,现在,xiànzài,bây giờ,,L16,,,,Hán ngữ 2,danh từ,
-L16-休息,休息,xiūxi,nghỉ ngơi,,L16,,,,Hán ngữ 2,động từ,
-L16-一起,一起,yìqǐ,cùng nhau,,L16,,,,Hán ngữ 2,phó từ,
-L16-伊妹儿,伊妹儿,yīmèir,email,,L16,,,,Hán ngữ 2,danh từ,
-L16-有时候,有时候,yǒu shíhou,có lúc,,L16,,,,Hán ngữ 2,,
-L16-预习,预习,yùxí,chuẩn bị bài trước,,L16,,,,Hán ngữ 2,động từ,
-L16-咱们,咱们,zánmen,chúng ta,,L16,,,,Hán ngữ 2,đại từ,
-L17-出来,出来,chūlai,"đi ra, ra",,L17,,,,Hán ngữ 2,động từ,
-L17-汉英,汉英,Hàn-Yīng,Hán – Anh,,L17,,,,Hán ngữ 2,,
-L17-挤,挤,jǐ,"chật, chen",,L17,,,,Hán ngữ 2,"tính từ, động từ",
-L17-教,教,jiāo,dạy,,L17,,,,Hán ngữ 2,động từ,
-L17-课,课,kè,"bài, giờ học",,L17,,,,Hán ngữ 2,danh từ,
-L17-口语,口语,kǒuyǔ,khẩu ngữ,,L17,,,,Hán ngữ 2,danh từ,
-L17-来,来,lái,đến,,L17,,,,Hán ngữ 2,động từ,
-L17-录音,录音,lùyīn,ghi âm,,L17,,,,Hán ngữ 2,"danh từ, động từ",
-L17-没有,没有,méiyǒu,"không, chưa",,L17,,,,Hán ngữ 2,phó từ,
-L17-门,门,mén,môn (lượng từ),,L17,,,,Hán ngữ 2,lượng từ,
-L17-骑,骑,qí,"cưỡi, đi (xe)",,L17,,,,Hán ngữ 2,động từ,
-L17-事,事,shì,việc,,L17,,,,Hán ngữ 2,danh từ,
-L17-书店,书店,shūdiàn,hiệu sách,,L17,,,,Hán ngữ 2,danh từ,
-L17-体育,体育,tǐyù,thể dục,,L17,,,,Hán ngữ 2,danh từ,
-L17-听力,听力,tīnglì,năng lực nghe,,L17,,,,Hán ngữ 2,danh từ,
-L17-文化,文化,wénhuà,văn hóa,,L17,,,,Hán ngữ 2,danh từ,
-L17-想,想,xiǎng,nghĩ; muốn,,L17,,,,Hán ngữ 2,"động từ, động từ năng nguyện",
-L17-行,行,xíng,được,,L17,,,,Hán ngữ 2,động từ,
-L17-音乐,音乐,yīnyuè,âm nhạc,,L17,,,,Hán ngữ 2,danh từ,
-L17-阅读,阅读,yuèdú,đọc hiểu,,L17,,,,Hán ngữ 2,danh từ,
-L17-在,在,zài,đang,,L17,,,,Hán ngữ 2,phó từ,
-L17-正,正,zhèng,đang,,L17,,,,Hán ngữ 2,phó từ,
-L17-正在,正在,zhèngzài,đang,,L17,,,,Hán ngữ 2,phó từ,
-L18-办,办,bàn,làm,,L18,,,,Hán ngữ 2,động từ,
-L18-帮,帮,bāng,giúp,,L18,,,,Hán ngữ 2,động từ,
-L18-包裹,包裹,bāoguǒ,bưu kiện,,L18,,,,Hán ngữ 2,danh từ,
-L18-报,报,bào,báo,,L18,,,,Hán ngữ 2,danh từ,
-L18-不用,不用,búyòng,không cần,,L18,,,,Hán ngữ 2,phó từ,
-L18-参观,参观,cānguān,tham quan,,L18,,,,Hán ngữ 2,động từ,
-L18-代表,代表,dàibiǎo,đại biểu,,L18,,,,Hán ngữ 2,"danh từ, động từ",
-L18-当,当,dāng,"làm, đảm nhiệm",,L18,,,,Hán ngữ 2,động từ,
-L18-翻译,翻译,fānyì,phiên dịch,,L18,,,,Hán ngữ 2,"danh từ, động từ",
-L18-飞,飞,fēi,bay,,L18,,,,Hán ngữ 2,động từ,
-L18-飞机,飞机,fēijī,máy bay,,L18,,,,Hán ngữ 2,danh từ,
-L18-份,份,fèn,"phần, tờ (lượng từ)",,L18,,,,Hán ngữ 2,lượng từ,
-L18-花,花,huā,hoa,,L18,,,,Hán ngữ 2,danh từ,
-L18-回来,回来,huílái,quay về,,L18,,,,Hán ngữ 2,động từ,
-L18-火车,火车,huǒchē,tàu hỏa,,L18,,,,Hán ngữ 2,danh từ,
-L18-浇,浇,jiāo,tưới,,L18,,,,Hán ngữ 2,động từ,
-L18-旅行,旅行,lǚxíng,du lịch,,L18,,,,Hán ngữ 2,động từ,
-L18-没问题,没问题,méi wèntí,không có vấn đề gì,,L18,,,,Hán ngữ 2,,
-L18-拿,拿,ná,"cầm, lấy",,L18,,,,Hán ngữ 2,động từ,
-L18-青年,青年,qīngnián,thanh niên,,L18,,,,Hán ngữ 2,danh từ,
-L18-顺便,顺便,shùnbiàn,tiện thể,,L18,,,,Hán ngữ 2,phó từ,
-L18-替,替,tì,"thay, thay thế",,L18,,,,Hán ngữ 2,"giới từ, động từ",
-L18-团,团,tuán,đoàn,,L18,,,,Hán ngữ 2,"danh từ, lượng từ",
-L18-问题,问题,wèntí,vấn đề,,L18,,,,Hán ngữ 2,danh từ,
-L18-用,用,yòng,dùng,,L18,,,,Hán ngữ 2,động từ,
-L18-邮票,邮票,yóupiào,tem,,L18,,,,Hán ngữ 2,danh từ,
-TR2-上海,上海,Shànghǎi,Thượng Hải,,L18,,,,Hán ngữ 2;tên riêng,tên riêng,
-TR2-珍妮,珍妮,Zhēnní,Janet,,L18,,,,Hán ngữ 2;tên riêng,tên riêng,
-L19-长,长,cháng,dài,,L19,,,,Hán ngữ 2,tính từ,
-L19-打折,打折,dǎ zhé,giảm giá,,L19,,,,Hán ngữ 2,,
-L19-当然,当然,dāngrán,đương nhiên,,L19,,,,Hán ngữ 2,phó từ,
-L19-短,短,duǎn,ngắn,,L19,,,,Hán ngữ 2,tính từ,
-L19-肥,肥,féi,"béo, rộng (quần áo)",,L19,,,,Hán ngữ 2,tính từ,
-L19-好看,好看,hǎokàn,"đẹp, ưa nhìn",,L19,,,,Hán ngữ 2,tính từ,
-L19-合适,合适,héshì,thích hợp,,L19,,,,Hán ngữ 2,tính từ,
-L19-可以,可以,kěyǐ,có thể,,L19,,,,Hán ngữ 2,động từ năng nguyện,
-L19-毛衣,毛衣,máoyī,áo len,,L19,,,,Hán ngữ 2,danh từ,
-L19-胖,胖,pàng,béo,,L19,,,,Hán ngữ 2,tính từ,
-L19-便宜,便宜,piányi,rẻ,,L19,,,,Hán ngữ 2,tính từ,
-L19-浅,浅,qiǎn,nhạt (màu); nông,,L19,,,,Hán ngữ 2,tính từ,
-L19-深,深,shēn,sâu; đậm (màu),,L19,,,,Hán ngữ 2,tính từ,
-L19-试,试,shì,thử,,L19,,,,Hán ngữ 2,động từ,
-L19-瘦,瘦,shòu,gầy; chật (quần áo),,L19,,,,Hán ngữ 2,tính từ,
-L19-一点儿,一点儿,yìdiǎnr,một chút,,L19,,,,Hán ngữ 2,số lượng từ,
-L19-应该,应该,yīnggāi,nên,,L19,,,,Hán ngữ 2,động từ năng nguyện,
-L19-又…又…,又…又…,yòu…yòu…,vừa… vừa…,,L19,,,,Hán ngữ 2,,
-L19-羽绒服,羽绒服,yǔróngfú,áo lông vũ,,L19,,,,Hán ngữ 2,danh từ,
-L20-毕业,毕业,bì yè,tốt nghiệp,,L20,,,,Hán ngữ 2,,
-L20-参加,参加,cānjiā,tham gia,,L20,,,,Hán ngữ 2,động từ,
-L20-打算,打算,dǎsuan,dự định,,L20,,,,Hán ngữ 2,"động từ, danh từ",
-L20-点（钟）,点（钟）,diǎn (zhōng),giờ,,L20,,,,Hán ngữ 2,lượng từ,
-L20-多,多,duō,"nhiều, bao (nhiêu)",,L20,,,,Hán ngữ 2,phó từ,
-L20-多大,多大,duō dà,bao nhiêu (tuổi),,L20,,,,Hán ngữ 2,,
-L20-狗,狗,gǒu,chó,,L20,,,,Hán ngữ 2,danh từ,
-L20-过,过,guò,"qua, trải qua",,L20,,,,Hán ngữ 2,động từ,
-L20-号,号,hào,số; ngày (trong tháng),,L20,,,,Hán ngữ 2,"danh từ, lượng từ",
-L20-后年,后年,hòunián,năm sau nữa,,L20,,,,Hán ngữ 2,danh từ,
-L20-今年,今年,jīnnián,năm nay,,L20,,,,Hán ngữ 2,danh từ,
-L20-就,就,jiù,"thì, liền",,L20,,,,Hán ngữ 2,phó từ,
-L20-举行,举行,jǔxíng,"cử hành, tổ chức",,L20,,,,Hán ngữ 2,động từ,
-L20-快乐,快乐,kuàilè,vui vẻ,,L20,,,,Hán ngữ 2,tính từ,
-L20-明年,明年,míngnián,sang năm,,L20,,,,Hán ngữ 2,danh từ,
-L20-年,年,nián,năm,,L20,,,,Hán ngữ 2,danh từ,
-L20-去年,去年,qùnián,năm ngoái,,L20,,,,Hán ngữ 2,danh từ,
-L20-生日,生日,shēngri,sinh nhật,,L20,,,,Hán ngữ 2,danh từ,
-L20-时间,时间,shíjiān,thời gian,,L20,,,,Hán ngữ 2,danh từ,
-L20-属,属,shǔ,thuộc (cầm tinh),,L20,,,,Hán ngữ 2,động từ,
-L20-岁,岁,suì,tuổi,,L20,,,,Hán ngữ 2,lượng từ,
-L20-晚会,晚会,wǎnhuì,dạ hội,,L20,,,,Hán ngữ 2,danh từ,
-L20-一定,一定,yídìng,nhất định,,L20,,,,Hán ngữ 2,phó từ,
-L20-月,月,yuè,tháng,,L20,,,,Hán ngữ 2,danh từ,
-L20-正好,正好,zhènghǎo,vừa đúng,,L20,,,,Hán ngữ 2,tính từ,
-L21-半,半,bàn,"nửa, rưỡi",,L21,,,,Hán ngữ 2,danh từ,
-L21-操场,操场,cāochǎng,sân tập thể dục,,L21,,,,Hán ngữ 2,danh từ,
-L21-差,差,chà,kém,,L21,,,,Hán ngữ 2,"động từ, tính từ",
-L21-出发,出发,chūfā,xuất phát,,L21,,,,Hán ngữ 2,động từ,
-L21-床,床,chuáng,giường,,L21,,,,Hán ngữ 2,danh từ,
-L21-带,带,dài,mang,,L21,,,,Hán ngữ 2,động từ,
-L21-点,点,diǎn,điểm,,L21,,,,Hán ngữ 2,"danh từ, lượng từ",
-L21-锻炼,锻炼,duànliàn,"rèn luyện, tập luyện",,L21,,,,Hán ngữ 2,động từ,
-L21-分（钟）,分（钟）,fēn (zhōng),phút,,L21,,,,Hán ngữ 2,"danh từ, lượng từ",
-L21-集合,集合,jíhé,tập hợp,,L21,,,,Hán ngữ 2,động từ,
-L21-教室,教室,jiàoshì,phòng học,,L21,,,,Hán ngữ 2,danh từ,
-L21-节,节,jié,tiết (học); lễ,,L21,,,,Hán ngữ 2,lượng từ,
-L21-刻,刻,kè,khắc (15 phút),,L21,,,,Hán ngữ 2,lượng từ,
-L21-快,快,kuài,nhanh,,L21,,,,Hán ngữ 2,tính từ,
-L21-每,每,měi,mỗi,,L21,,,,Hán ngữ 2,đại từ,
-L21-们,们,men,(hậu tố số nhiều),,L21,,,,Hán ngữ 2,hậu tố,
-L21-年级,年级,niánjí,"lớp, năm thứ (đại học)",,L21,,,,Hán ngữ 2,danh từ,
-L21-爬,爬,pá,"trèo, leo",,L21,,,,Hán ngữ 2,động từ,
-L21-起床,起床,qǐ chuáng,ngủ dậy,,L21,,,,Hán ngữ 2,,
-L21-前,前,qián,"trước, phía trước",,L21,,,,Hán ngữ 2,danh từ,
-L21-山,山,shān,núi,,L21,,,,Hán ngữ 2,danh từ,
-L21-上车,上车,shàng chē,lên xe,,L21,,,,Hán ngữ 2,,
-L21-上课,上课,shàng kè,lên lớp,,L21,,,,Hán ngữ 2,,
-L21-睡觉,睡觉,shuì jiào,ngủ,,L21,,,,Hán ngữ 2,,
-L21-晚饭,晚饭,wǎnfàn,cơm tối,,L21,,,,Hán ngữ 2,danh từ,
-L21-午饭,午饭,wǔfàn,cơm trưa,,L21,,,,Hán ngữ 2,danh từ,
-L21-洗,洗,xǐ,"rửa, giặt",,L21,,,,Hán ngữ 2,động từ,
-L21-洗澡,洗澡,xǐ zǎo,tắm,,L21,,,,Hán ngữ 2,,
-L21-下车,下车,xià chē,xuống xe,,L21,,,,Hán ngữ 2,,
-L21-以后,以后,yǐhòu,sau này,,L21,,,,Hán ngữ 2,danh từ,
-L21-早饭,早饭,zǎofàn,cơm sáng,,L21,,,,Hán ngữ 2,danh từ,
-L21-早上,早上,zǎoshang,buổi sáng,,L21,,,,Hán ngữ 2,danh từ,
-TR2-山本,山本,Shānběn,Yamamoto,,L21,,,,Hán ngữ 2;tên riêng,tên riêng,
-L22-爱好,爱好,àihào,sở thích; yêu thích,,L22,,,,Hán ngữ 2,"động từ, danh từ",
-L22-唱,唱,chàng,hát,,L22,,,,Hán ngữ 2,động từ,
-L22-大家,大家,dàjiā,mọi người,,L22,,,,Hán ngữ 2,đại từ,
-L22-电脑,电脑,diànnǎo,máy tính,,L22,,,,Hán ngữ 2,danh từ,
-L22-对,对,duì,đối với,,L22,,,,Hán ngữ 2,giới từ,
-L22-非常,非常,fēicháng,"rất, vô cùng",,L22,,,,Hán ngữ 2,phó từ,
-L22-感到,感到,gǎndào,cảm thấy,,L22,,,,Hán ngữ 2,động từ,
-L22-感兴趣,感兴趣,gǎn xìngqù,có hứng thú (với…),,L22,,,,Hán ngữ 2,,
-L22-高兴,高兴,gāoxìng,vui vẻ,,L22,,,,Hán ngữ 2,tính từ,
-L22-画,画,huà,vẽ,,L22,,,,Hán ngữ 2,động từ,
-L22-画儿,画儿,huàr,bức tranh,,L22,,,,Hán ngữ 2,danh từ,
-L22-叫,叫,jiào,"gọi, bảo",,L22,,,,Hán ngữ 2,động từ,
-L22-京剧,京剧,jīngjù,kinh kịch,,L22,,,,Hán ngữ 2,danh từ,
-L22-就,就,jiù,"chính là, ngay (nhấn mạnh)",,L22,,,,Hán ngữ 2,phó từ,
-L22-派,派,pài,"phái, cử",,L22,,,,Hán ngữ 2,động từ,
-L22-让,让,ràng,"để, bảo; nhường",,L22,,,,Hán ngữ 2,động từ,
-L22-书法,书法,shūfǎ,thư pháp,,L22,,,,Hán ngữ 2,danh từ,
-L22-谈,谈,tán,"nói chuyện, bàn",,L22,,,,Hán ngữ 2,động từ,
-L22-特别,特别,tèbié,đặc biệt,,L22,,,,Hán ngữ 2,tính từ,
-L22-玩,玩,wán,chơi,,L22,,,,Hán ngữ 2,động từ,
-L22-喜欢,喜欢,xǐhuan,thích,,L22,,,,Hán ngữ 2,động từ,
-L22-下课,下课,xià kè,tan học,,L22,,,,Hán ngữ 2,,
-L22-心情,心情,xīnqíng,tâm trạng,,L22,,,,Hán ngữ 2,danh từ,
-L22-兴趣,兴趣,xìngqù,hứng thú,,L22,,,,Hán ngữ 2,danh từ,
-L22-业余,业余,yèyú,"nghiệp dư, ngoài giờ",,L22,,,,Hán ngữ 2,danh từ,
-L22-以前,以前,yǐqián,trước đây,,L22,,,,Hán ngữ 2,danh từ,
-L22-愉快,愉快,yúkuài,vui vẻ,,L22,,,,Hán ngữ 2,tính từ,
-TR2-田中,田中,Tiánzhōng,Tanaka,,L22,,,,Hán ngữ 2;tên riêng,tên riêng,
-L23-白色,白色,báisè,màu trắng,,L23,,,,Hán ngữ 2,tính từ,
-L23-北边,北边,běibian,phía bắc,,L23,,,,Hán ngữ 2,danh từ,
-L23-…边,…边,…biān,"… bên, phía",,L23,,,,Hán ngữ 2,danh từ,
-L23-博物馆,博物馆,bówùguǎn,viện bảo tàng,,L23,,,,Hán ngữ 2,danh từ,
-L23-从,从,cóng,từ (khi),,L23,,,,Hán ngữ 2,giới từ,
-L23-打听,打听,dǎting,"hỏi thăm, nghe ngóng",,L23,,,,Hán ngữ 2,động từ,
-L23-到,到,dào,đến,,L23,,,,Hán ngữ 2,động từ,
-L23-灯,灯,dēng,đèn,,L23,,,,Hán ngữ 2,danh từ,
-L23-地方,地方,dìfang,"nơi, chỗ",,L23,,,,Hán ngữ 2,danh từ,
-L23-东边,东边,dōngbian,phía đông,,L23,,,,Hán ngữ 2,danh từ,
-L23-拐,拐,guǎi,rẽ,,L23,,,,Hán ngữ 2,động từ,
-L23-广场,广场,guǎngchǎng,quảng trường,,L23,,,,Hán ngữ 2,danh từ,
-L23-和平,和平,hépíng,hòa bình,,L23,,,,Hán ngữ 2,danh từ,
-L23-红绿灯,红绿灯,hónglǜdēng,đèn xanh đèn đỏ,,L23,,,,Hán ngữ 2,danh từ,
-L23-后边,后边,hòubian,phía sau,,L23,,,,Hán ngữ 2,danh từ,
-L23-近,近,jìn,gần,,L23,,,,Hán ngữ 2,tính từ,
-L23-劳驾,劳驾,láo jià,cảm phiền,,L23,,,,Hán ngữ 2,,
-L23-离,离,lí,"rời, cách",,L23,,,,Hán ngữ 2,giới từ,
-L23-里边,里边,lǐbian,bên trong,,L23,,,,Hán ngữ 2,danh từ,
-L23-路,路,lù,đường,,L23,,,,Hán ngữ 2,danh từ,
-L23-绿,绿,lǜ,xanh lá,,L23,,,,Hán ngữ 2,tính từ,
-L23-马路,马路,mǎlù,đường cái,,L23,,,,Hán ngữ 2,danh từ,
-L23-米,米,mǐ,mét,,L23,,,,Hán ngữ 2,lượng từ,
-L23-南边,南边,nánbian,phía nam,,L23,,,,Hán ngữ 2,danh từ,
-L23-前边,前边,qiánbian,phía trước,,L23,,,,Hán ngữ 2,danh từ,
-L23-上边,上边,shàngbian,phía trên,,L23,,,,Hán ngữ 2,danh từ,
-L23-外边,外边,wàibian,bên ngoài,,L23,,,,Hán ngữ 2,danh từ,
-L23-往,往,wǎng,hướng về,,L23,,,,Hán ngữ 2,giới từ,
-L23-西边,西边,xībian,phía tây,,L23,,,,Hán ngữ 2,danh từ,
-L23-下边,下边,xiàbian,phía dưới,,L23,,,,Hán ngữ 2,danh từ,
-L23-一直,一直,yìzhí,thẳng; luôn luôn,,L23,,,,Hán ngữ 2,phó từ,
-L23-右,右,yòu,phải (bên phải),,L23,,,,Hán ngữ 2,danh từ,
-L23-右边,右边,yòubian,bên phải,,L23,,,,Hán ngữ 2,danh từ,
-L23-远,远,yuǎn,xa,,L23,,,,Hán ngữ 2,tính từ,
-L23-中间,中间,zhōngjiān,ở giữa,,L23,,,,Hán ngữ 2,danh từ,
-L24-报名,报名,bào míng,"ghi tên, báo danh",,L24,,,,Hán ngữ 2,,
-L24-遍,遍,biàn,"lượt, lần (lượng từ)",,L24,,,,Hán ngữ 2,lượng từ,
-L24-病,病,bìng,bệnh; bị ốm,,L24,,,,Hán ngữ 2,"động từ, danh từ",
-L24-次,次,cì,lần,,L24,,,,Hán ngữ 2,lượng từ,
-L24-打,打,dǎ,"đánh, chơi",,L24,,,,Hán ngữ 2,động từ,
-L24-懂,懂,dǒng,hiểu,,L24,,,,Hán ngữ 2,động từ,
-L24-发烧,发烧,fā shāo,phát sốt,,L24,,,,Hán ngữ 2,,
-L24-感冒,感冒,gǎnmào,cảm (cúm),,L24,,,,Hán ngữ 2,"động từ, danh từ",
-L24-会,会,huì,"biết, có thể",,L24,,,,Hán ngữ 2,"động từ năng nguyện, động từ",
-L24-开始,开始,kāishǐ,bắt đầu,,L24,,,,Hán ngữ 2,động từ,
-L24-看病,看病,kàn bìng,khám bệnh,,L24,,,,Hán ngữ 2,,
-L24-咳嗽,咳嗽,késou,ho,,L24,,,,Hán ngữ 2,động từ,
-L24-可能,可能,kěnéng,"có thể, có khả năng",,L24,,,,Hán ngữ 2,phó từ,
-L24-了,了,le,rồi (trợ từ động thái),,L24,,,,Hán ngữ 2,trợ từ,
-L24-能,能,néng,có thể,,L24,,,,Hán ngữ 2,động từ năng nguyện,
-L24-请假,请假,qǐng jià,xin nghỉ phép,,L24,,,,Hán ngữ 2,,
-L24-舒服,舒服,shūfu,dễ chịu,,L24,,,,Hán ngữ 2,tính từ,
-L24-太极拳,太极拳,tàijíquán,thái cực quyền,,L24,,,,Hán ngữ 2,danh từ,
-L24-疼,疼,téng,đau,,L24,,,,Hán ngữ 2,động từ,
-L24-听说,听说,tīngshuō,nghe nói,,L24,,,,Hán ngữ 2,động từ,
-L24-头,头,tóu,đầu,,L24,,,,Hán ngữ 2,danh từ,
-L24-头疼,头疼,tóu téng,đau đầu,,L24,,,,Hán ngữ 2,,
-L24-下,下,xià,"sau, tới (下星期: tuần sau)",,L24,,,,Hán ngữ 2,danh từ,
-L24-小时,小时,xiǎoshí,"giờ, tiếng đồng hồ",,L24,,,,Hán ngữ 2,danh từ,
-L24-意思,意思,yìsi,ý nghĩa,,L24,,,,Hán ngữ 2,danh từ,
-L24-再,再,zài,"tái, lại",,L24,,,,Hán ngữ 2,phó từ,
-L25-表演,表演,biǎoyǎn,biểu diễn,,L25,,,,Hán ngữ 2,động từ,
-L25-不错,不错,búcuò,"không tồi, khá tốt",,L25,,,,Hán ngữ 2,tính từ,
-L25-错,错,cuò,sai,,L25,,,,Hán ngữ 2,tính từ,
-L25-得,得,de,(trợ từ bổ ngữ),,L25,,,,Hán ngữ 2,trợ từ,
-L25-电视台,电视台,diànshìtái,đài truyền hình,,L25,,,,Hán ngữ 2,danh từ,
-L25-刚才,刚才,gāngcái,vừa mới,,L25,,,,Hán ngữ 2,danh từ,
-L25-坚持,坚持,jiānchí,kiên trì,,L25,,,,Hán ngữ 2,động từ,
-L25-节目,节目,jiémù,tiết mục,,L25,,,,Hán ngữ 2,danh từ,
-L25-进步,进步,jìnbù,tiến bộ,,L25,,,,Hán ngữ 2,động từ,
-L25-看,看,kàn,"nhìn, xem; cho rằng",,L25,,,,Hán ngữ 2,động từ,
-L25-可以,可以,kěyǐ,"được, khá",,L25,,,,Hán ngữ 2,tính từ,
-L25-篮球,篮球,lánqiú,bóng rổ,,L25,,,,Hán ngữ 2,danh từ,
-L25-流利,流利,liúlì,lưu loát,,L25,,,,Hán ngữ 2,tính từ,
-L25-哪里,哪里,nǎli,đâu có (khiêm tốn); ở đâu,,L25,,,,Hán ngữ 2,đại từ,
-L25-那么,那么,nàme,như thế; vậy thì,,L25,,,,Hán ngữ 2,đại từ,
-L25-努力,努力,nǔlì,cố gắng,,L25,,,,Hán ngữ 2,tính từ,
-L25-跑,跑,pǎo,chạy,,L25,,,,Hán ngữ 2,động từ,
-L25-跑步,跑步,pǎo bù,chạy bộ,,L25,,,,Hán ngữ 2,,
-L25-球,球,qiú,quả bóng,,L25,,,,Hán ngữ 2,danh từ,
-L25-认真,认真,rènzhēn,"nghiêm túc, chăm chỉ",,L25,,,,Hán ngữ 2,tính từ,
-L25-水平,水平,shuǐpíng,trình độ,,L25,,,,Hán ngữ 2,danh từ,
-L25-台,台,tái,đài,,L25,,,,Hán ngữ 2,danh từ,
-L25-提高,提高,tígāo,nâng cao,,L25,,,,Hán ngữ 2,động từ,
-L25-晚,晚,wǎn,muộn,,L25,,,,Hán ngữ 2,tính từ,
-L25-为,为,wèi,vì,,L25,,,,Hán ngữ 2,giới từ,
-L25-为什么,为什么,wèi shénme,tại sao,,L25,,,,Hán ngữ 2,,
-L25-因为,因为,yīnwèi,bởi vì,,L25,,,,Hán ngữ 2,liên từ,
-L25-愿意,愿意,yuànyì,"bằng lòng, mong muốn",,L25,,,,Hán ngữ 2,"động từ năng nguyện, động từ",
-L25-运动,运动,yùndòng,"vận động, thể thao",,L25,,,,Hán ngữ 2,"động từ, danh từ",
-L25-早,早,zǎo,sớm,,L25,,,,Hán ngữ 2,tính từ,
-L25-这么,这么,zhème,như thế này,,L25,,,,Hán ngữ 2,đại từ,
-L26-阿姨,阿姨,āyí,"dì, cô",,L26,,,,Hán ngữ 2,danh từ,
-L26-哎,哎,āi,"a, á (thán từ)",,L26,,,,Hán ngữ 2,thán từ,
-L26-比,比,bǐ,"so, so với",,L26,,,,Hán ngữ 2,động từ,
-L26-比赛,比赛,bǐsài,thi đấu,,L26,,,,Hán ngữ 2,"động từ, danh từ",
-L26-出,出,chū,"ra, xuất",,L26,,,,Hán ngữ 2,động từ,
-L26-出国,出国,chū guó,ra nước ngoài,,L26,,,,Hán ngữ 2,,
-L26-打（电话）,打（电话）,dǎ (diànhuà),gọi (điện thoại),,L26,,,,Hán ngữ 2,động từ,
-L26-队,队,duì,đội,,L26,,,,Hán ngữ 2,danh từ,
-L26-对了,对了,duì le,đúng rồi,,L26,,,,Hán ngữ 2,,
-L26-关,关,guān,"đóng, tắt",,L26,,,,Hán ngữ 2,động từ,
-L26-关机,关机,guān jī,tắt máy,,L26,,,,Hán ngữ 2,,
-L26-接,接,jiē,"đón, tiếp",,L26,,,,Hán ngữ 2,động từ,
-L26-开,开,kāi,mở,,L26,,,,Hán ngữ 2,động từ,
-L26-开机,开机,kāi jī,mở máy,,L26,,,,Hán ngữ 2,,
-L26-考,考,kǎo,"thi, kiểm tra",,L26,,,,Hán ngữ 2,động từ,
-L26-陪,陪,péi,đi cùng,,L26,,,,Hán ngữ 2,động từ,
-L26-上,上,shàng,lên (lớp),,L26,,,,Hán ngữ 2,động từ,
-L26-输,输,shū,thua,,L26,,,,Hán ngữ 2,động từ,
-L26-踢,踢,tī,đá,,L26,,,,Hán ngữ 2,động từ,
-L26-托福,托福,Tuōfú,TOEFL,,L26,,,,Hán ngữ 2,danh từ,
-L26-忘,忘,wàng,quên,,L26,,,,Hán ngữ 2,động từ,
-L26-喂,喂,wèi,a lô (thán từ),,L26,,,,Hán ngữ 2,thán từ,
-L26-响,响,xiǎng,"kêu, reo (chuông)",,L26,,,,Hán ngữ 2,động từ,
-L26-已经,已经,yǐjīng,đã,,L26,,,,Hán ngữ 2,phó từ,
-L26-赢,赢,yíng,thắng,,L26,,,,Hán ngữ 2,động từ,
-L26-又,又,yòu,lại,,L26,,,,Hán ngữ 2,phó từ,
-L27-别,别,bié,đừng,,L27,,,,Hán ngữ 2,phó từ,
-L27-病人,病人,bìngrén,bệnh nhân,,L27,,,,Hán ngữ 2,danh từ,
-L27-肠炎,肠炎,chángyán,viêm ruột,,L27,,,,Hán ngữ 2,danh từ,
-L27-打针,打针,dǎ zhēn,tiêm,,L27,,,,Hán ngữ 2,,
-L27-大便,大便,dàbiàn,đại tiện,,L27,,,,Hán ngữ 2,"danh từ, động từ",
-L27-得,得,dé,được,,L27,,,,Hán ngữ 2,động từ,
-L27-肚子,肚子,dùzi,bụng,,L27,,,,Hán ngữ 2,danh từ,
-L27-后,后,hòu,sau,,L27,,,,Hán ngữ 2,danh từ,
-L27-化验,化验,huàyàn,"hóa nghiệm, xét nghiệm",,L27,,,,Hán ngữ 2,động từ,
-L27-寂寞,寂寞,jìmò,cô đơn,,L27,,,,Hán ngữ 2,tính từ,
-L27-检查,检查,jiǎnchá,kiểm tra,,L27,,,,Hán ngữ 2,động từ,
-L27-结果,结果,jiéguǒ,kết quả,,L27,,,,Hán ngữ 2,danh từ,
-L27-开（药）,开（药）,kāi (yào),kê (đơn thuốc),,L27,,,,Hán ngữ 2,động từ,
-L27-哭,哭,kū,khóc,,L27,,,,Hán ngữ 2,động từ,
-L27-拉肚子,拉肚子,lā dùzi,"đau bụng, tiêu chảy",,L27,,,,Hán ngữ 2,,
-L27-礼堂,礼堂,lǐtáng,hội trường lớn,,L27,,,,Hán ngữ 2,danh từ,
-L27-厉害,厉害,lìhai,"lợi hại, ghê gớm",,L27,,,,Hán ngữ 2,tính từ,
-L27-了,了,le,(trợ từ ngữ khí),,L27,,,,Hán ngữ 2,trợ từ,
-L27-难过,难过,nánguò,"khó chịu, buồn",,L27,,,,Hán ngữ 2,tính từ,
-L27-牛肉,牛肉,niúròu,thịt bò,,L27,,,,Hán ngữ 2,danh từ,
-L27-片,片,piàn,"viên, phiến (lượng từ)",,L27,,,,Hán ngữ 2,lượng từ,
-L27-然后,然后,ránhòu,sau đó,,L27,,,,Hán ngữ 2,phó từ,
-L27-所以,所以,suǒyǐ,vì vậy,,L27,,,,Hán ngữ 2,liên từ,
-L27-跳舞,跳舞,tiào wǔ,nhảy múa,,L27,,,,Hán ngữ 2,,
-L27-舞会,舞会,wǔhuì,vũ hội,,L27,,,,Hán ngữ 2,danh từ,
-L27-消化,消化,xiāohuà,tiêu hóa,,L27,,,,Hán ngữ 2,động từ,
-L27-小便,小便,xiǎobiàn,tiểu tiện,,L27,,,,Hán ngữ 2,"danh từ, động từ",
-L27-鱼,鱼,yú,cá,,L27,,,,Hán ngữ 2,danh từ,
-L28-才,才,cái,"vừa, mới",,L28,,,,Hán ngữ 2,phó từ,
-L28-层,层,céng,tầng,,L28,,,,Hán ngữ 2,lượng từ,
-L28-车站,车站,chēzhàn,bến xe,,L28,,,,Hán ngữ 2,danh từ,
-L28-厨房,厨房,chúfáng,phòng bếp,,L28,,,,Hán ngữ 2,danh từ,
-L28-地铁,地铁,dìtiě,tàu điện ngầm,,L28,,,,Hán ngữ 2,danh từ,
-L28-堵车,堵车,dǔ chē,tắc đường,,L28,,,,Hán ngữ 2,,
-L28-方便,方便,fāngbiàn,thuận tiện,,L28,,,,Hán ngữ 2,tính từ,
-L28-房子,房子,fángzi,nhà,,L28,,,,Hán ngữ 2,danh từ,
-L28-房租,房租,fángzū,tiền thuê nhà,,L28,,,,Hán ngữ 2,danh từ,
-L28-附近,附近,fùjìn,"gần, lân cận",,L28,,,,Hán ngữ 2,danh từ,
-L28-赶,赶,gǎn,"vội, đuổi theo",,L28,,,,Hán ngữ 2,động từ,
-L28-公共汽车,公共汽车,gōnggòng qìchē,xe buýt,,L28,,,,Hán ngữ 2,,
-L28-河,河,hé,sông,,L28,,,,Hán ngữ 2,danh từ,
-L28-还是,还是,háishi,"vẫn, hay là",,L28,,,,Hán ngữ 2,phó từ,
-L28-环境,环境,huánjìng,"môi trường, hoàn cảnh",,L28,,,,Hán ngữ 2,danh từ,
-L28-交通,交通,jiāotōng,giao thông,,L28,,,,Hán ngữ 2,danh từ,
-L28-客厅,客厅,kètīng,phòng khách,,L28,,,,Hán ngữ 2,danh từ,
-L28-乱,乱,luàn,"loạn, lộn xộn",,L28,,,,Hán ngữ 2,tính từ,
-L28-满意,满意,mǎnyì,vừa ý,,L28,,,,Hán ngữ 2,tính từ,
-L28-面积,面积,miànjī,diện tích,,L28,,,,Hán ngữ 2,danh từ,
-L28-旁边,旁边,pángbiān,bên cạnh,,L28,,,,Hán ngữ 2,danh từ,
-L28-平（方）米,平（方）米,píng (fāng) mǐ,mét vuông,,L28,,,,Hán ngữ 2,lượng từ,
-L28-妻子,妻子,qīzi,vợ,,L28,,,,Hán ngữ 2,danh từ,
-L28-情况,情况,qíngkuàng,tình hình,,L28,,,,Hán ngữ 2,danh từ,
-L28-上去,上去,shàngqu,lên,,L28,,,,Hán ngữ 2,động từ,
-L28-虽然,虽然,suīrán,"tuy, mặc dù",,L28,,,,Hán ngữ 2,liên từ,
-L28-套,套,tào,"bộ, căn (lượng từ)",,L28,,,,Hán ngữ 2,lượng từ,
-L28-体育馆,体育馆,tǐyùguǎn,nhà thi đấu thể thao,,L28,,,,Hán ngữ 2,danh từ,
-L28-条,条,tiáo,"chiếc, cái (lượng từ cho vật dài)",,L28,,,,Hán ngữ 2,lượng từ,
-L28-卧室,卧室,wòshì,phòng ngủ,,L28,,,,Hán ngữ 2,danh từ,
-L28-阳光,阳光,yángguāng,ánh mặt trời,,L28,,,,Hán ngữ 2,danh từ,
-L28-要是,要是,yàoshi,nếu,,L28,,,,Hán ngữ 2,liên từ,
-L28-有的,有的,yǒude,"có cái, có người",,L28,,,,Hán ngữ 2,đại từ,
-L28-站,站,zhàn,"trạm, bến",,L28,,,,Hán ngữ 2,danh từ,
-L28-真,真,zhēn,thật,,L28,,,,Hán ngữ 2,"phó từ, tính từ",
-L29-办法,办法,bànfǎ,biện pháp,,L29,,,,Hán ngữ 2,danh từ,
-L29-成,成,chéng,thành,,L29,,,,Hán ngữ 2,động từ,
-L29-成绩,成绩,chéngjì,thành tích,,L29,,,,Hán ngữ 2,danh từ,
-L29-词,词,cí,từ,,L29,,,,Hán ngữ 2,danh từ,
-L29-答,答,dá,trả lời,,L29,,,,Hán ngữ 2,động từ,
-L29-打开,打开,dǎ kāi,mở,,L29,,,,Hán ngữ 2,,
-L29-道,道,dào,"(lượng từ cho câu hỏi, đề bài)",,L29,,,,Hán ngữ 2,lượng từ,
-L29-干,干,gàn,làm,,L29,,,,Hán ngữ 2,động từ,
-L29-干什么,干什么,gàn shénme,làm gì,,L29,,,,Hán ngữ 2,,
-L29-故事,故事,gùshi,câu chuyện,,L29,,,,Hán ngữ 2,danh từ,
-L29-合上,合上,hé shàng,"gấp, đóng",,L29,,,,Hán ngữ 2,,
-L29-回信,回信,huí xìn,trả lời thư,,L29,,,,Hán ngữ 2,,
-L29-会话,会话,huìhuà,hội thoại,,L29,,,,Hán ngữ 2,"danh từ, động từ",
-L29-见,见,jiàn,gặp,,L29,,,,Hán ngữ 2,động từ,
-L29-句子,句子,jùzi,câu,,L29,,,,Hán ngữ 2,danh từ,
-L29-看见,看见,kàn jiàn,nhìn thấy,,L29,,,,Hán ngữ 2,,
-L29-考试,考试,kǎoshì,thi,,L29,,,,Hán ngữ 2,"động từ, danh từ",
-L29-念,念,niàn,đọc,,L29,,,,Hán ngữ 2,động từ,
-L29-上,上,shàng,(bổ ngữ kết quả),,L29,,,,Hán ngữ 2,động từ,
-L29-熟,熟,shú,chín; quen,,L29,,,,Hán ngữ 2,tính từ,
-L29-题,题,tí,"đề, câu hỏi",,L29,,,,Hán ngữ 2,danh từ,
-L29-听见,听见,tīngjiàn,nghe thấy,,L29,,,,Hán ngữ 2,động từ,
-L29-完,完,wán,"hết, xong",,L29,,,,Hán ngữ 2,động từ,
-L29-笑,笑,xiào,cười,,L29,,,,Hán ngữ 2,động từ,
-L29-页,页,yè,trang,,L29,,,,Hán ngữ 2,lượng từ,
-L29-有意思,有意思,yǒu yìsi,"có ý nghĩa, hay",,L29,,,,Hán ngữ 2,,
-L29-再,再,zài,"rồi mới, lại",,L29,,,,Hán ngữ 2,phó từ,
-L29-糟糕,糟糕,zāogāo,"chết rồi, thôi rồi",,L29,,,,Hán ngữ 2,tính từ,
-TR2-安娜,安娜,Ānnà,Anna,,L29,,,,Hán ngữ 2;tên riêng,tên riêng,
-L30-必须,必须,bìxū,"phải, nhất thiết",,L30,,,,Hán ngữ 2,phó từ,
-L30-不过,不过,búguò,nhưng,,L30,,,,Hán ngữ 2,liên từ,
-L30-不一定,不一定,bù yídìng,không nhất định,,L30,,,,Hán ngữ 2,,
-L30-菜,菜,cài,"rau, món ăn",,L30,,,,Hán ngữ 2,danh từ,
-L30-差不多,差不多,chàbuduō,"xấp xỉ, gần như",,L30,,,,Hán ngữ 2,phó từ,
-L30-从来,从来,cónglái,từ trước tới nay,,L30,,,,Hán ngữ 2,phó từ,
-L30-打鱼,打鱼,dǎ yú,đánh cá,,L30,,,,Hán ngữ 2,,
-L30-点心,点心,diǎnxin,điểm tâm,,L30,,,,Hán ngữ 2,danh từ,
-L30-父母,父母,fùmǔ,bố mẹ,,L30,,,,Hán ngữ 2,danh từ,
-L30-干净,干净,gānjìng,sạch sẽ,,L30,,,,Hán ngữ 2,tính từ,
-L30-干燥,干燥,gānzào,khô ráo,,L30,,,,Hán ngữ 2,tính từ,
-L30-感谢,感谢,gǎnxiè,cảm tạ,,L30,,,,Hán ngữ 2,động từ,
-L30-高血压,高血压,gāoxuèyā,cao huyết áp,,L30,,,,Hán ngữ 2,danh từ,
-L30-功课,功课,gōngkè,"bài học, bài tập",,L30,,,,Hán ngữ 2,danh từ,
-L30-好,好,hǎo,"rất, thật là",,L30,,,,Hán ngữ 2,phó từ,
-L30-好处,好处,hǎochù,lợi ích,,L30,,,,Hán ngữ 2,danh từ,
-L30-坏处,坏处,huàichù,"điểm xấu, tác hại",,L30,,,,Hán ngữ 2,danh từ,
-L30-机会,机会,jīhuì,cơ hội,,L30,,,,Hán ngữ 2,danh từ,
-L30-记,记,jì,"ghi, nhớ",,L30,,,,Hán ngữ 2,động từ,
-L30-记住,记住,jì zhù,ghi nhớ,,L30,,,,Hán ngữ 2,,
-L30-课间,课间,kèjiān,giữa các giờ học,,L30,,,,Hán ngữ 2,danh từ,
-L30-块,块,kuài,"khối, miếng",,L30,,,,Hán ngữ 2,lượng từ,
-L30-练,练,liàn,luyện,,L30,,,,Hán ngữ 2,động từ,
-L30-慢性病,慢性病,mànxìngbìng,bệnh mãn tính,,L30,,,,Hán ngữ 2,danh từ,
-L30-牛奶,牛奶,niúnǎi,sữa bò,,L30,,,,Hán ngữ 2,danh từ,
-L30-气功,气功,qìgōng,khí công,,L30,,,,Hán ngữ 2,danh từ,
-L30-气候,气候,qìhòu,khí hậu,,L30,,,,Hán ngữ 2,danh từ,
-L30-散步,散步,sàn bù,tản bộ,,L30,,,,Hán ngữ 2,,
-L30-晒,晒,shài,phơi,,L30,,,,Hán ngữ 2,động từ,
-L30-生活,生活,shēnghuó,"sinh hoạt, cuộc sống",,L30,,,,Hán ngữ 2,"động từ, danh từ",
-L30-失眠,失眠,shī mián,mất ngủ,,L30,,,,Hán ngữ 2,,
-L30-挺,挺,tǐng,"khá, rất",,L30,,,,Hán ngữ 2,phó từ,
-L30-午觉,午觉,wǔjiào,ngủ trưa,,L30,,,,Hán ngữ 2,danh từ,
-L30-习惯,习惯,xíguàn,thói quen; quen,,L30,,,,Hán ngữ 2,"động từ, danh từ",
-L30-效果,效果,xiàoguǒ,hiệu quả,,L30,,,,Hán ngữ 2,danh từ,
-L30-延长,延长,yáncháng,kéo dài,,L30,,,,Hán ngữ 2,động từ,
-L30-一般,一般,yìbān,"bình thường, thông thường",,L30,,,,Hán ngữ 2,tính từ,
-L30-油腻,油腻,yóunì,"nhiều dầu mỡ, ngấy",,L30,,,,Hán ngữ 2,tính từ,
-L30-游泳,游泳,yóu yǒng,bơi,,L30,,,,Hán ngữ 2,,
-L30-原来,原来,yuánlái,"hóa ra, vốn dĩ",,L30,,,,Hán ngữ 2,tính từ,
+id,hanzi,pinyin,meaning,hsk_level,lesson_id,example,example_pinyin,example_meaning,tags,pos,han_viet,topic
+L16-安静,安静,ānjìng,yên lặng,,L16,,,,Hán ngữ 2,tính từ,,adj
+L16-查,查,chá,"kiểm tra, tra",,L16,,,,Hán ngữ 2,động từ,,school
+L16-常（常）,常（常）,cháng (cháng),thường,,L16,,,,Hán ngữ 2,phó từ,,func
+L16-超市,超市,chāoshì,siêu thị,,L16,,,,Hán ngữ 2,danh từ,,shopping
+L16-电视,电视,diànshì,ti vi,,L16,,,,Hán ngữ 2,danh từ,,hobby
+L16-电视剧,电视剧,diànshìjù,phim truyền hình,,L16,,,,Hán ngữ 2,danh từ,,hobby
+L16-电影,电影,diànyǐng,phim (điện ảnh),,L16,,,,Hán ngữ 2,danh từ,,hobby
+L16-东西,东西,dōngxi,đồ vật,,L16,,,,Hán ngữ 2,danh từ,,things
+L16-发,发,fā,"gửi, phát",,L16,,,,Hán ngữ 2,động từ,,travel
+L16-复习,复习,fùxí,ôn tập,,L16,,,,Hán ngữ 2,động từ,,school
+L16-跟,跟,gēn,"cùng, với",,L16,,,,Hán ngữ 2,"giới từ, liên từ, động từ",,func
+L16-公园,公园,gōngyuán,công viên,,L16,,,,Hán ngữ 2,danh từ,,places
+L16-或者,或者,huòzhě,hoặc là,,L16,,,,Hán ngữ 2,liên từ,,func
+L16-借,借,jiè,mượn,,L16,,,,Hán ngữ 2,động từ,,verbs
+L16-课文,课文,kèwén,bài khóa,,L16,,,,Hán ngữ 2,danh từ,,school
+L16-练习,练习,liànxí,"luyện tập, bài tập",,L16,,,,Hán ngữ 2,"động từ, danh từ",,school
+L16-聊天儿,聊天儿,liáo tiānr,"nói chuyện, tán gẫu",,L16,,,,Hán ngữ 2,,,greet
+L16-上网,上网,shàng wǎng,lên mạng,,L16,,,,Hán ngữ 2,,,hobby
+L16-生词,生词,shēngcí,từ mới,,L16,,,,Hán ngữ 2,danh từ,,school
+L16-时候,时候,shíhou,lúc,,L16,,,,Hán ngữ 2,danh từ,,time
+L16-收,收,shōu,"thu, nhận",,L16,,,,Hán ngữ 2,động từ,,verbs
+L16-收发,收发,shōufā,thu phát,,L16,,,,Hán ngữ 2,động từ,,verbs
+L16-宿舍,宿舍,sùshè,ký túc xá,,L16,,,,Hán ngữ 2,danh từ,,places
+L16-晚上,晚上,wǎnshang,buổi tối,,L16,,,,Hán ngữ 2,danh từ,,time
+L16-网,网,wǎng,mạng,,L16,,,,Hán ngữ 2,danh từ,,things
+L16-现在,现在,xiànzài,bây giờ,,L16,,,,Hán ngữ 2,danh từ,,time
+L16-休息,休息,xiūxi,nghỉ ngơi,,L16,,,,Hán ngữ 2,động từ,,daily
+L16-一起,一起,yìqǐ,cùng nhau,,L16,,,,Hán ngữ 2,phó từ,,func
+L16-伊妹儿,伊妹儿,yīmèir,email,,L16,,,,Hán ngữ 2,danh từ,,travel
+L16-有时候,有时候,yǒu shíhou,có lúc,,L16,,,,Hán ngữ 2,,,time
+L16-预习,预习,yùxí,chuẩn bị bài trước,,L16,,,,Hán ngữ 2,động từ,,school
+L16-咱们,咱们,zánmen,chúng ta,,L16,,,,Hán ngữ 2,đại từ,,people
+L17-出来,出来,chūlai,"đi ra, ra",,L17,,,,Hán ngữ 2,động từ,,verbs
+L17-汉英,汉英,Hàn-Yīng,Hán – Anh,,L17,,,,Hán ngữ 2,,,school
+L17-挤,挤,jǐ,"chật, chen",,L17,,,,Hán ngữ 2,"tính từ, động từ",,verbs
+L17-教,教,jiāo,dạy,,L17,,,,Hán ngữ 2,động từ,,verbs
+L17-课,课,kè,"bài, giờ học",,L17,,,,Hán ngữ 2,danh từ,,school
+L17-口语,口语,kǒuyǔ,khẩu ngữ,,L17,,,,Hán ngữ 2,danh từ,,school
+L17-来,来,lái,đến,,L17,,,,Hán ngữ 2,động từ,,travel
+L17-录音,录音,lùyīn,ghi âm,,L17,,,,Hán ngữ 2,"danh từ, động từ",,school
+L17-没有,没有,méiyǒu,"không, chưa",,L17,,,,Hán ngữ 2,phó từ,,func
+L17-门,门,mén,môn (lượng từ),,L17,,,,Hán ngữ 2,lượng từ,,numbers
+L17-骑,骑,qí,"cưỡi, đi (xe)",,L17,,,,Hán ngữ 2,động từ,,travel
+L17-事,事,shì,việc,,L17,,,,Hán ngữ 2,danh từ,,things
+L17-书店,书店,shūdiàn,hiệu sách,,L17,,,,Hán ngữ 2,danh từ,,places
+L17-体育,体育,tǐyù,thể dục,,L17,,,,Hán ngữ 2,danh từ,,hobby
+L17-听力,听力,tīnglì,năng lực nghe,,L17,,,,Hán ngữ 2,danh từ,,school
+L17-文化,文化,wénhuà,văn hóa,,L17,,,,Hán ngữ 2,danh từ,,school
+L17-想,想,xiǎng,nghĩ; muốn,,L17,,,,Hán ngữ 2,"động từ, động từ năng nguyện",,verbs
+L17-行,行,xíng,được,,L17,,,,Hán ngữ 2,động từ,,verbs
+L17-音乐,音乐,yīnyuè,âm nhạc,,L17,,,,Hán ngữ 2,danh từ,,hobby
+L17-阅读,阅读,yuèdú,đọc hiểu,,L17,,,,Hán ngữ 2,danh từ,,school
+L17-在,在,zài,đang,,L17,,,,Hán ngữ 2,phó từ,,func
+L17-正,正,zhèng,đang,,L17,,,,Hán ngữ 2,phó từ,,func
+L17-正在,正在,zhèngzài,đang,,L17,,,,Hán ngữ 2,phó từ,,func
+L18-办,办,bàn,làm,,L18,,,,Hán ngữ 2,động từ,,verbs
+L18-帮,帮,bāng,giúp,,L18,,,,Hán ngữ 2,động từ,,verbs
+L18-包裹,包裹,bāoguǒ,bưu kiện,,L18,,,,Hán ngữ 2,danh từ,,travel
+L18-报,报,bào,báo,,L18,,,,Hán ngữ 2,danh từ,,things
+L18-不用,不用,búyòng,không cần,,L18,,,,Hán ngữ 2,phó từ,,func
+L18-参观,参观,cānguān,tham quan,,L18,,,,Hán ngữ 2,động từ,,travel
+L18-代表,代表,dàibiǎo,đại biểu,,L18,,,,Hán ngữ 2,"danh từ, động từ",,work
+L18-当,当,dāng,"làm, đảm nhiệm",,L18,,,,Hán ngữ 2,động từ,,verbs
+L18-翻译,翻译,fānyì,phiên dịch,,L18,,,,Hán ngữ 2,"danh từ, động từ",,school
+L18-飞,飞,fēi,bay,,L18,,,,Hán ngữ 2,động từ,,verbs
+L18-飞机,飞机,fēijī,máy bay,,L18,,,,Hán ngữ 2,danh từ,,travel
+L18-份,份,fèn,"phần, tờ (lượng từ)",,L18,,,,Hán ngữ 2,lượng từ,,numbers
+L18-花,花,huā,hoa,,L18,,,,Hán ngữ 2,danh từ,,things
+L18-回来,回来,huílái,quay về,,L18,,,,Hán ngữ 2,động từ,,travel
+L18-火车,火车,huǒchē,tàu hỏa,,L18,,,,Hán ngữ 2,danh từ,,travel
+L18-浇,浇,jiāo,tưới,,L18,,,,Hán ngữ 2,động từ,,daily
+L18-旅行,旅行,lǚxíng,du lịch,,L18,,,,Hán ngữ 2,động từ,,travel
+L18-没问题,没问题,méi wèntí,không có vấn đề gì,,L18,,,,Hán ngữ 2,,,greet
+L18-拿,拿,ná,"cầm, lấy",,L18,,,,Hán ngữ 2,động từ,,verbs
+L18-青年,青年,qīngnián,thanh niên,,L18,,,,Hán ngữ 2,danh từ,,people
+L18-顺便,顺便,shùnbiàn,tiện thể,,L18,,,,Hán ngữ 2,phó từ,,func
+L18-替,替,tì,"thay, thay thế",,L18,,,,Hán ngữ 2,"giới từ, động từ",,func
+L18-团,团,tuán,đoàn,,L18,,,,Hán ngữ 2,"danh từ, lượng từ",,work
+L18-问题,问题,wèntí,vấn đề,,L18,,,,Hán ngữ 2,danh từ,,things
+L18-用,用,yòng,dùng,,L18,,,,Hán ngữ 2,động từ,,verbs
+L18-邮票,邮票,yóupiào,tem,,L18,,,,Hán ngữ 2,danh từ,,travel
+TR2-上海,上海,Shànghǎi,Thượng Hải,,L18,,,,Hán ngữ 2;tên riêng,tên riêng,,countries
+TR2-珍妮,珍妮,Zhēnní,Janet,,L18,,,,Hán ngữ 2;tên riêng,tên riêng,,countries
+L19-长,长,cháng,dài,,L19,,,,Hán ngữ 2,tính từ,,adj
+L19-打折,打折,dǎ zhé,giảm giá,,L19,,,,Hán ngữ 2,,,shopping
+L19-当然,当然,dāngrán,đương nhiên,,L19,,,,Hán ngữ 2,phó từ,,func
+L19-短,短,duǎn,ngắn,,L19,,,,Hán ngữ 2,tính từ,,adj
+L19-肥,肥,féi,"béo, rộng (quần áo)",,L19,,,,Hán ngữ 2,tính từ,,shopping
+L19-好看,好看,hǎokàn,"đẹp, ưa nhìn",,L19,,,,Hán ngữ 2,tính từ,,adj
+L19-合适,合适,héshì,thích hợp,,L19,,,,Hán ngữ 2,tính từ,,adj
+L19-可以,可以,kěyǐ,có thể,,L19,,,,Hán ngữ 2,động từ năng nguyện,,verbs
+L19-毛衣,毛衣,máoyī,áo len,,L19,,,,Hán ngữ 2,danh từ,,shopping
+L19-胖,胖,pàng,béo,,L19,,,,Hán ngữ 2,tính từ,,adj
+L19-便宜,便宜,piányi,rẻ,,L19,,,,Hán ngữ 2,tính từ,,shopping
+L19-浅,浅,qiǎn,nhạt (màu); nông,,L19,,,,Hán ngữ 2,tính từ,,shopping
+L19-深,深,shēn,sâu; đậm (màu),,L19,,,,Hán ngữ 2,tính từ,,shopping
+L19-试,试,shì,thử,,L19,,,,Hán ngữ 2,động từ,,shopping
+L19-瘦,瘦,shòu,gầy; chật (quần áo),,L19,,,,Hán ngữ 2,tính từ,,shopping
+L19-一点儿,一点儿,yìdiǎnr,một chút,,L19,,,,Hán ngữ 2,số lượng từ,,func
+L19-应该,应该,yīnggāi,nên,,L19,,,,Hán ngữ 2,động từ năng nguyện,,verbs
+L19-又…又…,又…又…,yòu…yòu…,vừa… vừa…,,L19,,,,Hán ngữ 2,,,things
+L19-羽绒服,羽绒服,yǔróngfú,áo lông vũ,,L19,,,,Hán ngữ 2,danh từ,,shopping
+L20-毕业,毕业,bì yè,tốt nghiệp,,L20,,,,Hán ngữ 2,,,school
+L20-参加,参加,cānjiā,tham gia,,L20,,,,Hán ngữ 2,động từ,,verbs
+L20-打算,打算,dǎsuan,dự định,,L20,,,,Hán ngữ 2,"động từ, danh từ",,verbs
+L20-点（钟）,点（钟）,diǎn (zhōng),giờ,,L20,,,,Hán ngữ 2,lượng từ,,time
+L20-多,多,duō,"nhiều, bao (nhiêu)",,L20,,,,Hán ngữ 2,phó từ,,func
+L20-多大,多大,duō dà,bao nhiêu (tuổi),,L20,,,,Hán ngữ 2,,,numbers
+L20-狗,狗,gǒu,chó,,L20,,,,Hán ngữ 2,danh từ,,things
+L20-过,过,guò,"qua, trải qua",,L20,,,,Hán ngữ 2,động từ,,verbs
+L20-号,号,hào,số; ngày (trong tháng),,L20,,,,Hán ngữ 2,"danh từ, lượng từ",,time
+L20-后年,后年,hòunián,năm sau nữa,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-今年,今年,jīnnián,năm nay,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-就,就,jiù,"thì, liền",,L20,,,,Hán ngữ 2,phó từ,,func
+L20-举行,举行,jǔxíng,"cử hành, tổ chức",,L20,,,,Hán ngữ 2,động từ,,verbs
+L20-快乐,快乐,kuàilè,vui vẻ,,L20,,,,Hán ngữ 2,tính từ,,adj
+L20-明年,明年,míngnián,sang năm,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-年,年,nián,năm,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-去年,去年,qùnián,năm ngoái,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-生日,生日,shēngri,sinh nhật,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-时间,时间,shíjiān,thời gian,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-属,属,shǔ,thuộc (cầm tinh),,L20,,,,Hán ngữ 2,động từ,,verbs
+L20-岁,岁,suì,tuổi,,L20,,,,Hán ngữ 2,lượng từ,,numbers
+L20-晚会,晚会,wǎnhuì,dạ hội,,L20,,,,Hán ngữ 2,danh từ,,hobby
+L20-一定,一定,yídìng,nhất định,,L20,,,,Hán ngữ 2,phó từ,,func
+L20-月,月,yuè,tháng,,L20,,,,Hán ngữ 2,danh từ,,time
+L20-正好,正好,zhènghǎo,vừa đúng,,L20,,,,Hán ngữ 2,tính từ,,adj
+L21-半,半,bàn,"nửa, rưỡi",,L21,,,,Hán ngữ 2,danh từ,,numbers
+L21-操场,操场,cāochǎng,sân tập thể dục,,L21,,,,Hán ngữ 2,danh từ,,places
+L21-差,差,chà,kém,,L21,,,,Hán ngữ 2,"động từ, tính từ",,verbs
+L21-出发,出发,chūfā,xuất phát,,L21,,,,Hán ngữ 2,động từ,,travel
+L21-床,床,chuáng,giường,,L21,,,,Hán ngữ 2,danh từ,,daily
+L21-带,带,dài,mang,,L21,,,,Hán ngữ 2,động từ,,verbs
+L21-点,点,diǎn,điểm,,L21,,,,Hán ngữ 2,"danh từ, lượng từ",,numbers
+L21-锻炼,锻炼,duànliàn,"rèn luyện, tập luyện",,L21,,,,Hán ngữ 2,động từ,,hobby
+L21-分（钟）,分（钟）,fēn (zhōng),phút,,L21,,,,Hán ngữ 2,"danh từ, lượng từ",,time
+L21-集合,集合,jíhé,tập hợp,,L21,,,,Hán ngữ 2,động từ,,verbs
+L21-教室,教室,jiàoshì,phòng học,,L21,,,,Hán ngữ 2,danh từ,,school
+L21-节,节,jié,tiết (học); lễ,,L21,,,,Hán ngữ 2,lượng từ,,school
+L21-刻,刻,kè,khắc (15 phút),,L21,,,,Hán ngữ 2,lượng từ,,time
+L21-快,快,kuài,nhanh,,L21,,,,Hán ngữ 2,tính từ,,adj
+L21-每,每,měi,mỗi,,L21,,,,Hán ngữ 2,đại từ,,func
+L21-们,们,men,(hậu tố số nhiều),,L21,,,,Hán ngữ 2,hậu tố,,func
+L21-年级,年级,niánjí,"lớp, năm thứ (đại học)",,L21,,,,Hán ngữ 2,danh từ,,school
+L21-爬,爬,pá,"trèo, leo",,L21,,,,Hán ngữ 2,động từ,,hobby
+L21-起床,起床,qǐ chuáng,ngủ dậy,,L21,,,,Hán ngữ 2,,,daily
+L21-前,前,qián,"trước, phía trước",,L21,,,,Hán ngữ 2,danh từ,,time
+L21-山,山,shān,núi,,L21,,,,Hán ngữ 2,danh từ,,hobby
+L21-上车,上车,shàng chē,lên xe,,L21,,,,Hán ngữ 2,,,travel
+L21-上课,上课,shàng kè,lên lớp,,L21,,,,Hán ngữ 2,,,school
+L21-睡觉,睡觉,shuì jiào,ngủ,,L21,,,,Hán ngữ 2,,,daily
+L21-晚饭,晚饭,wǎnfàn,cơm tối,,L21,,,,Hán ngữ 2,danh từ,,food
+L21-午饭,午饭,wǔfàn,cơm trưa,,L21,,,,Hán ngữ 2,danh từ,,food
+L21-洗,洗,xǐ,"rửa, giặt",,L21,,,,Hán ngữ 2,động từ,,daily
+L21-洗澡,洗澡,xǐ zǎo,tắm,,L21,,,,Hán ngữ 2,,,daily
+L21-下车,下车,xià chē,xuống xe,,L21,,,,Hán ngữ 2,,,travel
+L21-以后,以后,yǐhòu,sau này,,L21,,,,Hán ngữ 2,danh từ,,time
+L21-早饭,早饭,zǎofàn,cơm sáng,,L21,,,,Hán ngữ 2,danh từ,,food
+L21-早上,早上,zǎoshang,buổi sáng,,L21,,,,Hán ngữ 2,danh từ,,time
+TR2-山本,山本,Shānběn,Yamamoto,,L21,,,,Hán ngữ 2;tên riêng,tên riêng,,countries
+L22-爱好,爱好,àihào,sở thích; yêu thích,,L22,,,,Hán ngữ 2,"động từ, danh từ",,hobby
+L22-唱,唱,chàng,hát,,L22,,,,Hán ngữ 2,động từ,,hobby
+L22-大家,大家,dàjiā,mọi người,,L22,,,,Hán ngữ 2,đại từ,,people
+L22-电脑,电脑,diànnǎo,máy tính,,L22,,,,Hán ngữ 2,danh từ,,things
+L22-对,对,duì,đối với,,L22,,,,Hán ngữ 2,giới từ,,func
+L22-非常,非常,fēicháng,"rất, vô cùng",,L22,,,,Hán ngữ 2,phó từ,,func
+L22-感到,感到,gǎndào,cảm thấy,,L22,,,,Hán ngữ 2,động từ,,verbs
+L22-感兴趣,感兴趣,gǎn xìngqù,có hứng thú (với…),,L22,,,,Hán ngữ 2,,,hobby
+L22-高兴,高兴,gāoxìng,vui vẻ,,L22,,,,Hán ngữ 2,tính từ,,adj
+L22-画,画,huà,vẽ,,L22,,,,Hán ngữ 2,động từ,,hobby
+L22-画儿,画儿,huàr,bức tranh,,L22,,,,Hán ngữ 2,danh từ,,hobby
+L22-叫,叫,jiào,"gọi, bảo",,L22,,,,Hán ngữ 2,động từ,,verbs
+L22-京剧,京剧,jīngjù,kinh kịch,,L22,,,,Hán ngữ 2,danh từ,,hobby
+L22-就,就,jiù,"chính là, ngay (nhấn mạnh)",,L22,,,,Hán ngữ 2,phó từ,,func
+L22-派,派,pài,"phái, cử",,L22,,,,Hán ngữ 2,động từ,,verbs
+L22-让,让,ràng,"để, bảo; nhường",,L22,,,,Hán ngữ 2,động từ,,verbs
+L22-书法,书法,shūfǎ,thư pháp,,L22,,,,Hán ngữ 2,danh từ,,hobby
+L22-谈,谈,tán,"nói chuyện, bàn",,L22,,,,Hán ngữ 2,động từ,,school
+L22-特别,特别,tèbié,đặc biệt,,L22,,,,Hán ngữ 2,tính từ,,adj
+L22-玩,玩,wán,chơi,,L22,,,,Hán ngữ 2,động từ,,hobby
+L22-喜欢,喜欢,xǐhuan,thích,,L22,,,,Hán ngữ 2,động từ,,verbs
+L22-下课,下课,xià kè,tan học,,L22,,,,Hán ngữ 2,,,school
+L22-心情,心情,xīnqíng,tâm trạng,,L22,,,,Hán ngữ 2,danh từ,,things
+L22-兴趣,兴趣,xìngqù,hứng thú,,L22,,,,Hán ngữ 2,danh từ,,hobby
+L22-业余,业余,yèyú,"nghiệp dư, ngoài giờ",,L22,,,,Hán ngữ 2,danh từ,,hobby
+L22-以前,以前,yǐqián,trước đây,,L22,,,,Hán ngữ 2,danh từ,,time
+L22-愉快,愉快,yúkuài,vui vẻ,,L22,,,,Hán ngữ 2,tính từ,,adj
+TR2-田中,田中,Tiánzhōng,Tanaka,,L22,,,,Hán ngữ 2;tên riêng,tên riêng,,countries
+L23-白色,白色,báisè,màu trắng,,L23,,,,Hán ngữ 2,tính từ,,shopping
+L23-北边,北边,běibian,phía bắc,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-…边,…边,…biān,"… bên, phía",,L23,,,,Hán ngữ 2,danh từ,,places
+L23-博物馆,博物馆,bówùguǎn,viện bảo tàng,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-从,从,cóng,từ (khi),,L23,,,,Hán ngữ 2,giới từ,,func
+L23-打听,打听,dǎting,"hỏi thăm, nghe ngóng",,L23,,,,Hán ngữ 2,động từ,,school
+L23-到,到,dào,đến,,L23,,,,Hán ngữ 2,động từ,,travel
+L23-灯,灯,dēng,đèn,,L23,,,,Hán ngữ 2,danh từ,,daily
+L23-地方,地方,dìfang,"nơi, chỗ",,L23,,,,Hán ngữ 2,danh từ,,places
+L23-东边,东边,dōngbian,phía đông,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-拐,拐,guǎi,rẽ,,L23,,,,Hán ngữ 2,động từ,,verbs
+L23-广场,广场,guǎngchǎng,quảng trường,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-和平,和平,hépíng,hòa bình,,L23,,,,Hán ngữ 2,danh từ,,things
+L23-红绿灯,红绿灯,hónglǜdēng,đèn xanh đèn đỏ,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-后边,后边,hòubian,phía sau,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-近,近,jìn,gần,,L23,,,,Hán ngữ 2,tính từ,,places
+L23-劳驾,劳驾,láo jià,cảm phiền,,L23,,,,Hán ngữ 2,,,greet
+L23-离,离,lí,"rời, cách",,L23,,,,Hán ngữ 2,giới từ,,func
+L23-里边,里边,lǐbian,bên trong,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-路,路,lù,đường,,L23,,,,Hán ngữ 2,danh từ,,travel
+L23-绿,绿,lǜ,xanh lá,,L23,,,,Hán ngữ 2,tính từ,,adj
+L23-马路,马路,mǎlù,đường cái,,L23,,,,Hán ngữ 2,danh từ,,travel
+L23-米,米,mǐ,mét,,L23,,,,Hán ngữ 2,lượng từ,,food
+L23-南边,南边,nánbian,phía nam,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-前边,前边,qiánbian,phía trước,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-上边,上边,shàngbian,phía trên,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-外边,外边,wàibian,bên ngoài,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-往,往,wǎng,hướng về,,L23,,,,Hán ngữ 2,giới từ,,func
+L23-西边,西边,xībian,phía tây,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-下边,下边,xiàbian,phía dưới,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-一直,一直,yìzhí,thẳng; luôn luôn,,L23,,,,Hán ngữ 2,phó từ,,func
+L23-右,右,yòu,phải (bên phải),,L23,,,,Hán ngữ 2,danh từ,,places
+L23-右边,右边,yòubian,bên phải,,L23,,,,Hán ngữ 2,danh từ,,places
+L23-远,远,yuǎn,xa,,L23,,,,Hán ngữ 2,tính từ,,places
+L23-中间,中间,zhōngjiān,ở giữa,,L23,,,,Hán ngữ 2,danh từ,,places
+L24-报名,报名,bào míng,"ghi tên, báo danh",,L24,,,,Hán ngữ 2,,,school
+L24-遍,遍,biàn,"lượt, lần (lượng từ)",,L24,,,,Hán ngữ 2,lượng từ,,numbers
+L24-病,病,bìng,bệnh; bị ốm,,L24,,,,Hán ngữ 2,"động từ, danh từ",,health
+L24-次,次,cì,lần,,L24,,,,Hán ngữ 2,lượng từ,,numbers
+L24-打,打,dǎ,"đánh, chơi",,L24,,,,Hán ngữ 2,động từ,,hobby
+L24-懂,懂,dǒng,hiểu,,L24,,,,Hán ngữ 2,động từ,,verbs
+L24-发烧,发烧,fā shāo,phát sốt,,L24,,,,Hán ngữ 2,,,health
+L24-感冒,感冒,gǎnmào,cảm (cúm),,L24,,,,Hán ngữ 2,"động từ, danh từ",,health
+L24-会,会,huì,"biết, có thể",,L24,,,,Hán ngữ 2,"động từ năng nguyện, động từ",,verbs
+L24-开始,开始,kāishǐ,bắt đầu,,L24,,,,Hán ngữ 2,động từ,,verbs
+L24-看病,看病,kàn bìng,khám bệnh,,L24,,,,Hán ngữ 2,,,health
+L24-咳嗽,咳嗽,késou,ho,,L24,,,,Hán ngữ 2,động từ,,health
+L24-可能,可能,kěnéng,"có thể, có khả năng",,L24,,,,Hán ngữ 2,phó từ,,func
+L24-了,了,le,rồi (trợ từ động thái),,L24,,,,Hán ngữ 2,trợ từ,,func
+L24-能,能,néng,có thể,,L24,,,,Hán ngữ 2,động từ năng nguyện,,verbs
+L24-请假,请假,qǐng jià,xin nghỉ phép,,L24,,,,Hán ngữ 2,,,work
+L24-舒服,舒服,shūfu,dễ chịu,,L24,,,,Hán ngữ 2,tính từ,,adj
+L24-太极拳,太极拳,tàijíquán,thái cực quyền,,L24,,,,Hán ngữ 2,danh từ,,hobby
+L24-疼,疼,téng,đau,,L24,,,,Hán ngữ 2,động từ,,health
+L24-听说,听说,tīngshuō,nghe nói,,L24,,,,Hán ngữ 2,động từ,,school
+L24-头,头,tóu,đầu,,L24,,,,Hán ngữ 2,danh từ,,health
+L24-头疼,头疼,tóu téng,đau đầu,,L24,,,,Hán ngữ 2,,,health
+L24-下,下,xià,"sau, tới (下星期: tuần sau)",,L24,,,,Hán ngữ 2,danh từ,,time
+L24-小时,小时,xiǎoshí,"giờ, tiếng đồng hồ",,L24,,,,Hán ngữ 2,danh từ,,time
+L24-意思,意思,yìsi,ý nghĩa,,L24,,,,Hán ngữ 2,danh từ,,things
+L24-再,再,zài,"tái, lại",,L24,,,,Hán ngữ 2,phó từ,,func
+L25-表演,表演,biǎoyǎn,biểu diễn,,L25,,,,Hán ngữ 2,động từ,,hobby
+L25-不错,不错,búcuò,"không tồi, khá tốt",,L25,,,,Hán ngữ 2,tính từ,,adj
+L25-错,错,cuò,sai,,L25,,,,Hán ngữ 2,tính từ,,adj
+L25-得,得,de,(trợ từ bổ ngữ),,L25,,,,Hán ngữ 2,trợ từ,,func
+L25-电视台,电视台,diànshìtái,đài truyền hình,,L25,,,,Hán ngữ 2,danh từ,,places
+L25-刚才,刚才,gāngcái,vừa mới,,L25,,,,Hán ngữ 2,danh từ,,time
+L25-坚持,坚持,jiānchí,kiên trì,,L25,,,,Hán ngữ 2,động từ,,verbs
+L25-节目,节目,jiémù,tiết mục,,L25,,,,Hán ngữ 2,danh từ,,hobby
+L25-进步,进步,jìnbù,tiến bộ,,L25,,,,Hán ngữ 2,động từ,,verbs
+L25-看,看,kàn,"nhìn, xem; cho rằng",,L25,,,,Hán ngữ 2,động từ,,verbs
+L25-可以,可以,kěyǐ,"được, khá",,L25,,,,Hán ngữ 2,tính từ,,adj
+L25-篮球,篮球,lánqiú,bóng rổ,,L25,,,,Hán ngữ 2,danh từ,,hobby
+L25-流利,流利,liúlì,lưu loát,,L25,,,,Hán ngữ 2,tính từ,,adj
+L25-哪里,哪里,nǎli,đâu có (khiêm tốn); ở đâu,,L25,,,,Hán ngữ 2,đại từ,,func
+L25-那么,那么,nàme,như thế; vậy thì,,L25,,,,Hán ngữ 2,đại từ,,func
+L25-努力,努力,nǔlì,cố gắng,,L25,,,,Hán ngữ 2,tính từ,,adj
+L25-跑,跑,pǎo,chạy,,L25,,,,Hán ngữ 2,động từ,,hobby
+L25-跑步,跑步,pǎo bù,chạy bộ,,L25,,,,Hán ngữ 2,,,hobby
+L25-球,球,qiú,quả bóng,,L25,,,,Hán ngữ 2,danh từ,,hobby
+L25-认真,认真,rènzhēn,"nghiêm túc, chăm chỉ",,L25,,,,Hán ngữ 2,tính từ,,adj
+L25-水平,水平,shuǐpíng,trình độ,,L25,,,,Hán ngữ 2,danh từ,,school
+L25-台,台,tái,đài,,L25,,,,Hán ngữ 2,danh từ,,things
+L25-提高,提高,tígāo,nâng cao,,L25,,,,Hán ngữ 2,động từ,,verbs
+L25-晚,晚,wǎn,muộn,,L25,,,,Hán ngữ 2,tính từ,,time
+L25-为,为,wèi,vì,,L25,,,,Hán ngữ 2,giới từ,,func
+L25-为什么,为什么,wèi shénme,tại sao,,L25,,,,Hán ngữ 2,,,func
+L25-因为,因为,yīnwèi,bởi vì,,L25,,,,Hán ngữ 2,liên từ,,func
+L25-愿意,愿意,yuànyì,"bằng lòng, mong muốn",,L25,,,,Hán ngữ 2,"động từ năng nguyện, động từ",,verbs
+L25-运动,运动,yùndòng,"vận động, thể thao",,L25,,,,Hán ngữ 2,"động từ, danh từ",,hobby
+L25-早,早,zǎo,sớm,,L25,,,,Hán ngữ 2,tính từ,,time
+L25-这么,这么,zhème,như thế này,,L25,,,,Hán ngữ 2,đại từ,,func
+L26-阿姨,阿姨,āyí,"dì, cô",,L26,,,,Hán ngữ 2,danh từ,,people
+L26-哎,哎,āi,"a, á (thán từ)",,L26,,,,Hán ngữ 2,thán từ,,func
+L26-比,比,bǐ,"so, so với",,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-比赛,比赛,bǐsài,thi đấu,,L26,,,,Hán ngữ 2,"động từ, danh từ",,hobby
+L26-出,出,chū,"ra, xuất",,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-出国,出国,chū guó,ra nước ngoài,,L26,,,,Hán ngữ 2,,,countries
+L26-打（电话）,打（电话）,dǎ (diànhuà),gọi (điện thoại),,L26,,,,Hán ngữ 2,động từ,,travel
+L26-队,队,duì,đội,,L26,,,,Hán ngữ 2,danh từ,,hobby
+L26-对了,对了,duì le,đúng rồi,,L26,,,,Hán ngữ 2,,,greet
+L26-关,关,guān,"đóng, tắt",,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-关机,关机,guān jī,tắt máy,,L26,,,,Hán ngữ 2,,,travel
+L26-接,接,jiē,"đón, tiếp",,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-开,开,kāi,mở,,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-开机,开机,kāi jī,mở máy,,L26,,,,Hán ngữ 2,,,travel
+L26-考,考,kǎo,"thi, kiểm tra",,L26,,,,Hán ngữ 2,động từ,,school
+L26-陪,陪,péi,đi cùng,,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-上,上,shàng,lên (lớp),,L26,,,,Hán ngữ 2,động từ,,school
+L26-输,输,shū,thua,,L26,,,,Hán ngữ 2,động từ,,hobby
+L26-踢,踢,tī,đá,,L26,,,,Hán ngữ 2,động từ,,hobby
+L26-托福,托福,Tuōfú,TOEFL,,L26,,,,Hán ngữ 2,danh từ,,school
+L26-忘,忘,wàng,quên,,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-喂,喂,wèi,a lô (thán từ),,L26,,,,Hán ngữ 2,thán từ,,func
+L26-响,响,xiǎng,"kêu, reo (chuông)",,L26,,,,Hán ngữ 2,động từ,,verbs
+L26-已经,已经,yǐjīng,đã,,L26,,,,Hán ngữ 2,phó từ,,func
+L26-赢,赢,yíng,thắng,,L26,,,,Hán ngữ 2,động từ,,hobby
+L26-又,又,yòu,lại,,L26,,,,Hán ngữ 2,phó từ,,func
+L27-别,别,bié,đừng,,L27,,,,Hán ngữ 2,phó từ,,func
+L27-病人,病人,bìngrén,bệnh nhân,,L27,,,,Hán ngữ 2,danh từ,,health
+L27-肠炎,肠炎,chángyán,viêm ruột,,L27,,,,Hán ngữ 2,danh từ,,health
+L27-打针,打针,dǎ zhēn,tiêm,,L27,,,,Hán ngữ 2,,,health
+L27-大便,大便,dàbiàn,đại tiện,,L27,,,,Hán ngữ 2,"danh từ, động từ",,health
+L27-得,得,dé,được,,L27,,,,Hán ngữ 2,động từ,,verbs
+L27-肚子,肚子,dùzi,bụng,,L27,,,,Hán ngữ 2,danh từ,,health
+L27-后,后,hòu,sau,,L27,,,,Hán ngữ 2,danh từ,,time
+L27-化验,化验,huàyàn,"hóa nghiệm, xét nghiệm",,L27,,,,Hán ngữ 2,động từ,,health
+L27-寂寞,寂寞,jìmò,cô đơn,,L27,,,,Hán ngữ 2,tính từ,,adj
+L27-检查,检查,jiǎnchá,kiểm tra,,L27,,,,Hán ngữ 2,động từ,,health
+L27-结果,结果,jiéguǒ,kết quả,,L27,,,,Hán ngữ 2,danh từ,,things
+L27-开（药）,开（药）,kāi (yào),kê (đơn thuốc),,L27,,,,Hán ngữ 2,động từ,,health
+L27-哭,哭,kū,khóc,,L27,,,,Hán ngữ 2,động từ,,verbs
+L27-拉肚子,拉肚子,lā dùzi,"đau bụng, tiêu chảy",,L27,,,,Hán ngữ 2,,,health
+L27-礼堂,礼堂,lǐtáng,hội trường lớn,,L27,,,,Hán ngữ 2,danh từ,,places
+L27-厉害,厉害,lìhai,"lợi hại, ghê gớm",,L27,,,,Hán ngữ 2,tính từ,,adj
+L27-了,了,le,(trợ từ ngữ khí),,L27,,,,Hán ngữ 2,trợ từ,,func
+L27-难过,难过,nánguò,"khó chịu, buồn",,L27,,,,Hán ngữ 2,tính từ,,adj
+L27-牛肉,牛肉,niúròu,thịt bò,,L27,,,,Hán ngữ 2,danh từ,,food
+L27-片,片,piàn,"viên, phiến (lượng từ)",,L27,,,,Hán ngữ 2,lượng từ,,numbers
+L27-然后,然后,ránhòu,sau đó,,L27,,,,Hán ngữ 2,phó từ,,func
+L27-所以,所以,suǒyǐ,vì vậy,,L27,,,,Hán ngữ 2,liên từ,,func
+L27-跳舞,跳舞,tiào wǔ,nhảy múa,,L27,,,,Hán ngữ 2,,,hobby
+L27-舞会,舞会,wǔhuì,vũ hội,,L27,,,,Hán ngữ 2,danh từ,,hobby
+L27-消化,消化,xiāohuà,tiêu hóa,,L27,,,,Hán ngữ 2,động từ,,health
+L27-小便,小便,xiǎobiàn,tiểu tiện,,L27,,,,Hán ngữ 2,"danh từ, động từ",,health
+L27-鱼,鱼,yú,cá,,L27,,,,Hán ngữ 2,danh từ,,food
+L28-才,才,cái,"vừa, mới",,L28,,,,Hán ngữ 2,phó từ,,func
+L28-层,层,céng,tầng,,L28,,,,Hán ngữ 2,lượng từ,,places
+L28-车站,车站,chēzhàn,bến xe,,L28,,,,Hán ngữ 2,danh từ,,travel
+L28-厨房,厨房,chúfáng,phòng bếp,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-地铁,地铁,dìtiě,tàu điện ngầm,,L28,,,,Hán ngữ 2,danh từ,,travel
+L28-堵车,堵车,dǔ chē,tắc đường,,L28,,,,Hán ngữ 2,,,travel
+L28-方便,方便,fāngbiàn,thuận tiện,,L28,,,,Hán ngữ 2,tính từ,,adj
+L28-房子,房子,fángzi,nhà,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-房租,房租,fángzū,tiền thuê nhà,,L28,,,,Hán ngữ 2,danh từ,,shopping
+L28-附近,附近,fùjìn,"gần, lân cận",,L28,,,,Hán ngữ 2,danh từ,,places
+L28-赶,赶,gǎn,"vội, đuổi theo",,L28,,,,Hán ngữ 2,động từ,,verbs
+L28-公共汽车,公共汽车,gōnggòng qìchē,xe buýt,,L28,,,,Hán ngữ 2,,,travel
+L28-河,河,hé,sông,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-还是,还是,háishi,"vẫn, hay là",,L28,,,,Hán ngữ 2,phó từ,,func
+L28-环境,环境,huánjìng,"môi trường, hoàn cảnh",,L28,,,,Hán ngữ 2,danh từ,,daily
+L28-交通,交通,jiāotōng,giao thông,,L28,,,,Hán ngữ 2,danh từ,,travel
+L28-客厅,客厅,kètīng,phòng khách,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-乱,乱,luàn,"loạn, lộn xộn",,L28,,,,Hán ngữ 2,tính từ,,adj
+L28-满意,满意,mǎnyì,vừa ý,,L28,,,,Hán ngữ 2,tính từ,,adj
+L28-面积,面积,miànjī,diện tích,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-旁边,旁边,pángbiān,bên cạnh,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-平（方）米,平（方）米,píng (fāng) mǐ,mét vuông,,L28,,,,Hán ngữ 2,lượng từ,,numbers
+L28-妻子,妻子,qīzi,vợ,,L28,,,,Hán ngữ 2,danh từ,,people
+L28-情况,情况,qíngkuàng,tình hình,,L28,,,,Hán ngữ 2,danh từ,,things
+L28-上去,上去,shàngqu,lên,,L28,,,,Hán ngữ 2,động từ,,verbs
+L28-虽然,虽然,suīrán,"tuy, mặc dù",,L28,,,,Hán ngữ 2,liên từ,,func
+L28-套,套,tào,"bộ, căn (lượng từ)",,L28,,,,Hán ngữ 2,lượng từ,,numbers
+L28-体育馆,体育馆,tǐyùguǎn,nhà thi đấu thể thao,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-条,条,tiáo,"chiếc, cái (lượng từ cho vật dài)",,L28,,,,Hán ngữ 2,lượng từ,,numbers
+L28-卧室,卧室,wòshì,phòng ngủ,,L28,,,,Hán ngữ 2,danh từ,,places
+L28-阳光,阳光,yángguāng,ánh mặt trời,,L28,,,,Hán ngữ 2,danh từ,,daily
+L28-要是,要是,yàoshi,nếu,,L28,,,,Hán ngữ 2,liên từ,,func
+L28-有的,有的,yǒude,"có cái, có người",,L28,,,,Hán ngữ 2,đại từ,,func
+L28-站,站,zhàn,"trạm, bến",,L28,,,,Hán ngữ 2,danh từ,,travel
+L28-真,真,zhēn,thật,,L28,,,,Hán ngữ 2,"phó từ, tính từ",,func
+L29-办法,办法,bànfǎ,biện pháp,,L29,,,,Hán ngữ 2,danh từ,,things
+L29-成,成,chéng,thành,,L29,,,,Hán ngữ 2,động từ,,verbs
+L29-成绩,成绩,chéngjì,thành tích,,L29,,,,Hán ngữ 2,danh từ,,school
+L29-词,词,cí,từ,,L29,,,,Hán ngữ 2,danh từ,,school
+L29-答,答,dá,trả lời,,L29,,,,Hán ngữ 2,động từ,,school
+L29-打开,打开,dǎ kāi,mở,,L29,,,,Hán ngữ 2,,,verbs
+L29-道,道,dào,"(lượng từ cho câu hỏi, đề bài)",,L29,,,,Hán ngữ 2,lượng từ,,numbers
+L29-干,干,gàn,làm,,L29,,,,Hán ngữ 2,động từ,,verbs
+L29-干什么,干什么,gàn shénme,làm gì,,L29,,,,Hán ngữ 2,,,func
+L29-故事,故事,gùshi,câu chuyện,,L29,,,,Hán ngữ 2,danh từ,,school
+L29-合上,合上,hé shàng,"gấp, đóng",,L29,,,,Hán ngữ 2,,,verbs
+L29-回信,回信,huí xìn,trả lời thư,,L29,,,,Hán ngữ 2,,,travel
+L29-会话,会话,huìhuà,hội thoại,,L29,,,,Hán ngữ 2,"danh từ, động từ",,school
+L29-见,见,jiàn,gặp,,L29,,,,Hán ngữ 2,động từ,,greet
+L29-句子,句子,jùzi,câu,,L29,,,,Hán ngữ 2,danh từ,,school
+L29-看见,看见,kàn jiàn,nhìn thấy,,L29,,,,Hán ngữ 2,,,verbs
+L29-考试,考试,kǎoshì,thi,,L29,,,,Hán ngữ 2,"động từ, danh từ",,school
+L29-念,念,niàn,đọc,,L29,,,,Hán ngữ 2,động từ,,school
+L29-上,上,shàng,(bổ ngữ kết quả),,L29,,,,Hán ngữ 2,động từ,,verbs
+L29-熟,熟,shú,chín; quen,,L29,,,,Hán ngữ 2,tính từ,,adj
+L29-题,题,tí,"đề, câu hỏi",,L29,,,,Hán ngữ 2,danh từ,,school
+L29-听见,听见,tīngjiàn,nghe thấy,,L29,,,,Hán ngữ 2,động từ,,verbs
+L29-完,完,wán,"hết, xong",,L29,,,,Hán ngữ 2,động từ,,verbs
+L29-笑,笑,xiào,cười,,L29,,,,Hán ngữ 2,động từ,,verbs
+L29-页,页,yè,trang,,L29,,,,Hán ngữ 2,lượng từ,,numbers
+L29-有意思,有意思,yǒu yìsi,"có ý nghĩa, hay",,L29,,,,Hán ngữ 2,,,adj
+L29-再,再,zài,"rồi mới, lại",,L29,,,,Hán ngữ 2,phó từ,,func
+L29-糟糕,糟糕,zāogāo,"chết rồi, thôi rồi",,L29,,,,Hán ngữ 2,tính từ,,adj
+TR2-安娜,安娜,Ānnà,Anna,,L29,,,,Hán ngữ 2;tên riêng,tên riêng,,countries
+L30-必须,必须,bìxū,"phải, nhất thiết",,L30,,,,Hán ngữ 2,phó từ,,func
+L30-不过,不过,búguò,nhưng,,L30,,,,Hán ngữ 2,liên từ,,func
+L30-不一定,不一定,bù yídìng,không nhất định,,L30,,,,Hán ngữ 2,,,func
+L30-菜,菜,cài,"rau, món ăn",,L30,,,,Hán ngữ 2,danh từ,,food
+L30-差不多,差不多,chàbuduō,"xấp xỉ, gần như",,L30,,,,Hán ngữ 2,phó từ,,func
+L30-从来,从来,cónglái,từ trước tới nay,,L30,,,,Hán ngữ 2,phó từ,,func
+L30-打鱼,打鱼,dǎ yú,đánh cá,,L30,,,,Hán ngữ 2,,,hobby
+L30-点心,点心,diǎnxin,điểm tâm,,L30,,,,Hán ngữ 2,danh từ,,food
+L30-父母,父母,fùmǔ,bố mẹ,,L30,,,,Hán ngữ 2,danh từ,,people
+L30-干净,干净,gānjìng,sạch sẽ,,L30,,,,Hán ngữ 2,tính từ,,adj
+L30-干燥,干燥,gānzào,khô ráo,,L30,,,,Hán ngữ 2,tính từ,,daily
+L30-感谢,感谢,gǎnxiè,cảm tạ,,L30,,,,Hán ngữ 2,động từ,,greet
+L30-高血压,高血压,gāoxuèyā,cao huyết áp,,L30,,,,Hán ngữ 2,danh từ,,health
+L30-功课,功课,gōngkè,"bài học, bài tập",,L30,,,,Hán ngữ 2,danh từ,,school
+L30-好,好,hǎo,"rất, thật là",,L30,,,,Hán ngữ 2,phó từ,,func
+L30-好处,好处,hǎochù,lợi ích,,L30,,,,Hán ngữ 2,danh từ,,things
+L30-坏处,坏处,huàichù,"điểm xấu, tác hại",,L30,,,,Hán ngữ 2,danh từ,,things
+L30-机会,机会,jīhuì,cơ hội,,L30,,,,Hán ngữ 2,danh từ,,things
+L30-记,记,jì,"ghi, nhớ",,L30,,,,Hán ngữ 2,động từ,,verbs
+L30-记住,记住,jì zhù,ghi nhớ,,L30,,,,Hán ngữ 2,,,verbs
+L30-课间,课间,kèjiān,giữa các giờ học,,L30,,,,Hán ngữ 2,danh từ,,school
+L30-块,块,kuài,"khối, miếng",,L30,,,,Hán ngữ 2,lượng từ,,numbers
+L30-练,练,liàn,luyện,,L30,,,,Hán ngữ 2,động từ,,school
+L30-慢性病,慢性病,mànxìngbìng,bệnh mãn tính,,L30,,,,Hán ngữ 2,danh từ,,health
+L30-牛奶,牛奶,niúnǎi,sữa bò,,L30,,,,Hán ngữ 2,danh từ,,food
+L30-气功,气功,qìgōng,khí công,,L30,,,,Hán ngữ 2,danh từ,,hobby
+L30-气候,气候,qìhòu,khí hậu,,L30,,,,Hán ngữ 2,danh từ,,daily
+L30-散步,散步,sàn bù,tản bộ,,L30,,,,Hán ngữ 2,,,hobby
+L30-晒,晒,shài,phơi,,L30,,,,Hán ngữ 2,động từ,,daily
+L30-生活,生活,shēnghuó,"sinh hoạt, cuộc sống",,L30,,,,Hán ngữ 2,"động từ, danh từ",,daily
+L30-失眠,失眠,shī mián,mất ngủ,,L30,,,,Hán ngữ 2,,,health
+L30-挺,挺,tǐng,"khá, rất",,L30,,,,Hán ngữ 2,phó từ,,func
+L30-午觉,午觉,wǔjiào,ngủ trưa,,L30,,,,Hán ngữ 2,danh từ,,daily
+L30-习惯,习惯,xíguàn,thói quen; quen,,L30,,,,Hán ngữ 2,"động từ, danh từ",,daily
+L30-效果,效果,xiàoguǒ,hiệu quả,,L30,,,,Hán ngữ 2,danh từ,,things
+L30-延长,延长,yáncháng,kéo dài,,L30,,,,Hán ngữ 2,động từ,,verbs
+L30-一般,一般,yìbān,"bình thường, thông thường",,L30,,,,Hán ngữ 2,tính từ,,adj
+L30-油腻,油腻,yóunì,"nhiều dầu mỡ, ngấy",,L30,,,,Hán ngữ 2,tính từ,,adj
+L30-游泳,游泳,yóu yǒng,bơi,,L30,,,,Hán ngữ 2,,,hobby
+L30-原来,原来,yuánlái,"hóa ra, vốn dĩ",,L30,,,,Hán ngữ 2,tính từ,,adj

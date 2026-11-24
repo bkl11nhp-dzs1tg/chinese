@@ -1,0 +1,109 @@
+[
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 对不起",
+  "options": [
+   "duìbuqǐ",
+   "bú kèqi"
+  ],
+  "answer": "duìbuqǐ"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 是",
+  "options": [
+   "shì",
+   "sì"
+  ],
+  "answer": "shì"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___ (bàba)",
+  "options": [
+   "爸爸",
+   "妈妈",
+   "哥哥"
+  ],
+  "answer": "爸爸"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___ (mèimei)",
+  "options": [
+   "妹妹",
+   "姐姐",
+   "弟弟"
+  ],
+  "answer": "妹妹"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___ (dìdi)",
+  "options": [
+   "弟弟",
+   "哥哥",
+   "爸爸"
+  ],
+  "answer": "弟弟"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: ___ (jiā)",
+  "options": [
+   "家",
+   "下",
+   "茶"
+  ],
+  "answer": "家"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn từ đúng: 他___王。",
+  "options": [
+   "姓",
+   "叫",
+   "是"
+  ],
+  "answer": "姓"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn chữ đúng: 我爸爸是老___。",
+  "options": [
+   "师",
+   "生",
+   "是"
+  ],
+  "answer": "师"
+ },
+ {
+  "type": "choose",
+  "prompt": "Chọn pinyin đúng: 再见",
+  "options": [
+   "zàijiàn",
+   "zàijiān"
+  ],
+  "answer": "zàijiàn"
+ },
+ {
+  "type": "reorder",
+  "vi": "Anh ấy không phải là học sinh.",
+  "words": [
+   "他",
+   "不",
+   "是",
+   "学生"
+  ]
+ },
+ {
+  "type": "reorder",
+  "vi": "Anh ấy là em trai tôi.",
+  "words": [
+   "他",
+   "是",
+   "我",
+   "弟弟"
+  ]
+ }
+]

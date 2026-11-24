@@ -41,7 +41,7 @@ function popFx(parent, text, good = true) {
 }
 
 // ---------------------------------------------------------------- Nối cặp
-export function matchGame({ cards, onResult, onDone }) {
+export function matchGame({ cards, onResult, onDone, onProgress }) {
   const pairs = cards.slice(0, 6);
   const root = h('div', { class: 'stack' });
   if (pairs.length < 2) { mount(root, h('p', {}, 'Cần ít nhất 2 từ để chơi.')); setTimeout(() => onDone({ skipped: true }), 0); return { el: root, destroy() {} }; }
@@ -76,6 +76,7 @@ export function matchGame({ cards, onResult, onDone }) {
     if (a.t.id === t.id) {
       [a.b, b].forEach((x) => { x.disabled = true; x.classList.add('correct'); setTimeout(() => x.classList.add('gone'), 450); });
       matched++;
+      onProgress?.(matched / pairs.length, `${matched}/${pairs.length}`);
       combo++;
       pairsEl.textContent = `${matched}/${pairs.length}`;
       comboEl.textContent = `×${combo}`;
@@ -163,11 +164,12 @@ export function raceGame({ cards, pool, onResult, onDone, seconds = 60 }) {
 }
 
 // ---------------------------------------------------------------- Xây câu
-export function buildGame({ sentences, onDone }) {
+export function buildGame({ sentences, onDone, onProgress }) {
   const root = h('div', { class: 'stack' });
   const list = shuffle(sentences).slice(0, 8);
   let i = 0, done = 0;
   function show() {
+    onProgress?.(i / list.length, `${Math.min(i + 1, list.length)}/${list.length}`);
     if (i >= list.length) { onDone({ done, total: list.length }); return; }
     const s = list[i];
     const pieces = shuffle(s.options.map((t, k) => ({ t, k })));
@@ -200,11 +202,12 @@ export function buildGame({ sentences, onDone }) {
 }
 
 // ---------------------------------------------------------------- Nghe chọn chữ
-export function listenGame({ cards, pool, rate = 1, onResult, onDone, rounds = 10 }) {
+export function listenGame({ cards, pool, rate = 1, onResult, onDone, onProgress, rounds = 10 }) {
   const root = h('div', { class: 'stack' });
   const qs = shuffle(cards).slice(0, rounds);
   let i = 0, correct = 0;
   function show() {
+    onProgress?.(i / qs.length, `${Math.min(i + 1, qs.length)}/${qs.length}`);
     if (i >= qs.length) { onDone({ correct, total: qs.length }); return; }
     const c = qs[i];
     const others = shuffle(pool.filter((x) => x.hanzi !== c.hanzi)).slice(0, 3);

@@ -1,221 +1,531 @@
 {
- "id": "L11",
- "book": "Hán ngữ 1",
- "unit": 11,
- "order": 11,
- "title": "我们都是留学生",
- "title_vi": "Chúng tôi đều là lưu học sinh",
- "vocab_ids": [
-  "L11-都",
-  "L11-和",
-  "L11-欢迎",
-  "L11-教授",
-  "L11-介绍",
-  "L11-俩",
-  "L11-留学",
-  "L11-留学生",
-  "L11-没什么",
-  "L11-秘书",
-  "L11-你们",
-  "L11-他们",
-  "L11-位",
-  "L11-我们",
-  "L11-先",
-  "L11-校长",
-  "L11-学生",
-  "L11-也",
-  "L11-一下儿"
- ],
- "exercises": [
-  {
-   "id": "L11-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Chúng tôi đều là lưu học sinh.”",
-   "options": [
-    "我们",
-    "都",
-    "是",
-    "留学生"
-   ],
-   "answer": [
-    "我们",
-    "都",
-    "是",
-    "留学生"
-   ],
-   "explanation": "我们都是留学生 — Chúng tôi đều là lưu học sinh."
-  },
-  {
-   "id": "L11-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi giới thiệu một chút.”",
-   "options": [
-    "我",
-    "介绍",
-    "一下儿"
-   ],
-   "answer": [
-    "我",
-    "介绍",
-    "一下儿"
-   ],
-   "explanation": "我介绍一下儿 — Tôi giới thiệu một chút."
-  },
-  {
-   "id": "L11-r3",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Anh ấy cũng là giáo viên.”",
-   "options": [
-    "他",
-    "也",
-    "是",
-    "老师"
-   ],
-   "answer": [
-    "他",
-    "也",
-    "是",
-    "老师"
-   ],
-   "explanation": "他也是老师 — Anh ấy cũng là giáo viên."
-  },
-  {
-   "id": "L11-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 我们___是留学生。",
-   "answer": "都",
-   "explanation": "Chúng tôi đều là lưu học sinh."
-  }
- ],
- "texts": [
-  {
-   "title": "这位是王教授",
-   "lines": [
+  "id": "L11",
+  "book": "Hán ngữ 1",
+  "unit": 11,
+  "order": 11,
+  "title": "我们都是留学生",
+  "title_vi": "Chúng tôi đều là lưu học sinh",
+  "vocab_ids": [
+    "L11-都",
+    "L11-和",
+    "L11-欢迎",
+    "L11-教授",
+    "L11-介绍",
+    "L11-俩",
+    "L11-留学",
+    "L11-留学生",
+    "L11-没什么",
+    "L11-秘书",
+    "L11-你们",
+    "L11-他们",
+    "L11-位",
+    "L11-我们",
+    "L11-先",
+    "L11-校长",
+    "L11-学生",
+    "L11-也",
+    "L11-一下儿"
+  ],
+  "exercises": [
     {
-     "speaker": "秘书",
-     "zh": "我先介绍一下儿，这位是王教授。这是马校长。",
-     "vi": "(Thư ký giới thiệu giáo sư Vương với hiệu trưởng) Tôi xin giới thiệu trước, vị này là giáo sư Vương. Đây là hiệu trưởng Mã."
+      "id": "L11-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúng tôi đều là lưu học sinh.”",
+      "options": [
+        "我们",
+        "都",
+        "是",
+        "留学生"
+      ],
+      "answer": [
+        "我们",
+        "都",
+        "是",
+        "留学生"
+      ],
+      "explanation": "我们都是留学生 — Chúng tôi đều là lưu học sinh."
     },
     {
-     "speaker": "校长",
-     "zh": "欢迎您，王教授。",
-     "vi": "Hoan nghênh ông, giáo sư Vương."
+      "id": "L11-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi giới thiệu một chút.”",
+      "options": [
+        "我",
+        "介绍",
+        "一下儿"
+      ],
+      "answer": [
+        "我",
+        "介绍",
+        "一下儿"
+      ],
+      "explanation": "我介绍一下儿 — Tôi giới thiệu một chút."
     },
     {
-     "speaker": "王教授",
-     "zh": "谢谢！",
-     "vi": "Cảm ơn!"
+      "id": "L11-r3",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Anh ấy cũng là giáo viên.”",
+      "options": [
+        "他",
+        "也",
+        "是",
+        "老师"
+      ],
+      "answer": [
+        "他",
+        "也",
+        "是",
+        "老师"
+      ],
+      "explanation": "他也是老师 — Anh ấy cũng là giáo viên."
+    },
+    {
+      "id": "L11-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 我们___是留学生。",
+      "answer": "都",
+      "explanation": "Chúng tôi đều là lưu học sinh."
+    },
+    {
+      "id": "L11-wb1",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Cảm ơn các bạn!”",
+      "options": [
+        "你们",
+        "谢谢"
+      ],
+      "answer": [
+        "谢谢",
+        "你们"
+      ],
+      "explanation": "谢谢你们 — Cảm ơn các bạn!"
+    },
+    {
+      "id": "L11-wb2",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúng tôi yêu thầy/cô giáo.”",
+      "options": [
+        "老师",
+        "我们",
+        "爱"
+      ],
+      "answer": [
+        "我们",
+        "爱",
+        "老师"
+      ],
+      "explanation": "我们爱老师 — Chúng tôi yêu thầy/cô giáo."
+    },
+    {
+      "id": "L11-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 学生",
+      "options": [
+        "xuésheng",
+        "xuěsheng"
+      ],
+      "answer": "xuésheng"
+    },
+    {
+      "id": "L11-wb4",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Em gái không phải là học sinh.”",
+      "options": [
+        "是",
+        "妹妹",
+        "不",
+        "学生"
+      ],
+      "answer": [
+        "妹妹",
+        "不",
+        "是",
+        "学生"
+      ],
+      "explanation": "妹妹不是学生 — Em gái không phải là học sinh."
+    },
+    {
+      "id": "L11-wb5",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi là học sinh.”",
+      "options": [
+        "是",
+        "我",
+        "学生"
+      ],
+      "answer": [
+        "我",
+        "是",
+        "学生"
+      ],
+      "explanation": "我是学生 — Tôi là học sinh."
+    },
+    {
+      "id": "L11-wb6",
+      "source": "workbook",
+      "type": "match",
+      "prompt": "Nối câu hỏi với câu trả lời",
+      "pairs": [
+        {
+          "left": "你姓什么？",
+          "right": "我姓王。"
+        },
+        {
+          "left": "你是学生吗？",
+          "right": "我是学生。"
+        },
+        {
+          "left": "你叫什么名字？",
+          "right": "我叫玛丽。"
+        }
+      ]
+    },
+    {
+      "id": "L11-wb7",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Anh ấy không phải là học sinh.”",
+      "options": [
+        "不",
+        "学生",
+        "他",
+        "是"
+      ],
+      "answer": [
+        "他",
+        "不",
+        "是",
+        "学生"
+      ],
+      "explanation": "他不是学生 — Anh ấy không phải là học sinh."
+    },
+    {
+      "id": "L11-wb8",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúng tôi đi đến trường.”",
+      "options": [
+        "学校",
+        "我们",
+        "去"
+      ],
+      "answer": [
+        "我们",
+        "去",
+        "学校"
+      ],
+      "explanation": "我们去学校 — Chúng tôi đi đến trường."
+    },
+    {
+      "id": "L11-wb9",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Họ đi đâu?”",
+      "options": [
+        "哪儿",
+        "他们",
+        "去"
+      ],
+      "answer": [
+        "他们",
+        "去",
+        "哪儿"
+      ],
+      "explanation": "他们去哪儿 — Họ đi đâu?"
+    },
+    {
+      "id": "L11-wb10",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi và em gái là học sinh.”",
+      "options": [
+        "学生",
+        "是",
+        "妹妹",
+        "我",
+        "和"
+      ],
+      "answer": [
+        "我",
+        "和",
+        "妹妹",
+        "是",
+        "学生"
+      ],
+      "explanation": "我和妹妹是学生 — Tôi và em gái là học sinh."
+    },
+    {
+      "id": "L11-wb11",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Anh trai đi học cùng ai?”",
+      "options": [
+        "学校",
+        "去",
+        "谁",
+        "哥哥",
+        "和"
+      ],
+      "answer": [
+        "哥哥",
+        "和",
+        "谁",
+        "去",
+        "学校"
+      ],
+      "explanation": "哥哥和谁去学校 — Anh trai đi học cùng ai?"
+    },
+    {
+      "id": "L11-wb12",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我们___学校。",
+      "options": [
+        "去",
+        "是",
+        "叫"
+      ],
+      "answer": "去"
+    },
+    {
+      "id": "L11-wb13",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "— 你叫什么名字？ — ___",
+      "options": [
+        "我叫玛丽。",
+        "我姓王。",
+        "我是学生。"
+      ],
+      "answer": "我叫玛丽。"
+    },
+    {
+      "id": "L11-wb14",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Học sinh nhiều, thầy cô ít.”",
+      "options": [
+        "少",
+        "老师",
+        "学生",
+        "多"
+      ],
+      "answer": [
+        "学生",
+        "多",
+        "老师",
+        "少"
+      ],
+      "explanation": "学生多老师少 — Học sinh nhiều, thầy cô ít."
+    },
+    {
+      "id": "L11-wb15",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi cũng học tiếng Trung.”",
+      "options": [
+        "也",
+        "中文",
+        "我",
+        "学"
+      ],
+      "answer": [
+        "我",
+        "也",
+        "学",
+        "中文"
+      ],
+      "explanation": "我也学中文 — Tôi cũng học tiếng Trung."
+    },
+    {
+      "id": "L11-wb16",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我和妹妹___吃鸡蛋。",
+      "options": [
+        "都",
+        "也",
+        "很"
+      ],
+      "answer": "都"
+    },
+    {
+      "id": "L11-wb17",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi và em gái đều ăn trứng gà.”",
+      "options": [
+        "和",
+        "都",
+        "鸡蛋",
+        "吃",
+        "我",
+        "妹妹"
+      ],
+      "answer": [
+        "我",
+        "和",
+        "妹妹",
+        "都",
+        "吃",
+        "鸡蛋"
+      ],
+      "explanation": "我和妹妹都吃鸡蛋 — Tôi và em gái đều ăn trứng gà."
+    },
+    {
+      "id": "L11-wb18",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chúng tôi đều là học sinh.”",
+      "options": [
+        "学生",
+        "是",
+        "我们",
+        "都"
+      ],
+      "answer": [
+        "我们",
+        "都",
+        "是",
+        "学生"
+      ],
+      "explanation": "我们都是学生 — Chúng tôi đều là học sinh."
     }
-   ]
-  },
-  {
-   "title": "我们都是留学生",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "田芳",
-     "zh": "你是留学生吗？",
-     "vi": "Bạn là lưu học sinh à?"
+      "title": "这位是王教授",
+      "lines": [
+        {
+          "speaker": "秘书",
+          "zh": "我先介绍一下儿，这位是王教授。这是马校长。",
+          "vi": "(Thư ký giới thiệu giáo sư Vương với hiệu trưởng) Tôi xin giới thiệu trước, vị này là giáo sư Vương. Đây là hiệu trưởng Mã."
+        },
+        {
+          "speaker": "校长",
+          "zh": "欢迎您，王教授。",
+          "vi": "Hoan nghênh ông, giáo sư Vương."
+        },
+        {
+          "speaker": "王教授",
+          "zh": "谢谢！",
+          "vi": "Cảm ơn!"
+        }
+      ]
     },
     {
-     "speaker": "罗兰",
-     "zh": "是。",
-     "vi": "Phải."
+      "title": "我们都是留学生",
+      "lines": [
+        {
+          "speaker": "田芳",
+          "zh": "你是留学生吗？",
+          "vi": "Bạn là lưu học sinh à?"
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "是。",
+          "vi": "Phải."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "她也是留学生吗？",
+          "vi": "Cô ấy cũng là lưu học sinh à?"
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "她也是留学生。我们都是留学生。",
+          "vi": "Cô ấy cũng là lưu học sinh. Chúng tôi đều là lưu học sinh."
+        },
+        {
+          "speaker": "田芳",
+          "zh": "他们俩也都是留学生吗？",
+          "vi": "Hai người họ cũng đều là lưu học sinh à?"
+        },
+        {
+          "speaker": "罗兰",
+          "zh": "不，他们俩不是留学生。他们都是中国学生。",
+          "vi": "Không, hai người họ không phải lưu học sinh. Họ đều là sinh viên Trung Quốc."
+        }
+      ]
     },
     {
-     "speaker": "田芳",
-     "zh": "她也是留学生吗？",
-     "vi": "Cô ấy cũng là lưu học sinh à?"
-    },
-    {
-     "speaker": "罗兰",
-     "zh": "她也是留学生。我们都是留学生。",
-     "vi": "Cô ấy cũng là lưu học sinh. Chúng tôi đều là lưu học sinh."
-    },
-    {
-     "speaker": "田芳",
-     "zh": "他们俩也都是留学生吗？",
-     "vi": "Hai người họ cũng đều là lưu học sinh à?"
-    },
-    {
-     "speaker": "罗兰",
-     "zh": "不，他们俩不是留学生。他们都是中国学生。",
-     "vi": "Không, hai người họ không phải lưu học sinh. Họ đều là sinh viên Trung Quốc."
+      "title": "你也是中国人吗",
+      "lines": [
+        {
+          "speaker": "爱德华",
+          "zh": "他是中国人吗？",
+          "vi": "Anh ấy là người Trung Quốc à?"
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "是。",
+          "vi": "Phải."
+        },
+        {
+          "speaker": "爱德华",
+          "zh": "你也是中国人吗？",
+          "vi": "Bạn cũng là người Trung Quốc à?"
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "不是。我是韩国人。",
+          "vi": "Không phải. Tôi là người Hàn Quốc."
+        },
+        {
+          "speaker": "爱德华",
+          "zh": "对不起。",
+          "vi": "Xin lỗi."
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "没什么。",
+          "vi": "Không sao."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "title": "你也是中国人吗",
-   "lines": [
+  ],
+  "grammar_points": [
     {
-     "speaker": "爱德华",
-     "zh": "他是中国人吗？",
-     "vi": "Anh ấy là người Trung Quốc à?"
+      "id": "L11-g1",
+      "title": "Câu hỏi với 吗",
+      "note": "Câu trần thuật + 吗？ hỏi có/không.",
+      "examples": [
+        {
+          "zh": "她也是留学生吗？",
+          "vi": "Cô ấy cũng là lưu học sinh à?"
+        }
+      ]
     },
     {
-     "speaker": "李昌浩",
-     "zh": "是。",
-     "vi": "Phải."
+      "id": "L11-g2",
+      "title": "Trạng ngữ",
+      "note": "Trạng ngữ (phó từ, từ chỉ thời gian…) đứng trước động từ/tính từ.",
+      "examples": [
+        {
+          "zh": "我先介绍一下儿。",
+          "vi": "Tôi giới thiệu trước một chút."
+        }
+      ]
     },
     {
-     "speaker": "爱德华",
-     "zh": "你也是中国人吗？",
-     "vi": "Bạn cũng là người Trung Quốc à?"
-    },
-    {
-     "speaker": "李昌浩",
-     "zh": "不是。我是韩国人。",
-     "vi": "Không phải. Tôi là người Hàn Quốc."
-    },
-    {
-     "speaker": "爱德华",
-     "zh": "对不起。",
-     "vi": "Xin lỗi."
-    },
-    {
-     "speaker": "李昌浩",
-     "zh": "没什么。",
-     "vi": "Không sao."
+      "id": "L11-g3",
+      "title": "Phó từ 也 và 都",
+      "note": "也 = cũng, 都 = đều; đặt trước động từ. Khi có cả hai: 也都. 不都 = không phải đều; 都不 = đều không.",
+      "examples": [
+        {
+          "zh": "我们都是留学生。",
+          "vi": "Chúng tôi đều là lưu học sinh."
+        },
+        {
+          "zh": "他们俩也都是留学生吗？",
+          "vi": "Hai người họ cũng đều là lưu học sinh à?"
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L11-g1",
-   "title": "Câu hỏi với 吗",
-   "note": "Câu trần thuật + 吗？ hỏi có/không.",
-   "examples": [
-    {
-     "zh": "她也是留学生吗？",
-     "vi": "Cô ấy cũng là lưu học sinh à?"
-    }
-   ]
-  },
-  {
-   "id": "L11-g2",
-   "title": "Trạng ngữ",
-   "note": "Trạng ngữ (phó từ, từ chỉ thời gian…) đứng trước động từ/tính từ.",
-   "examples": [
-    {
-     "zh": "我先介绍一下儿。",
-     "vi": "Tôi giới thiệu trước một chút."
-    }
-   ]
-  },
-  {
-   "id": "L11-g3",
-   "title": "Phó từ 也 và 都",
-   "note": "也 = cũng, 都 = đều; đặt trước động từ. Khi có cả hai: 也都. 不都 = không phải đều; 都不 = đều không.",
-   "examples": [
-    {
-     "zh": "我们都是留学生。",
-     "vi": "Chúng tôi đều là lưu học sinh."
-    },
-    {
-     "zh": "他们俩也都是留学生吗？",
-     "vi": "Hai người họ cũng đều là lưu học sinh à?"
-    }
-   ]
-  }
- ]
+  ]
 }

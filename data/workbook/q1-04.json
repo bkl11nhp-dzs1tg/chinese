@@ -1,0 +1,14 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 名字","options":["míngzi","mínzi"],"answer":"míngzi"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 姓","options":["xìng","xíng"],"answer":"xìng"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 叫","options":["jiào","qiào"],"answer":"jiào"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 哥哥","options":["gēge","kēke"],"answer":"gēge"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 什么","options":["shénme","zěnme"],"answer":"shénme"},
+ {"type":"match","prompt":"Nối câu hỏi với câu trả lời","pairs":[{"left":"你姓什么？","right":"我姓王。"},{"left":"你是学生吗？","right":"我是学生。"},{"left":"你叫什么名字？","right":"我叫玛丽。"}]},
+ {"type":"choose","prompt":"Chọn từ đúng: 你姓___？","options":["什么","名字","吗"],"answer":"什么"},
+ {"type":"choose","prompt":"Chọn từ đúng: 她叫什么___？","options":["名字","姓","是"],"answer":"名字"},
+ {"type":"reorder","vi":"Bạn tên là gì?","words":["你","叫","什么","名字"]},
+ {"type":"reorder","vi":"Bạn họ gì?","words":["你","姓","什么"]},
+ {"type":"reorder","vi":"Tôi họ Vương.","words":["我","姓","王"]},
+ {"type":"reorder","vi":"Thầy giáo họ Vương.","words":["老师","姓","王"]}
+]

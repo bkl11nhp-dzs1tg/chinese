@@ -1,0 +1,8 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 公园里有很___人。","options":["多","少","大"],"answer":"多"},
+ {"type":"choose","prompt":"Chọn từ đúng: 办公室里___一部电话。","options":["有","是","在"],"answer":"有"},
+ {"type":"reorder","vi":"Trong cặp sách có gì?","words":["书包","里","有","什么"]},
+ {"type":"reorder","vi":"Trong phòng của bố có hai chiếc điện thoại.","words":["爸爸","的","房间","里","有","两","部","电话"]},
+ {"type":"reorder","vi":"Trong công viên có rất nhiều người.","words":["公园","里","有","很","多","人"]},
+ {"type":"reorder","vi":"Trong phòng làm việc có một chiếc điện thoại.","words":["办公室","里","有","一","部","电话"]}
+]

@@ -150,3 +150,35 @@ body.landing-mode .top-tabs, body.landing-mode .sync-btn, body.landing-mode [dat
 .word-row .mark-tag { position: static; flex: none; }
 .word-row.weak { border-color: color-mix(in srgb, var(--accent) 55%, transparent); background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface)); }
 .word-row .dots { flex: none; }
+
+/* Thanh tiến độ: nền ray rõ, phần đã đi nổi bật; trên nền đỏ (đầu chương) dùng thanh trắng. */
+.bar { background: color-mix(in srgb, var(--ink) 10%, var(--surface-2)); }
+.bar > span { background: linear-gradient(90deg, var(--accent), #ff7d93); }
+.bar.good > span { background: var(--good); }
+.unit-head .bar { background: rgba(255, 255, 255, .28) !important; }
+.unit-head .bar > span { background: #fff !important; }
+.focus-top .bar { box-shadow: inset 0 1px 2px rgba(60, 20, 30, .12); }
+
+/* ---------- Thẻ: tab + Câu / Mẫu câu ---------- */
+.large-title + .seg { margin: 0 0 14px; }
+.filters { display: grid; gap: 10px; }
+.group-seg { width: fit-content; }
+.phrase-list { display: grid; gap: 10px; }
+@media (min-width: 900px) { .phrase-list { grid-template-columns: 1fr 1fr; align-items: start; } }
+.ph-row { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 18px; border: 1px solid var(--line); background: var(--glass-strong); }
+.ph-body { flex: 1; min-width: 0; display: grid; gap: 4px; }
+.ph-zh { font-size: 22px; line-height: 1.4; }
+.ph-spk { color: var(--muted); font-size: 16px; }
+.ph-py { color: var(--accent-ink); font-weight: 600; font-size: 14px; }
+.ph-vi { color: var(--ink-2); font-size: 15px; }
+.ph-tag { flex: none; align-self: flex-start; font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-ink); text-decoration: none; white-space: nowrap; }
+.ph-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; font-size: 17px; }
+.ph-note { color: var(--ink-2); background: var(--surface-2); border-radius: 12px; padding: 8px 10px; font-size: 15px; }
+.ph-ex { display: flex; gap: 10px; align-items: flex-start; padding-top: 8px; }
+.ph-ex .han { font-size: 20px; }
+.say-btn { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; cursor: pointer; }
+.say-btn svg { width: 16px; height: 16px; }
+.note-lines { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; }
+.note-lines li { position: relative; padding-left: 14px; line-height: 1.5; }
+.note-lines li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.ph-note.note-lines { padding: 10px 12px; }

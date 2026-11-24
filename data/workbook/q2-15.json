@@ -1,0 +1,14 @@
+[
+ {"type":"choose","prompt":"Chọn từ đúng: 我和小红___是二班的学生。","options":["都","常","非常"],"answer":"都"},
+ {"type":"choose","prompt":"Chọn từ đúng: ___双筷子是你的？","options":["哪","什么","怎么"],"answer":"哪"},
+ {"type":"choose","prompt":"Chọn từ đúng: 小华家的对___是银行。","options":["面","边","前"],"answer":"面"},
+ {"type":"choose","prompt":"Chọn từ đúng: 我常___小强一起打篮球。","options":["和","也","一起"],"answer":"和"},
+ {"type":"choose","prompt":"— 饺子好吃吗？ — ___","options":["非常好吃。","我不吃。","你呢？"],"answer":"非常好吃。"},
+ {"type":"choose","prompt":"— 哪个碗是你的？ — ___","options":["这个碗是我的。","我的裙子是白的。","那个碗是弟弟的。"],"answer":"这个碗是我的。"},
+ {"type":"choose","prompt":"— 今天早上你去哪儿了？ — ___","options":["我去公园了。","我常去公园。","我去公园吧。"],"answer":"我去公园了。"},
+ {"type":"choose","prompt":"— 学校的对面是什么地方？ — ___","options":["是银行。","在医院的前面。","公园在医院的对面。"],"answer":"是银行。"},
+ {"type":"choose","prompt":"Chọn chữ đúng: 我的弟弟非常聪___。","options":["明","名","们"],"answer":"明"},
+ {"type":"choose","prompt":"Chọn từ đúng: 这双皮鞋___漂亮了！","options":["太","很","都"],"answer":"太"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 喜欢","options":["xǐhuan","xīhuan"],"answer":"xǐhuan"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 身体","options":["shēntǐ","shēntí"],"answer":"shēntǐ"}
+]

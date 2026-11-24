@@ -1,216 +1,534 @@
 {
- "id": "L13",
- "book": "Hán ngữ 1",
- "unit": 13,
- "order": 13,
- "title": "这是不是中药",
- "title_vi": "Đây có phải là thuốc Đông y không",
- "vocab_ids": [
-  "L13-本",
-  "L13-笔",
-  "L13-茶叶",
-  "L13-词典",
-  "L13-光盘",
-  "L13-黑",
-  "L13-红",
-  "L13-件",
-  "L13-旧",
-  "L13-里",
-  "L13-没（有）",
-  "L13-瓶",
-  "L13-轻",
-  "L13-日用品",
-  "L13-水",
-  "L13-西药",
-  "L13-香水",
-  "L13-箱子",
-  "L13-药",
-  "L13-椅子",
-  "L13-有",
-  "L13-雨",
-  "L13-雨伞",
-  "L13-张",
-  "L13-这儿",
-  "L13-支",
-  "L13-中药",
-  "L13-重"
- ],
- "exercises": [
-  {
-   "id": "L13-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Đây có phải thuốc Đông y không?”",
-   "options": [
-    "这",
-    "是不是",
-    "中药"
-   ],
-   "answer": [
-    "这",
-    "是不是",
-    "中药"
-   ],
-   "explanation": "这是不是中药 — Đây có phải thuốc Đông y không?"
-  },
-  {
-   "id": "L13-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Cái va li này rất nặng.”",
-   "options": [
-    "这个",
-    "箱子",
-    "很",
-    "重"
-   ],
-   "answer": [
-    "这个",
-    "箱子",
-    "很",
-    "重"
-   ],
-   "explanation": "这个箱子很重 — Cái va li này rất nặng."
-  },
-  {
-   "id": "L13-r3",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Trong va li có gì?”",
-   "options": [
-    "箱子",
-    "里",
-    "有",
-    "什么"
-   ],
-   "answer": [
-    "箱子",
-    "里",
-    "有",
-    "什么"
-   ],
-   "explanation": "箱子里有什么 — Trong va li có gì?"
-  },
-  {
-   "id": "L13-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 我有两___词典。",
-   "answer": "本",
-   "explanation": "Tôi có hai quyển từ điển."
-  }
- ],
- "texts": [
-  {
-   "title": "这个黑箱子很重",
-   "lines": [
+  "id": "L13",
+  "book": "Hán ngữ 1",
+  "unit": 13,
+  "order": 13,
+  "title": "这是不是中药",
+  "title_vi": "Đây có phải là thuốc Đông y không",
+  "vocab_ids": [
+    "L13-本",
+    "L13-笔",
+    "L13-茶叶",
+    "L13-词典",
+    "L13-光盘",
+    "L13-黑",
+    "L13-红",
+    "L13-件",
+    "L13-旧",
+    "L13-里",
+    "L13-没（有）",
+    "L13-瓶",
+    "L13-轻",
+    "L13-日用品",
+    "L13-水",
+    "L13-西药",
+    "L13-香水",
+    "L13-箱子",
+    "L13-药",
+    "L13-椅子",
+    "L13-有",
+    "L13-雨",
+    "L13-雨伞",
+    "L13-张",
+    "L13-这儿",
+    "L13-支",
+    "L13-中药",
+    "L13-重"
+  ],
+  "exercises": [
     {
-     "speaker": "A",
-     "zh": "你没有箱子吗？",
-     "vi": "(Tại sân bay) Bạn không có va li à?"
+      "id": "L13-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Đây có phải thuốc Đông y không?”",
+      "options": [
+        "这",
+        "是不是",
+        "中药"
+      ],
+      "answer": [
+        "这",
+        "是不是",
+        "中药"
+      ],
+      "explanation": "这是不是中药 — Đây có phải thuốc Đông y không?"
     },
     {
-     "speaker": "B",
-     "zh": "有啊。我的在这儿呢。",
-     "vi": "Có chứ. Của tôi ở đây."
+      "id": "L13-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Cái va li này rất nặng.”",
+      "options": [
+        "这个",
+        "箱子",
+        "很",
+        "重"
+      ],
+      "answer": [
+        "这个",
+        "箱子",
+        "很",
+        "重"
+      ],
+      "explanation": "这个箱子很重 — Cái va li này rất nặng."
     },
     {
-     "speaker": "A",
-     "zh": "我的很重，你的重不重？",
-     "vi": "Của tôi rất nặng, của bạn có nặng không?"
+      "id": "L13-r3",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Trong va li có gì?”",
+      "options": [
+        "箱子",
+        "里",
+        "有",
+        "什么"
+      ],
+      "answer": [
+        "箱子",
+        "里",
+        "有",
+        "什么"
+      ],
+      "explanation": "箱子里有什么 — Trong va li có gì?"
     },
     {
-     "speaker": "B",
-     "zh": "这个黑的很重，那个红的比较轻。",
-     "vi": "Cái màu đen này rất nặng, cái màu đỏ kia tương đối nhẹ."
+      "id": "L13-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 我有两___词典。",
+      "answer": "本",
+      "explanation": "Tôi có hai quyển từ điển."
     },
     {
-     "speaker": "A",
-     "zh": "你的箱子很新，我的很旧。",
-     "vi": "Va li của bạn rất mới, của tôi rất cũ."
+      "id": "L13-wb1",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Kia là bút của ai?”",
+      "options": [
+        "谁",
+        "的",
+        "笔",
+        "那",
+        "是"
+      ],
+      "answer": [
+        "那",
+        "是",
+        "谁",
+        "的",
+        "笔"
+      ],
+      "explanation": "那是谁的笔 — Kia là bút của ai?"
     },
     {
-     "speaker": "B",
-     "zh": "那个新的是朋友的。这个旧的是我的。",
-     "vi": "Cái mới kia là của bạn tôi. Cái cũ này là của tôi."
+      "id": "L13-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 有",
+      "options": [
+        "yǒu",
+        "yòu"
+      ],
+      "answer": "yǒu"
+    },
+    {
+      "id": "L13-wb3",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn lượng từ đúng: 我有两___书。",
+      "options": [
+        "本",
+        "支",
+        "个"
+      ],
+      "answer": "本"
+    },
+    {
+      "id": "L13-wb4",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn lượng từ đúng: 我有两___笔。",
+      "options": [
+        "支",
+        "本",
+        "张"
+      ],
+      "answer": "支"
+    },
+    {
+      "id": "L13-wb5",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn lượng từ đúng: 他有一___妹妹。",
+      "options": [
+        "个",
+        "本",
+        "支"
+      ],
+      "answer": "个"
+    },
+    {
+      "id": "L13-wb6",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 你有___个哥哥？",
+      "options": [
+        "几",
+        "两",
+        "谁"
+      ],
+      "answer": "几"
+    },
+    {
+      "id": "L13-wb7",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi có hai quyển sách.”",
+      "options": [
+        "有",
+        "书",
+        "本",
+        "我",
+        "两"
+      ],
+      "answer": [
+        "我",
+        "有",
+        "两",
+        "本",
+        "书"
+      ],
+      "explanation": "我有两本书 — Tôi có hai quyển sách."
+    },
+    {
+      "id": "L13-wb8",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn có mấy em gái?”",
+      "options": [
+        "几",
+        "个",
+        "有",
+        "你",
+        "妹妹"
+      ],
+      "answer": [
+        "你",
+        "有",
+        "几",
+        "个",
+        "妹妹"
+      ],
+      "explanation": "你有几个妹妹 — Bạn có mấy em gái?"
+    },
+    {
+      "id": "L13-wb9",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Em trai có ba quyển vở.”",
+      "options": [
+        "三",
+        "本",
+        "有",
+        "弟弟",
+        "书"
+      ],
+      "answer": [
+        "弟弟",
+        "有",
+        "三",
+        "本",
+        "书"
+      ],
+      "explanation": "弟弟有三本书 — Em trai có ba quyển vở."
+    },
+    {
+      "id": "L13-wb10",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn có từ điển không?”",
+      "options": [
+        "吗",
+        "你",
+        "词典",
+        "有"
+      ],
+      "answer": [
+        "你",
+        "有",
+        "词典",
+        "吗"
+      ],
+      "explanation": "你有词典吗 — Bạn có từ điển không?"
+    },
+    {
+      "id": "L13-wb11",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 椅子",
+      "options": [
+        "yǐzi",
+        "yízi"
+      ],
+      "answer": "yǐzi"
+    },
+    {
+      "id": "L13-wb12",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 我有一个妹妹，你___？",
+      "options": [
+        "呢",
+        "吗",
+        "的"
+      ],
+      "answer": "呢"
+    },
+    {
+      "id": "L13-wb13",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 你有___支笔？",
+      "options": [
+        "几",
+        "什么",
+        "哪儿"
+      ],
+      "answer": "几"
+    },
+    {
+      "id": "L13-wb14",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 妈妈___是老师。",
+      "options": [
+        "不",
+        "没",
+        "有"
+      ],
+      "answer": "不"
+    },
+    {
+      "id": "L13-wb15",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "— 你姓什么？ — ___",
+      "options": [
+        "我姓张。",
+        "我叫玛丽。",
+        "我是学生。"
+      ],
+      "answer": "我姓张。"
+    },
+    {
+      "id": "L13-wb16",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn từ đúng: 这本书是___的？",
+      "options": [
+        "谁",
+        "什么",
+        "哪儿"
+      ],
+      "answer": "谁"
+    },
+    {
+      "id": "L13-wb17",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Quyển sách kia là của ai?”",
+      "options": [
+        "本",
+        "是",
+        "的",
+        "谁",
+        "那",
+        "书"
+      ],
+      "answer": [
+        "那",
+        "本",
+        "书",
+        "是",
+        "谁",
+        "的"
+      ],
+      "explanation": "那本书是谁的 — Quyển sách kia là của ai?"
+    },
+    {
+      "id": "L13-wb18",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Quyển sách này là của em gái.”",
+      "options": [
+        "书",
+        "的",
+        "本",
+        "这",
+        "妹妹",
+        "是"
+      ],
+      "answer": [
+        "这",
+        "本",
+        "书",
+        "是",
+        "妹妹",
+        "的"
+      ],
+      "explanation": "这本书是妹妹的 — Quyển sách này là của em gái."
+    },
+    {
+      "id": "L13-wb19",
+      "source": "workbook",
+      "type": "match",
+      "prompt": "Nối màu với nghĩa",
+      "pairs": [
+        {
+          "left": "红",
+          "right": "đỏ"
+        },
+        {
+          "left": "白",
+          "right": "trắng"
+        },
+        {
+          "left": "黑",
+          "right": "đen"
+        }
+      ]
+    },
+    {
+      "id": "L13-wb20",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Trong cặp sách có gì?”",
+      "options": [
+        "有",
+        "书包",
+        "里",
+        "什么"
+      ],
+      "answer": [
+        "书包",
+        "里",
+        "有",
+        "什么"
+      ],
+      "explanation": "书包里有什么 — Trong cặp sách có gì?"
     }
-   ]
-  },
-  {
-   "title": "这是不是中药",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "A",
-     "zh": "先生，这些黑的是什么东西？",
-     "vi": "(Tại hải quan) Thưa ông, những thứ màu đen này là gì?"
+      "title": "这个黑箱子很重",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "你没有箱子吗？",
+          "vi": "(Tại sân bay) Bạn không có va li à?"
+        },
+        {
+          "speaker": "B",
+          "zh": "有啊。我的在这儿呢。",
+          "vi": "Có chứ. Của tôi ở đây."
+        },
+        {
+          "speaker": "A",
+          "zh": "我的很重，你的重不重？",
+          "vi": "Của tôi rất nặng, của bạn có nặng không?"
+        },
+        {
+          "speaker": "B",
+          "zh": "这个黑的很重，那个红的比较轻。",
+          "vi": "Cái màu đen này rất nặng, cái màu đỏ kia tương đối nhẹ."
+        },
+        {
+          "speaker": "A",
+          "zh": "你的箱子很新，我的很旧。",
+          "vi": "Va li của bạn rất mới, của tôi rất cũ."
+        },
+        {
+          "speaker": "B",
+          "zh": "那个新的是朋友的。这个旧的是我的。",
+          "vi": "Cái mới kia là của bạn tôi. Cái cũ này là của tôi."
+        }
+      ]
     },
     {
-     "speaker": "B",
-     "zh": "这是一些药。",
-     "vi": "Đây là một ít thuốc."
-    },
-    {
-     "speaker": "A",
-     "zh": "什么药？",
-     "vi": "Thuốc gì?"
-    },
-    {
-     "speaker": "B",
-     "zh": "中药。",
-     "vi": "Thuốc Đông y."
-    },
-    {
-     "speaker": "A",
-     "zh": "这是不是药？",
-     "vi": "Đây có phải là thuốc không?"
-    },
-    {
-     "speaker": "B",
-     "zh": "这不是药，这是茶叶。",
-     "vi": "Đây không phải thuốc, đây là lá trà."
-    },
-    {
-     "speaker": "A",
-     "zh": "那个箱子里是什么？",
-     "vi": "Trong va li kia là gì?"
-    },
-    {
-     "speaker": "B",
-     "zh": "都是日用品。有两件衣服、一把雨伞和一瓶香水，还有一本书、一本词典、两张光盘和三支笔。",
-     "vi": "Đều là đồ dùng hằng ngày. Có hai bộ quần áo, một cái ô và một lọ nước hoa, còn có một quyển sách, một quyển từ điển, hai cái đĩa CD và ba cây bút."
+      "title": "这是不是中药",
+      "lines": [
+        {
+          "speaker": "A",
+          "zh": "先生，这些黑的是什么东西？",
+          "vi": "(Tại hải quan) Thưa ông, những thứ màu đen này là gì?"
+        },
+        {
+          "speaker": "B",
+          "zh": "这是一些药。",
+          "vi": "Đây là một ít thuốc."
+        },
+        {
+          "speaker": "A",
+          "zh": "什么药？",
+          "vi": "Thuốc gì?"
+        },
+        {
+          "speaker": "B",
+          "zh": "中药。",
+          "vi": "Thuốc Đông y."
+        },
+        {
+          "speaker": "A",
+          "zh": "这是不是药？",
+          "vi": "Đây có phải là thuốc không?"
+        },
+        {
+          "speaker": "B",
+          "zh": "这不是药，这是茶叶。",
+          "vi": "Đây không phải thuốc, đây là lá trà."
+        },
+        {
+          "speaker": "A",
+          "zh": "那个箱子里是什么？",
+          "vi": "Trong va li kia là gì?"
+        },
+        {
+          "speaker": "B",
+          "zh": "都是日用品。有两件衣服、一把雨伞和一瓶香水，还有一本书、一本词典、两张光盘和三支笔。",
+          "vi": "Đều là đồ dùng hằng ngày. Có hai bộ quần áo, một cái ô và một lọ nước hoa, còn có một quyển sách, một quyển từ điển, hai cái đĩa CD và ba cây bút."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L13-g1",
-   "title": "Câu vị ngữ tính từ",
-   "note": "Tính từ làm vị ngữ trực tiếp, không cần 是; thường có 很 đứng trước.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "我的很重。",
-     "vi": "Của tôi rất nặng."
-    }
-   ]
-  },
-  {
-   "id": "L13-g2",
-   "title": "Câu hỏi chính phản",
-   "note": "Khẳng định + phủ định: 重不重, 是不是.",
-   "examples": [
+      "id": "L13-g1",
+      "title": "Câu vị ngữ tính từ",
+      "note": "Tính từ làm vị ngữ trực tiếp, không cần 是; thường có 很 đứng trước.",
+      "examples": [
+        {
+          "zh": "我的很重。",
+          "vi": "Của tôi rất nặng."
+        }
+      ]
+    },
     {
-     "zh": "这是不是中药？",
-     "vi": "Đây có phải thuốc Đông y không?"
-    }
-   ]
-  },
-  {
-   "id": "L13-g3",
-   "title": "Cụm từ chữ 的",
-   "note": "Tính từ/danh từ/đại từ + 的 thay cho danh từ đã biết: 黑的 = cái màu đen.",
-   "examples": [
+      "id": "L13-g2",
+      "title": "Câu hỏi chính phản",
+      "note": "Khẳng định + phủ định: 重不重, 是不是.",
+      "examples": [
+        {
+          "zh": "这是不是中药？",
+          "vi": "Đây có phải thuốc Đông y không?"
+        }
+      ]
+    },
     {
-     "zh": "那个新的是朋友的。",
-     "vi": "Cái mới kia là của bạn tôi."
+      "id": "L13-g3",
+      "title": "Cụm từ chữ 的",
+      "note": "Tính từ/danh từ/đại từ + 的 thay cho danh từ đã biết: 黑的 = cái màu đen.",
+      "examples": [
+        {
+          "zh": "那个新的是朋友的。",
+          "vi": "Cái mới kia là của bạn tôi."
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

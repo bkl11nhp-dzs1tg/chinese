@@ -1,189 +1,229 @@
 {
- "id": "L10",
- "book": "Hán ngữ 1",
- "unit": 10,
- "order": 10,
- "title": "他住哪儿",
- "title_vi": "Anh ấy sống ở đâu",
- "vocab_ids": [
-  "L10-办公",
-  "L10-办公室",
-  "L10-电",
-  "L10-电话",
-  "L10-房间",
-  "L10-号",
-  "L10-号码",
-  "L10-话",
-  "L10-家",
-  "L10-零",
-  "L10-楼",
-  "L10-门",
-  "L10-呢",
-  "L10-手",
-  "L10-手机",
-  "L10-在",
-  "L10-知道",
-  "L10-职员",
-  "L10-住"
- ],
- "exercises": [
-  {
-   "id": "L10-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Anh ấy sống ở đâu?”",
-   "options": [
-    "他",
-    "住",
-    "哪儿"
-   ],
-   "answer": [
-    "他",
-    "住",
-    "哪儿"
-   ],
-   "explanation": "他住哪儿 — Anh ấy sống ở đâu?"
-  },
-  {
-   "id": "L10-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Bạn biết số điện thoại của anh ấy không?”",
-   "options": [
-    "你",
-    "知道",
-    "他的",
-    "电话",
-    "号码",
-    "吗"
-   ],
-   "answer": [
-    "你",
-    "知道",
-    "他的",
-    "电话",
-    "号码",
-    "吗"
-   ],
-   "explanation": "你知道他的电话号码吗 — Bạn biết số điện thoại của anh ấy không?"
-  },
-  {
-   "id": "L10-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 我住九楼，你___？",
-   "answer": "呢",
-   "explanation": "Tôi ở tầng chín, còn bạn?"
-  }
- ],
- "texts": [
-  {
-   "title": "他住哪儿",
-   "lines": [
+  "id": "L10",
+  "book": "Hán ngữ 1",
+  "unit": 10,
+  "order": 10,
+  "title": "他住哪儿",
+  "title_vi": "Anh ấy sống ở đâu",
+  "vocab_ids": [
+    "L10-办公",
+    "L10-办公室",
+    "L10-电",
+    "L10-电话",
+    "L10-房间",
+    "L10-号",
+    "L10-号码",
+    "L10-话",
+    "L10-家",
+    "L10-零",
+    "L10-楼",
+    "L10-门",
+    "L10-呢",
+    "L10-手",
+    "L10-手机",
+    "L10-在",
+    "L10-知道",
+    "L10-职员",
+    "L10-住"
+  ],
+  "exercises": [
     {
-     "speaker": "李昌浩",
-     "zh": "请问，这是办公室吗？",
-     "vi": "Xin hỏi, đây có phải là văn phòng không?"
+      "id": "L10-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Anh ấy sống ở đâu?”",
+      "options": [
+        "他",
+        "住",
+        "哪儿"
+      ],
+      "answer": [
+        "他",
+        "住",
+        "哪儿"
+      ],
+      "explanation": "他住哪儿 — Anh ấy sống ở đâu?"
     },
     {
-     "speaker": "职员",
-     "zh": "是。你找谁？",
-     "vi": "Phải. Anh tìm ai?"
+      "id": "L10-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Bạn biết số điện thoại của anh ấy không?”",
+      "options": [
+        "你",
+        "知道",
+        "他的",
+        "电话",
+        "号码",
+        "吗"
+      ],
+      "answer": [
+        "你",
+        "知道",
+        "他的",
+        "电话",
+        "号码",
+        "吗"
+      ],
+      "explanation": "你知道他的电话号码吗 — Bạn biết số điện thoại của anh ấy không?"
     },
     {
-     "speaker": "李昌浩",
-     "zh": "王老师在吗？我是他的学生。",
-     "vi": "Thầy Vương có ở đây không? Tôi là học sinh của thầy."
+      "id": "L10-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 我住九楼，你___？",
+      "answer": "呢",
+      "explanation": "Tôi ở tầng chín, còn bạn?"
     },
     {
-     "speaker": "职员",
-     "zh": "他不在。他在家呢。",
-     "vi": "Thầy không có ở đây. Thầy ở nhà."
+      "id": "L10-wb1",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn chữ đúng: 你___ (hǎo)",
+      "options": [
+        "好",
+        "号",
+        "女"
+      ],
+      "answer": "好"
     },
     {
-     "speaker": "李昌浩",
-     "zh": "他住哪儿？",
-     "vi": "Thầy sống ở đâu?"
+      "id": "L10-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "Chọn pinyin đúng: 回家",
+      "options": [
+        "huí jiā",
+        "huìjiā"
+      ],
+      "answer": "huí jiā"
     },
     {
-     "speaker": "职员",
-     "zh": "他住十八楼一门，房间号是601。",
-     "vi": "Thầy ở nhà số 18, cửa số 1, phòng 601."
-    },
-    {
-     "speaker": "李昌浩",
-     "zh": "您知道他的电话号码吗？",
-     "vi": "Ông có biết số điện thoại của thầy không?"
-    },
-    {
-     "speaker": "职员",
-     "zh": "知道，62931074。",
-     "vi": "Biết, 62931074."
-    },
-    {
-     "speaker": "李昌浩",
-     "zh": "他的手机号码是多少？",
-     "vi": "Số di động của thầy là bao nhiêu?"
-    },
-    {
-     "speaker": "职员",
-     "zh": "不知道。",
-     "vi": "Không biết."
-    },
-    {
-     "speaker": "李昌浩",
-     "zh": "谢谢您。",
-     "vi": "Cảm ơn ông."
-    },
-    {
-     "speaker": "职员",
-     "zh": "不客气。",
-     "vi": "Không có gì."
+      "id": "L10-wb3",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Thư viện ở đâu?”",
+      "options": [
+        "哪儿",
+        "图书馆",
+        "在"
+      ],
+      "answer": [
+        "图书馆",
+        "在",
+        "哪儿"
+      ],
+      "explanation": "图书馆在哪儿 — Thư viện ở đâu?"
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L10-g1",
-   "title": "Trật tự câu tiếng Hán",
-   "note": "Không biến đổi hình thái từ; trật tự từ là phương tiện ngữ pháp chính. Thông thường: Chủ ngữ + (Trạng ngữ) + Động từ + Tân ngữ. Định ngữ đứng trước danh từ.",
-   "examples": [
+  ],
+  "texts": [
     {
-     "zh": "他住十八楼一门。",
-     "vi": "Thầy ở nhà số 18, cửa số 1."
+      "title": "他住哪儿",
+      "lines": [
+        {
+          "speaker": "李昌浩",
+          "zh": "请问，这是办公室吗？",
+          "vi": "Xin hỏi, đây có phải là văn phòng không?"
+        },
+        {
+          "speaker": "职员",
+          "zh": "是。你找谁？",
+          "vi": "Phải. Anh tìm ai?"
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "王老师在吗？我是他的学生。",
+          "vi": "Thầy Vương có ở đây không? Tôi là học sinh của thầy."
+        },
+        {
+          "speaker": "职员",
+          "zh": "他不在。他在家呢。",
+          "vi": "Thầy không có ở đây. Thầy ở nhà."
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "他住哪儿？",
+          "vi": "Thầy sống ở đâu?"
+        },
+        {
+          "speaker": "职员",
+          "zh": "他住十八楼一门，房间号是601。",
+          "vi": "Thầy ở nhà số 18, cửa số 1, phòng 601."
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "您知道他的电话号码吗？",
+          "vi": "Ông có biết số điện thoại của thầy không?"
+        },
+        {
+          "speaker": "职员",
+          "zh": "知道，62931074。",
+          "vi": "Biết, 62931074."
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "他的手机号码是多少？",
+          "vi": "Số di động của thầy là bao nhiêu?"
+        },
+        {
+          "speaker": "职员",
+          "zh": "不知道。",
+          "vi": "Không biết."
+        },
+        {
+          "speaker": "李昌浩",
+          "zh": "谢谢您。",
+          "vi": "Cảm ơn ông."
+        },
+        {
+          "speaker": "职员",
+          "zh": "不客气。",
+          "vi": "Không có gì."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "L10-g2",
-   "title": "Câu vị ngữ động từ",
-   "note": "Vị ngữ là động từ (có thể kèm tân ngữ).",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "你找谁？",
-     "vi": "Anh tìm ai?"
-    }
-   ]
-  },
-  {
-   "id": "L10-g3",
-   "title": "Cách đọc số điện thoại, số phòng",
-   "note": "Đọc từng chữ số; số 1 thường đọc yāo để khỏi nhầm với 七. 0 đọc líng (零).",
-   "examples": [
+      "id": "L10-g1",
+      "title": "Trật tự câu tiếng Hán",
+      "note": "Không biến đổi hình thái từ; trật tự từ là phương tiện ngữ pháp chính. Thông thường: Chủ ngữ + (Trạng ngữ) + Động từ + Tân ngữ. Định ngữ đứng trước danh từ.",
+      "examples": [
+        {
+          "zh": "他住十八楼一门。",
+          "vi": "Thầy ở nhà số 18, cửa số 1."
+        }
+      ]
+    },
     {
-     "zh": "房间号是601。",
-     "vi": "Số phòng là 601 (liù líng yāo)."
-    }
-   ]
-  },
-  {
-   "id": "L10-g4",
-   "title": "呢 trong 他在家呢",
-   "note": "呢 cuối câu trần thuật nhấn mạnh trạng thái đang diễn ra.",
-   "examples": [
+      "id": "L10-g2",
+      "title": "Câu vị ngữ động từ",
+      "note": "Vị ngữ là động từ (có thể kèm tân ngữ).",
+      "examples": [
+        {
+          "zh": "你找谁？",
+          "vi": "Anh tìm ai?"
+        }
+      ]
+    },
     {
-     "zh": "他在家呢。",
-     "vi": "Thầy đang ở nhà."
+      "id": "L10-g3",
+      "title": "Cách đọc số điện thoại, số phòng",
+      "note": "Đọc từng chữ số; số 1 thường đọc yāo để khỏi nhầm với 七. 0 đọc líng (零).",
+      "examples": [
+        {
+          "zh": "房间号是601。",
+          "vi": "Số phòng là 601 (liù líng yāo)."
+        }
+      ]
+    },
+    {
+      "id": "L10-g4",
+      "title": "呢 trong 他在家呢",
+      "note": "呢 cuối câu trần thuật nhấn mạnh trạng thái đang diễn ra.",
+      "examples": [
+        {
+          "zh": "他在家呢。",
+          "vi": "Thầy đang ở nhà."
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

@@ -1,7 +1,7 @@
 // Lộ trình bài học theo sách (mục 9.3) và trang một bài với các bước:
 // 1. Học từ mới → 2. Nghe bài (MP3 của sách) → 3. Luyện tập → 4. Kiểm tra cuối bài.
 
-import { h, mount, toast } from '../../ui/dom.js';
+import { h, mount, toast, noteLines } from '../../ui/dom.js';
 import { cue } from '../../ui/feedback.js';
 import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
@@ -165,7 +165,7 @@ export async function renderLesson(root, ctx, { params }) {
               if (on) cue('good');
             },
           }, icon('check'), 'Đã hiểu')),
-        g.note ? h('p', { style: { margin: '0 0 6px' } }, g.note) : null,
+        g.note ? noteLines(g.note) : null,
         g.example ? h('div', { class: 'han', style: { fontSize: '20px' } }, g.example) : null,
         (g.examples || []).map((e) => h('div', { class: 'ex' },
           h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe ví dụ', style: { width: '36px', minHeight: '36px' }, onclick: () => speak(e.zh, rate) }, icon('speaker')),

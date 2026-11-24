@@ -1,0 +1,11 @@
+[
+ {"type":"choose","prompt":"Chọn pinyin đúng: 上课","options":["shàng kè","shāng kè"],"answer":"shàng kè"},
+ {"type":"choose","prompt":"Chọn pinyin đúng: 回家","options":["huí jiā","huìjiā"],"answer":"huí jiā"},
+ {"type":"choose","prompt":"Chọn từ đúng: 我___教室。","options":["去","听","问"],"answer":"去"},
+ {"type":"choose","prompt":"Chọn từ đúng: 我们___课吧！","options":["上","回答","问"],"answer":"上"},
+ {"type":"choose","prompt":"Chọn từ đúng: 老师___，我们回答。","options":["问","讲","上课"],"answer":"问"},
+ {"type":"choose","prompt":"Chọn từ đúng: 我们去学校___！","options":["吧","吗","呢"],"answer":"吧"},
+ {"type":"reorder","vi":"Chúng ta vào học thôi!","words":["我们","上课","吧"]},
+ {"type":"reorder","vi":"Vào học rồi.","words":["上课","了"]},
+ {"type":"reorder","vi":"Các bạn nghe giảng.","words":["同学们","听","课"]}
+]

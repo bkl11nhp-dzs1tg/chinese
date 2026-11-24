@@ -1,208 +1,311 @@
 {
- "id": "L19",
- "book": "Hán ngữ 2",
- "unit": 19,
- "order": 19,
- "title": "可以试试吗",
- "title_vi": "Có thể thử được không",
- "vocab_ids": [
-  "L19-长",
-  "L19-打折",
-  "L19-当然",
-  "L19-短",
-  "L19-肥",
-  "L19-好看",
-  "L19-合适",
-  "L19-可以",
-  "L19-毛衣",
-  "L19-胖",
-  "L19-便宜",
-  "L19-浅",
-  "L19-深",
-  "L19-试",
-  "L19-瘦",
-  "L19-一点儿",
-  "L19-应该",
-  "L19-又…又…",
-  "L19-羽绒服"
- ],
- "exercises": [
-  {
-   "id": "L19-r1",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Tôi có thể thử không?”",
-   "options": [
-    "我",
-    "可以",
-    "试试",
-    "吗"
-   ],
-   "answer": [
-    "我",
-    "可以",
-    "试试",
-    "吗"
-   ],
-   "explanation": "我可以试试吗 — Tôi có thể thử không?"
-  },
-  {
-   "id": "L19-r2",
-   "type": "reorder",
-   "prompt": "Sắp xếp thành câu: “Chiếc áo len này vừa rẻ vừa đẹp.”",
-   "options": [
-    "这件",
-    "毛衣",
-    "又",
-    "便宜",
-    "又",
-    "好看"
-   ],
-   "answer": [
-    "这件",
-    "毛衣",
-    "又",
-    "便宜",
-    "又",
-    "好看"
-   ],
-   "explanation": "这件毛衣又便宜又好看 — Chiếc áo len này vừa rẻ vừa đẹp."
-  },
-  {
-   "id": "L19-f1",
-   "type": "fill",
-   "prompt": "Điền vào chỗ trống: 这件羽绒服有点儿长，有短一___的吗？",
-   "answer": "点儿",
-   "explanation": "Áo lông vũ này hơi dài, có cái ngắn hơn chút không?"
-  }
- ],
- "texts": [
-  {
-   "title": "可以试试吗",
-   "lines": [
+  "id": "L19",
+  "book": "Hán ngữ 2",
+  "unit": 19,
+  "order": 19,
+  "title": "可以试试吗",
+  "title_vi": "Có thể thử được không",
+  "vocab_ids": [
+    "L19-长",
+    "L19-打折",
+    "L19-当然",
+    "L19-短",
+    "L19-肥",
+    "L19-好看",
+    "L19-合适",
+    "L19-可以",
+    "L19-毛衣",
+    "L19-胖",
+    "L19-便宜",
+    "L19-浅",
+    "L19-深",
+    "L19-试",
+    "L19-瘦",
+    "L19-一点儿",
+    "L19-应该",
+    "L19-又…又…",
+    "L19-羽绒服"
+  ],
+  "exercises": [
     {
-     "speaker": "玛丽",
-     "zh": "我看看羽绒服。",
-     "vi": "(Mary mua áo lông vũ ở cửa hàng) Tôi xem áo lông vũ."
+      "id": "L19-r1",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Tôi có thể thử không?”",
+      "options": [
+        "我",
+        "可以",
+        "试试",
+        "吗"
+      ],
+      "answer": [
+        "我",
+        "可以",
+        "试试",
+        "吗"
+      ],
+      "explanation": "我可以试试吗 — Tôi có thể thử không?"
     },
     {
-     "speaker": "售货员",
-     "zh": "你看看这件怎么样？又好又便宜。",
-     "vi": "Chị xem cái này thế nào? Vừa đẹp vừa rẻ."
+      "id": "L19-r2",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Chiếc áo len này vừa rẻ vừa đẹp.”",
+      "options": [
+        "这件",
+        "毛衣",
+        "又",
+        "便宜",
+        "又",
+        "好看"
+      ],
+      "answer": [
+        "这件",
+        "毛衣",
+        "又",
+        "便宜",
+        "又",
+        "好看"
+      ],
+      "explanation": "这件毛衣又便宜又好看 — Chiếc áo len này vừa rẻ vừa đẹp."
     },
     {
-     "speaker": "玛丽",
-     "zh": "这件有一点儿长。有短一点儿的吗？",
-     "vi": "Cái này hơi dài. Có cái nào ngắn hơn một chút không?"
+      "id": "L19-f1",
+      "type": "fill",
+      "prompt": "Điền vào chỗ trống: 这件羽绒服有点儿长，有短一___的吗？",
+      "answer": "点儿",
+      "explanation": "Áo lông vũ này hơi dài, có cái ngắn hơn chút không?"
     },
     {
-     "speaker": "售货员",
-     "zh": "你要深颜色的还是要浅颜色的？",
-     "vi": "Chị muốn màu đậm hay màu nhạt?"
+      "id": "L19-wb1",
+      "source": "workbook",
+      "type": "match",
+      "prompt": "Nối từ trái nghĩa",
+      "pairs": [
+        {
+          "left": "大",
+          "right": "小"
+        },
+        {
+          "left": "多",
+          "right": "少"
+        },
+        {
+          "left": "长",
+          "right": "短"
+        }
+      ]
     },
     {
-     "speaker": "玛丽",
-     "zh": "浅颜色的。……我试试可以吗？",
-     "vi": "Màu nhạt. … Tôi thử được không?"
+      "id": "L19-wb2",
+      "source": "workbook",
+      "type": "choose",
+      "prompt": "— 这个苹果好吃吗？ — ___",
+      "options": [
+        "很好吃。",
+        "很好看。",
+        "很好听。"
+      ],
+      "answer": "很好吃。"
     },
     {
-     "speaker": "售货员",
-     "zh": "当然可以。",
-     "vi": "Đương nhiên là được."
+      "id": "L19-wb3",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Cái áo này là của bố.”",
+      "options": [
+        "件",
+        "是",
+        "的",
+        "这",
+        "衣服",
+        "爸爸"
+      ],
+      "answer": [
+        "这",
+        "件",
+        "衣服",
+        "是",
+        "爸爸",
+        "的"
+      ],
+      "explanation": "这件衣服是爸爸的 — Cái áo này là của bố."
     },
     {
-     "speaker": "玛丽",
-     "zh": "这件太肥了，有没有瘦一点儿的？",
-     "vi": "Cái này rộng quá, có cái nào chật hơn một chút không?"
+      "id": "L19-wb4",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Áo của mẹ màu xanh lam.”",
+      "options": [
+        "的",
+        "是",
+        "蓝",
+        "妈妈",
+        "衣服",
+        "的"
+      ],
+      "answer": [
+        "妈妈",
+        "的",
+        "衣服",
+        "是",
+        "蓝",
+        "的"
+      ],
+      "explanation": "妈妈的衣服是蓝的 — Áo của mẹ màu xanh lam."
     },
     {
-     "speaker": "售货员",
-     "zh": "你再试试这一件。",
-     "vi": "Chị thử lại cái này xem."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "这件不大不小，正合适，颜色也很好看。",
-     "vi": "Cái này không to không nhỏ, vừa vặn, màu cũng rất đẹp."
+      "id": "L19-wb5",
+      "source": "workbook",
+      "type": "reorder",
+      "prompt": "Sắp xếp thành câu: “Áo của bạn màu gì?”",
+      "options": [
+        "的",
+        "是",
+        "颜色",
+        "什么",
+        "你",
+        "衣服",
+        "的"
+      ],
+      "answer": [
+        "你",
+        "的",
+        "衣服",
+        "是",
+        "什么",
+        "颜色",
+        "的"
+      ],
+      "explanation": "你的衣服是什么颜色的 — Áo của bạn màu gì?"
     }
-   ]
-  },
-  {
-   "title": "便宜一点儿吧",
-   "lines": [
+  ],
+  "texts": [
     {
-     "speaker": "玛丽",
-     "zh": "这种羽绒服怎么卖？",
-     "vi": "Loại áo lông vũ này bán thế nào?"
+      "title": "可以试试吗",
+      "lines": [
+        {
+          "speaker": "玛丽",
+          "zh": "我看看羽绒服。",
+          "vi": "(Mary mua áo lông vũ ở cửa hàng) Tôi xem áo lông vũ."
+        },
+        {
+          "speaker": "售货员",
+          "zh": "你看看这件怎么样？又好又便宜。",
+          "vi": "Chị xem cái này thế nào? Vừa đẹp vừa rẻ."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "这件有一点儿长。有短一点儿的吗？",
+          "vi": "Cái này hơi dài. Có cái nào ngắn hơn một chút không?"
+        },
+        {
+          "speaker": "售货员",
+          "zh": "你要深颜色的还是要浅颜色的？",
+          "vi": "Chị muốn màu đậm hay màu nhạt?"
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "浅颜色的。……我试试可以吗？",
+          "vi": "Màu nhạt. … Tôi thử được không?"
+        },
+        {
+          "speaker": "售货员",
+          "zh": "当然可以。",
+          "vi": "Đương nhiên là được."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "这件太肥了，有没有瘦一点儿的？",
+          "vi": "Cái này rộng quá, có cái nào chật hơn một chút không?"
+        },
+        {
+          "speaker": "售货员",
+          "zh": "你再试试这一件。",
+          "vi": "Chị thử lại cái này xem."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "这件不大不小，正合适，颜色也很好看。",
+          "vi": "Cái này không to không nhỏ, vừa vặn, màu cũng rất đẹp."
+        }
+      ]
     },
     {
-     "speaker": "售货员",
-     "zh": "一件四百块。",
-     "vi": "Bốn trăm đồng một chiếc."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "太贵了。便宜一点儿吧，二百怎么样？",
-     "vi": "Đắt quá. Rẻ hơn chút đi, hai trăm được không?"
-    },
-    {
-     "speaker": "售货员",
-     "zh": "二百太少了，不卖。可以打八折，你给三百二吧。",
-     "vi": "Hai trăm ít quá, không bán. Có thể giảm 20%, chị trả ba trăm hai đi."
-    },
-    {
-     "speaker": "玛丽",
-     "zh": "三百行不行？",
-     "vi": "Ba trăm được không?"
-    },
-    {
-     "speaker": "售货员",
-     "zh": "给你吧。",
-     "vi": "Thôi được, bán cho chị."
+      "title": "便宜一点儿吧",
+      "lines": [
+        {
+          "speaker": "玛丽",
+          "zh": "这种羽绒服怎么卖？",
+          "vi": "Loại áo lông vũ này bán thế nào?"
+        },
+        {
+          "speaker": "售货员",
+          "zh": "一件四百块。",
+          "vi": "Bốn trăm đồng một chiếc."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "太贵了。便宜一点儿吧，二百怎么样？",
+          "vi": "Đắt quá. Rẻ hơn chút đi, hai trăm được không?"
+        },
+        {
+          "speaker": "售货员",
+          "zh": "二百太少了，不卖。可以打八折，你给三百二吧。",
+          "vi": "Hai trăm ít quá, không bán. Có thể giảm 20%, chị trả ba trăm hai đi."
+        },
+        {
+          "speaker": "玛丽",
+          "zh": "三百行不行？",
+          "vi": "Ba trăm được không?"
+        },
+        {
+          "speaker": "售货员",
+          "zh": "给你吧。",
+          "vi": "Thôi được, bán cho chị."
+        }
+      ]
     }
-   ]
-  }
- ],
- "grammar_points": [
-  {
-   "id": "L19-g1",
-   "title": "Lặp động từ",
-   "note": "Động từ lặp lại (AA, ABAB) làm nhẹ ý: thử một chút, làm qua.",
-   "examples": [
+  ],
+  "grammar_points": [
     {
-     "zh": "我试试可以吗？",
-     "vi": "Tôi thử một chút được không?"
+      "id": "L19-g1",
+      "title": "Lặp động từ",
+      "note": "Động từ lặp lại (AA, ABAB) làm nhẹ ý: thử một chút, làm qua.",
+      "examples": [
+        {
+          "zh": "我试试可以吗？",
+          "vi": "Tôi thử một chút được không?"
+        },
+        {
+          "zh": "我看看羽绒服。",
+          "vi": "Tôi xem áo lông vũ."
+        }
+      ]
     },
     {
-     "zh": "我看看羽绒服。",
-     "vi": "Tôi xem áo lông vũ."
-    }
-   ]
-  },
-  {
-   "id": "L19-g2",
-   "title": "又…又…",
-   "note": "Vừa… vừa…, nối hai tính từ/động từ.",
-   "examples": [
-    {
-     "zh": "又好又便宜。",
-     "vi": "Vừa tốt vừa rẻ."
-    }
-   ]
-  },
-  {
-   "id": "L19-g3",
-   "title": "一点儿 và 有一点儿",
-   "note": "Tính từ + 一点儿: so sánh (… hơn một chút). 有一点儿 + tính từ: hơi … (thường ý không hài lòng).",
-   "examples": [
-    {
-     "zh": "这件有一点儿长。",
-     "vi": "Cái này hơi dài."
+      "id": "L19-g2",
+      "title": "又…又…",
+      "note": "Vừa… vừa…, nối hai tính từ/động từ.",
+      "examples": [
+        {
+          "zh": "又好又便宜。",
+          "vi": "Vừa tốt vừa rẻ."
+        }
+      ]
     },
     {
-     "zh": "有短一点儿的吗？",
-     "vi": "Có cái ngắn hơn một chút không?"
+      "id": "L19-g3",
+      "title": "一点儿 và 有一点儿",
+      "note": "Tính từ + 一点儿: so sánh (… hơn một chút). 有一点儿 + tính từ: hơi … (thường ý không hài lòng).",
+      "examples": [
+        {
+          "zh": "这件有一点儿长。",
+          "vi": "Cái này hơi dài."
+        },
+        {
+          "zh": "有短一点儿的吗？",
+          "vi": "Có cái ngắn hơn một chút không?"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }
