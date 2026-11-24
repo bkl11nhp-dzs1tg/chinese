@@ -65,3 +65,21 @@ describe('gradeSpeech', () => {
     expect(gradeSpeech('', '你好')).toBe(false);
   });
 });
+
+import { gradeSentence, inkScore } from '../src/core/practice.js';
+describe('viết câu / viết chữ', () => {
+  it('chấm câu bỏ qua dấu câu, chỉ ra chữ thiếu/thừa', () => {
+    expect(gradeSentence('你好！', '你好。').ok).toBe(true);
+    const r = gradeSentence('我是学生', '我不是学生。');
+    expect(r.score).toBeGreaterThan(0.8);
+    expect(r.diff.find((d) => d.kind === 'miss').ch).toBe('不');
+    expect(gradeSentence('他去学校', '我爱妈妈').ok).toBe(false);
+  });
+  it('chấm nét: trùng mẫu điểm cao, khác hẳn điểm thấp', () => {
+    const S = 16, grid = (f) => Uint8Array.from({ length: S * S }, (_, k) => (f(k % S, (k / S) | 0) ? 1 : 0));
+    const cross = grid((x, y) => x === 8 || y === 8);
+    const box = grid((x, y) => x === 1 || x === 14 || y === 1 || y === 14);
+    expect(inkScore(cross, cross, S, 1)).toBeCloseTo(1);
+    expect(inkScore(box, cross, S, 1)).toBeLessThan(0.5);
+  });
+});

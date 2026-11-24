@@ -10,7 +10,61 @@ export const SKILLS = [
   { id: 'tones', label: 'Thanh điệu', desc: 'Chọn pinyin có dấu thanh đúng', icon: 'tone', tone: 'purple' },
   { id: 'typing', label: 'Gõ pinyin', desc: 'Nhìn chữ, gõ cách đọc', icon: 'keyboard', tone: 'navy' },
   { id: 'sentence', label: 'Ghép câu', desc: 'Sắp xếp từ thành câu đúng ngữ pháp', icon: 'blocks', tone: 'teal' },
+  { id: 'write', label: 'Viết chữ', desc: 'Vẽ chữ Hán bằng tay, máy chấm nét', icon: 'pencil', tone: 'orange' },
+  { id: 'compose', label: 'Viết câu', desc: 'Dịch câu sang tiếng Trung, máy chấm', icon: 'lessons', tone: 'green' },
 ];
+
+// ---------------------------------------------------------------- viết câu
+const PUNCT_RX = /[\s，。？！、；：,.?!;:“”"'‘’（）()…—-]/g;
+const normZh = (s) => String(s || '').normalize('NFC').replace(PUNCT_RX, '');
+
+/** So sánh câu viết với đáp án theo từng chữ (bỏ dấu câu, khoảng trắng). Trả về { score, ok, diff:[{ch, kind:'ok'|'miss'|'extra'}] }. */
+export function gradeSentence(response, answer, { pass = 0.8 } = {}) {
+  const a = [...normZh(answer)];
+  const b = [...normZh(response)];
+  if (!a.length) return { score: 0, ok: false, diff: [] };
+  const n = a.length, m = b.length;
+  const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+  const diff = [];
+  let i = 0, j = 0;
+  while (i < n || j < m) {
+    if (i < n && j < m && a[i] === b[j]) { diff.push({ ch: a[i], kind: 'ok' }); i++; j++; }
+    else if (j < m && (i >= n || dp[i][j + 1] >= dp[i + 1][j])) { diff.push({ ch: b[j], kind: 'extra' }); j++; }
+    else { diff.push({ ch: a[i], kind: 'miss' }); i++; }
+  }
+  const lcs = dp[0][0];
+  const score = (2 * lcs) / (n + m || 1);
+  return { score, ok: score >= pass, diff };
+}
+
+// ---------------------------------------------------------------- viết chữ tay
+/**
+ * Chấm chữ vẽ tay so với chữ mẫu. user, ref: mảng 0/1 kích thước size×size (đã chuẩn hóa theo khung bao).
+ * Dung sai `tol` điểm ảnh. Trả về điểm 0–1 (trung bình điều hòa của độ phủ chữ mẫu và độ chính xác nét vẽ).
+ */
+export function inkScore(user, ref, size, tol = 2) {
+  const dil = (g) => {
+    const o = new Uint8Array(size * size);
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      if (!g[y * size + x]) continue;
+      for (let dy = -tol; dy <= tol; dy++) for (let dx = -tol; dx <= tol; dx++) {
+        const yy = y + dy, xx = x + dx;
+        if (yy >= 0 && yy < size && xx >= 0 && xx < size) o[yy * size + xx] = 1;
+      }
+    }
+    return o;
+  };
+  const du = dil(user), dr = dil(ref);
+  let r = 0, rn = 0, p = 0, pn = 0;
+  for (let k = 0; k < size * size; k++) {
+    if (ref[k]) { rn++; if (du[k]) r++; }
+    if (user[k]) { pn++; if (dr[k]) p++; }
+  }
+  if (!rn || !pn) return 0;
+  const R = r / rn, P = p / pn;
+  return R + P ? (2 * R * P) / (R + P) : 0;
+}
 
 // ---------------------------------------------------------------- pinyin
 const TONE_MARKS = ['\u0304', '\u0301', '\u030C', '\u0300']; // thanh 1–4
@@ -126,6 +180,14 @@ export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], ran
   } else if (skill === 'typing') {
     for (const c of pickWords(n)) {
       out.push({ type: 'pinyin', prompt: `Gõ pinyin của “${c.hanzi}” (${c.meaning})`, hanzi: c.hanzi, answer: c.pinyin, card_ids: [c.id], explanation: 'Không cần gõ dấu thanh; có thể gõ số (ni3hao3) hoặc v thay ü.' });
+    }
+  } else if (skill === 'write') {
+    for (const c of shuffle(words.filter((c) => [...c.hanzi].length <= 2 && /^[㐀-鿿]+$/.test(c.hanzi)), rand).slice(0, Math.min(n, 8))) {
+      out.push({ type: 'draw', prompt: `Viết chữ: ${c.meaning}`, hanzi: c.hanzi, pinyin: c.pinyin, answer: c.hanzi, card_ids: [c.id], explanation: `${c.hanzi} (${c.pinyin}): ${c.meaning}` });
+    }
+  } else if (skill === 'compose') {
+    for (const l of shuffle(shortLines.filter((l) => [...l.zh].length <= 16), rand).slice(0, Math.min(n, 8))) {
+      out.push({ type: 'compose', prompt: l.vi, answer: l.zh });
     }
   } else if (skill === 'sentence') {
     const ok = shuffle(shortLines.filter((l) => {

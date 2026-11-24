@@ -15,6 +15,7 @@ import { buildDictionary, segmentSentence, isHanChar } from '../../core/segment.
 import { cardStatus } from '../../core/srs.js';
 import { lessonIdFromAudioName } from '../../core/audio.js';
 import { lessonAudioSrc } from '../../content.js';
+import { audioPlayer } from '../lessons/lessons.js';
 
 const MODES = [
   { id: 'normal', label: 'Đọc' },
@@ -436,6 +437,7 @@ export async function renderReader(root, ctx, { params }) {
       h('div', { class: 'reader-tools' },
         modeBar,
         h('div', { class: 'tool-chips' }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ lạ'), fontBtn)),
+      audioSrc && !flat.some((x) => x.audio_ms) ? h('div', { class: 'reader-mp3' }, audioPlayer(audioSrc, 'MP3 của sách')) : null,
       !audioEl && !ttsSupported() ? h('p', { class: 'notice small' }, 'Trình duyệt không hỗ trợ đọc giọng máy.') : null,
       h('div', { class: 'reader-card px-box' }, content),
       h('div', { class: 'player-wrap' }, playerBar, rateBtn)),

@@ -183,7 +183,7 @@ export async function renderLesson(root, ctx, { params }) {
 }
 
 /** Trình phát MP3 gọn, cùng tông màu app (thay thanh phát mặc định màu xám của trình duyệt). */
-function audioPlayer(src, label) {
+export function audioPlayer(src, label) {
   const audio = new Audio();
   audio.preload = 'metadata';
   audio.src = src;

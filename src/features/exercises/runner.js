@@ -7,10 +7,11 @@ import { h } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { grade, answerText, shuffle, autoExercises } from '../../core/exercises.js';
-import { gradePinyin, gradeSpeech } from '../../core/practice.js';
+import { gradePinyin, gradeSpeech, gradeSentence } from '../../core/practice.js';
+import { writeArea } from './handwriting.js';
 
 const isHan = (s) => /\p{Script=Han}/u.test(s || '');
-const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ pinyin', speak: 'Luyện nói' };
+const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ pinyin', speak: 'Luyện nói', draw: 'Viết chữ', compose: 'Viết câu' };
 const PAIR_COLORS = ['#e07b39', '#3a7bd5', '#2e9d63', '#9b59b6', '#d4a017', '#c0392b'];
 
 /** Gom bài tập luyện của một bài: bài tập câu của bài + câu tự sinh từ từ vựng. */
@@ -82,7 +83,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       if (response == null) return;
       answered = true;
       const ok = ex.type === 'pinyin' ? gradePinyin(response, ex.answer)
-        : ex.type === 'speak' ? !!response.ok
+        : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'compose' ? !!response.ok
         : grade(ex.type === 'listen' ? { ...ex, type: 'choose' } : ex, response);
       results.push({ question: ex, correct: ok, response });
       onAnswer?.(ex, ok, response);
@@ -90,11 +91,13 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       if (mode === 'test') { i++; next(); return; }
       mark(ok);
       const answer = ex.type === 'speak' ? (response.transcript ? `Máy nghe được: ${response.transcript}` : ex.target) : answerText(ex);
+      const extra = ex.type === 'draw' || ex.type === 'compose' ? h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`) : null;
       shell.showSheet({
         ok,
         title: ok ? pickPraise() : 'Chưa đúng',
         detail: h('div', {},
           ok ? null : h('div', {}, 'Đáp án đúng: ', h('strong', { class: isHan(answer) ? 'han' : '' }, answer)),
+          extra,
           ex.explanation ? h('div', { class: 'muted', style: { marginTop: '4px' } }, ex.explanation) : null),
         onContinue: () => { i++; next(); },
       });
@@ -238,6 +241,27 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         drawLines();
       };
       keyHandler = (e) => { if (e.key === 'Enter' && !answered) submit(); };
+    } else if (ex.type === 'draw') {
+      // Viết chữ bằng tay: nhìn nghĩa + pinyin, vẽ chữ; có thể bật "Tô theo mẫu" (khi đó tính là đã xem gợi ý).
+      const area = writeArea(ex.hanzi, { onChange: (full) => setReady(full) });
+      body.append(
+        h('div', { class: 'hw-hint' }, h('span', { class: 'hw-py' }, ex.pinyin), h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'))),
+        area.el);
+      getResponse = () => { const score = area.score(); return { score, ok: score >= 0.7 && !area.usedGuide(), guided: area.usedGuide() }; };
+      mark = (ok) => area.showAnswer(ok);
+    } else if (ex.type === 'compose') {
+      // Viết câu: đọc nghĩa tiếng Việt, tự gõ câu tiếng Trung (bàn phím chữ Hán / viết tay của điện thoại), máy chấm theo từng chữ.
+      const input = h('textarea', { class: 'compose-input han', lang: 'zh-CN', rows: 2, autocomplete: 'off', spellcheck: false, 'aria-label': 'Câu tiếng Trung' });
+      const diffBox = h('div', { class: 'compose-diff hidden' });
+      input.addEventListener('input', () => setReady(input.value.trim() !== ''));
+      body.append(input, diffBox);
+      getResponse = () => { if (!input.value.trim()) return null; const r = gradeSentence(input.value, ex.answer); return { ...r, text: input.value }; };
+      mark = () => {
+        const r = gradeSentence(input.value, ex.answer);
+        diffBox.replaceChildren(...r.diff.map((d) => h('span', { class: ['cd', d.kind], lang: 'zh-CN' }, d.ch)));
+        diffBox.classList.remove('hidden');
+      };
+      setTimeout(() => input.focus(), 50);
     } else if (ex.type === 'pinyin') {
       const input = h('input', { type: 'text', class: 'py-input', autocomplete: 'off', autocapitalize: 'off', spellcheck: false, enterkeyhint: 'done', 'aria-label': 'Pinyin', placeholder: 'vd: ni hao' });
       input.addEventListener('input', () => setReady(input.value.trim() !== ''));

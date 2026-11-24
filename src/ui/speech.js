@@ -44,14 +44,19 @@ export async function genderVoice(gender) {
 export async function speak(text, rate = 1, { gender = null } = {}) {
   if (!ttsSupported() || !text) return false;
   let voice = gender ? await genderVoice(gender) : null;
-  const exact = !!voice;
+  let exact = !!voice;
+  if (!voice && gender) {
+    // Không có giọng nam/nữ rõ ràng: nếu máy có ≥2 giọng tiếng Trung thì mỗi người một giọng.
+    const zh = (await loadVoices()).filter((v) => /^zh[-_](CN|Hans)/i.test(v.lang) || /^cmn/i.test(v.lang));
+    if (zh.length >= 2) { voice = gender === 'male' ? zh[1] : zh[0]; exact = false; }
+  }
   if (!voice) voice = await chineseVoice();
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'zh-CN';
   if (voice) u.voice = voice;
   u.rate = rate;
-  if (gender && !exact) u.pitch = gender === 'male' ? 0.6 : 1.25;
+  if (gender && !exact) { u.pitch = gender === 'male' ? 0.5 : 1.45; if (gender === 'male') u.rate = rate * 0.95; }
   speechSynthesis.speak(u);
   return !!voice;
 }
