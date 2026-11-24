@@ -446,3 +446,5 @@ input[type="search"], input[type="text"], input[type="url"], input[type="passwor
 /* Sóng dưới đáy: giữ đúng tỉ lệ ảnh, lặp ngang thay vì kéo giãn */
 .page-wave { height: auto; aspect-ratio: auto; min-height: 0; height: clamp(70px, 12vw, 120px); background: var(--wave) left bottom / auto 100% repeat-x !important; opacity: .3; }
 .page-wave { opacity: .22 !important; }
+/* Vòng phút học trên ô mục tiêu: đĩa kính mờ phía sau để nổi trên cành đào */
+.today-hero .ring { position: relative; z-index: 1; border-radius: 50%; background: color-mix(in srgb, var(--surface) 55%, transparent); -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%); box-shadow: 0 8px 24px rgba(90, 30, 45, .10), inset 0 1px 0 rgba(255, 255, 255, .6); }
