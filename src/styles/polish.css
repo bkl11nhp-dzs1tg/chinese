@@ -448,3 +448,14 @@ input[type="search"], input[type="text"], input[type="url"], input[type="passwor
 .page-wave { opacity: .22 !important; }
 /* Vòng phút học trên ô mục tiêu: đĩa kính mờ phía sau để nổi trên cành đào */
 .today-hero .ring { position: relative; z-index: 1; border-radius: 50%; background: color-mix(in srgb, var(--surface) 55%, transparent); -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%); box-shadow: 0 8px 24px rgba(90, 30, 45, .10), inset 0 1px 0 rgba(255, 255, 255, .6); }
+
+/* Đầu chương: giữ nền gradient đỏ–hồng cũ nhưng nhạt hơn */
+.unit-head { background: linear-gradient(135deg, #e0566f, #f59aae) !important; color: #fff !important; border: 1px solid rgba(255, 255, 255, .35) !important; }
+.unit-head::after { display: none; }
+.unit-head h2 { color: #fff !important; }
+.unit-head .small, .unit-head .muted { color: rgba(255, 255, 255, .9) !important; }
+.unit-head .bar { background: rgba(255, 255, 255, .32) !important; }
+.unit-head .bar > span { background: #fff !important; }
+.seg-dark { background: rgba(255, 255, 255, .22) !important; }
+.seg-dark .seg-btn { color: rgba(255, 255, 255, .92) !important; }
+.seg-dark .seg-btn.on { background: #fff !important; color: #c42a46 !important; }
