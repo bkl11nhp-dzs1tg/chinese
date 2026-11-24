@@ -399,7 +399,7 @@ export async function renderReader(root, ctx, { params }) {
   function rerender() {
     if (mode === 'step') return renderStep();
     scoreEl.textContent = mode === 'quiz' ? quizScore() : '';
-    content.replaceChildren(mode === 'quiz' ? h('p', { class: 'quiz-head' }, 'Đọc câu, chọn nghĩa đúng. ', scoreEl) : null,...doc.paragraphs.map((p, pi) => h('section', { class: 'para' },
+    content.replaceChildren(mode === 'quiz' ? h('p', { class: 'quiz-head' }, scoreEl) : null,...doc.paragraphs.map((p, pi) => h('section', { class: 'para' },
       p.title ? h('h3', { class: 'para-title han' }, p.title) : null,
       flat.filter((st) => st.pi === pi).map((st) => sentenceEl(st)))));
   }
@@ -424,7 +424,6 @@ export async function renderReader(root, ctx, { params }) {
         h('div', { class: 'tool-chips' }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ lạ'), fontBtn)),
       !audioEl && !ttsSupported() ? h('p', { class: 'notice small' }, 'Trình duyệt không hỗ trợ đọc giọng máy.') : null,
       h('div', { class: 'reader-card px-box' }, content),
-      h('p', { class: 'muted small center reader-hint' }, 'Bấm vào một từ để tra nghĩa và đánh dấu chưa nhớ / đã nhớ'),
       h('div', { class: 'player-wrap' }, playerBar, rateBtn)),
     scrim, sheet);
   updatePlayBtn();

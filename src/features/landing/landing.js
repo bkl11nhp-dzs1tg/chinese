@@ -5,7 +5,7 @@ import { h, mount, toast } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { cue } from '../../ui/feedback.js';
-import { canInstall, promptInstall, isStandalone, isIOS } from '../../install.js';
+import { canInstall, promptInstall, isStandalone } from '../../install.js';
 
 const DEMO = [
   { hanzi: '你好', pinyin: 'nǐ hǎo', meaning: 'xin chào' },
@@ -38,7 +38,7 @@ export async function render(root, ctx) {
       flipped ? h('span', { class: 'demo-py' }, d.pinyin) : null,
       flipped ? h('span', { class: 'demo-vi' }, d.meaning) : null);
     [...dots.children].forEach((x, k) => x.classList.toggle('on', k === di));
-    hint.textContent = flipped ? 'Bấm để sang thẻ khác' : 'Bấm để lật thẻ';
+    hint.replaceChildren(icon(flipped ? 'chevron' : 'repeat'));
   };
   card.onclick = () => {
     card.classList.remove('turn');
@@ -54,7 +54,6 @@ export async function render(root, ctx) {
   function paintInstall() {
     if (isStandalone()) installArea.replaceChildren();
     else if (canInstall()) installArea.replaceChildren(h('button', { class: 'ld-link', type: 'button', onclick: async () => { if ((await promptInstall()) === 'accepted') toast('Đã cài app.'); paintInstall(); } }, icon('download'), 'Cài app lên máy'));
-    else if (isIOS()) installArea.replaceChildren(h('span', { class: 'ld-note' }, icon('download'), 'Cài app: Chia sẻ → Thêm vào MH chính'));
     else installArea.replaceChildren();
   }
   window.addEventListener('install:changed', paintInstall);
@@ -66,13 +65,12 @@ export async function render(root, ctx) {
       h('div', { class: 'ld-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语'), h('span', { class: 'ld-seal' }, icon('logo'))),
       h('div', { class: 'ld-copy' },
         h('h1', {}, 'Tự học tiếng Trung', h('br'), h('em', {}, 'mỗi ngày.')),
-        h('p', { class: 'ld-lead' }, started ? `Bạn đã học ${learned} từ. Thêm 15 phút hôm nay nhé!` : '15 phút thôi, chậm mà chắc.'),
+        h('p', { class: 'ld-lead' }, started ? `Bạn đã học ${learned} từ. Thêm 15 phút hôm nay nhé!` : 'Tiếp thu mỗi bài học chỉ từ 15 phút.'),
         h('div', { class: 'ld-cta' },
           h('button', { class: 'btn primary big ld-go', type: 'button', onclick: start }, started ? 'Học tiếp' : 'Bắt đầu học', icon('chevron')),
           installArea))),
     // 2. Thẻ lật thử, đứng riêng
     h('section', { class: 'ld-try' },
-      h('p', { class: 'ld-try-label' }, 'Thử lật một thẻ'),
       card),
   ));
 

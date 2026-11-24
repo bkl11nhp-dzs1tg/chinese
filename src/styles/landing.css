@@ -61,3 +61,12 @@
   .ld-hero { gap: 72px; justify-content: center; grid-template-columns: auto minmax(0, 560px); }
   .ld-try { margin-top: 88px; }
 }
+.demo-hint { display: flex; justify-content: center; color: var(--accent); }
+.demo-hint svg { width: 26px; height: 26px; padding: 6px; box-sizing: content-box; border-radius: 50%; background: var(--accent-soft); }
+.demo-card:not(.flipped) .demo-hint svg { animation: nudge 1.6s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: rotate(-25deg) scale(1.08); } }
+.ld-try { margin-top: 48px; }
+@media (max-width: 899px) {
+  .ld { padding-bottom: 170px; }
+  .ld-try .demo-card { width: min(74%, 270px); aspect-ratio: 1 / 1; }
+}
