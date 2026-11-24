@@ -1,5 +1,5 @@
-// #/welcome: trang giới thiệu (lần đầu mở app, hoặc bấm logo).
-// Hai cột: bên trái chữ 汉语 viết dọc + thẻ từ lớn bấm lật thử; bên phải thông điệp ngắn và nút học.
+// #/welcome: trang giới thiệu + đăng nhập (lần đầu mở app, bấm logo, hoặc vào Tài khoản khi chưa đăng nhập).
+// Gọn trong một màn: chữ 汉语 + lời nhắn + nút học, thẻ lật thử nhỏ, khối đăng nhập (điện thoại: gập lại, bấm mở).
 
 import { h, mount, toast } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
@@ -25,12 +25,12 @@ export async function render(root, ctx, { query = {} } = {}) {
     ctx.navigate('today');
   };
 
-  // ---------- thẻ thử
+  // ---------- thẻ lật thử
   let di = 0;
   let flipped = false;
   const face = h('div', { class: 'demo-face' });
-  const hint = h('span', { class: 'demo-hint' });
   const dots = h('span', { class: 'demo-dots', 'aria-hidden': 'true' }, DEMO.map(() => h('i')));
+  const hint = h('span', { class: 'demo-hint' });
   const card = h('button', { class: 'demo-card', type: 'button', 'aria-label': 'Thẻ thử: bấm để lật' }, face, dots, hint);
   const paintCard = () => {
     const d = DEMO[di];
@@ -51,41 +51,45 @@ export async function render(root, ctx, { query = {} } = {}) {
   };
   paintCard();
 
-  // ---------- cài app (một dòng nhỏ, chỉ khi cài được)
-  const installArea = h('div', { class: 'ld-install' });
+  // ---------- cài app (chỉ khi trình duyệt cho cài)
+  const installArea = h('div', { class: 'lp-install' });
   function paintInstall() {
-    if (isStandalone()) installArea.replaceChildren();
-    else if (canInstall()) installArea.replaceChildren(h('button', { class: 'ld-install-btn', type: 'button', onclick: async () => { if ((await promptInstall()) === 'accepted') toast('Đã cài app.'); paintInstall(); } }, h('span', { class: 'if-logo' }, icon('logo')), h('span', { class: 'if-text' }, h('b', {}, 'Cài app lên máy'), h('small', {}, 'Mở nhanh, học offline')), icon('download')));
+    if (!isStandalone() && canInstall()) installArea.replaceChildren(h('button', { class: 'ld-install-btn', type: 'button', onclick: async () => { if ((await promptInstall()) === 'accepted') toast('Đã cài app'); paintInstall(); } }, h('span', { class: 'if-logo' }, icon('logo')), h('span', { class: 'if-text' }, h('b', {}, 'Cài app lên máy'), h('small', {}, 'Mở nhanh, học offline')), icon('download')));
     else installArea.replaceChildren();
   }
   window.addEventListener('install:changed', paintInstall);
   paintInstall();
 
-  const deco = (name, cls) => h('img', { class: ['deco', cls], src: `./art/deco/${name}.webp`, alt: '', 'aria-hidden': 'true', decoding: 'async' });
-  mount(root, h('div', { class: 'ld' },
-    deco('branch', 'ld-branch'),
-    deco('petals', 'ld-petal'), deco('petals', 'ld-petal p2'), deco('petals', 'ld-petal p3'),
-    // 1. Chữ 汉语 + lời nhắn + nút học
-    h('section', { class: 'ld-hero' },
-      h('div', { class: 'ld-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语')),
-      h('div', { class: 'ld-copy' },
-        h('h1', {}, 'Tự học tiếng Trung', h('br'), h('em', {}, 'mỗi ngày.')),
-        h('p', { class: 'ld-lead' }, started ? `Bạn đã học ${learned} từ. Thêm 15 phút hôm nay nhé!` : 'Tiếp thu mỗi bài học chỉ từ 15 phút.'),
-        h('div', { class: 'ld-cta' },
-          h('button', { class: 'btn primary big ld-go', type: 'button', onclick: start }, started ? 'Học tiếp' : 'Bắt đầu học', icon('chevron')),
-          installArea))),
-    // 2. Thẻ lật thử, đứng riêng
-    h('section', { class: 'ld-try ld-scene' },
-      deco('mountains', 'deco-mtn'), deco('pavilion', 'deco-pagoda'),
-      card),
-    // Tài khoản: đăng nhập để đồng bộ nhiều thiết bị (không bắt buộc).
-    (() => {
-      const acct = loadAccount();
-      if (acct) return h('section', { class: 'ld-acct signed' }, h('span', { class: 'avatar' }, (acct.username || '?')[0].toUpperCase()), h('div', { class: 'grow' }, h('b', {}, acct.username), h('small', {}, 'Đang đồng bộ giữa các thiết bị')), h('a', { class: 'btn tinted', href: '#/account' }, 'Tài khoản'));
-      return h('section', { class: 'ld-acct' }, h('h2', { class: 'ld-acct-title' }, 'Học trên nhiều thiết bị'), authCard(ctx, { register: query.auth === 'register' }));
-    })(),
-  ));
+  // ---------- tài khoản
+  const acct = loadAccount();
+  const wide = globalThis.matchMedia?.('(min-width: 900px)').matches;
+  const account = acct
+    ? h('section', { class: 'lp-acct signed' },
+        h('span', { class: 'avatar' }, (acct.username || '?')[0].toUpperCase()),
+        h('div', { class: 'grow' }, h('b', {}, acct.username), h('small', {}, 'Đang đồng bộ giữa các thiết bị')),
+        h('a', { class: 'btn tinted', href: '#/account' }, 'Tài khoản'))
+    : h('details', { class: 'lp-acct', open: !!query.auth || wide },
+        h('summary', {},
+          h('span', { class: 'lp-acct-ic' }, icon('cloudCheck')),
+          h('span', { class: 'grow' }, h('b', {}, 'Đăng nhập / Tạo tài khoản'), h('small', {}, 'Đồng bộ tiến độ trên nhiều thiết bị')),
+          h('span', { class: 'lp-acct-chev' }, icon('chevron'))),
+        authCard(ctx, { register: query.auth === 'register' }));
 
-  if (query.auth) requestAnimationFrame(() => root.querySelector('#auth')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
+  const deco = (name, cls) => h('img', { class: ['deco', cls], src: `./art/deco/${name}.webp`, alt: '', 'aria-hidden': 'true', decoding: 'async' });
+  mount(root, h('div', { class: 'lp' },
+    deco('branch', 'lp-branch'),
+    h('div', { class: 'lp-main' },
+      h('section', { class: 'lp-hero' },
+        h('div', { class: 'lp-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语')),
+        h('div', { class: 'lp-copy' },
+          h('h1', {}, 'Tự học tiếng Trung', h('br'), h('em', {}, 'mỗi ngày.')),
+          h('p', { class: 'lp-lead' }, started ? `Bạn đã học ${learned} từ. Thêm 15 phút hôm nay nhé!` : 'Tiếp thu mỗi bài học chỉ từ 15 phút.'))),
+      h('div', { class: 'lp-cta' },
+        h('button', { class: 'btn primary big lp-go', type: 'button', onclick: start }, started ? 'Học tiếp' : 'Bắt đầu học', icon('chevron')),
+        installArea),
+      h('section', { class: 'lp-scene' }, deco('mountains', 'lp-mtn'), deco('pavilion', 'lp-pavilion'), card)),
+    h('div', { class: 'lp-side' }, account)));
+
+  if (query.auth) requestAnimationFrame(() => root.querySelector('.lp-acct')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
   return () => { window.removeEventListener('install:changed', paintInstall); };
 }

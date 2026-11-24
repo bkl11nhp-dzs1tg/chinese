@@ -1,8 +1,8 @@
 // Service worker: học được khi mất mạng (mục 4.2).
 // - Trang (navigation): mạng trước, mất mạng thì dùng bản đã lưu.
-// - File tĩnh cùng nguồn và font Google: lưu cache khi tải lần đầu, sau đó dùng cache.
+// - File build có mã băm và font Google: cache trước. Ảnh/đồ họa/icon: mạng trước, mất mạng dùng cache.
 // Đổi VERSION khi cần xóa cache cũ.
-const VERSION = 'v3';
+const VERSION = 'v4';
 const CACHE = `chinese-study-${VERSION}`;
 const PRECACHE = ['./', './index.html', './manifest.webmanifest', './icons/icon.svg', './icons/icon-192.png'];
 
@@ -45,6 +45,16 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
+  // File không có mã băm trong tên (ảnh bài học, đồ họa, icon…): mạng trước để luôn nhận bản mới,
+  // mất mạng mới dùng bản đã lưu. File build có mã băm (/assets/…) không đổi nội dung → cache trước.
+  if (sameOrigin && !url.pathname.includes('/assets/')) {
+    e.respondWith(
+      fetch(req)
+        .then((res) => { if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); } return res; })
+        .catch(() => caches.match(req)),
+    );
+    return;
+  }
   e.respondWith(
     caches.match(req).then((hit) => hit || fetch(req).then((res) => {
       if (res.ok || res.type === 'opaque') {
