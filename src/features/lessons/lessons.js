@@ -76,6 +76,7 @@ export async function renderLesson(root, ctx, { params }) {
   const threshold = ctx.settings.pass_threshold;
   const cards = lesson.vocab_ids.map((id) => data.cardsById.get(id)).filter(Boolean);
   const audioUrl = await lessonAudioSrc(lesson.id);
+  const wbCount = (data.exercisesByLesson.get(lesson.id) || []).filter((e) => e.source === 'workbook' || String(e.id).includes('-wb')).length;
   const idx = data.lessons.indexOf(lesson);
   const prev = data.lessons[idx - 1];
   const next = data.lessons[idx + 1];
@@ -127,11 +128,11 @@ export async function renderLesson(root, ctx, { params }) {
         ? stepRow({ n: 2, iconName: 'lessons', title: 'Bài khóa', meta: `${textCount} câu · bấm từ để tra, nghe từng câu${readProg?.finished ? ' · đã đọc xong' : ''}`, done: !!readProg?.finished, href: `#/read/${encodeURIComponent(`lesson:${lesson.id}`)}` })
         : stepRow({ n: 2, iconName: 'lessons', title: 'Bài khóa', meta: 'Bài này chưa có bài khóa', href: `#/lesson/${encodeURIComponent(lesson.id)}` }),
       stepRow({ n: 3, iconName: 'sparkle', title: 'Ngữ pháp', meta: gpTotal ? `${gpDone.size}/${gpTotal} điểm đã hiểu` : 'Bài này không có điểm ngữ pháp', done: gpTotal > 0 && gpDone.size >= gpTotal, onclick: () => root.querySelector('#grammar')?.scrollIntoView({ behavior: 'smooth' }) }),
-      stepRow({ n: 4, iconName: 'pencil', title: 'Luyện tập', meta: st.best_score != null ? `Tốt nhất ${Math.round(st.best_score * 100)}%` : 'Trắc nghiệm, ghép cặp, điền từ, sắp xếp câu', done: st.best_score != null && st.best_score >= threshold, href: `#/exercise/${encodeURIComponent(lesson.id)}` }),
+      stepRow({ n: 4, iconName: 'pencil', title: 'Luyện tập', meta: [st.best_score != null ? `Tốt nhất ${Math.round(st.best_score * 100)}%` : 'Trắc nghiệm, ghép cặp, sắp xếp câu', wbCount ? `${wbCount} câu sách bài tập` : null].filter(Boolean).join(' · '), done: st.best_score != null && st.best_score >= threshold, href: `#/exercise/${encodeURIComponent(lesson.id)}` }),
       stepRow({ n: 5, iconName: 'trophy', title: 'Kiểm tra cuối bài', meta: st.test_best != null ? `Tốt nhất ${Math.round(st.test_best * 100)}% · ${progress?.test_attempts || 0} lần · đạt từ ${Math.round(threshold * 100)}%` : `Từ vựng + bài khóa · đạt từ ${Math.round(threshold * 100)}% để hoàn thành bài`, done: testPassed, href: `#/test/${encodeURIComponent(lesson.id)}` })),
     audioUrl
       ? [h('div', { class: 'section-title' }, 'Nghe bài (MP3 của sách)'),
-        h('div', { class: 'group card' }, h('audio', { controls: true, preload: 'metadata', src: audioUrl }), h('p', { class: 'muted small', style: { margin: '6px 0 0' } }, `File nghe của ${lesson.book}, bài ${lesson.unit ?? ''}`))]
+        audioPlayer(audioUrl, `${lesson.book} · Bài ${lesson.unit ?? ''}`)]
       : null,
 
     h('div', { class: 'section-title' }, `Từ vựng (${cards.length})`),
@@ -179,4 +180,35 @@ export async function renderLesson(root, ctx, { params }) {
       next ? h('a', { class: 'btn ghost', href: `#/lesson/${encodeURIComponent(next.id)}` }, `Bài ${next.unit ?? ''}`, icon('chevron')) : h('span')),
   )));
   return null;
+}
+
+/** Trình phát MP3 gọn, cùng tông màu app (thay thanh phát mặc định màu xám của trình duyệt). */
+function audioPlayer(src, label) {
+  const audio = new Audio();
+  audio.preload = 'metadata';
+  audio.src = src;
+  const fmt = (t) => (Number.isFinite(t) ? `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}` : '0:00');
+  const playBtn = h('button', { class: 'ap-play', type: 'button', 'aria-label': 'Phát' }, icon('play'));
+  const time = h('span', { class: 'ap-time' }, '0:00');
+  const seek = h('input', { class: 'ap-seek', type: 'range', min: 0, max: 1000, value: 0, step: 1, 'aria-label': 'Vị trí' });
+  const rateBtn = h('button', { class: 'ap-rate', type: 'button', 'aria-label': 'Tốc độ' }, '1×');
+  const RATES = [1, 0.75, 0.5, 1.25];
+  let ri = 0;
+  const paint = () => {
+    playBtn.replaceChildren(icon(audio.paused ? 'play' : 'pause'));
+    playBtn.setAttribute('aria-label', audio.paused ? 'Phát' : 'Dừng');
+    const d = audio.duration || 0;
+    seek.value = d ? Math.round((audio.currentTime / d) * 1000) : 0;
+    seek.style.setProperty('--p', `${seek.value / 10}%`);
+    time.textContent = `${fmt(audio.currentTime)} / ${fmt(d)}`;
+  };
+  playBtn.onclick = () => (audio.paused ? audio.play() : audio.pause());
+  rateBtn.onclick = () => { ri = (ri + 1) % RATES.length; audio.playbackRate = RATES[ri]; rateBtn.textContent = `${RATES[ri]}×`; };
+  seek.oninput = () => { if (audio.duration) audio.currentTime = (seek.value / 1000) * audio.duration; };
+  for (const ev of ['play', 'pause', 'timeupdate', 'loadedmetadata', 'ended']) audio.addEventListener(ev, paint);
+  window.addEventListener('hashchange', () => audio.pause(), { once: true });
+  paint();
+  return h('div', { class: 'audio-player' }, playBtn,
+    h('div', { class: 'ap-main' }, h('div', { class: 'ap-top' }, h('strong', {}, label), time), seek),
+    rateBtn);
 }

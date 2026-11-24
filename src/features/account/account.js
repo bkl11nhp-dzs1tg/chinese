@@ -20,8 +20,15 @@ export function ago(t, now = Date.now()) {
 export async function render(root, ctx, { query = {} } = {}) {
   const acct = loadAccount();
   if (acct) return renderSignedIn(root, ctx, acct);
+  // Chưa đăng nhập: hiện trang giới thiệu kèm form đăng nhập (không đổi địa chỉ để tránh chuyển trang chồng nhau).
+  document.body.classList.add('landing-mode');
+  const landing = await import('../landing/landing.js');
+  return landing.render(root, ctx, { query: { auth: query.mode === 'register' ? 'register' : 'login' } });
+}
 
-  let register = query.mode === 'register';
+/** Khối đăng nhập / tạo tài khoản (dùng trên trang giới thiệu). */
+export function authCard(ctx, { register: startRegister = false } = {}) {
+  let register = startRegister;
   let busy = false;
   const remembered = (() => { try { return localStorage.getItem(LAST_USER) || ''; } catch { return ''; } })();
 
@@ -106,13 +113,16 @@ export async function render(root, ctx, { query = {} } = {}) {
       await ctx.refreshSettings();
       toast(register ? 'Đã tạo tài khoản' : r.pulled ? `Đã tải ${r.pulled} bản ghi từ máy khác` : 'Đã đăng nhập');
       window.dispatchEvent(new Event('sync:changed'));
-      ctx.navigate(`account?r=${Date.now()}`);
+      await ctx.repo.saveSettings({ onboarded: true });
+      await ctx.refreshSettings();
+      ctx.navigate('today');
     } catch (err) {
       showErr(err.message, err.status);
     } finally {
       busy = false;
       submitBtn.classList.remove('loading');
-      if (document.body.contains(submitBtn)) setMode(register);
+      submitBtn.replaceChildren(register ? 'Tạo tài khoản' : 'Đăng nhập', icon('chevron'));
+      submitBtn.disabled = false;
     }
   } },
   title, tabs, fUser.wrap, fPass.wrap, fPass2.wrap, formErr, submitBtn);
@@ -124,20 +134,10 @@ export async function render(root, ctx, { query = {} } = {}) {
     else if (status === 401) { fPass.set(' ', true); passIn.select(); }
   }
 
-  const perks = [
-    ['cloudCheck', 'Tự đồng bộ', 'mỗi phút khi có mạng'],
-    ['repeat', 'Đủ tiến độ', 'thẻ, lịch ôn, điểm, thời gian'],
-    ['lock', 'An toàn', 'mật khẩu được mã hóa'],
-  ];
-  mount(root,
-    h('div', { class: 'auth-page' },
-      h('section', { class: 'auth-hero' },
-        artOr('sync'),
-        h('h1', {}, 'Học trên điện thoại,', h('br'), h('em', {}, 'tiếp tục trên máy tính.')),
-        h('ul', { class: 'perks' }, perks.map(([ic, a, b]) => h('li', {}, h('span', { class: 'perk-ic' }, icon(ic)), h('span', {}, h('b', {}, a), h('small', {}, b)))))),
-      h('section', { class: 'auth-card' }, form)));
   setMode(register);
-  if (!remembered) userIn.focus({ preventScroll: true });
+  return h('section', { class: 'auth-card', id: 'auth' },
+    h('img', { class: 'auth-cloud', src: './art/deco/cloud.webp', alt: '', 'aria-hidden': 'true' }),
+    form);
 }
 
 function renderSignedIn(root, ctx, acct) {
@@ -184,7 +184,7 @@ function renderSignedIn(root, ctx, acct) {
           window.dispatchEvent(new Event('sync:changed'));
           ctx.navigate(`account?r=${Date.now()}`);
         } }, icon('logout'), 'Đăng xuất')),
-      h('section', { class: 'auth-hero small' }, artOr('sync')),
+      h('section', { class: 'auth-hero small' }, h('img', { class: 'profile-scene', src: './art/deco/scene.webp', alt: '' })),
       h('details', { class: 'danger-zone' },
         h('summary', {}, icon('trash'), 'Xóa tài khoản'),
         h('p', { class: 'muted small' }, 'Xóa tài khoản và toàn bộ dữ liệu trên máy chủ. Dữ liệu trên máy này vẫn giữ.'),

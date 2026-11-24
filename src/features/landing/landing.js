@@ -5,6 +5,8 @@ import { h, mount, toast } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { cue } from '../../ui/feedback.js';
+import { authCard } from '../account/account.js';
+import { loadAccount } from '../../sync.js';
 import { canInstall, promptInstall, isStandalone } from '../../install.js';
 
 const DEMO = [
@@ -13,7 +15,7 @@ const DEMO = [
   { hanzi: '学习', pinyin: 'xuéxí', meaning: 'học tập' },
 ];
 
-export async function render(root, ctx) {
+export async function render(root, ctx, { query = {} } = {}) {
   const data = await ctx.loadAll();
   const learned = data.states.filter((s) => s.last_reviewed_at != null).length;
   const started = learned > 0;
@@ -62,7 +64,7 @@ export async function render(root, ctx) {
   const deco = (name, cls) => h('img', { class: ['deco', cls], src: `./art/deco/${name}.webp`, alt: '', 'aria-hidden': 'true', decoding: 'async' });
   mount(root, h('div', { class: 'ld' },
     deco('branch', 'ld-branch'),
-    deco('flower', 'ld-petal'), deco('flower', 'ld-petal p2'), deco('flower', 'ld-petal p3'),
+    deco('petals', 'ld-petal'), deco('petals', 'ld-petal p2'), deco('petals', 'ld-petal p3'),
     // 1. Chữ 汉语 + lời nhắn + nút học
     h('section', { class: 'ld-hero' },
       h('div', { class: 'ld-vert', 'aria-hidden': 'true' }, h('span', { class: 'han' }, '汉语')),
@@ -74,9 +76,16 @@ export async function render(root, ctx) {
           installArea))),
     // 2. Thẻ lật thử, đứng riêng
     h('section', { class: 'ld-try ld-scene' },
-      deco('mountains', 'deco-mtn'), deco('pagoda', 'deco-pagoda'),
+      deco('mountains', 'deco-mtn'), deco('pavilion', 'deco-pagoda'),
       card),
+    // Tài khoản: đăng nhập để đồng bộ nhiều thiết bị (không bắt buộc).
+    (() => {
+      const acct = loadAccount();
+      if (acct) return h('section', { class: 'ld-acct signed' }, h('span', { class: 'avatar' }, (acct.username || '?')[0].toUpperCase()), h('div', { class: 'grow' }, h('b', {}, acct.username), h('small', {}, 'Đang đồng bộ giữa các thiết bị')), h('a', { class: 'btn tinted', href: '#/account' }, 'Tài khoản'));
+      return h('section', { class: 'ld-acct' }, h('h2', { class: 'ld-acct-title' }, 'Học trên nhiều thiết bị'), authCard(ctx, { register: query.auth === 'register' }));
+    })(),
   ));
 
+  if (query.auth) requestAnimationFrame(() => root.querySelector('#auth')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
   return () => { window.removeEventListener('install:changed', paintInstall); };
 }

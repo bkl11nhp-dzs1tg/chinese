@@ -34,7 +34,6 @@ export async function render(root, ctx) {
   const activeSt = active ? data.statusById.get(active.id) : null;
   const d = new Date(now);
   const nothingToDo = due === 0 && suggestedNew === 0;
-  const backupHint = now - (s.last_export_at || 0) > 7 * 86400000 && data.states.length > 20;
   const doneLessons = data.lessons.filter((l) => data.statusById.get(l.id).status === 'done').length;
 
   const ring = scoreRing(goalFrac, { size: 112, stroke: 12, passed: goalFrac >= 1 ? true : null });
@@ -103,8 +102,6 @@ export async function render(root, ctx) {
         h('div', { class: 'skill-mini' }, SKILLS.map((k) => h('a', { class: ['skill-pill', `tone-${k.tone}`], href: `#/practice/${k.id}` },
           h('span', { class: 'sk-ic' }, icon(k.icon)), h('span', {}, k.label)))))),
 
-    backupHint ? h('p', { class: 'notice small mt' },
-      'Dữ liệu chỉ nằm trong trình duyệt này. Thỉnh thoảng nên ', h('a', { href: '#/settings' }, 'xuất bản sao lưu'), '.') : null,
   );
 }
 

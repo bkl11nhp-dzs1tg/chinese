@@ -3,7 +3,6 @@
 
 import { h, mount, pct } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
-import { columnChart, hbars } from '../../ui/chart.js';
 import { dayKey, dailySeries, timeTotals, streak, cardStatusCounts, weeklyAccuracy, accuracyByActivity, formatDuration, startOfDay, addDays } from '../../core/stats.js';
 import { scoreRing } from '../exercises/result-view.js';
 
@@ -85,30 +84,43 @@ export async function render(root, ctx) {
         h('div', { class: 'hm-head' }, WD.map((d) => h('span', {}, d))),
         h('div', { class: 'heatmap' }, cells))),
     h('div', { class: 'stats-layout' },
-      h('section', { class: 'card px-box' },
-        h('h2', {}, 'Phút học mỗi ngày'),
-        h('p', { class: 'muted small', style: { marginTop: '-6px' } }, '14 ngày gần nhất'),
-        columnChart(series.map((d) => ({ label: dm(d.day), value: minutes(d.ms), tip: `${dm(d.day)}: ${minutes(d.ms)} phút` })), { caption: 'Phút học', unit: ' phút' })),
-      h('section', { class: 'card px-box' },
-        h('h2', {}, 'Từ vựng'),
-        h('div', { class: 'stack-bar', role: 'img', 'aria-label': `Đã thuộc ${counts.mastered}, đang học ${counts.learning}, mới ${counts.new}` },
+      // 1. Phút học 7 ngày gần nhất: cột HTML, số phút trên đầu cột, thứ ở dưới.
+      (() => {
+        const last7 = series.slice(-7);
+        const mins = last7.map((d) => minutes(d.ms));
+        const max = Math.max(s.session_minutes, ...mins, 1);
+        const total = mins.reduce((a, b) => a + b, 0);
+        return h('section', { class: 'card px-box st-card' },
+          h('div', { class: 'st-head' }, h('h2', {}, 'Phút học 7 ngày'), h('span', { class: 'st-sum' }, h('b', {}, `${total}′`), ` · TB ${Math.round(total / 7)}′/ngày`)),
+          h('div', { class: 'days-chart', role: 'img', 'aria-label': last7.map((d, i) => `${dm(d.day)}: ${mins[i]} phút`).join(', ') },
+            h('i', { class: 'goal-line', style: { bottom: `${(s.session_minutes / max) * 100}%` } }),
+            last7.map((d, i) => {
+              const date = new Date(d.day);
+              const today = i === last7.length - 1;
+              return h('div', { class: ['dc-col', today ? 'today' : '', mins[i] >= s.session_minutes ? 'hit' : ''] },
+                h('span', { class: 'dc-val' }, mins[i] ? String(mins[i]) : ''),
+                h('span', { class: 'dc-bar', style: { height: `${Math.max(mins[i] ? 6 : 3, (mins[i] / max) * 100)}%` } }),
+                h('span', { class: 'dc-day' }, today ? 'Nay' : WD[(date.getDay() + 6) % 7]));
+            })));
+      })(),
+      // 2. Từ vựng: thanh tỉ lệ dày + 3 ô số.
+      h('section', { class: 'card px-box st-card' },
+        h('div', { class: 'st-head' }, h('h2', {}, 'Từ vựng'), h('span', { class: 'st-sum' }, h('b', {}, String(learnedTotal)), `/${data.cards.length} đã học`)),
+        h('div', { class: 'stack-bar big', role: 'img', 'aria-label': `Đã thuộc ${counts.mastered}, đang học ${counts.learning}, mới ${counts.new}` },
           seg(counts.mastered, 'sb-mastered'), seg(counts.learning, 'sb-learning'), seg(counts.new, 'sb-new')),
-        h('div', { class: 'sb-legend' },
-          legendItem('sb-mastered', 'Đã thuộc', counts.mastered),
-          legendItem('sb-learning', 'Đang học', counts.learning),
-          legendItem('sb-new', 'Mới', counts.new)),
-        h('p', { class: 'muted small' }, '“Đã thuộc” = khoảng ôn từ 21 ngày trở lên.'),
-        h('a', { class: 'btn tinted block', href: '#/cards', style: { marginTop: '6px' } }, icon('cards'), 'Xem thẻ'))),
-    h('section', { class: 'card px-box', style: { marginTop: '16px' } },
-      h('h2', {}, 'Tỷ lệ nhớ đúng theo tuần'),
-      hbars(weeks.map((w) => ({
-        label: `${dm(dayKey(w.from))}–${dm(dayKey(w.to - 1))}`,
-        value: w.rate ?? 0,
-        display: w.rate == null ? '—' : pct(w.rate),
-      })), { total: 1 }),
-      byAct.length ? h('table', { class: 'data', style: { marginTop: '12px' } },
-        h('thead', {}, h('tr', {}, h('th', {}, 'Hoạt động'), h('th', { class: 'num' }, 'Lượt'), h('th', { class: 'num' }, 'Đúng'))),
-        h('tbody', {}, byAct.map((a) => h('tr', {}, h('td', {}, ACTIVITY[a.activity] || a.activity), h('td', { class: 'num' }, a.total), h('td', { class: 'num' }, a.rate == null ? '—' : pct(a.rate)))))) : h('p', { class: 'muted' }, 'Chưa có lượt ôn nào.')),
+        h('div', { class: 'vocab-stats' },
+          [['sb-mastered', 'Đã thuộc', counts.mastered, 'mastered'], ['sb-learning', 'Đang học', counts.learning, 'learning'], ['sb-new', 'Chưa học', counts.new, 'new']]
+            .map(([cls, label, n, k]) => h('a', { class: 'vs-item', href: `#/cards?s=${k}` }, h('i', { class: cls }), h('b', {}, String(n)), h('small', {}, label)))),
+        h('a', { class: 'btn tinted block', href: '#/cards' }, icon('cards'), 'Xem thẻ')),
+    ),
+    // 3. Tỷ lệ nhớ đúng 4 tuần: mỗi tuần một cột phần trăm.
+    h('section', { class: 'card px-box st-card', style: { marginTop: '16px' } },
+      h('div', { class: 'st-head' }, h('h2', {}, 'Tỷ lệ nhớ đúng'), h('span', { class: 'st-sum' }, '4 tuần gần nhất')),
+      h('div', { class: 'acc-weeks' }, weeks.map((w, i) => h('div', { class: ['aw-col', w.rate == null ? 'empty' : w.rate >= 0.8 ? 'good' : w.rate >= 0.5 ? 'mid' : 'low', i === weeks.length - 1 ? 'now' : ''] },
+        h('div', { class: 'aw-track' }, h('span', { style: { height: `${Math.round((w.rate ?? 0) * 100)}%` } })),
+        h('b', {}, w.rate == null ? '–' : pct(w.rate)),
+        h('small', {}, i === weeks.length - 1 ? 'Tuần này' : `${dm(dayKey(w.from))}`)))),
+      byAct.length ? h('div', { class: 'act-chips' }, byAct.map((a) => h('span', { class: 'act-chip' }, ACTIVITY[a.activity] || a.activity, h('b', {}, a.rate == null ? '—' : pct(a.rate)), h('small', {}, `${a.total} lượt`)))) : null),
   );
 }
 

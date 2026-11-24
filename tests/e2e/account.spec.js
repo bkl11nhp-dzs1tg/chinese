@@ -6,10 +6,14 @@ const SYNC = 'http://localhost:8788';
 async function login(page, { register }) {
   await page.evaluate((u) => localStorage.setItem('chinese-study-sync-url', u), SYNC);
   await page.goto('/#/account');
-  if (register) await page.getByRole('button', { name: /Chưa có tài khoản/ }).click();
+  await expect(page.locator('#auth')).toBeVisible({ timeout: 15000 });
+  if (register) await page.getByRole('tab', { name: 'Tạo tài khoản' }).click();
   await page.getByLabel('Tên đăng nhập').fill('hocvien1');
-  await page.getByLabel('Mật khẩu').fill('matkhau123');
-  await page.getByRole('button', { name: register ? /Tạo tài khoản và đồng bộ/ : /Đăng nhập và đồng bộ/ }).click();
+  await page.getByLabel('Mật khẩu', { exact: true }).fill('matkhau123');
+  if (register) await page.getByLabel('Nhập lại mật khẩu').fill('matkhau123');
+  await page.locator('#auth button[type="submit"]').click();
+  await expect(page.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 15000 });
+  await page.goto('/#/account');
   await expect(page.getByRole('button', { name: /Đồng bộ ngay/ })).toBeVisible({ timeout: 15000 });
 }
 
@@ -29,7 +33,7 @@ test('đồng bộ tiến độ giữa 2 thiết bị', async ({ browser }) => {
   await A.getByRole('button', { name: 'Kết thúc buổi học' }).click();
   await A.goto('/#/account');
   await A.getByRole('button', { name: /Đồng bộ ngay/ }).click();
-  await expect(A.getByText(/Đã đồng bộ lúc/)).toBeVisible();
+  await expect(A.locator('.sync-result')).toBeVisible();
 
   // Thiết bị B: trình duyệt mới, dữ liệu trống
   const B = await (await browser.newContext({ viewport: { width: 1280, height: 800 } })).newPage();
@@ -47,8 +51,9 @@ test('đồng bộ tiến độ giữa 2 thiết bị', async ({ browser }) => {
   await C.goto('/#/today');
   await C.evaluate((u) => localStorage.setItem('chinese-study-sync-url', u), SYNC);
   await C.goto('/#/account');
+  await expect(C.locator('#auth')).toBeVisible({ timeout: 15000 });
   await C.getByLabel('Tên đăng nhập').fill('hocvien1');
-  await C.getByLabel('Mật khẩu').fill('saimatkhau');
-  await C.getByRole('button', { name: /Đăng nhập và đồng bộ/ }).click();
-  await expect(C.getByRole('alert')).toContainText('Sai tên đăng nhập hoặc mật khẩu');
+  await C.getByLabel('Mật khẩu', { exact: true }).fill('saimatkhau');
+  await C.locator('#auth button[type="submit"]').click();
+  await expect(C.locator('.form-alert')).toContainText('Sai tên đăng nhập hoặc mật khẩu');
 });

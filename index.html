@@ -13,9 +13,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet" />
     <title>Chinese</title>
+<style>
+      html, body { margin: 0; background: #fbf3e8; }
+      @media (prefers-color-scheme: dark) { html, body { background: #170c12; } .boot-name { color: #fdf0f4 !important; } .boot-bar { background: rgba(255,255,255,.12) !important; } }
+      .boot { min-height: 100dvh; display: grid; place-content: center; justify-items: center; gap: 14px; font-family: "Be Vietnam Pro", -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: radial-gradient(40vmax 40vmax at 10% 8%, rgba(255,207,218,.7), transparent 70%), radial-gradient(36vmax 36vmax at 92% 92%, rgba(251,230,200,.7), transparent 70%); }
+      .boot-logo { animation: boot-pop 1.2s cubic-bezier(.2,.9,.25,1.2) infinite alternate; filter: drop-shadow(0 12px 24px rgba(232,52,79,.35)); }
+      .boot-logo svg { display: block; border-radius: 18px; }
+      .boot-name { font-weight: 800; font-size: 26px; letter-spacing: -.01em; color: #2b1a1e; }
+      .boot-bar { width: 140px; height: 5px; border-radius: 99px; background: rgba(43,26,30,.1); overflow: hidden; }
+      .boot-bar i { display: block; width: 40%; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #ff7d93, #e8344f); animation: boot-slide 1.1s ease-in-out infinite; }
+      .boot-msg { min-height: 18px; font-size: 13px; color: #6f5a5c; }
+      @keyframes boot-pop { from { transform: translateY(0) scale(1); } to { transform: translateY(-6px) scale(1.04); } }
+      @keyframes boot-slide { from { transform: translateX(-110%); } to { transform: translateX(260%); } }
+      @media (prefers-reduced-motion: reduce) { .boot-logo, .boot-bar i { animation: none; } }
+    </style>
   </head>
   <body>
-    <div id="app"><p style="padding:24px">Đang mở…</p></div>
+    <div id="app">
+      <div class="boot" role="status" aria-label="Đang tải">
+        <div class="boot-logo"><svg viewBox="0 0 24 24" width="76" height="76"><rect x="1" y="1" width="22" height="22" rx="5" fill="#e8344f"/><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="3.6" fill="none" stroke="#ffd1dc" stroke-width="1.1"/><path d="M6.8 8.4h10.4v6.4H6.8z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/><path d="M12 4.8v14.6" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/></svg></div>
+        <div class="boot-name">Chinese</div>
+        <div class="boot-bar"><i></i></div>
+        <div class="boot-msg"></div>
+      </div>
+    </div>
     <noscript>App cần JavaScript để chạy.</noscript>
     <script type="module" src="/src/main.js"></script>
   </body>

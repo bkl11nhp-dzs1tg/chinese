@@ -67,7 +67,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       mode === 'test' ? (isLast ? 'Nộp bài' : 'Tiếp') : 'Kiểm tra');
     shell.setFooter(checkBtn);
     shell.main.replaceChildren(
-      h('div', { class: 'q-type' }, TYPE_LABEL[ex.type] || ''),
+      h('div', { class: 'q-type' }, TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
       ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
       body);
 

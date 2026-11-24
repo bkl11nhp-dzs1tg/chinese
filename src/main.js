@@ -75,7 +75,8 @@ async function boot() {
   const ctx = createContext(repo);
   await ctx.refreshSettings();
   setFeedbackEnabled(ctx.settings.sound_enabled);
-  if (!(await repo.count('cards'))) mount(appEl, h('div', { class: 'splash' }, icon('logo'), h('p', {}, 'Đang chuẩn bị nội dung học…')));
+  // Lần đầu: giữ màn tải trong index.html, chỉ thêm dòng trạng thái.
+  if (!(await repo.count('cards'))) { const m = appEl.querySelector('.boot-msg'); if (m) m.textContent = 'Đang chuẩn bị 30 bài học…'; }
   const sync = await syncContent(repo, ctx.settings);
   if (sync.status === 'installed' || sync.status === 'updated') await ctx.refreshSettings();
 
@@ -148,7 +149,7 @@ async function boot() {
         if (item.match.includes(m.name)) a.setAttribute('aria-current', 'page');
         else a.removeAttribute('aria-current');
       }
-      document.body.classList.toggle('landing-mode', m.name === 'welcome');
+      document.body.classList.toggle('landing-mode', m.name === 'welcome' || (m.name === 'account' && !loadAccount()));
       paintInstall();
       if (m.name === 'settings') settingsBtn.setAttribute('aria-current', 'page'); else settingsBtn.removeAttribute('aria-current');
     },
