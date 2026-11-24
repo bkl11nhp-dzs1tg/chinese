@@ -2,7 +2,7 @@
 // - Trang (navigation): mạng trước, mất mạng thì dùng bản đã lưu.
 // - File tĩnh cùng nguồn và font Google: lưu cache khi tải lần đầu, sau đó dùng cache.
 // Đổi VERSION khi cần xóa cache cũ.
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = `chinese-study-${VERSION}`;
 const PRECACHE = ['./', './index.html', './manifest.webmanifest', './icons/icon.svg', './icons/icon-192.png'];
 

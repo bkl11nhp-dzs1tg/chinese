@@ -53,7 +53,7 @@ export async function render(root, ctx) {
   const installArea = h('div', { class: 'ld-install' });
   function paintInstall() {
     if (isStandalone()) installArea.replaceChildren();
-    else if (canInstall()) installArea.replaceChildren(h('button', { class: 'ld-link', type: 'button', onclick: async () => { if ((await promptInstall()) === 'accepted') toast('Đã cài app.'); paintInstall(); } }, icon('download'), 'Cài app lên máy'));
+    else if (canInstall()) installArea.replaceChildren(h('button', { class: 'ld-install-btn', type: 'button', onclick: async () => { if ((await promptInstall()) === 'accepted') toast('Đã cài app.'); paintInstall(); } }, h('span', { class: 'if-logo' }, icon('logo')), h('span', { class: 'if-text' }, h('b', {}, 'Cài app lên máy'), h('small', {}, 'Mở nhanh, học offline')), icon('download')));
     else installArea.replaceChildren();
   }
   window.addEventListener('install:changed', paintInstall);

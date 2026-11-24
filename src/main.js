@@ -112,9 +112,11 @@ async function boot() {
   // Nút cài app nhỏ nổi ở góc (chỉ hiện khi trình duyệt cho cài; bấm × để ẩn).
   const FAB_KEY = 'chinese-install-fab-hidden';
   const fabHidden = () => { try { return localStorage.getItem(FAB_KEY) === '1'; } catch { return false; } };
-  const installBtn = h('button', { class: 'install-fab hidden', type: 'button', 'aria-label': 'Cài app lên máy', onclick: () => promptInstall().then(paintInstall) },
-    icon('download'), 'Cài app',
-    h('span', { class: 'x', role: 'button', 'aria-label': 'Ẩn', onclick: (e) => { e.stopPropagation(); try { localStorage.setItem(FAB_KEY, '1'); } catch { /* bỏ qua */ } paintInstall(); } }, icon('close')));
+  const hideFab = () => { try { localStorage.setItem(FAB_KEY, '1'); } catch { /* bỏ qua */ } paintInstall(); };
+  const installBtn = h('div', { class: 'install-fab hidden', role: 'group', 'aria-label': 'Cài app' },
+    h('button', { class: 'if-main', type: 'button', onclick: () => promptInstall().then(paintInstall) },
+      h('span', { class: 'if-logo' }, icon('logo')), h('span', { class: 'if-text' }, h('b', {}, 'Cài app'), h('small', {}, 'Mở nhanh, học offline')), icon('download')),
+    h('button', { class: 'if-close', type: 'button', 'aria-label': 'Ẩn', onclick: hideFab }, icon('close')));
   const paintInstall = () => installBtn.classList.toggle('hidden', !canInstall() || fabHidden() || document.body.classList.contains('landing-mode'));
   window.addEventListener('install:changed', paintInstall);
   const settingsBtn = h('a', { class: 'icon-btn', href: '#/settings', 'aria-label': 'Cài đặt', title: 'Cài đặt', dataset: { name: 'settings' } }, icon('settings'));

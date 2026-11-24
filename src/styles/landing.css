@@ -70,3 +70,8 @@
   .ld { padding-bottom: 170px; }
   .ld-try .demo-card { width: min(74%, 270px); aspect-ratio: 1 / 1; }
 }
+.ld-install-btn { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 340px; padding: 8px 14px 8px 8px; border-radius: 18px; border: 1px solid var(--glass-border); background: var(--glass-strong); color: var(--ink); font: inherit; text-align: left; cursor: pointer; box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transition: transform .15s; }
+.ld-install-btn:active { transform: scale(.98); }
+.ld-install-btn .if-text { flex: 1; }
+.ld-install-btn > svg { width: 22px; height: 22px; color: var(--accent-ink); }
+@media (max-width: 899px) { .ld-install-btn { max-width: none; } .ld-install { text-align: left; } }

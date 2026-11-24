@@ -1,53 +1,30 @@
-// Tạo icon PWA dạng pixel (chữ 中 trên nền đỏ) mà không cần thư viện ảnh: tự ghi PNG bằng zlib.
-// Chạy: npm run icons
-import { deflateSync } from 'node:zlib';
+// Tạo icon web/PWA từ đúng logo ở đầu trang (ô đỏ, viền hồng, chữ 中 trắng).
+// Chạy: npm run icons → public/icons/icon.svg, icon-192.png, icon-512.png, icon-maskable-512.png
+import { chromium } from '@playwright/test';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
-const GLYPH = ['...##...', '########', '#..##..#', '#..##..#', '########', '...##...', '...##...', '...##...'];
-const BG = [0xe8, 0x34, 0x4f];
-const FG = [0xff, 0xff, 0xff];
-const ACCENT = [0xff, 0xc4, 0xd2];
+const RED = '#e8344f';
+// Giống icon('logo') trong src/ui/icons.js (viewBox 24).
+const glyph = '<rect x="2.6" y="2.6" width="18.8" height="18.8" rx="3.6" fill="none" stroke="#ffd1dc" stroke-width="1.1"/>'
+  + '<path d="M6.8 8.4h10.4v6.4H6.8z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/>'
+  + '<path d="M12 4.8v14.6" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>';
 
-function crc32(buf) {
-  let c, crc = 0xffffffff;
-  for (let n = 0; n < buf.length; n++) {
-    c = (crc ^ buf[n]) & 0xff;
-    for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
-    crc = (crc >>> 8) ^ c;
-  }
-  return (crc ^ 0xffffffff) >>> 0;
-}
-function chunk(type, data) {
-  const len = Buffer.alloc(4); len.writeUInt32BE(data.length);
-  const td = Buffer.concat([Buffer.from(type), data]);
-  const crc = Buffer.alloc(4); crc.writeUInt32BE(crc32(td));
-  return Buffer.concat([len, td, crc]);
-}
-function png(size, maskable) {
-  // Lưới 12×12: glyph 8×8 ở giữa (vùng an toàn cho icon maskable), viền dưới màu nhấn.
-  const grid = 12, cell = size / grid, off = 2;
-  const raw = Buffer.alloc((size * 3 + 1) * size);
-  for (let y = 0; y < size; y++) {
-    raw[y * (size * 3 + 1)] = 0;
-    for (let x = 0; x < size; x++) {
-      const gx = Math.floor(x / cell) - off, gy = Math.floor(y / cell) - off;
-      let c = BG;
-      if (gx >= 0 && gx < 8 && gy >= 0 && gy < 8 && GLYPH[gy][gx] === '#') c = FG;
-      if (!maskable && Math.floor(y / cell) === grid - 1) c = ACCENT;
-      raw.set(c, y * (size * 3 + 1) + 1 + x * 3);
-    }
-  }
-  const ihdr = Buffer.alloc(13);
-  ihdr.writeUInt32BE(size, 0); ihdr.writeUInt32BE(size, 4);
-  ihdr[8] = 8; ihdr[9] = 2; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
-  return Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]), chunk('IHDR', ihdr), chunk('IDAT', deflateSync(raw)), chunk('IEND', Buffer.alloc(0))]);
-}
+// Favicon: ô bo góc như logo.
+const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="5" fill="${RED}"/>${glyph}</svg>`;
+// Icon cài app: phủ kín nền đỏ (hệ điều hành tự bo góc), logo ở giữa.
+const full = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="${RED}"/><g transform="translate(1.2 1.2) scale(0.9)">${glyph}</g></svg>`;
+// Maskable: logo thu nhỏ vào vùng an toàn 60% ở giữa.
+const maskable = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="${RED}"/><g transform="translate(4.8 4.8) scale(0.6)">${glyph}</g></svg>`;
 
 mkdirSync('public/icons', { recursive: true });
-writeFileSync('public/icons/icon-192.png', png(192, false));
-writeFileSync('public/icons/icon-512.png', png(512, false));
-writeFileSync('public/icons/icon-maskable-512.png', png(512, true));
-let d = '';
-GLYPH.forEach((row, y) => [...row].forEach((ch, x) => { if (ch === '#') d += `M${x + 2} ${y + 2}h1v1h-1z`; }));
-writeFileSync('public/icons/icon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" shape-rendering="crispEdges"><rect width="12" height="12" fill="#1f2a44"/><rect y="11" width="12" height="1" fill="#e0864a"/><path fill="#f4eddc" d="${d}"/></svg>\n`);
+writeFileSync('public/icons/icon.svg', favicon);
+
+const browser = await chromium.launch({ channel: 'chrome' });
+const page = await browser.newPage();
+for (const [name, svg, size] of [['icon-192.png', full, 192], ['icon-512.png', full, 512], ['icon-maskable-512.png', maskable, 512]]) {
+  await page.setViewportSize({ width: size, height: size });
+  await page.setContent(`<html><body style="margin:0">${svg.replace('<svg ', `<svg width="${size}" height="${size}" `)}</body></html>`);
+  await page.screenshot({ path: `public/icons/${name}`, omitBackground: true, clip: { x: 0, y: 0, width: size, height: size } });
+}
+await browser.close();
 console.log('Đã tạo icon trong public/icons/');

@@ -26,17 +26,24 @@ a.lesson-card:hover, .skill-card:hover, .word-tile:hover { transform: translateY
 
 /* ---------- nút cài app nổi ở góc ---------- */
 .install-fab {
-  position: fixed; right: 14px; bottom: calc(var(--tabbar-h) + 26px + env(safe-area-inset-bottom)); z-index: 30;
-  display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px 0 10px; border-radius: 999px; border: 0; cursor: pointer;
-  background: var(--accent); color: #fff; font: 800 14px var(--font); white-space: nowrap;
-  box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 40%, transparent); animation: fab-in .45s var(--ease-spring) both;
+  position: fixed; right: 12px; top: calc(68px + env(safe-area-inset-top)); z-index: 30;
+  display: flex; align-items: center; gap: 2px; padding: 6px 6px 6px 8px; border-radius: 18px;
+  background: var(--glass-strong); border: 1px solid var(--glass-border); color: var(--ink);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  box-shadow: 0 10px 28px rgba(90, 30, 45, .16); animation: fab-in .45s var(--ease-spring) both;
 }
-.install-fab svg { width: 18px; height: 18px; }
-.install-fab .x { margin-left: 2px; opacity: .8; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; }
-.install-fab .x svg { width: 14px; height: 14px; }
 .install-fab.hidden { display: none; }
-@keyframes fab-in { from { opacity: 0; transform: translateY(16px) scale(.9); } }
-@media (min-width: 900px) { .install-fab { bottom: 24px; right: 24px; } }
+.if-main { display: flex; align-items: center; gap: 10px; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; padding: 2px 6px 2px 0; text-align: left; }
+.if-logo svg { width: 36px; height: 36px; display: block; border-radius: 10px; }
+.if-text { display: grid; line-height: 1.15; }
+.if-text b { font-size: 15px; }
+.if-text small { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.if-main > svg { width: 22px; height: 22px; color: var(--accent-ink); margin-left: 4px; }
+.if-close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); display: grid; place-items: center; cursor: pointer; }
+.if-close:hover { background: var(--surface-2); }
+.if-close svg { width: 16px; height: 16px; }
+@keyframes fab-in { from { opacity: 0; transform: translateY(-10px) scale(.95); } }
+@media (min-width: 900px) { .install-fab { top: auto; bottom: 24px; right: 24px; } }
 body.focus-mode .install-fab { display: none; }
 
 /* ---------- bài khóa / bài đọc ---------- */
@@ -185,7 +192,7 @@ body.landing-mode .top-tabs, body.landing-mode .sync-btn, body.landing-mode [dat
 
 /* ---------- Tương phản: nền đậm cho mọi nút/nhãn chữ trắng (cả giao diện sáng và tối) ---------- */
 .btn.primary { background: linear-gradient(180deg, var(--accent-fill-top), var(--accent-fill)); }
-.seg-btn.on, .install-fab, .pl-play, .mark-tag, .badge.weak-badge, .mark-btn.weak.on, .lp-num.on { background: var(--accent-fill); color: #fff; }
+.seg-btn.on, .pl-play, .mark-tag, .badge.weak-badge, .mark-btn.weak.on, .lp-num.on { background: var(--accent-fill); color: #fff; }
 .mark-btn.weak.on { border-color: var(--accent-fill); }
 .node.done, .grades .q4, .grades .g-good, .pop-fx.good, .btn.good, .mark-tag.known { background: var(--good-fill); color: #fff; }
 .mark-btn.known.on { background: var(--good-fill); border-color: var(--good-fill); color: #fff; }
