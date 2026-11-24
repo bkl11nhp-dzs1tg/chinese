@@ -433,7 +433,7 @@ input[type="search"], input[type="text"], input[type="url"], input[type="passwor
 .today-hero > .deco-branch { top: 0; right: 0; width: 160px; transform: scaleX(-1); opacity: .35; }
 
 /* Đầu chương (Hán ngữ 1/2): cùng kiểu thẻ kính kem như phần còn lại của app */
-.unit-head { background: var(--glass-strong) !important; color: var(--ink) !important; border: 1px solid var(--glass-border) !important; box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); position: relative; overflow: hidden; }
+.unit-head { background: var(--glass-strong) !important; color: var(--ink) !important; border: none !important; box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); position: relative; overflow: hidden; }
 .unit-head::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--accent-fill); }
 .unit-head h2 { color: var(--ink) !important; }
 .unit-head .small, .unit-head .muted { color: var(--muted) !important; }
