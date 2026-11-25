@@ -569,3 +569,11 @@ body.focus-mode .page-wave { display: none; }
 .seg-dark .seg-btn::after { background: #fff; }
 /* Thanh chọn chế độ trong trang đọc, trên nền thẻ */
 .reader-tools .seg-btn.on { color: var(--accent-ink) !important; background: transparent !important; }
+/* Tab không giãn hết chiều ngang khi nằm cạnh tiêu đề trang */
+.seg { width: auto; }
+.large-title .seg, .large-title + .seg:not(.seg-fit) { width: auto; flex: none; }
+.large-title .seg .seg-btn { flex: none; }
+.large-title > div:first-child { min-width: 0; flex: 1 1 auto; }
+.large-title h1, .large-title .sub { white-space: nowrap; }
+.seg-fit:not(.large-title .seg) { width: 100%; }
+.unit-head .seg-dark { width: auto !important; }
