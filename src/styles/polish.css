@@ -612,3 +612,7 @@ body.focus-mode .page-wave { display: none; }
 :is(.gc-ic, .gc-play, .avatar, .icon-btn.tinted-round) .ic-color [style*="fill:var(--ic"] { fill: currentColor !important; fill-opacity: .25; } :is(.gc-ic, .gc-play) .ic-color [style*="stroke:var(--ic"] { stroke: currentColor !important; }
 /* Danh sách mục tiêu: mọi dòng cùng một kiểu ô */
 .plan-row .plan-ic, .plan-row.new .plan-ic, .plan-row.learning .plan-ic { background: var(--accent-soft) !important; color: var(--accent-ink) !important; }
+.mt-line { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin: 0 0 8px; font-size: 18px; }
+.mt-text { color: var(--ink); }
+.mt-src { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--surface-2); padding: 1px 7px; border-radius: 999px; margin-left: 6px; }
+.spinner.sm { width: 14px; height: 14px; border-width: 2px; border-color: var(--line-strong); border-top-color: var(--accent); }

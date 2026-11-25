@@ -17,6 +17,7 @@ import { lessonIdFromAudioName } from '../../core/audio.js';
 import { lessonAudioSrc } from '../../content.js';
 import { audioPlayer } from '../lessons/lessons.js';
 import { lyricsToParagraphs, youtubeId, fmtTime } from '../../core/media.js';
+import { translateZhVi } from '../../core/translate.js';
 
 
 const MODES = [
@@ -219,7 +220,8 @@ export async function renderReader(root, ctx, { params }) {
 
   // Video YouTube (bài hát / thoại phim): câu có mốc thời gian → bấm ▶ thì tua video tới đó.
   const ytId = youtubeId(doc.media);
-  const ytFrame = ytId ? h('iframe', { class: 'yt-frame', src: `https://www.youtube-nocookie.com/embed/${ytId}?enablejsapi=1&playsinline=1&rel=0`, title: doc.title, allow: 'autoplay; encrypted-media; picture-in-picture', allowfullscreen: true }) : null;
+  const firstT = flat.find((x) => x.t != null)?.t ?? 0;
+  const ytFrame = ytId ? h('iframe', { class: 'yt-frame', src: `https://www.youtube-nocookie.com/embed/${ytId}?enablejsapi=1&playsinline=1&rel=0${firstT > 0 ? `&start=${Math.floor(firstT)}` : ''}`, title: doc.title, allow: 'autoplay; encrypted-media; picture-in-picture', allowfullscreen: true }) : null;
   const ytCmd = (func, args = []) => ytFrame?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
   // Nhận thời gian phát hiện tại từ YouTube (để tô câu theo video, không phải tua từng câu).
   let ytTime = 0;
@@ -239,6 +241,18 @@ export async function renderReader(root, ctx, { params }) {
   if (ytFrame) { window.addEventListener('message', onYt); ytFrame.addEventListener('load', () => { ytListen(); setTimeout(ytListen, 800); }); }
   /** Câu ứng với thời điểm t của video. */
   const sentenceAt = (t) => { let k = -1; for (const x of timed) { if (x.t <= t + 0.15) k = x.idx; else break; } return k; };
+  /** Phát từ mốc t: tua + phát, rồi kiểm tra lại (lệnh tua gửi lúc player chưa sẵn sàng sẽ bị bỏ qua). */
+  function ytPlayFrom(t) {
+    ytCmd('seekTo', [t, true]);
+    ytCmd('playVideo');
+    let tries = 0;
+    const fix = setInterval(() => {
+      tries++;
+      if (Math.abs(ytTime - t) <= 2 || tries > 8) { clearInterval(fix); return; }
+      if (ytTime < t - 2 || ytTime > t + 6) ytCmd('seekTo', [t, true]);
+      ytCmd('playVideo');
+    }, 400);
+  }
   function followVideo() {
     if (!ytPlaying || !timed.length) return;
     const k = sentenceAt(ytTime);
@@ -251,8 +265,7 @@ export async function renderReader(root, ctx, { params }) {
   }
   function playSentence(st, rate = prefs.rate) {
     if (ytFrame && st.t != null) {
-      if (!ytPlaying || Math.abs(ytTime - st.t) > 1.2) ytCmd('seekTo', [st.t, true]);
-      ytCmd('playVideo');
+      if (!ytPlaying || Math.abs(ytTime - st.t) > 1.2) ytPlayFrom(st.t); else ytCmd('playVideo');
       stopSeg = () => ytCmd('pauseVideo');
       return Promise.resolve();
     }
@@ -302,6 +315,15 @@ export async function renderReader(root, ctx, { params }) {
       rerender();
     };
     const meaningInput = h('input', { type: 'text', placeholder: 'Nghĩa tiếng Việt', 'aria-label': 'Nghĩa của từ', autocomplete: 'off' });
+    const mtLine = h('div', { class: 'mt-line' }, h('span', { class: 'spinner sm' }), 'Đang dịch…');
+    if (!entries.length) {
+      translateZhVi(word).then((r) => {
+        if (r) {
+          mtLine.replaceChildren(h('strong', { class: 'mt-text' }, r.text), h('span', { class: 'mt-src' }, r.source === 'cache' ? 'đã dịch' : r.source));
+          if (!meaningInput.value) meaningInput.value = r.text;
+        } else mtLine.replaceChildren(h('span', { class: 'muted small' }, 'Chưa dịch được (cần mạng). Gõ nghĩa để lưu:'));
+      });
+    }
     const body = h('div', { class: 'inner' },
       h('div', { class: 'row between nowrap' },
         h('div', {},
@@ -312,7 +334,7 @@ export async function renderReader(root, ctx, { params }) {
         ? h('div', { style: { margin: '10px 0' } }, entries.map((c) => h('div', { style: { marginBottom: '4px' } },
             c.pos ? h('span', { class: 'badge', style: { marginRight: '6px' } }, c.pos) : null, h('strong', {}, c.meaning))))
         : h('div', { style: { margin: '10px 0' } },
-            h('p', { class: 'muted small', style: { margin: '0 0 6px' } }, 'Chưa có trong từ vựng của bạn (app không tự đoán nghĩa). Gõ nghĩa nếu muốn lưu:'),
+            mtLine,
             meaningInput),
       chars.length > 1 ? h('div', { class: 'chars' }, chars.map((ch, k) => {
         const single = dict.map.get(ch)?.[0];
@@ -356,8 +378,8 @@ export async function renderReader(root, ctx, { params }) {
     updatePlayBtn();
     if (ytFrame && timed.length) {
       const st = flat[current]?.t != null ? flat[current] : timed[0];
-      if (!ytPlaying || Math.abs(ytTime - st.t) > 1.2) ytCmd('seekTo', [st.t, true]);
-      ytCmd('playVideo');
+      // Đang dừng ở đầu video (chưa tới câu nào) → phát từ mốc câu đầu/câu đang chọn.
+      if (!ytPlaying || Math.abs(ytTime - st.t) > 1.2) ytPlayFrom(st.t); else ytCmd('playVideo');
       stopSeg = () => ytCmd('pauseVideo');
       return;
     }
@@ -436,7 +458,13 @@ export async function renderReader(root, ctx, { params }) {
 
   function sentenceEl(st, { big = false } = {}) {
     const showMeaning = mode === 'normal' && prefs.meaning;
-    const meaningEl = h('div', { class: ['s-meaning', showMeaning ? '' : 'hidden'] }, st.meaning || '');
+    const meaningEl = h('div', { class: ['s-meaning', showMeaning ? '' : 'hidden'] }, st.meaning || st.mt || '');
+    if (!st.meaning && !st.mt) {
+      // Câu chưa có bản dịch (vd bài hát tự thêm): dịch máy khi cần hiện nghĩa.
+      const fill = () => translateZhVi(st.hanzi).then((r) => { if (r) { st.mt = r.text; meaningEl.replaceChildren(r.text, h('span', { class: 'mt-src' }, 'dịch máy')); } });
+      if (showMeaning) fill();
+      else new MutationObserver((_, ob) => { if (!meaningEl.classList.contains('hidden')) { ob.disconnect(); fill(); } }).observe(meaningEl, { attributes: true, attributeFilter: ['class'] });
+    } else if (!st.meaning && st.mt) meaningEl.append(h('span', { class: 'mt-src' }, 'dịch máy'));
     const pyLine = mode !== 'plain' && mode !== 'quiz' && prefs.pinyin && !st.charPy && st.pinyin ? h('div', { class: 's-pinyin' }, st.pinyin) : null;
     let quizBox = null;
     if (mode === 'quiz') quizBox = quizEl(st);

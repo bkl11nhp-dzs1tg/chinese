@@ -3,6 +3,8 @@
 import { test, expect } from '@playwright/test';
 
 test('đọc bài: tra từ, lưu từ mới, nhớ vị trí, bài khóa', async ({ page }) => {
+  // Không gọi dịch vụ dịch thật trong test: giả lập mất mạng tới Google/MyMemory.
+  await page.route(/translate\.googleapis\.com|mymemory\.translated\.net/, (r) => r.abort());
   await page.goto('/#/today');
   await expect(page.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 20000 });
 
@@ -19,7 +21,7 @@ test('đọc bài: tra từ, lưu từ mới, nhớ vị trí, bài khóa', asyn
 
   // Từ chưa có trong từ vựng: không đoán nghĩa, tự điền rồi lưu
   await page.locator('.tok[data-word="同"]').first().click();
-  await expect(page.locator('.word-sheet.open')).toContainText('không tự đoán nghĩa');
+  await expect(page.locator('.word-sheet.open .mt-line')).toContainText('Chưa dịch được');
   await page.getByLabel('Nghĩa của từ').fill('cùng');
   await page.getByRole('button', { name: 'Lưu vào thẻ từ' }).click();
   await expect(page.locator('.tok.saved').first()).toBeVisible();

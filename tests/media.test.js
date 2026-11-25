@@ -24,3 +24,17 @@ describe('bài hát / thoại phim', () => {
     expect(youtubeId('https://example.com')).toBe(null);
   });
 });
+
+import { parseGoogle, translateZhVi } from '../src/core/translate.js';
+describe('dịch tự động', () => {
+  it('đọc kết quả Google Dịch', () => {
+    expect(parseGoogle([[['bạn cùng lớp', '同学', null]], null, 'zh-CN'])).toBe('bạn cùng lớp');
+    expect(parseGoogle([[['Xin chào. ', '你好。'], ['Tạm biệt', '再见']]])).toBe('Xin chào. Tạm biệt');
+  });
+  it('Google lỗi thì dùng MyMemory', async () => {
+    const fetchImpl = async (url) => (url.includes('googleapis')
+      ? new Response('x', { status: 429 })
+      : new Response(JSON.stringify({ responseData: { translatedText: 'trà' } })));
+    expect(await translateZhVi(`茶${Math.random()}`, { fetchImpl })).toMatchObject({ text: 'trà', source: 'MyMemory' });
+  });
+});
