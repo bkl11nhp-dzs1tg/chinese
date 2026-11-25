@@ -577,3 +577,11 @@ body.focus-mode .page-wave { display: none; }
 .large-title h1, .large-title .sub { white-space: nowrap; }
 .seg-fit:not(.large-title .seg) { width: 100%; }
 .unit-head .seg-dark { width: auto !important; }
+/* Bộ lọc trang Thẻ: ô tìm + tab "Theo bài / Theo chủ đề" cùng một hàng, chip bên dưới full chiều ngang */
+.filters { display: grid !important; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; }
+.filters > input[type="search"] { grid-column: 1; min-width: 0; }
+.filters > .group-seg { grid-column: 2; width: auto !important; }
+.filters > .group-seg .seg-btn { flex: none; }
+.filters > .chip-scroll { grid-column: 1 / -1; }
+.filters > .chip-scroll.hidden { display: none; }
+@media (max-width: 600px) { .filters { grid-template-columns: 1fr; } .filters > .group-seg { grid-column: 1; } }
