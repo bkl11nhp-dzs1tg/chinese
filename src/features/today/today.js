@@ -7,7 +7,6 @@ import { newLearnedToday, timeTotals, streak, formatDuration, startOfDay } from 
 import { newCardQueue, nextLessonStep } from '../../core/lessons.js';
 import { SKILLS } from '../../core/practice.js';
 import { dayKey, addDays } from '../../core/stats.js';
-import { scoreRing } from '../exercises/result-view.js';
 
 const WEEKDAYS = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
 
@@ -28,17 +27,13 @@ export async function render(root, ctx) {
   const suggestedNew = Math.min(quota, available);
   const totals = timeTotals(sessions, now);
   const st = streak(sessions, now);
-  const goalMs = s.session_minutes * 60000;
-  const goalFrac = Math.min(1, totals.today / goalMs);
   const active = data.active;
   const activeSt = active ? data.statusById.get(active.id) : null;
   const d = new Date(now);
   const nothingToDo = due === 0 && suggestedNew === 0;
   const doneLessons = data.lessons.filter((l) => data.statusById.get(l.id).status === 'done').length;
 
-  const ring = scoreRing(goalFrac, { size: 112, stroke: 12, passed: goalFrac >= 1 ? true : null });
-  ring.querySelector('text').textContent = `${Math.round(totals.today / 60000)}′`;
-  ring.setAttribute('aria-label', `Đã học ${Math.round(totals.today / 60000)} trên ${s.session_minutes} phút hôm nay`);
+  const ring = goalRing(totals.today / 60000, s.session_minutes);
 
   // Bước tiếp theo của bài đang học
   let lessonCta = null;
@@ -60,8 +55,8 @@ export async function render(root, ctx) {
       h('div', { class: 'row nowrap', style: { alignItems: 'center', gap: '16px' } },
         h('div', { style: { flex: 1 } },
           h('div', { class: 'q-type' }, 'Mục tiêu hôm nay'),
-          h('h2', { style: { margin: '4px 0' } }, nothingToDo ? 'Đã xong phần hôm nay' : `${due} thẻ ôn · ${suggestedNew} từ mới`),
-          h('p', { class: 'muted small', style: { margin: 0 } }, `${formatDuration(totals.today)} / ${s.session_minutes} phút`)),
+          h('h2', { style: { margin: '4px 0' } }, nothingToDo ? 'Xong hôm nay' : `${due} thẻ ôn · ${suggestedNew} từ mới`),
+          h('p', { class: ['muted', 'small', totals.today >= s.session_minutes * 60000 ? 'goal-hit' : ''], style: { margin: 0 } }, totals.today >= s.session_minutes * 60000 ? `Vượt mục tiêu ${s.session_minutes} phút` : `${formatDuration(totals.today)} / ${s.session_minutes} phút`)),
         ring),
       h('ul', { class: 'plan-list' },
         planRow('repeat', 'Ôn tập đến hạn', due ? `${due} thẻ` : 'không có', due ? 'learning' : ''),
@@ -138,4 +133,24 @@ function weekDays(sessions, now) {
     return h('span', { class: ['wd', on ? 'on' : '', t === today ? 'today' : '', t > today ? 'future' : ''], title: on ? 'Đã học' : '' },
       h('span', { class: 'wd-ic' }, on ? icon('flame') : String(new Date(t).getDate())), h('small', {}, lb));
   });
+}
+
+/** Vòng mục tiêu phút học: chữ số ở chính giữa (HTML), vượt mục tiêu thì thêm vòng thứ hai màu vàng + nhãn %. */
+function goalRing(min, goal) {
+  const m = Math.round(min);
+  const frac = goal ? min / goal : 0;
+  const S = 112, W = 12, r = (S - W) / 2, C = 2 * Math.PI * r;
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${S} ${S}`);
+  svg.setAttribute('class', 'gr-svg');
+  const arc = (cls, f, w = W, rr = r) => `<circle class="${cls}" cx="${S / 2}" cy="${S / 2}" r="${rr}" fill="none" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${2 * Math.PI * rr}" stroke-dashoffset="${2 * Math.PI * rr * (1 - Math.min(1, Math.max(0, f)))}" transform="rotate(-90 ${S / 2} ${S / 2})"${f <= 0.001 ? ' visibility="hidden"' : ''}/>`;
+  svg.innerHTML = `<circle class="gr-track" cx="${S / 2}" cy="${S / 2}" r="${r}" fill="none" stroke-width="${W}"/>`
+    + arc(frac >= 1 ? 'gr-done' : 'gr-val', Math.min(1, frac))
+    + (frac > 1 ? arc('gr-over', frac - 1, 5, r - W + 1) : '');
+  const over = frac >= 1;
+  return h('div', { class: ['goal-ring', over ? 'over' : ''], role: 'img', 'aria-label': `Đã học ${m} trên ${goal} phút hôm nay` },
+    svg,
+    h('div', { class: 'gr-label' }, h('b', {}, String(m)), h('small', {}, `/ ${goal} phút`)),
+    over ? h('span', { class: 'gr-badge' }, frac >= 1.05 ? `${Math.round(frac * 100)}%` : 'Đạt') : null);
 }

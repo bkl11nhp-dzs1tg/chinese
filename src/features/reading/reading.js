@@ -7,7 +7,7 @@
 // "Nghe cả bài": đọc lần lượt từng câu, tô sáng câu đang đọc (MP3 + audio_ms nếu có, không thì giọng máy).
 // Bấm vào một từ: bảng tra từ (chữ, pinyin, nghĩa, giải thích từng chữ, câu ví dụ) + Lưu từ mới / Đã biết.
 
-import { h, mount, toast } from '../../ui/dom.js';
+import { h, mount, toast, confirmDialog } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { speak, ttsSupported, RATES } from '../../ui/speech.js';
 import { cue } from '../../ui/feedback.js';
@@ -16,6 +16,8 @@ import { cardStatus } from '../../core/srs.js';
 import { lessonIdFromAudioName } from '../../core/audio.js';
 import { lessonAudioSrc } from '../../content.js';
 import { audioPlayer } from '../lessons/lessons.js';
+import { lyricsToParagraphs, youtubeId, fmtTime } from '../../core/media.js';
+
 
 const MODES = [
   { id: 'normal', label: 'Đọc' },
@@ -43,7 +45,7 @@ export function lessonToDoc(lesson) {
 
 export function readingToDoc(r) {
   return {
-    id: r.id, kind: 'reading', lesson_id: r.lesson_id, title: r.title,
+    id: r.id, kind: 'reading', media_kind: r.kind || 'text', media: r.media || null, user: r.source === 'user', lesson_id: r.lesson_id, title: r.title,
     subtitle: [r.level ? `Cấp ${r.level}` : null, r.source].filter(Boolean).join(' · '),
     audio_file: r.audio_file,
     paragraphs: r.paragraphs.map((p) => ({ id: p.id, title: '', sentences: p.sentences })),
@@ -51,27 +53,74 @@ export function readingToDoc(r) {
 }
 
 // ---------------------------------------------------------------- danh sách
-export async function renderList(root, ctx) {
-  const [readings, progress, lessons] = await Promise.all([ctx.repo.getAll('readings'), ctx.repo.getAll('reading_progress'), ctx.repo.lessonsOrdered()]);
+const KINDS = [
+  { id: 'song', label: 'Bài hát', icon: 'headphones' },
+  { id: 'film', label: 'Thoại phim', icon: 'play' },
+  { id: 'text', label: 'Bài đọc', icon: 'lessons' },
+];
+
+export async function renderList(root, ctx, { query = {} } = {}) {
+  const [allReadings, progress, lessons] = await Promise.all([ctx.repo.getAll('readings'), ctx.repo.getAll('reading_progress'), ctx.repo.lessonsOrdered()]);
+  const readings = allReadings.filter((r) => !r.deleted);
   const prog = new Map(progress.map((p) => [p.reading_id, p]));
   const count = (doc) => doc.paragraphs.reduce((n, p) => n + p.sentences.length, 0);
   const row = (doc) => {
     const p = prog.get(doc.id);
     const n = count(doc);
     const at = p ? Math.min(n, (p.last_sentence_index || 0) + 1) : 0;
+    const kind = KINDS.find((k) => k.id === doc.media_kind);
     return h('a', { class: 'row-link', href: `#/read/${encodeURIComponent(doc.id)}` },
-      h('span', { class: ['icon-box', p?.finished ? 'done' : ''] }, p?.finished ? icon('check') : icon('lessons')),
+      h('span', { class: ['icon-box', p?.finished ? 'done' : ''] }, p?.finished ? icon('check') : icon(kind?.icon || 'lessons')),
       h('span', { class: 'grow' },
         h('div', { class: 'title han' }, doc.title),
-        h('div', { class: 'meta' }, [doc.subtitle, `${n} câu`, p ? (p.finished ? 'Đã đọc xong' : `Đang ở câu ${at}`) : null].filter(Boolean).join(' · '))),
+        h('div', { class: 'meta' }, [doc.media ? 'có video' : null, `${n} câu`, p ? (p.finished ? 'Đã học xong' : `Đang ở câu ${at}`) : null].filter(Boolean).join(' · '))),
       icon('chevron'));
   };
+  let tab = KINDS.some((k) => k.id === query.k) ? query.k : 'song';
+  const tabs = h('div', { class: 'seg seg-fit', role: 'tablist' }, KINDS.map((k) => h('a', {
+    class: ['seg-btn', k.id === tab ? 'on' : ''], role: 'tab', href: `#/readings?k=${k.id}`, 'aria-selected': String(k.id === tab),
+  }, k.label)));
   const lessonDocs = lessons.filter((l) => l.texts?.length).map(lessonToDoc);
+  const mine = readings.filter((r) => (r.kind || 'text') === tab).map(readingToDoc);
+  const addBtn = tab !== 'text' ? h('button', { class: 'btn primary block', type: 'button', onclick: () => openAddDialog(ctx, tab) }, icon('plus'), tab === 'song' ? 'Thêm bài hát' : 'Thêm đoạn thoại phim') : null;
   mount(root,
-    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Đọc hiểu'), h('h1', {}, 'Bài đọc')), segmented('readings')),
-    readings.length ? [h('div', { class: 'section-title' }, 'Bài đọc của bạn'), h('div', { class: 'group' }, readings.map((r) => row(readingToDoc(r))))]
-      : h('p', { class: 'notice' }, 'Chưa có bài đọc riêng.'),
-    lessonDocs.length ? [h('div', { class: 'section-title' }, 'Bài khóa trong sách'), h('div', { class: 'group' }, lessonDocs.map(row))] : null);
+    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Đọc · Nghe · Hát'), h('h1', {}, 'Bài đọc')), segmented('readings')),
+    tabs,
+    addBtn ? h('div', { class: 'add-media' }, addBtn) : null,
+    mine.length ? h('div', { class: 'group' }, mine.map(row)) : h('p', { class: 'notice' }, tab === 'film' ? 'Chưa có đoạn thoại nào.' : tab === 'song' ? 'Chưa có bài hát nào.' : 'Chưa có bài đọc riêng.'),
+    tab === 'text' && lessonDocs.length ? [h('div', { class: 'section-title' }, 'Bài khóa trong sách'), h('div', { class: 'group' }, lessonDocs.map(row))] : null);
+}
+
+/** Hộp thêm bài hát / đoạn thoại: tên, link YouTube (không bắt buộc), lời tiếng Trung (mỗi dòng một câu, nhận mốc [mm:ss]), bản dịch. */
+function openAddDialog(ctx, kind) {
+  const title = h('input', { type: 'text', placeholder: kind === 'song' ? 'Tên bài hát' : 'Tên phim / cảnh', 'aria-label': 'Tên' });
+  const link = h('input', { type: 'url', placeholder: 'Link YouTube (không bắt buộc)', 'aria-label': 'Link YouTube', inputmode: 'url' });
+  const zh = h('textarea', { rows: 7, class: 'han', lang: 'zh-CN', placeholder: '[00:12.30] 第一句\n[00:15.80] 第二句', 'aria-label': 'Lời tiếng Trung' });
+  const vi = h('textarea', { rows: 5, placeholder: 'Câu 1\nCâu 2', 'aria-label': 'Bản dịch tiếng Việt' });
+  const err = h('p', { class: 'form-error' });
+  const dlg = h('dialog', { class: 'media-dialog' },
+    h('h2', {}, kind === 'song' ? 'Thêm bài hát' : 'Thêm đoạn thoại phim'),
+    h('label', { class: 'field' }, h('span', {}, 'Tên'), title),
+    h('label', { class: 'field' }, h('span', {}, 'Video'), link),
+    h('label', { class: 'field' }, h('span', {}, 'Lời tiếng Trung'), zh),
+    h('label', { class: 'field' }, h('span', {}, 'Bản dịch'), vi),
+    err,
+    h('div', { class: 'row nowrap' },
+      h('button', { class: 'btn', type: 'button', style: { flex: 1 }, onclick: () => dlg.close() }, 'Hủy'),
+      h('button', { class: 'btn primary', type: 'button', style: { flex: 1.4 }, onclick: async () => {
+        const paragraphs = lyricsToParagraphs(zh.value, vi.value);
+        if (!title.value.trim()) { err.textContent = 'Nhập tên'; title.focus(); return; }
+        if (!paragraphs.length) { err.textContent = 'Dán lời tiếng Trung'; zh.focus(); return; }
+        if (link.value.trim() && !youtubeId(link.value)) { err.textContent = 'Link YouTube chưa đúng'; link.focus(); return; }
+        const id = `U-${Date.now().toString(36)}`;
+        await ctx.repo.saveUserReading({ id, title: title.value.trim(), kind, media: link.value.trim() || null, level: null, source_note: '', lesson_id: null, audio_file: null, paragraphs });
+        dlg.close();
+        toast('Đã thêm');
+        ctx.navigate(`read/${encodeURIComponent(id)}`);
+      } }, 'Lưu')));
+  dlg.addEventListener('close', () => dlg.remove());
+  document.body.append(dlg);
+  dlg.showModal();
 }
 
 /** Thanh chọn Lộ trình | Bài đọc ở đầu tab Bài học. */
@@ -162,7 +211,16 @@ export async function renderReader(root, ctx, { params }) {
   }
   const voiceOf = (sp) => voiceMap.get(sp) || null;
 
+  // Video YouTube (bài hát / thoại phim): câu có mốc thời gian → bấm ▶ thì tua video tới đó.
+  const ytId = youtubeId(doc.media);
+  const ytFrame = ytId ? h('iframe', { class: 'yt-frame', src: `https://www.youtube-nocookie.com/embed/${ytId}?enablejsapi=1&playsinline=1&rel=0`, title: doc.title, allow: 'autoplay; encrypted-media; picture-in-picture', allowfullscreen: true }) : null;
+  const ytCmd = (func, args = []) => ytFrame?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
   function playSentence(st, rate = prefs.rate) {
+    if (ytFrame && st.t != null) {
+      const nx = flat[st.idx + 1];
+      ytCmd('seekTo', [st.t, true]); ytCmd('playVideo');
+      return new Promise((resolve) => { const ms = nx?.t != null ? Math.max(800, (nx.t - st.t) * 1000) : 4000; const tm = setTimeout(() => resolve(), ms); stopSeg = () => { clearTimeout(tm); ytCmd('pauseVideo'); resolve(); }; });
+    }
     return new Promise((resolve) => {
       if (audioEl && st.audio_ms) {
         audioEl.currentTime = st.audio_ms.start / 1000;
@@ -349,6 +407,7 @@ export async function renderReader(root, ctx, { params }) {
         }, icon('play')),
         h('div', { style: { flex: 1, minWidth: 0 } },
           st.speaker ? h('div', { class: ['speaker', 'han', [...st.speaker].length < 2 ? 'sr-only' : ''], style: { color: spkColor.get(st.speaker) } }, st.speaker) : null,
+          st.t != null && ytFrame ? h('span', { class: 's-time' }, fmtTime(st.t)) : null,
           h('span', { class: 'han zh', lang: 'zh-CN', style: { fontSize: `${big ? FONT[prefs.font] + 6 : FONT[prefs.font]}px` } }, st.tokens.map((t, k) => tokenEl(st, t, k))),
           pyLine, meaningEl, quizBox)));
   }
@@ -423,7 +482,7 @@ export async function renderReader(root, ctx, { params }) {
   const wordCount = new Set(flat.flatMap((x) => x.tokens.filter((t) => t.word && dict.map.has(t.text)).map((t) => t.text))).size;
   mount(root,
     h('div', { class: 'reader', style: { '--rd-font': `${FONT[prefs.font]}px` } },
-      h('a', { class: 'btn ghost back-link', href: doc.kind === 'lesson' ? `#/lesson/${encodeURIComponent(doc.lesson_id)}` : '#/readings' }, icon('back'), doc.kind === 'lesson' ? 'Bài học' : 'Bài đọc'),
+      h('a', { class: 'btn ghost back-link', href: doc.kind === 'lesson' ? `#/lesson/${encodeURIComponent(doc.lesson_id)}` : `#/readings?k=${doc.media_kind || 'text'}` }, icon('back'), doc.kind === 'lesson' ? 'Bài học' : 'Bài đọc'),
       h('header', { class: 'reader-hero px-box' },
         doc.lesson_id ? h('span', { class: 'rh-art' }, h('img', { src: `./lessons/${encodeURIComponent(doc.lesson_id)}.webp`, alt: '', onerror: (e) => e.target.parentNode.remove() })) : null,
         h('div', { class: 'rh-text' },
@@ -434,12 +493,14 @@ export async function renderReader(root, ctx, { params }) {
             h('span', {}, icon('lessons'), `${flat.length} câu`),
             h('span', {}, icon('cards'), `${wordCount} từ vựng`),
             audioEl ? h('span', {}, icon('headphones'), 'MP3 của sách') : null))),
+      ytFrame ? h('div', { class: 'yt-wrap' }, ytFrame) : null,
       h('div', { class: 'reader-tools' },
         modeBar,
-        h('div', { class: 'tool-chips' }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ lạ'), fontBtn)),
-      audioSrc && !flat.some((x) => x.audio_ms) ? h('div', { class: 'reader-mp3' }, audioPlayer(audioSrc, 'MP3 của sách')) : null,
+        h('div', { class: 'tool-chips' }, optBtn('pinyin', 'Pinyin'), optBtn('meaning', 'Nghĩa'), optBtn('highlight', 'Tô từ lạ'), fontBtn),
+        audioSrc && !flat.some((x) => x.audio_ms) ? h('div', { class: 'reader-mp3' }, audioPlayer(audioSrc, 'MP3 của sách')) : null),
       !audioEl && !ttsSupported() ? h('p', { class: 'notice small' }, 'Trình duyệt không hỗ trợ đọc giọng máy.') : null,
       h('div', { class: 'reader-card px-box' }, content),
+      doc.user ? h('button', { class: 'btn ghost block del-reading', type: 'button', onclick: async () => { if (!(await confirmDialog({ title: 'Xóa bài này?', ok: 'Xóa', danger: true }))) return; await repo.deleteReading(doc.id); toast('Đã xóa'); ctx.navigate(`readings?k=${doc.media_kind}`); } }, icon('trash'), 'Xóa bài') : null,
       h('div', { class: 'player-wrap' }, playerBar, rateBtn)),
     scrim, sheet);
   updatePlayBtn();

@@ -227,6 +227,11 @@ export function createRepo(db) {
 
   // Đánh dấu từ: 'known' (đã nhớ) hoặc 'weak' (chưa nhớ – tô màu khi gặp lại). null = bỏ đánh dấu.
   const markWord = (word, status, now = Date.now()) => (status ? put('known_words', { word, status, marked_at: now }) : del('known_words', word));
+  /** Lưu bài hát / thoại phim người học tự thêm (source = user, được đồng bộ). */
+  const saveUserReading = (r, now = Date.now()) => put('readings', { ...r, source: 'user', updated_at: now, created_at: r.created_at || now });
+  // Đánh dấu xóa (để lệnh xóa cũng đồng bộ sang máy khác), danh sách tự ẩn bài có deleted.
+  const deleteReading = async (id, now = Date.now()) => { const r = await get('readings', id); if (r) await put('readings', { ...r, deleted: true, updated_at: now }); };
+
   const markKnown = (word, now = Date.now()) => markWord(word, 'known', now);
   const unmarkKnown = (word) => del('known_words', word);
   /** Map từ → 'known' | 'weak' (bản ghi cũ không có status = đã nhớ). */
@@ -274,7 +279,7 @@ export function createRepo(db) {
     getSettings, saveSettings,
     recordReview, undoReview, makeDue,
     importContent, existingIds,
-    saveReadingProgress, recordLookup, lookupCount, saveReadingWord, markKnown, unmarkKnown, markWord, wordMarks,
+    saveReadingProgress, recordLookup, lookupCount, saveReadingWord, markKnown, unmarkKnown, markWord, wordMarks, saveUserReading, deleteReading,
     lessonsOrdered, saveLessonScore, saveTestScore, setLessonStatus, markGrammar,
     saveSession,
     putAudio, getAudio, audioIndex,

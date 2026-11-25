@@ -6,7 +6,7 @@ test('đọc bài: tra từ, lưu từ mới, nhớ vị trí, bài khóa', asyn
   await page.goto('/#/today');
   await expect(page.getByRole('heading', { name: 'Hôm nay' })).toBeVisible({ timeout: 20000 });
 
-  await page.goto('/#/readings');
+  await page.goto('/#/readings?k=text');
   await expect(page.getByText('Bài khóa trong sách')).toBeVisible();
   await page.screenshot({ path: 'test-results/screens/10-readings.png' });
   await page.getByRole('link', { name: /我的一天/ }).click();
@@ -27,7 +27,7 @@ test('đọc bài: tra từ, lưu từ mới, nhớ vị trí, bài khóa', asyn
   // Bấm ▶ câu thứ 2 → mở lại vẫn ở câu 2
   await page.locator('.sent[data-i="1"] .say').click();
   await page.waitForTimeout(1300);
-  await page.goto('/#/readings');
+  await page.goto('/#/readings?k=text');
   await page.goto('/#/read/R02');
   await expect(page.locator('.sent.active')).toHaveAttribute('data-i', '1');
   await page.getByRole('tab', { name: 'Từng câu' }).click();

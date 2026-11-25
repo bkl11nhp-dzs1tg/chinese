@@ -1,0 +1,35 @@
+{
+  "id": "S01",
+  "title": "两只老虎",
+  "kind": "song",
+  "level": 1,
+  "source": "Đồng dao Trung Quốc (dân gian)",
+  "media": null,
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "两只老虎，两只老虎，",
+          "meaning": "Hai con hổ, hai con hổ,"
+        },
+        {
+          "hanzi": "跑得快，跑得快。",
+          "meaning": "chạy nhanh lắm, chạy nhanh lắm."
+        },
+        {
+          "hanzi": "一只没有眼睛，",
+          "meaning": "Một con không có mắt,"
+        },
+        {
+          "hanzi": "一只没有尾巴，",
+          "meaning": "một con không có đuôi,"
+        },
+        {
+          "hanzi": "真奇怪！真奇怪！",
+          "meaning": "Lạ thật! Lạ thật!"
+        }
+      ]
+    }
+  ]
+}

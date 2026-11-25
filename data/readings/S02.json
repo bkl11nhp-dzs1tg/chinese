@@ -1,0 +1,48 @@
+{
+  "id": "S02",
+  "title": "茉莉花",
+  "kind": "song",
+  "level": 2,
+  "source": "Dân ca Giang Tô (dân gian)",
+  "media": null,
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "好一朵美丽的茉莉花，",
+          "meaning": "Ôi đóa hoa nhài đẹp xinh,"
+        },
+        {
+          "hanzi": "好一朵美丽的茉莉花，",
+          "meaning": "ôi đóa hoa nhài đẹp xinh,"
+        },
+        {
+          "hanzi": "芬芳美丽满枝桠，",
+          "meaning": "thơm ngát đẹp xinh đầy cành,"
+        },
+        {
+          "hanzi": "又香又白人人夸。",
+          "meaning": "vừa thơm vừa trắng, ai cũng khen."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "sentences": [
+        {
+          "hanzi": "让我来将你摘下，",
+          "meaning": "Để tôi hái em xuống,"
+        },
+        {
+          "hanzi": "送给别人家。",
+          "meaning": "tặng cho nhà người ta."
+        },
+        {
+          "hanzi": "茉莉花呀茉莉花。",
+          "meaning": "Hoa nhài ơi hoa nhài."
+        }
+      ]
+    }
+  ]
+}

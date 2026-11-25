@@ -10,7 +10,7 @@
 // GET  /api/sync/pull?cursor=N                         → {cursor, more, changes:[{store,key,data}]}
 // GET  /api/audio/L01.mp3?t=TOKEN                     → MP3 của sách từ R2 (chỉ người đã đăng nhập; hỗ trợ Range để tua)
 
-const STORES = new Set(['card_state', 'review_events', 'lesson_progress', 'study_sessions', 'settings', 'reading_progress', 'word_lookups', 'known_words', 'cards']);
+const STORES = new Set(['card_state', 'review_events', 'lesson_progress', 'study_sessions', 'settings', 'reading_progress', 'word_lookups', 'known_words', 'cards', 'readings']);
 const PBKDF2_ITER = 100000; // giới hạn tối đa của Workers
 const TOKEN_DAYS = 180;
 const MAX_PUSH = 2000;

@@ -16,6 +16,8 @@ export const SYNC_STORES = {
   known_words: { key: 'word' },
   // Chỉ thẻ người học tự tạo (lưu từ bài đọc); thẻ từ gói nội dung không đồng bộ.
   cards: { key: 'id', filter: (c) => c.source === 'reading' },
+  // Bài hát / thoại phim người học tự thêm.
+  readings: { key: 'id', filter: (r) => r.source === 'user' },
 };
 
 /** Cài đặt chỉ thuộc về một thiết bị, không đồng bộ. */
@@ -72,6 +74,8 @@ export function mergeRecord(store, local, remote) {
         finished: !!(local.finished || remote.finished),
       };
     }
+    case 'readings':
+      return (remote.updated_at ?? 0) > (local.updated_at ?? 0) ? remote : local;
     case 'cards':
       // Giữ bản có nghĩa (người học có thể đã gõ nghĩa trên một thiết bị).
       return local.meaning && !/^\(chưa có nghĩa/.test(local.meaning) ? local : remote;
