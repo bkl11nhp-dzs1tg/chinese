@@ -23,6 +23,7 @@ import * as practice from './features/practice/practice.js';
 import * as account from './features/account/account.js';
 import * as landing from './features/landing/landing.js';
 import { initInstall, canInstall, promptInstall } from './install.js';
+import { initZhKeyboard } from './ui/zh-keyboard.js';
 import { setFeedbackEnabled } from './ui/feedback.js';
 import { syncContent } from './content.js';
 import { loadAccount, syncNow } from './sync.js';
@@ -179,6 +180,7 @@ async function boot() {
   window.addEventListener('hashchange', () => { if (/^#\/(today|stats|lessons)/.test(location.hash)) autoSync(); });
 
   if (!ctx.settings.onboarded && !location.hash) location.replace('#/welcome');
+  initZhKeyboard(ctx);
   await router.start(main, ctx);
   autoSync({ force: true });
 }

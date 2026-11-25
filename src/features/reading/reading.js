@@ -47,7 +47,7 @@ export function lessonToDoc(lesson) {
 export function readingToDoc(r) {
   return {
     id: r.id, kind: 'reading', media_kind: r.kind || 'text', media: r.media || null, user: r.source === 'user', lesson_id: r.lesson_id, title: r.title,
-    subtitle: r.source === 'user' ? ({ song: 'Bài hát của bạn', film: 'Thoại phim của bạn' }[r.kind] || 'Bài đọc của bạn') : [r.level ? `Cấp ${r.level}` : null, r.source].filter(Boolean).join(' · '),
+    subtitle: r.source === 'user' ? ({ song: 'Bài hát của bạn', film: 'Hội thoại của bạn' }[r.kind] || 'Câu chuyện của bạn') : [r.level ? `Cấp ${r.level}` : null, r.source].filter(Boolean).join(' · '),
     audio_file: r.audio_file,
     paragraphs: r.paragraphs.map((p) => ({ id: p.id, title: '', sentences: p.sentences })),
   };
@@ -56,8 +56,8 @@ export function readingToDoc(r) {
 // ---------------------------------------------------------------- danh sách
 const KINDS = [
   { id: 'song', label: 'Bài hát', icon: 'headphones' },
-  { id: 'film', label: 'Thoại phim', icon: 'play' },
-  { id: 'text', label: 'Bài đọc', icon: 'lessons' },
+  { id: 'film', label: 'Hội thoại', icon: 'chat' },
+  { id: 'text', label: 'Câu chuyện', icon: 'books' },
 ];
 
 export async function renderList(root, ctx, { query = {} } = {}) {
@@ -83,12 +83,12 @@ export async function renderList(root, ctx, { query = {} } = {}) {
   }, k.label)));
   const lessonDocs = lessons.filter((l) => l.texts?.length).map(lessonToDoc);
   const mine = readings.filter((r) => (r.kind || 'text') === tab).map(readingToDoc);
-  const addBtn = tab !== 'text' ? h('button', { class: 'btn primary block', type: 'button', onclick: () => openAddDialog(ctx, tab) }, icon('plus'), tab === 'song' ? 'Thêm bài hát' : 'Thêm đoạn thoại phim') : null;
+  const addBtn = tab !== 'text' ? h('button', { class: 'btn primary block', type: 'button', onclick: () => openAddDialog(ctx, tab) }, icon('plus'), tab === 'song' ? 'Thêm bài hát' : 'Thêm hội thoại') : null;
   mount(root,
-    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Đọc · Nghe · Hát'), h('h1', {}, 'Bài đọc')), segmented('readings')),
+    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Nghe · Đọc · Hát'), h('h1', {}, 'Thư viện')), segmented('readings')),
     tabs,
     addBtn ? h('div', { class: 'add-media' }, addBtn) : null,
-    mine.length ? h('div', { class: 'group' }, mine.map(row)) : h('p', { class: 'notice' }, tab === 'film' ? 'Chưa có đoạn thoại nào.' : tab === 'song' ? 'Chưa có bài hát nào.' : 'Chưa có bài đọc riêng.'),
+    mine.length ? h('div', { class: 'group' }, mine.map(row)) : h('p', { class: 'notice' }, tab === 'film' ? 'Chưa có hội thoại nào.' : tab === 'song' ? 'Chưa có bài hát nào.' : 'Chưa có câu chuyện riêng.'),
     tab === 'text' && lessonDocs.length ? [h('div', { class: 'section-title' }, 'Bài khóa trong sách'), h('div', { class: 'group' }, lessonDocs.map(row))] : null);
 }
 
@@ -98,7 +98,7 @@ function openAddDialog(ctx, kind, existing = null) {
   const lrc = (t) => (t == null ? '' : `[${String(Math.floor(t / 60)).padStart(2, '0')}:${(t % 60).toFixed(2).padStart(5, '0')}] `);
   const zhInit = existing ? existing.paragraphs.map((p) => p.sentences.map((st) => `${lrc(st.t)}${st.speaker ? `${st.speaker}：` : ''}${st.hanzi}`).join('\n')).join('\n\n') : '';
   const viInit = existing ? existing.paragraphs.flatMap((p) => p.sentences.map((st) => st.meaning || '')).join('\n') : '';
-  const title = h('input', { type: 'text', placeholder: kind === 'song' ? 'Tên bài hát' : 'Tên phim / cảnh', 'aria-label': 'Tên', value: existing?.title || '' });
+  const title = h('input', { type: 'text', placeholder: kind === 'song' ? 'Tên bài hát' : 'Tên hội thoại / cảnh phim', 'aria-label': 'Tên', value: existing?.title || '' });
   const link = h('input', { type: 'url', placeholder: 'Link YouTube (không bắt buộc)', 'aria-label': 'Link YouTube', inputmode: 'url', value: existing?.media || '' });
   const zh = h('textarea', { rows: 7, class: 'han', lang: 'zh-CN', placeholder: '[00:12.30] 第一句\n[00:15.80] 第二句', 'aria-label': 'Lời tiếng Trung' });
   zh.value = zhInit;
@@ -106,7 +106,7 @@ function openAddDialog(ctx, kind, existing = null) {
   vi.value = viInit;
   const err = h('p', { class: 'form-error' });
   const dlg = h('dialog', { class: 'media-dialog' },
-    h('h2', {}, existing ? 'Sửa bài' : kind === 'song' ? 'Thêm bài hát' : 'Thêm đoạn thoại phim'),
+    h('h2', {}, existing ? 'Sửa bài' : kind === 'song' ? 'Thêm bài hát' : 'Thêm hội thoại'),
     h('label', { class: 'field' }, h('span', {}, 'Tên'), title),
     h('label', { class: 'field' }, h('span', {}, 'Video'), link),
     h('label', { class: 'field' }, h('span', {}, 'Lời tiếng Trung'), zh),
@@ -134,7 +134,7 @@ function openAddDialog(ctx, kind, existing = null) {
 export function segmented(active) {
   return h('div', { class: 'seg seg-fit seg-page', role: 'tablist' },
     h('a', { class: ['seg-btn', active === 'path' ? 'on' : ''], href: '#/lessons', role: 'tab', 'aria-selected': String(active === 'path') }, 'Lộ trình'),
-    h('a', { class: ['seg-btn', active === 'readings' ? 'on' : ''], href: '#/readings', role: 'tab', 'aria-selected': String(active === 'readings') }, 'Bài đọc'));
+    h('a', { class: ['seg-btn', active === 'readings' ? 'on' : ''], href: '#/readings', role: 'tab', 'aria-selected': String(active === 'readings') }, 'Thư viện'));
 }
 
 // ---------------------------------------------------------------- trang đọc
@@ -552,7 +552,7 @@ export async function renderReader(root, ctx, { params }) {
   const wordCount = new Set(flat.flatMap((x) => x.tokens.filter((t) => t.word && dict.map.has(t.text)).map((t) => t.text))).size;
   mount(root,
     h('div', { class: 'reader', style: { '--rd-font': `${FONT[prefs.font]}px` } },
-      h('a', { class: 'btn ghost back-link', href: doc.kind === 'lesson' ? `#/lesson/${encodeURIComponent(doc.lesson_id)}` : `#/readings?k=${doc.media_kind || 'text'}` }, icon('back'), doc.kind === 'lesson' ? 'Bài học' : 'Bài đọc'),
+      h('a', { class: 'btn ghost back-link', href: doc.kind === 'lesson' ? `#/lesson/${encodeURIComponent(doc.lesson_id)}` : `#/readings?k=${doc.media_kind || 'text'}` }, icon('back'), doc.kind === 'lesson' ? 'Bài học' : 'Thư viện'),
       h('header', { class: 'reader-hero px-box' },
         doc.lesson_id ? h('span', { class: 'rh-art' }, h('img', { src: `./lessons/${encodeURIComponent(doc.lesson_id)}.webp`, alt: '', onerror: (e) => e.target.parentNode.remove() })) : null,
         h('div', { class: 'rh-text' },
