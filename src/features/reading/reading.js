@@ -46,7 +46,7 @@ export function lessonToDoc(lesson) {
 export function readingToDoc(r) {
   return {
     id: r.id, kind: 'reading', media_kind: r.kind || 'text', media: r.media || null, user: r.source === 'user', lesson_id: r.lesson_id, title: r.title,
-    subtitle: [r.level ? `Cấp ${r.level}` : null, r.source].filter(Boolean).join(' · '),
+    subtitle: r.source === 'user' ? ({ song: 'Bài hát của bạn', film: 'Thoại phim của bạn' }[r.kind] || 'Bài đọc của bạn') : [r.level ? `Cấp ${r.level}` : null, r.source].filter(Boolean).join(' · '),
     audio_file: r.audio_file,
     paragraphs: r.paragraphs.map((p) => ({ id: p.id, title: '', sentences: p.sentences })),
   };
@@ -492,6 +492,9 @@ export async function renderReader(root, ctx, { params }) {
       h('header', { class: 'reader-hero px-box' },
         doc.lesson_id ? h('span', { class: 'rh-art' }, h('img', { src: `./lessons/${encodeURIComponent(doc.lesson_id)}.webp`, alt: '', onerror: (e) => e.target.parentNode.remove() })) : null,
         h('div', { class: 'rh-text' },
+          doc.user ? h('div', { class: 'rh-actions' },
+            h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Sửa bài', title: 'Sửa bài', onclick: async () => openAddDialog(ctx, doc.media_kind, await repo.get('readings', doc.id)) }, icon('pencil')),
+            h('button', { class: 'icon-btn danger-ic', type: 'button', 'aria-label': 'Xóa bài', title: 'Xóa bài', onclick: async () => { if (!(await confirmDialog({ title: 'Xóa bài này?', ok: 'Xóa', danger: true }))) return; await repo.deleteReading(doc.id); toast('Đã xóa'); ctx.navigate(`readings?k=${doc.media_kind}`); } }, icon('trash'))) : null,
           h('div', { class: 'q-type' }, doc.subtitle),
           h('h1', { class: 'han' }, doc.title),
           lessonRow?.title_vi ? h('p', { class: 'muted', style: { margin: 0 } }, lessonRow.title_vi) : null,
@@ -506,8 +509,6 @@ export async function renderReader(root, ctx, { params }) {
         audioSrc && !flat.some((x) => x.audio_ms) ? h('div', { class: 'reader-mp3' }, audioPlayer(audioSrc, 'MP3 của sách')) : null),
       !audioEl && !ttsSupported() ? h('p', { class: 'notice small' }, 'Trình duyệt không hỗ trợ đọc giọng máy.') : null,
       h('div', { class: 'reader-card px-box' }, content),
-      doc.user ? h('button', { class: 'btn tinted block', type: 'button', style: { marginTop: '12px' }, onclick: async () => openAddDialog(ctx, doc.media_kind, await repo.get('readings', doc.id)) }, icon('pencil'), 'Sửa bài') : null,
-      doc.user ? h('button', { class: 'btn ghost block del-reading', type: 'button', onclick: async () => { if (!(await confirmDialog({ title: 'Xóa bài này?', ok: 'Xóa', danger: true }))) return; await repo.deleteReading(doc.id); toast('Đã xóa'); ctx.navigate(`readings?k=${doc.media_kind}`); } }, icon('trash'), 'Xóa bài') : null,
       h('div', { class: 'player-wrap' }, playerBar, rateBtn)),
     scrim, sheet);
   updatePlayBtn();
