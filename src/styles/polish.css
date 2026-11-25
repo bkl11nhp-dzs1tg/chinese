@@ -596,3 +596,19 @@ body.focus-mode .page-wave { display: none; }
 .focus-top .count { position: relative; display: block; gap: 0; padding-left: 4px; line-height: 1.2; }
 .focus-top .count small { position: absolute; right: 0; top: calc(100% + 6px); white-space: nowrap; }
 .focus-top:has(.count small) { padding-bottom: 30px; }
+
+/* ---------- Icon màu: bảng màu pastel (sáng) / dịu (tối) ---------- */
+:root { --ic-yellow: #ffd45e; --ic-orange: #ff9a5a; --ic-pink: #ffc2d1; --ic-red: #ff6b81; --ic-blue: #a9d1ff; --ic-green: #9be0b4; --ic-violet: #d2c1ff; --ic-bg: var(--surface); --ic-check: #1f8a52; --ic-greenS: #1f8a52; --ic-blueS: #3a7bd5; --ic-redS: #e8344f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ic-yellow: #c9a23a; --ic-orange: #c2683a; --ic-pink: #9b4a63; --ic-red: #c43d55; --ic-blue: #3f6a9c; --ic-green: #3d8a5d; --ic-violet: #6b5aa6; --ic-check: #6fd296; --ic-greenS: #6fd296; --ic-blueS: #8fb0e8; --ic-redS: #ff7d93; } }
+:root[data-theme="dark"] { --ic-yellow: #c9a23a; --ic-orange: #c2683a; --ic-pink: #9b4a63; --ic-red: #c43d55; --ic-blue: #3f6a9c; --ic-green: #3d8a5d; --ic-violet: #6b5aa6; --ic-check: #6fd296; --ic-greenS: #6fd296; --ic-blueS: #8fb0e8; --ic-redS: #ff7d93; }
+/* Tab không chọn: màu nhạt hơn một chút; tab đang chọn: đủ màu */
+.tab:not([aria-current="page"]) .ic-color [style*="--ic-"] { opacity: .75; }
+/* Icon trên nền đặc (nút chính, avatar…) giữ đơn sắc để không rối */
+.btn.primary .ic-color [style*="fill:var(--ic"], .btn.good .ic-color [style*="fill:var(--ic"], .pl-play .ic-color [style*="fill:var(--ic"], .ap-play .ic-color [style*="fill:var(--ic"], .seg-btn.on .ic-color [style*="fill:var(--ic"] { fill: rgba(255,255,255,.28) !important; }
+/* Icon trong ô màu (plan, icon-box, kỹ năng, thống kê…): theo đúng màu ô, tô nhạt 1 tông – không pha nhiều màu */
+:is(.plan-ic, .icon-box, .sc-ic, .st-ic, .tile-ic, .perk-ic, .lp-acct-ic, .sk-ic, .icon-badge, .scope-opt .sc-ic, [class*="tone-"] .sk-ic, .mini-step) .ic-color [style*="fill:var(--ic"] { fill: currentColor !important; fill-opacity: .18; opacity: 1 !important; }
+:is(.plan-ic, .icon-box, .sc-ic, .st-ic, .tile-ic, .perk-ic, .lp-acct-ic, .sk-ic, .icon-badge, .mini-step) .ic-color [style*="stroke:var(--ic"] { stroke: currentColor !important; }
+.plan-row.new .plan-ic { background: color-mix(in srgb, var(--ic-yellow) 30%, var(--surface)); color: #a26a00; }
+:is(.gc-ic, .gc-play, .avatar, .icon-btn.tinted-round) .ic-color [style*="fill:var(--ic"] { fill: currentColor !important; fill-opacity: .25; } :is(.gc-ic, .gc-play) .ic-color [style*="stroke:var(--ic"] { stroke: currentColor !important; }
+/* Danh sách mục tiêu: mọi dòng cùng một kiểu ô */
+.plan-row .plan-ic, .plan-row.new .plan-ic, .plan-row.learning .plan-ic { background: var(--accent-soft) !important; color: var(--accent-ink) !important; }

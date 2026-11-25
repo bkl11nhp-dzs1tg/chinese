@@ -221,11 +221,40 @@ export async function renderReader(root, ctx, { params }) {
   const ytId = youtubeId(doc.media);
   const ytFrame = ytId ? h('iframe', { class: 'yt-frame', src: `https://www.youtube-nocookie.com/embed/${ytId}?enablejsapi=1&playsinline=1&rel=0`, title: doc.title, allow: 'autoplay; encrypted-media; picture-in-picture', allowfullscreen: true }) : null;
   const ytCmd = (func, args = []) => ytFrame?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
+  // Nhận thời gian phát hiện tại từ YouTube (để tô câu theo video, không phải tua từng câu).
+  let ytTime = 0;
+  let ytPlaying = false;
+  const timed = flat.filter((x) => x.t != null);
+  const onYt = (e) => {
+    if (!ytFrame || e.source !== ytFrame.contentWindow) return;
+    let d; try { d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch { return; }
+    if (d?.event === 'infoDelivery' && d.info) {
+      if (typeof d.info.currentTime === 'number') ytTime = d.info.currentTime;
+      if (typeof d.info.playerState === 'number') ytPlaying = d.info.playerState === 1;
+      if (typeof d.info.playerState === 'number' && timed.length) { playingAll = ytPlaying; updatePlayBtn(); }
+      followVideo();
+    } else if (d?.event === 'onReady' || d?.event === 'initialDelivery') ytListen();
+  };
+  const ytListen = () => ytFrame?.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 'reader' }), '*');
+  if (ytFrame) { window.addEventListener('message', onYt); ytFrame.addEventListener('load', () => { ytListen(); setTimeout(ytListen, 800); }); }
+  /** Câu ứng với thời điểm t của video. */
+  const sentenceAt = (t) => { let k = -1; for (const x of timed) { if (x.t <= t + 0.15) k = x.idx; else break; } return k; };
+  function followVideo() {
+    if (!ytPlaying || !timed.length) return;
+    const k = sentenceAt(ytTime);
+    if (k >= 0 && k !== current) {
+      setCurrent(k);
+      if (mode === 'step') renderStep();
+      updatePlayBtn();
+      root.querySelector(`.sent[data-i="${k}"]`)?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }
   function playSentence(st, rate = prefs.rate) {
     if (ytFrame && st.t != null) {
-      const nx = flat[st.idx + 1];
-      ytCmd('seekTo', [st.t, true]); ytCmd('playVideo');
-      return new Promise((resolve) => { const ms = nx?.t != null ? Math.max(800, (nx.t - st.t) * 1000) : 4000; const tm = setTimeout(() => resolve(), ms); stopSeg = () => { clearTimeout(tm); ytCmd('pauseVideo'); resolve(); }; });
+      if (!ytPlaying || Math.abs(ytTime - st.t) > 1.2) ytCmd('seekTo', [st.t, true]);
+      ytCmd('playVideo');
+      stopSeg = () => ytCmd('pauseVideo');
+      return Promise.resolve();
     }
     return new Promise((resolve) => {
       if (audioEl && st.audio_ms) {
@@ -325,6 +354,13 @@ export async function renderReader(root, ctx, { params }) {
   async function playAll() {
     playingAll = true;
     updatePlayBtn();
+    if (ytFrame && timed.length) {
+      const st = flat[current]?.t != null ? flat[current] : timed[0];
+      if (!ytPlaying || Math.abs(ytTime - st.t) > 1.2) ytCmd('seekTo', [st.t, true]);
+      ytCmd('playVideo');
+      stopSeg = () => ytCmd('pauseVideo');
+      return;
+    }
     const start = current >= flat.length - 1 ? 0 : current;
     for (let i = start; i < flat.length && playingAll; i++) {
       setCurrent(i);
@@ -523,6 +559,7 @@ export async function renderReader(root, ctx, { params }) {
     clearTimeout(saveTimer);
     repo.saveReadingProgress(doc.id, { last_sentence_index: current });
     window.removeEventListener('keydown', onKey);
+    window.removeEventListener('message', onYt);
     audioEl?.pause();
     return tracker.stop();
   };

@@ -1,3 +1,5 @@
+import { COLOR_PATHS } from './icons-color.js';
+
 // Icon nét mảnh 24×24, tự vẽ. Icon điều hướng có lớp tô (.tone) đậm lên khi đang chọn. Logo: con dấu chữ 中.
 
 const PATHS = {
@@ -78,7 +80,9 @@ export function icon(name, { title } = {}) {
     svg.setAttribute('stroke-width', '1.9');
     svg.setAttribute('stroke-linecap', 'round');
     svg.setAttribute('stroke-linejoin', 'round');
-    svg.innerHTML = PATHS[name] || PATHS.today;
+    svg.setAttribute('stroke-width', COLOR_PATHS[name] ? '1.7' : '1.9');
+    svg.innerHTML = COLOR_PATHS[name] || PATHS[name] || PATHS.today;
+    if (COLOR_PATHS[name]) svg.classList.add('ic-color');
   }
   if (title) {
     const t = document.createElementNS(ns, 'title');
