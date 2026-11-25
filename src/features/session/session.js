@@ -66,7 +66,7 @@ export async function render(root, ctx, { query }) {
   }
 
   const tracker = ctx.startTracking({ plan, kind: query.lesson ? 'lesson' : query.mode === 'review' ? 'review' : 'session' });
-  const shell = focusShell({ onClose: () => finish(true), closeLabel: 'Kết thúc buổi học' });
+  const shell = focusShell({ onClose: () => (finished ? ctx.navigate(backTo) : finish(true)), closeLabel: 'Kết thúc buổi học' });
   mount(root, shell.el);
   const steps = [...plan.steps];
   const relearnCount = new Map();
