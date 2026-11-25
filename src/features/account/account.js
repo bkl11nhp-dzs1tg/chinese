@@ -167,31 +167,35 @@ function renderSignedIn(root, ctx, acct) {
   const onSync = () => { when.textContent = ago(loadAccount()?.last_sync_at); };
   window.addEventListener('sync:changed', onSync);
 
+  const logoutBtn = h('button', { class: 'btn block', type: 'button', onclick: async () => {
+    if (!(await confirmDialog({ title: 'Đăng xuất?', body: 'Dữ liệu học vẫn giữ trên máy này; chỉ ngừng đồng bộ.', ok: 'Đăng xuất' }))) return;
+    await signOut(ctx.repo);
+    toast('Đã đăng xuất');
+    window.dispatchEvent(new Event('sync:changed'));
+    ctx.navigate(`account?r=${Date.now()}`);
+  } }, icon('logout'), 'Đăng xuất');
+  const danger = h('details', { class: 'danger-zone' },
+    h('summary', {}, icon('trash'), 'Xóa tài khoản'),
+    h('p', { class: 'muted small' }, 'Xóa tài khoản và toàn bộ dữ liệu trên máy chủ. Dữ liệu trên máy này vẫn giữ.'),
+    h('button', { class: 'btn danger block', type: 'button', onclick: async () => {
+      const pass = h('input', { type: 'password', autocomplete: 'current-password', 'aria-label': 'Mật khẩu', placeholder: 'Mật khẩu' });
+      if (!(await confirmDialog({ title: 'Xóa tài khoản?', body: h('div', {}, h('p', {}, 'Nhập mật khẩu để xác nhận. Không thể hoàn tác.'), pass), ok: 'Xóa vĩnh viễn', danger: true }))) return;
+      try { await deleteAccount(ctx.repo, pass.value); toast('Đã xóa tài khoản'); window.dispatchEvent(new Event('sync:changed')); ctx.navigate(`account?r=${Date.now()}`); } catch (e) { toast(e.message); }
+    } }, 'Xóa vĩnh viễn'));
+
+  // Một thẻ duy nhất ở giữa: ảnh bìa → avatar + tên → trạng thái đồng bộ → nút → xóa tài khoản (gập).
   mount(root,
-    h('div', { class: 'auth-page signed' },
-      h('section', { class: 'auth-card profile' },
+    h('div', { class: 'large-title' }, h('h1', {}, 'Tài khoản')),
+    h('section', { class: 'acct-card' },
+      h('div', { class: 'acct-cover' }, h('img', { src: './art/deco/scene.webp', alt: '' })),
+      h('div', { class: 'acct-body' },
         h('div', { class: 'profile-head' },
           h('span', { class: 'avatar' }, (acct.username || '?')[0].toUpperCase()),
           h('div', { class: 'grow' }, h('strong', { class: 'p-name' }, acct.username), h('div', { class: 'p-status' }, statusDot, statusText))),
         h('div', { class: 'sync-box' },
           h('div', { class: 'sb-row' }, icon('cloudCheck'), h('span', { class: 'grow' }, 'Lần đồng bộ gần nhất'), h('b', {}, when)),
           result),
-        syncBtn,
-        h('button', { class: 'btn block', type: 'button', onclick: async () => {
-          if (!(await confirmDialog({ title: 'Đăng xuất?', body: 'Dữ liệu học vẫn giữ trên máy này; chỉ ngừng đồng bộ.', ok: 'Đăng xuất' }))) return;
-          await signOut(ctx.repo);
-          toast('Đã đăng xuất');
-          window.dispatchEvent(new Event('sync:changed'));
-          ctx.navigate(`account?r=${Date.now()}`);
-        } }, icon('logout'), 'Đăng xuất')),
-      h('section', { class: 'auth-hero small' }, h('img', { class: 'profile-scene', src: './art/deco/scene.webp', alt: '' })),
-      h('details', { class: 'danger-zone' },
-        h('summary', {}, icon('trash'), 'Xóa tài khoản'),
-        h('p', { class: 'muted small' }, 'Xóa tài khoản và toàn bộ dữ liệu trên máy chủ. Dữ liệu trên máy này vẫn giữ.'),
-        h('button', { class: 'btn danger block', type: 'button', onclick: async () => {
-          const pass = h('input', { type: 'password', autocomplete: 'current-password', 'aria-label': 'Mật khẩu', placeholder: 'Mật khẩu' });
-          if (!(await confirmDialog({ title: 'Xóa tài khoản?', body: h('div', {}, h('p', {}, 'Nhập mật khẩu để xác nhận. Không thể hoàn tác.'), pass), ok: 'Xóa vĩnh viễn', danger: true }))) return;
-          try { await deleteAccount(ctx.repo, pass.value); toast('Đã xóa tài khoản'); window.dispatchEvent(new Event('sync:changed')); ctx.navigate(`account?r=${Date.now()}`); } catch (e) { toast(e.message); }
-        } }, 'Xóa vĩnh viễn'))));
+        h('div', { class: 'acct-actions' }, syncBtn, logoutBtn),
+        danger)));
   return () => { clearInterval(tick); window.removeEventListener('sync:changed', onSync); };
 }
