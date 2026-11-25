@@ -47,7 +47,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
   let keyHandler = null;
   const onKey = (e) => keyHandler?.(e);
   window.addEventListener('keydown', onKey);
-  const progress = onProgress || ((k, n) => shell.setProgress(k / n, `${Math.min(k + 1, n)}/${n}`));
+  const progress = onProgress || ((k, n, done = 0) => shell.setProgress((k + done) / n, `${Math.min(k + 1, n)}/${n}`));
 
   function next() {
     if (i >= exercises.length) {
@@ -86,6 +86,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'compose' ? !!response.ok
         : grade(ex.type === 'listen' ? { ...ex, type: 'choose' } : ex, response);
       results.push({ question: ex, correct: ok, response });
+      progress(i, exercises.length, 1); // trả lời xong: thanh chạy lên ngay
       onAnswer?.(ex, ok, response);
       body.querySelectorAll('button, input').forEach((b) => { b.disabled = true; });
       if (mode === 'test') { i++; next(); return; }

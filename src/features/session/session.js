@@ -99,7 +99,7 @@ export async function render(root, ctx, { query }) {
   let current = null;
   let finished = false;
 
-  function updateProgress() { shell.setProgress(idx / steps.length, `${Math.min(idx + 1, steps.length)}/${steps.length}`); }
+  function updateProgress(_k, _n, done = 0) { shell.setProgress((idx + (_n ? ((_k || 0) + done) / _n : 0)) / steps.length, `${Math.min(idx + 1, steps.length)}/${steps.length}`); }
 
   async function showStep() {
     current?.destroy?.();
@@ -152,7 +152,7 @@ export async function render(root, ctx, { query }) {
       const { exercises, lessonCards } = lessonExercises(l, data, { limit: step.count });
       const wrongCards = new Set();
       current = exerciseRunner({
-        shell, exercises, mode: 'practice', rate: s.tts_rate, onProgress: () => updateProgress(),
+        shell, exercises, mode: 'practice', rate: s.tts_rate, onProgress: (k, n, done) => updateProgress(k, n, done),
         onAnswer: async (ex, ok) => {
           results.push(ok);
           if (!ok) relatedCardIds(ex, lessonCards).forEach((id) => wrongCards.add(id));

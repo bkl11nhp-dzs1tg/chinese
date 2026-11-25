@@ -28,7 +28,8 @@ export function focusShell({ onClose, closeLabel = 'Thoát' } = {}) {
   return {
     el, main, footer,
     setProgress(frac, label = '') {
-      const pct = Math.max(0, Math.min(1, frac)) * 100;
+      // Luôn hiện một đoạn ngắn ở câu đầu để thấy rõ là thanh tiến độ.
+      const pct = frac > 0 || label ? Math.max(5, Math.min(1, frac) * 100) : 0;
       progress.style.width = `${pct}%`;
       bar.setAttribute('aria-valuenow', Math.round(pct));
       count.textContent = label;
