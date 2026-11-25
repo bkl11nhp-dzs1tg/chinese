@@ -1,0 +1,52 @@
+{
+  "id": "S06",
+  "title": "送别",
+  "kind": "song",
+  "level": 3,
+  "source": "Lý Thúc Đồng (1915), lời đã thuộc phạm vi công cộng",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "长亭外，古道边，",
+          "meaning": "Ngoài trường đình, bên đường xưa,"
+        },
+        {
+          "hanzi": "芳草碧连天。",
+          "meaning": "cỏ thơm xanh nối liền chân trời."
+        },
+        {
+          "hanzi": "晚风拂柳笛声残，",
+          "meaning": "Gió chiều lướt liễu, tiếng sáo tàn,"
+        },
+        {
+          "hanzi": "夕阳山外山。",
+          "meaning": "nắng chiều núi ngoài núi."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "sentences": [
+        {
+          "hanzi": "天之涯，地之角，",
+          "meaning": "Nơi chân trời, nơi góc bể,"
+        },
+        {
+          "hanzi": "知交半零落。",
+          "meaning": "bạn tri âm nửa đã tản mát."
+        },
+        {
+          "hanzi": "一壶浊酒尽余欢，",
+          "meaning": "Một bầu rượu đục cạn chút vui còn lại,"
+        },
+        {
+          "hanzi": "今宵别梦寒。",
+          "meaning": "đêm nay giấc mộng chia ly lạnh lẽo."
+        }
+      ]
+    }
+  ],
+  "media": null
+}

@@ -1,0 +1,31 @@
+{
+  "id": "S05",
+  "title": "春晓",
+  "kind": "song",
+  "level": 2,
+  "source": "Thơ Mạnh Hạo Nhiên (đời Đường), thường được phổ nhạc",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "春眠不觉晓，",
+          "meaning": "Giấc xuân không biết trời đã sáng,"
+        },
+        {
+          "hanzi": "处处闻啼鸟。",
+          "meaning": "khắp nơi nghe tiếng chim hót."
+        },
+        {
+          "hanzi": "夜来风雨声，",
+          "meaning": "Đêm qua tiếng mưa gió,"
+        },
+        {
+          "hanzi": "花落知多少。",
+          "meaning": "hoa rụng biết bao nhiêu."
+        }
+      ]
+    }
+  ],
+  "media": null
+}

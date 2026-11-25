@@ -1,0 +1,45 @@
+{
+  "id": "F01",
+  "title": "机场送别",
+  "kind": "film",
+  "level": 2,
+  "source": "Cảnh tự soạn theo kiểu phim: tiễn bạn ở sân bay",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "你真的要走了吗？",
+          "meaning": "Bạn thật sự phải đi rồi sao?",
+          "speaker": "玛丽"
+        },
+        {
+          "hanzi": "是啊，飞机十点起飞。",
+          "meaning": "Ừ, máy bay cất cánh lúc mười giờ.",
+          "speaker": "大卫"
+        },
+        {
+          "hanzi": "到了以后给我打电话。",
+          "meaning": "Đến nơi thì gọi điện cho mình nhé.",
+          "speaker": "玛丽"
+        },
+        {
+          "hanzi": "好，我一定给你打电话。",
+          "meaning": "Được, nhất định mình sẽ gọi cho bạn.",
+          "speaker": "大卫"
+        },
+        {
+          "hanzi": "一路平安！",
+          "meaning": "Thượng lộ bình an!",
+          "speaker": "玛丽"
+        },
+        {
+          "hanzi": "谢谢你。明年见！",
+          "meaning": "Cảm ơn bạn. Năm sau gặp lại!",
+          "speaker": "大卫"
+        }
+      ]
+    }
+  ],
+  "media": null
+}

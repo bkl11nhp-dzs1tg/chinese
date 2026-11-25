@@ -1,0 +1,31 @@
+{
+  "id": "S03",
+  "title": "祝你生日快乐",
+  "kind": "song",
+  "level": 1,
+  "source": "Bài hát chúc mừng sinh nhật (lời tiếng Trung phổ biến)",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "祝你生日快乐，",
+          "meaning": "Chúc bạn sinh nhật vui vẻ,"
+        },
+        {
+          "hanzi": "祝你生日快乐，",
+          "meaning": "chúc bạn sinh nhật vui vẻ,"
+        },
+        {
+          "hanzi": "祝你幸福，祝你健康，",
+          "meaning": "chúc bạn hạnh phúc, chúc bạn khỏe mạnh,"
+        },
+        {
+          "hanzi": "祝你生日快乐！",
+          "meaning": "chúc bạn sinh nhật vui vẻ!"
+        }
+      ]
+    }
+  ],
+  "media": null
+}

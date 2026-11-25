@@ -1,0 +1,45 @@
+{
+  "id": "F04",
+  "title": "看病",
+  "kind": "film",
+  "level": 2,
+  "source": "Cảnh tự soạn theo kiểu phim: đi khám bệnh",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "你怎么了？",
+          "meaning": "Cháu bị sao thế?",
+          "speaker": "大夫"
+        },
+        {
+          "hanzi": "我头疼，还有点儿发烧。",
+          "meaning": "Cháu đau đầu, còn hơi sốt.",
+          "speaker": "玛丽"
+        },
+        {
+          "hanzi": "感冒了。多喝水，多休息。",
+          "meaning": "Bị cảm rồi. Uống nhiều nước, nghỉ ngơi nhiều vào.",
+          "speaker": "大夫"
+        },
+        {
+          "hanzi": "要吃药吗？",
+          "meaning": "Có cần uống thuốc không ạ?",
+          "speaker": "玛丽"
+        },
+        {
+          "hanzi": "我给你开一点儿药。",
+          "meaning": "Bác kê cho cháu một ít thuốc.",
+          "speaker": "大夫"
+        },
+        {
+          "hanzi": "谢谢大夫。",
+          "meaning": "Cảm ơn bác sĩ.",
+          "speaker": "玛丽"
+        }
+      ]
+    }
+  ],
+  "media": null
+}

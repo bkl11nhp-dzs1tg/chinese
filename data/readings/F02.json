@@ -1,0 +1,50 @@
+{
+  "id": "F02",
+  "title": "饭馆点菜",
+  "kind": "film",
+  "level": 1,
+  "source": "Cảnh tự soạn theo kiểu phim: gọi món ở quán ăn",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "你们好！几位？",
+          "meaning": "Chào quý khách! Mấy người ạ?",
+          "speaker": "服务员"
+        },
+        {
+          "hanzi": "两位。",
+          "meaning": "Hai người.",
+          "speaker": "田芳"
+        },
+        {
+          "hanzi": "请坐。你们吃什么？",
+          "meaning": "Mời ngồi. Quý khách ăn gì ạ?",
+          "speaker": "服务员"
+        },
+        {
+          "hanzi": "一碗米饭，一个鸡蛋汤。",
+          "meaning": "Một bát cơm, một bát canh trứng.",
+          "speaker": "张东"
+        },
+        {
+          "hanzi": "我要饺子。有啤酒吗？",
+          "meaning": "Tôi muốn sủi cảo. Có bia không?",
+          "speaker": "田芳"
+        },
+        {
+          "hanzi": "有。还要别的吗？",
+          "meaning": "Có ạ. Còn cần gì khác không?",
+          "speaker": "服务员"
+        },
+        {
+          "hanzi": "不要了，谢谢。",
+          "meaning": "Không cần nữa, cảm ơn.",
+          "speaker": "张东"
+        }
+      ]
+    }
+  ],
+  "media": null
+}

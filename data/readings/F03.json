@@ -1,0 +1,45 @@
+{
+  "id": "F03",
+  "title": "问路",
+  "kind": "film",
+  "level": 2,
+  "source": "Cảnh tự soạn theo kiểu phim: hỏi đường",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "请问，邮局在哪儿？",
+          "meaning": "Xin hỏi, bưu điện ở đâu ạ?",
+          "speaker": "麦克"
+        },
+        {
+          "hanzi": "一直往前走，到红绿灯往右拐。",
+          "meaning": "Cứ đi thẳng, đến đèn giao thông thì rẽ phải.",
+          "speaker": "阿姨"
+        },
+        {
+          "hanzi": "离这儿远吗？",
+          "meaning": "Có xa đây không ạ?",
+          "speaker": "麦克"
+        },
+        {
+          "hanzi": "不太远，走路十分钟。",
+          "meaning": "Không xa lắm, đi bộ mười phút.",
+          "speaker": "阿姨"
+        },
+        {
+          "hanzi": "谢谢您！",
+          "meaning": "Cảm ơn bác!",
+          "speaker": "麦克"
+        },
+        {
+          "hanzi": "不客气。",
+          "meaning": "Không có gì.",
+          "speaker": "阿姨"
+        }
+      ]
+    }
+  ],
+  "media": null
+}

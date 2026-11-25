@@ -1,0 +1,31 @@
+{
+  "id": "S04",
+  "title": "静夜思",
+  "kind": "song",
+  "level": 2,
+  "source": "Thơ Lý Bạch (đời Đường), thường được phổ nhạc",
+  "paragraphs": [
+    {
+      "id": "p1",
+      "sentences": [
+        {
+          "hanzi": "床前明月光，",
+          "meaning": "Trước giường ánh trăng sáng,"
+        },
+        {
+          "hanzi": "疑是地上霜。",
+          "meaning": "ngỡ là sương trên mặt đất."
+        },
+        {
+          "hanzi": "举头望明月，",
+          "meaning": "Ngẩng đầu ngắm trăng sáng,"
+        },
+        {
+          "hanzi": "低头思故乡。",
+          "meaning": "cúi đầu nhớ quê nhà."
+        }
+      ]
+    }
+  ],
+  "media": null
+}

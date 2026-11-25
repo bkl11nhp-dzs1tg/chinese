@@ -203,7 +203,7 @@ export async function renderReader(root, ctx, { params }) {
   let playingAll = false;
   let stopSeg = null;
   // Giọng của từng người nói: xen kẽ nữ / nam theo thứ tự xuất hiện; tên quen trong sách thì theo giới tính.
-  const FEMALE_NAMES = /玛丽|田芳|王兰|安娜|珍妮|罗兰|妈妈|姐姐|妹妹|阿姨|小姐|女/;
+  const FEMALE_NAMES = /玛丽|田芳|王兰|安娜|珍妮|罗兰|妈妈|姐姐|妹妹|阿姨|小姐|服务员|女/;
   const MALE_NAMES = /大卫|麦克|爱德华|张东|李昌浩|山本|田中|王|林|关|爸爸|哥哥|弟弟|先生|男/;
   const speakers = [...new Set(flat.map((x) => x.speaker).filter(Boolean))];
   const voiceMap = new Map();

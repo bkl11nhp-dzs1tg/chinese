@@ -213,7 +213,7 @@ function buildReading(raw, source, where, errors) {
         else tokens = st.tokens.map((t) => ({ text: [...hanzi].slice(t.start, t.end).join(''), start: t.start, end: t.end, word: true }));
       }
       const t = Number.isFinite(Number(st?.t)) && st?.t != null ? Number(st.t) : null;
-      return { id: sid, hanzi, pinyin: nfc(st?.pinyin), meaning: nfc(st?.meaning), audio_ms, tokens, t };
+      return { id: sid, hanzi, pinyin: nfc(st?.pinyin), meaning: nfc(st?.meaning), audio_ms, tokens, t, speaker: nfc(st?.speaker) || null };
     }),
   }));
   if (!paragraphs.some((p) => p.sentences.length)) { errors.push(issue(source, where, 'Bài đọc không có câu nào.')); ok = false; }
