@@ -552,3 +552,20 @@ body.focus-mode .page-wave { display: none; }
 .rh-actions .icon-btn svg { width: 18px; height: 18px; }
 .rh-actions .danger-ic { color: var(--bad); }
 .reader-hero .rh-text { padding-right: 96px; }
+
+/* ---------- Tab kiểu gạch chân (thay cho dạng viên thuốc) ---------- */
+.seg { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; border-radius: 0 !important; gap: 4px; border-bottom: 1.5px solid var(--line) !important; display: flex; width: 100%; }
+.seg .seg-btn, .seg-btn { position: relative; background: transparent !important; box-shadow: none !important; border-radius: 10px 10px 0 0 !important; color: var(--muted) !important; font-weight: 700; padding: 10px 14px 12px; min-height: 44px; white-space: nowrap; }
+.seg .seg-btn:hover { color: var(--ink) !important; background: color-mix(in srgb, var(--accent-soft) 50%, transparent) !important; }
+.seg .seg-btn.on { color: var(--accent-ink) !important; background: transparent !important; }
+.seg .seg-btn::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1.5px; height: 3px; border-radius: 3px 3px 0 0; background: var(--accent-fill); transform: scaleX(0); transition: transform .25s var(--ease-out); }
+.seg .seg-btn.on::after { transform: scaleX(1); }
+.seg-fit .seg-btn { flex: 1; }
+/* Trên đầu chương nền đỏ: chữ trắng, gạch trắng */
+.seg-dark { border-bottom-color: rgba(255, 255, 255, .35) !important; width: auto; }
+.seg-dark .seg-btn { color: rgba(255, 255, 255, .8) !important; padding: 6px 12px 8px; min-height: 34px; }
+.seg-dark .seg-btn.on { color: #fff !important; background: transparent !important; }
+.seg-dark .seg-btn:hover { background: rgba(255, 255, 255, .12) !important; color: #fff !important; }
+.seg-dark .seg-btn::after { background: #fff; }
+/* Thanh chọn chế độ trong trang đọc, trên nền thẻ */
+.reader-tools .seg-btn.on { color: var(--accent-ink) !important; background: transparent !important; }
