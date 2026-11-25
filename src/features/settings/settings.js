@@ -8,6 +8,7 @@ import { applyTheme } from '../../app.js';
 import { chineseVoice, ttsSupported, RATES } from '../../ui/speech.js';
 import { setFeedbackEnabled } from '../../ui/feedback.js';
 import { icon } from '../../ui/icons.js';
+import { askPermission, notifyPermission, testNotification, syncPushSubscription } from '../../reminder.js';
 
 export async function render(root, ctx) {
   const s = ctx.settings;
@@ -106,8 +107,18 @@ export async function render(root, ctx) {
       switchRow('sound_enabled', 'Âm báo & rung', 'Khi trả lời đúng/sai'),
       switchRow('games_enabled', 'Trò chơi cuối buổi học', 'Một trò nối cặp ngắn'),
       selectRow('tts_rate', 'Tốc độ đọc', voice ? `Giọng: ${voice.name}` : 'Thiết bị chưa có giọng đọc tiếng Trung', RATES.map((r) => [r, `${r}×`]), Number),
-      h('div', { class: 'form-row' }, h('label', { for: 'set-reminder' }, 'Giờ nhắc học', h('span', { class: 'hint' }, 'Dùng khi tích hợp Telegram (giai đoạn 4)')),
-        h('input', { id: 'set-reminder', type: 'time', value: s.reminder_time, onchange: (e) => save({ reminder_time: e.target.value }) })),
+      h('div', { class: 'form-row' }, h('label', { for: 'set-remind-on' }, 'Thông báo nhắc học', h('span', { class: 'hint' }, notifyPermission() === 'denied' ? 'Trình duyệt đang chặn thông báo' : notifyPermission() === 'unsupported' ? 'Trình duyệt không hỗ trợ' : 'Khi hôm nay chưa học')),
+        h('div', {}, h('input', { id: 'set-remind-on', type: 'checkbox', class: 'switch', checked: !!s.reminder_enabled && notifyPermission() === 'granted', disabled: notifyPermission() === 'unsupported', onchange: async (e) => {
+          if (e.target.checked) {
+            const p = await askPermission();
+            if (p !== 'granted') { e.target.checked = false; toast('Chưa được cấp quyền thông báo'); return; }
+            await save({ reminder_enabled: true });
+            testNotification();
+            syncPushSubscription({ enabled: true, time: s.reminder_time });
+          } else { await save({ reminder_enabled: false }); syncPushSubscription({ enabled: false }); }
+        } }))),
+      h('div', { class: 'form-row' }, h('label', { for: 'set-reminder' }, 'Giờ nhắc học'),
+        h('input', { id: 'set-reminder', type: 'time', value: s.reminder_time, onchange: async (e) => { await save({ reminder_time: e.target.value }); if (ctx.settings.reminder_enabled) syncPushSubscription({ enabled: true, time: e.target.value }); } })),
       selectRow('theme', 'Giao diện', null, [['auto', 'Theo hệ thống'], ['light', 'Sáng'], ['dark', 'Tối']])),
 
     h('section', { class: 'card px-box stack', style: { marginTop: '24px' } },

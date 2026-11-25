@@ -24,6 +24,8 @@ import * as account from './features/account/account.js';
 import * as landing from './features/landing/landing.js';
 import { initInstall, canInstall, promptInstall } from './install.js';
 import { initZhKeyboard } from './ui/zh-keyboard.js';
+import { startReminder, syncPushSubscription } from './reminder.js';
+import { startOfDay } from './core/stats.js';
 import { setFeedbackEnabled } from './ui/feedback.js';
 import { syncContent } from './content.js';
 import { loadAccount, syncNow } from './sync.js';
@@ -181,6 +183,10 @@ async function boot() {
 
   if (!ctx.settings.onboarded && !location.hash) location.replace('#/welcome');
   initZhKeyboard(ctx);
+  // Nhắc học: hôm nay đã có buổi học có thời gian thì không nhắc.
+  // Đã bật nhắc + đã đăng nhập: làm mới đăng ký đẩy (đổi máy, đổi múi giờ…).
+  if (ctx.settings.reminder_enabled && loadAccount()) syncPushSubscription({ enabled: true, time: ctx.settings.reminder_time });
+  startReminder(ctx, async () => (await repo.getAll('study_sessions')).some((x) => (x.started_at || 0) >= startOfDay(Date.now()) && (x.active_ms || 0) > 30_000));
   await router.start(main, ctx);
   autoSync({ force: true });
 }

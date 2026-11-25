@@ -38,17 +38,19 @@ export function focusShell({ onClose, closeLabel = 'Thoát' } = {}) {
     },
     setFooter(...nodes) { footer.replaceChildren(...nodes.filter(Boolean)); },
     /** Hiện khung phản hồi. ok: true/false/null (null = trung tính). */
-    showSheet({ ok, title, detail, button = 'Tiếp tục', onContinue }) {
+    showSheet({ ok, title, detail, button = 'Tiếp tục', onContinue, onRetry }) {
       if (ok === true || ok === false) cue(ok ? 'good' : 'bad');
       sheet.className = `sheet open ${ok === true ? 'ok' : ok === false ? 'no' : ''}`;
       const btn = h('button', { class: ['btn', 'big', 'block', ok === false ? 'bad' : ok === true ? 'good' : 'primary'], type: 'button' }, button);
       const go = () => { this.hideSheet(); onContinue?.(); };
       btn.onclick = go;
       sheetKey = go;
+      // Trả lời sai: thêm nút "Làm lại" để làm lại ngay câu này.
+      const retry = onRetry ? h('button', { class: 'btn big sheet-retry', type: 'button', onclick: () => { this.hideSheet(); onRetry(); } }, icon('repeat'), 'Làm lại') : null;
       sheetInner.replaceChildren(
         h('h3', {}, ok === true ? icon('checkCircle') : ok === false ? icon('xCircle') : null, title),
         detail ? h('div', { class: 'detail' }, detail) : null,
-        btn);
+        retry ? h('div', { class: 'sheet-actions' }, retry, btn) : btn);
       setTimeout(() => btn.focus({ preventScroll: true }), 50);
     },
     hideSheet() { sheet.classList.remove('open'); sheetKey = null; },

@@ -5,6 +5,8 @@ compatibility_date = "2026-11-01"
 # Địa chỉ trang web được phép gọi API (GitHub Pages của bạn), cách nhau bằng dấu phẩy.
 [vars]
 ALLOWED_ORIGINS = "https://bkl11nhp-dzs1tg.github.io,http://localhost:5173"
+VAPID_PUBLIC = "BPfSxSSj-YLmIyeVF-NbAyjanjLcAuTagTSxSVd7LGlsXy2M8vkD9PvF9FKG_F0FlACGqPSmfxmeSxDmbZEIbUU"
+VAPID_SUBJECT = "https://bkl11nhp-dzs1tg.github.io/chinese/"
 
 [[d1_databases]]
 binding = "DB"
@@ -17,3 +19,8 @@ migrations_dir = "migrations"
 [[r2_buckets]]
 binding = "AUDIO"
 bucket_name = "chinese-audio"
+
+# Nhắc học bằng thông báo đẩy: chạy mỗi 15 phút.
+# Khóa VAPID: VAPID_PUBLIC (biến thường, bên dưới) + VAPID_PRIVATE_JWK (bí mật: npx wrangler secret put VAPID_PRIVATE_JWK).
+[triggers]
+crons = ["*/15 * * * *"]

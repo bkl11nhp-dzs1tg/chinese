@@ -44,31 +44,32 @@ export function lessonExercises(lesson, data, { limit = Infinity, rand = Math.ra
 export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, onProgress, onAnswer, onDone }) {
   let i = 0;
   const results = [];
+  const queue = [...exercises];
   let keyHandler = null;
   const onKey = (e) => keyHandler?.(e);
   window.addEventListener('keydown', onKey);
   const progress = onProgress || ((k, n, done = 0) => shell.setProgress((k + done) / n, `${Math.min(k + 1, n)}/${n}`));
 
   function next() {
-    if (i >= exercises.length) {
+    if (i >= queue.length) {
       keyHandler = null;
       const correct = results.filter((r) => r.correct).length;
       const total = exercises.length;
       onDone({ score: total ? correct / total : 0, correct, total, results });
       return;
     }
-    progress(i, exercises.length);
-    render(exercises[i]);
+    progress(i, queue.length);
+    render(queue[i]);
   }
 
   function render(ex) {
     const body = h('div');
-    const isLast = i === exercises.length - 1;
+    const isLast = i === queue.length - 1;
     const checkBtn = h('button', { class: 'btn primary big block', type: 'button', disabled: true },
       mode === 'test' ? (isLast ? 'Nộp bài' : 'Tiếp') : 'Kiểm tra');
     shell.setFooter(checkBtn);
     shell.main.replaceChildren(
-      h('div', { class: 'q-type' }, TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
+      h('div', { class: 'q-type' }, ex._orig ? h('span', { class: 'retry-tag' }, icon('repeat'), 'Làm lại câu sai') : null, TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
       ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
       body);
 
@@ -85,9 +86,11 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       const ok = ex.type === 'pinyin' ? gradePinyin(response, ex.answer)
         : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'compose' ? !!response.ok
         : grade(ex.type === 'listen' ? { ...ex, type: 'choose' } : ex, response);
-      results.push({ question: ex, correct: ok, response });
-      progress(i, exercises.length, 1); // trả lời xong: thanh chạy lên ngay
-      onAnswer?.(ex, ok, response);
+      const orig = ex._orig || ex;
+      // Điểm và lịch ôn chỉ tính lần làm đầu; lần làm lại để sửa sai.
+      if (!ex._orig) { results.push({ question: ex, correct: ok, response }); onAnswer?.(ex, ok, response); }
+      else if (ok) { const r = results.find((x) => x.question === orig); if (r) r.fixed = true; }
+      progress(i, queue.length, 1); // trả lời xong: thanh chạy lên ngay
       body.querySelectorAll('button, input').forEach((b) => { b.disabled = true; });
       if (mode === 'test') { i++; next(); return; }
       mark(ok);
@@ -101,6 +104,8 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
           extra,
           ex.explanation ? h('div', { class: 'muted', style: { marginTop: '4px' } }, ex.explanation) : null),
         onContinue: () => { i++; next(); },
+        // Làm lại ngay câu vừa sai (điểm vẫn tính lần đầu).
+        onRetry: !ok && mode === 'practice' ? () => render({ ...orig, _orig: orig }) : null,
       });
     }
     checkBtn.onclick = submit;

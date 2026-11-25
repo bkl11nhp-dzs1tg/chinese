@@ -8,6 +8,9 @@
 // POST /api/account/delete {password}                 → {ok}   (xóa tài khoản và toàn bộ dữ liệu)
 // POST /api/sync/push  {changes:[{store,key,data}]}   → {cursor}   (data = null nghĩa là xóa)
 // GET  /api/sync/pull?cursor=N                         → {cursor, more, changes:[{store,key,data}]}
+// GET  /api/push/key                                 → {key}  (khóa công khai VAPID)
+// POST /api/push/subscribe {endpoint, remind_utc_min, tz_offset_min} → {ok}
+// POST /api/push/unsubscribe {endpoint}               → {ok}
 // GET  /api/audio/L01.mp3?t=TOKEN                     → MP3 của sách từ R2 (chỉ người đã đăng nhập; hỗ trợ Range để tua)
 
 const STORES = new Set(['card_state', 'review_events', 'lesson_progress', 'study_sessions', 'settings', 'reading_progress', 'word_lookups', 'known_words', 'cards', 'readings']);
@@ -166,7 +169,26 @@ export async function handle(request, env, { now = Date.now() } = {}) {
       return serveAudio(request, env.AUDIO, am[1], headers);
     }
 
+    if (request.method === 'GET' && path === '/api/push/key') return json({ key: env.VAPID_PUBLIC || null }, 200, headers);
+
     const user = await auth(request, db, now);
+
+    if (request.method === 'POST' && path === '/api/push/subscribe') {
+      const b = await readJson(request);
+      const ep = String(b.endpoint || '');
+      if (!/^https:\/\//.test(ep) || ep.length > 1000) throw new HttpError(400, 'Đăng ký thông báo không hợp lệ.');
+      const m = Math.round(Number(b.remind_utc_min)), tz = Math.round(Number(b.tz_offset_min));
+      if (!(m >= 0 && m < 1440) || !(tz >= -900 && tz <= 900)) throw new HttpError(400, 'Giờ nhắc không hợp lệ.');
+      await db.prepare(`INSERT INTO push_subs (endpoint, user_id, remind_utc_min, tz_offset_min, created_at) VALUES (?, ?, ?, ?, ?)
+        ON CONFLICT(endpoint) DO UPDATE SET user_id = excluded.user_id, remind_utc_min = excluded.remind_utc_min, tz_offset_min = excluded.tz_offset_min`)
+        .bind(ep, user.id, m, tz, now).run();
+      return json({ ok: true }, 200, headers);
+    }
+    if (request.method === 'POST' && path === '/api/push/unsubscribe') {
+      const b = await readJson(request);
+      await db.prepare('DELETE FROM push_subs WHERE endpoint = ? AND user_id = ?').bind(String(b.endpoint || ''), user.id).run();
+      return json({ ok: true }, 200, headers);
+    }
 
     if (request.method === 'GET' && path === '/api/me') return json({ user: { id: user.id, username: user.username } }, 200, headers);
 
@@ -181,6 +203,7 @@ export async function handle(request, env, { now = Date.now() } = {}) {
       if (!u || !safeEqual(await hashPassword(String(body.password || ''), u.salt, u.iterations), u.pass_hash)) throw new HttpError(401, 'Mật khẩu không đúng.');
       await db.batch([
         db.prepare('DELETE FROM records WHERE user_id = ?').bind(user.id),
+        db.prepare('DELETE FROM push_subs WHERE user_id = ?').bind(user.id),
         db.prepare('DELETE FROM sessions WHERE user_id = ?').bind(user.id),
         db.prepare('DELETE FROM counters WHERE user_id = ?').bind(user.id),
         db.prepare('DELETE FROM users WHERE id = ?').bind(user.id),

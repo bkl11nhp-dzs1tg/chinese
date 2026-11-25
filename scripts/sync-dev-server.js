@@ -8,7 +8,7 @@ import { createD1 } from '../worker/d1-node.js';
 const port = Number(process.env.PORT || 8787);
 const file = process.env.SYNC_DB || 'data/sync-dev.sqlite';
 if (file !== ':memory:') mkdirSync('data', { recursive: true });
-const env = { DB: createD1(file, ['worker/migrations/0001_init.sql']), ALLOWED_ORIGINS: '*' };
+const env = { DB: createD1(file, ['worker/migrations/0001_init.sql', 'worker/migrations/0002_push.sql']), ALLOWED_ORIGINS: '*' };
 
 createServer(async (req, res) => {
   const chunks = [];

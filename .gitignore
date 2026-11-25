@@ -14,3 +14,4 @@ playwright-report/
 
 # Server đồng bộ chạy thử trên máy
 data/*.sqlite
+worker/.vapid-private.json

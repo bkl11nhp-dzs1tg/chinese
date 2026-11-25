@@ -36,7 +36,9 @@ export function initZhKeyboard(ctx) {
   const fab = h('button', { class: 'zhk-fab hidden', type: 'button', 'aria-label': 'Bàn phím tiếng Trung', title: 'Bàn phím tiếng Trung' }, h('span', { class: 'han' }, '中'));
   const pyIn = h('input', { class: 'zhk-py', type: 'text', placeholder: 'pinyin', autocomplete: 'off', autocapitalize: 'off', spellcheck: false, 'aria-label': 'Pinyin' });
   const cands = h('div', { class: 'zhk-cands', role: 'listbox', 'aria-label': 'Chữ gợi ý' });
+  const grip = h('div', { class: 'zhk-grip', 'aria-hidden': 'true' }, h('i'));
   const panel = h('div', { class: 'zhk hidden', role: 'dialog', 'aria-label': 'Bàn phím tiếng Trung' },
+    grip,
     h('div', { class: 'zhk-top' },
       pyIn,
       h('button', { class: 'zhk-key', type: 'button', 'aria-label': 'Xóa chữ', onclick: () => backspace() }, '⌫'),
@@ -85,7 +87,9 @@ export function initZhKeyboard(ctx) {
   function open() { remember(); panel.classList.remove('hidden'); fab.classList.add('hidden'); pyIn.value = ''; paint(); pyIn.focus(); }
   function close() { panel.classList.add('hidden'); if (target) { target.focus(); try { target.setSelectionRange(sel[0], sel[1]); } catch { /* bỏ qua */ } } }
   fab.addEventListener('pointerdown', (e) => e.preventDefault()); // giữ con trỏ ở ô đang gõ
-  fab.addEventListener('click', open);
+  const fabMoved = draggable(fab, fab, 'zhk-fab-pos');
+  fab.addEventListener('click', () => { if (!fabMoved()) open(); });
+  draggable(panel, grip, 'zhk-panel-pos');
 
   document.addEventListener('focusin', (e) => {
     if (editable(e.target)) { target = e.target; remember(); if (panel.classList.contains('hidden')) fab.classList.remove('hidden'); }
@@ -97,4 +101,41 @@ export function initZhKeyboard(ctx) {
   });
   for (const ev of ['keyup', 'click', 'select']) document.addEventListener(ev, (e) => { if (e.target === target) remember(); });
   window.addEventListener('hashchange', () => { panel.classList.add('hidden'); fab.classList.add('hidden'); target = null; });
+}
+
+/** Kéo-thả phần tử cố định (position: fixed) bằng tay cầm; nhớ vị trí. Trả về hàm cho biết lần bấm vừa rồi có kéo hay không. */
+function draggable(el, handle, key) {
+  let moved = false;
+  const clamp = (x, y) => {
+    const r = el.getBoundingClientRect();
+    return [Math.min(Math.max(4, x), innerWidth - r.width - 4), Math.min(Math.max(4, y), innerHeight - r.height - 4)];
+  };
+  const place = (x, y) => { [x, y] = clamp(x, y); Object.assign(el.style, { left: `${x}px`, top: `${y}px`, right: 'auto', bottom: 'auto', transform: 'none' }); };
+  const saved = (() => { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; } })();
+  // Khôi phục khi phần tử hiện ra (cần kích thước thật).
+  new MutationObserver(() => { if (saved && !el.classList.contains('hidden') && !el.style.left) requestAnimationFrame(() => place(saved[0], saved[1])); })
+    .observe(el, { attributes: true, attributeFilter: ['class'] });
+  handle.style.touchAction = 'none';
+  handle.addEventListener('pointerdown', (e) => {
+    const r = el.getBoundingClientRect();
+    const dx = e.clientX - r.left, dy = e.clientY - r.top;
+    const sx = e.clientX, sy = e.clientY;
+    moved = false;
+    handle.setPointerCapture(e.pointerId);
+    const mv = (ev) => {
+      if (!moved && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 6) return;
+      moved = true;
+      el.classList.add('dragging');
+      place(ev.clientX - dx, ev.clientY - dy);
+    };
+    const up = () => {
+      handle.removeEventListener('pointermove', mv);
+      el.classList.remove('dragging');
+      if (moved) { const r2 = el.getBoundingClientRect(); try { localStorage.setItem(key, JSON.stringify([r2.left, r2.top])); } catch { /* bỏ qua */ } }
+    };
+    handle.addEventListener('pointermove', mv);
+    handle.addEventListener('pointerup', up, { once: true });
+    handle.addEventListener('pointercancel', up, { once: true });
+  });
+  return () => { const m = moved; moved = false; return m; };
 }

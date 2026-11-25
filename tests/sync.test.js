@@ -18,7 +18,7 @@ const device = async () => createRepo(await openDb({ name: `dev-${n++}` }));
 const as = async (acct, fn) => { store.set('chinese-study-account', JSON.stringify(acct)); const r = await fn(); return [r, JSON.parse(store.get('chinese-study-account') || 'null')]; };
 
 beforeEach(() => {
-  env = { DB: createD1(':memory:', ['worker/migrations/0001_init.sql']), ALLOWED_ORIGINS: '*' };
+  env = { DB: createD1(':memory:', ['worker/migrations/0001_init.sql', 'worker/migrations/0002_push.sql']), ALLOWED_ORIGINS: '*' };
   store.clear();
 });
 
@@ -119,7 +119,7 @@ describe('máy chủ cũ', () => {
   it('máy chủ chưa nhận "readings" vẫn đăng nhập/đồng bộ được', async () => {
     const { createD1 } = await import('../worker/d1-node.js');
     const { handle } = await import('../worker/src/handler.js');
-    const env = { DB: createD1(':memory:', ['worker/migrations/0001_init.sql']), ALLOWED_ORIGINS: '*' };
+    const env = { DB: createD1(':memory:', ['worker/migrations/0001_init.sql', 'worker/migrations/0002_push.sql']), ALLOWED_ORIGINS: '*' };
     // Giả lập máy chủ cũ: từ chối mọi lần đẩy có store "readings".
     const fetchImpl = async (url, init) => {
       if (url.endsWith('/api/sync/push') && JSON.parse(init.body).changes.some((c) => c.store === 'readings')) {

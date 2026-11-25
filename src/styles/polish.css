@@ -635,3 +635,10 @@ body.focus-mode .zhk-fab { bottom: calc(96px + env(safe-area-inset-bottom)); }
 .zhk-empty { color: var(--muted); font-size: 14px; padding: 0 6px; }
 .zhk-punct { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
 .zhk-punct .zhk-key { min-width: 0; height: 40px; }
+.retry-tag { display: inline-flex; align-items: center; gap: 4px; margin-right: 8px; padding: 2px 8px; border-radius: 999px; background: var(--bad-bg); color: var(--bad); font-size: 11px; font-weight: 800; letter-spacing: 0; text-transform: none; vertical-align: middle; } .retry-tag svg { width: 12px; height: 12px; }
+.zhk-grip { display: grid; place-items: center; height: 18px; margin: -4px 0 -2px; cursor: grab; }
+.zhk-grip i { width: 44px; height: 5px; border-radius: 99px; background: var(--line-strong); }
+.zhk.dragging, .zhk-fab.dragging { transition: none; opacity: .92; cursor: grabbing; }
+.zhk.dragging .zhk-grip { cursor: grabbing; }
+.zhk-fab { touch-action: none; }
+.sheet-actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px; } .sheet-retry { background: rgba(255,255,255,.75) !important; color: var(--bad) !important; border: 1.5px solid color-mix(in srgb, var(--bad) 40%, transparent) !important; white-space: nowrap; }

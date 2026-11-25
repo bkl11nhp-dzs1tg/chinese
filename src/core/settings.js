@@ -3,6 +3,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   new_per_day: 10,
   session_minutes: 20,
   reminder_time: '20:00',
+  reminder_enabled: false,
   cat_enabled: false,
   games_enabled: true,
   tts_rate: 1,
