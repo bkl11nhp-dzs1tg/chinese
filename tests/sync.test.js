@@ -114,3 +114,26 @@ describe('đánh dấu từ (known_words)', () => {
     expect(mergeRecord('known_words', b, a).status).toBe('known');
   });
 });
+
+describe('máy chủ cũ', () => {
+  it('máy chủ chưa nhận "readings" vẫn đăng nhập/đồng bộ được', async () => {
+    const { createD1 } = await import('../worker/d1-node.js');
+    const { handle } = await import('../worker/src/handler.js');
+    const env = { DB: createD1(':memory:', ['worker/migrations/0001_init.sql']), ALLOWED_ORIGINS: '*' };
+    // Giả lập máy chủ cũ: từ chối mọi lần đẩy có store "readings".
+    const fetchImpl = async (url, init) => {
+      if (url.endsWith('/api/sync/push') && JSON.parse(init.body).changes.some((c) => c.store === 'readings')) {
+        return new Response(JSON.stringify({ error: 'Bản ghi không hợp lệ.' }), { status: 400 });
+      }
+      return handle(new Request(url, init), env);
+    };
+    const { openDb: open, createRepo: mk } = await import('../src/db/repo.js');
+    const repo = mk(await open(`old-${Math.random()}`));
+    await repo.saveUserReading({ id: 'U-1', title: 'x', kind: 'song', paragraphs: [{ id: 'p1', sentences: [{ id: 's1', hanzi: '你好' }] }] });
+    await repo.saveSettings({ theme: 'dark' });
+    await signIn({ url: 'http://x', username: 'olduser', password: 'matkhau123', register: true, fetchImpl });
+    const r = await syncNow(repo, { fetchImpl });
+    expect(r.status).toBe('ok');
+    await signOut(repo, { fetchImpl });
+  });
+});

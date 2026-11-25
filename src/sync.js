@@ -5,6 +5,8 @@ import { SYNC_STORES, shouldSync, recordKey, mergeRecord, sameRecord, hashRecord
 
 const ACCOUNT_KEY = 'chinese-study-account';
 const PUSH_CHUNK = 1000;
+/** Loại dữ liệu thêm sau; máy chủ chưa cập nhật có thể từ chối. */
+const NEWER_STORES = new Set(['readings']);
 const ENV = (typeof import.meta !== 'undefined' && import.meta.env) || {};
 export const DEFAULT_SYNC_URL = ENV.VITE_SYNC_URL || (ENV.DEV ? 'http://localhost:8787' : '');
 /** Địa chỉ Worker đồng bộ (D1). Không có ô nhập: lấy từ lúc build; localStorage chỉ để test ghi đè. */
@@ -130,8 +132,16 @@ async function runSync(repo, { fetchImpl, now = Date.now } = {}) {
   }
   for (let i = 0; i < changes.length; i += PUSH_CHUNK) {
     const chunk = changes.slice(i, i + PUSH_CHUNK);
-    await api(acct.url, '/api/sync/push', { method: 'POST', token: acct.token, body: { changes: chunk.map(({ store, key, data }) => ({ store, key, data })) }, fetchImpl });
-    for (const c of chunk) {
+    let sent = chunk;
+    try {
+      await api(acct.url, '/api/sync/push', { method: 'POST', token: acct.token, body: { changes: chunk.map(({ store, key, data }) => ({ store, key, data })) }, fetchImpl });
+    } catch (e) {
+      // Máy chủ cũ chưa nhận loại dữ liệu mới (vd bài hát tự thêm): gửi phần còn lại, giữ phần kia để lần sau gửi lại.
+      if (e.status !== 400 || !chunk.some((c) => NEWER_STORES.has(c.store))) throw e;
+      sent = chunk.filter((c) => !NEWER_STORES.has(c.store));
+      if (sent.length) await api(acct.url, '/api/sync/push', { method: 'POST', token: acct.token, body: { changes: sent.map(({ store, key, data }) => ({ store, key, data })) }, fetchImpl });
+    }
+    for (const c of sent) {
       const hashes = meta.get(c.store);
       if (c.h) hashes[c.key] = c.h; else delete hashes[c.key];
     }

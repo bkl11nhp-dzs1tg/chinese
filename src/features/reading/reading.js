@@ -92,14 +92,20 @@ export async function renderList(root, ctx, { query = {} } = {}) {
 }
 
 /** Hộp thêm bài hát / đoạn thoại: tên, link YouTube (không bắt buộc), lời tiếng Trung (mỗi dòng một câu, nhận mốc [mm:ss]), bản dịch. */
-function openAddDialog(ctx, kind) {
-  const title = h('input', { type: 'text', placeholder: kind === 'song' ? 'Tên bài hát' : 'Tên phim / cảnh', 'aria-label': 'Tên' });
-  const link = h('input', { type: 'url', placeholder: 'Link YouTube (không bắt buộc)', 'aria-label': 'Link YouTube', inputmode: 'url' });
+function openAddDialog(ctx, kind, existing = null) {
+  // Sửa: dựng lại lời từ các câu (giữ mốc thời gian, người nói, dòng trống giữa các đoạn).
+  const lrc = (t) => (t == null ? '' : `[${String(Math.floor(t / 60)).padStart(2, '0')}:${(t % 60).toFixed(2).padStart(5, '0')}] `);
+  const zhInit = existing ? existing.paragraphs.map((p) => p.sentences.map((st) => `${lrc(st.t)}${st.speaker ? `${st.speaker}：` : ''}${st.hanzi}`).join('\n')).join('\n\n') : '';
+  const viInit = existing ? existing.paragraphs.flatMap((p) => p.sentences.map((st) => st.meaning || '')).join('\n') : '';
+  const title = h('input', { type: 'text', placeholder: kind === 'song' ? 'Tên bài hát' : 'Tên phim / cảnh', 'aria-label': 'Tên', value: existing?.title || '' });
+  const link = h('input', { type: 'url', placeholder: 'Link YouTube (không bắt buộc)', 'aria-label': 'Link YouTube', inputmode: 'url', value: existing?.media || '' });
   const zh = h('textarea', { rows: 7, class: 'han', lang: 'zh-CN', placeholder: '[00:12.30] 第一句\n[00:15.80] 第二句', 'aria-label': 'Lời tiếng Trung' });
+  zh.value = zhInit;
   const vi = h('textarea', { rows: 5, placeholder: 'Câu 1\nCâu 2', 'aria-label': 'Bản dịch tiếng Việt' });
+  vi.value = viInit;
   const err = h('p', { class: 'form-error' });
   const dlg = h('dialog', { class: 'media-dialog' },
-    h('h2', {}, kind === 'song' ? 'Thêm bài hát' : 'Thêm đoạn thoại phim'),
+    h('h2', {}, existing ? 'Sửa bài' : kind === 'song' ? 'Thêm bài hát' : 'Thêm đoạn thoại phim'),
     h('label', { class: 'field' }, h('span', {}, 'Tên'), title),
     h('label', { class: 'field' }, h('span', {}, 'Video'), link),
     h('label', { class: 'field' }, h('span', {}, 'Lời tiếng Trung'), zh),
@@ -112,11 +118,11 @@ function openAddDialog(ctx, kind) {
         if (!title.value.trim()) { err.textContent = 'Nhập tên'; title.focus(); return; }
         if (!paragraphs.length) { err.textContent = 'Dán lời tiếng Trung'; zh.focus(); return; }
         if (link.value.trim() && !youtubeId(link.value)) { err.textContent = 'Link YouTube chưa đúng'; link.focus(); return; }
-        const id = `U-${Date.now().toString(36)}`;
-        await ctx.repo.saveUserReading({ id, title: title.value.trim(), kind, media: link.value.trim() || null, level: null, source_note: '', lesson_id: null, audio_file: null, paragraphs });
+        const id = existing?.id || `U-${Date.now().toString(36)}`;
+        await ctx.repo.saveUserReading({ ...(existing || {}), id, title: title.value.trim(), kind, media: link.value.trim() || null, level: null, source_note: '', lesson_id: null, audio_file: null, paragraphs });
         dlg.close();
-        toast('Đã thêm');
-        ctx.navigate(`read/${encodeURIComponent(id)}`);
+        toast(existing ? 'Đã lưu' : 'Đã thêm');
+        ctx.navigate(`read/${encodeURIComponent(id)}?r=${Date.now()}`);
       } }, 'Lưu')));
   dlg.addEventListener('close', () => dlg.remove());
   document.body.append(dlg);
@@ -500,6 +506,7 @@ export async function renderReader(root, ctx, { params }) {
         audioSrc && !flat.some((x) => x.audio_ms) ? h('div', { class: 'reader-mp3' }, audioPlayer(audioSrc, 'MP3 của sách')) : null),
       !audioEl && !ttsSupported() ? h('p', { class: 'notice small' }, 'Trình duyệt không hỗ trợ đọc giọng máy.') : null,
       h('div', { class: 'reader-card px-box' }, content),
+      doc.user ? h('button', { class: 'btn tinted block', type: 'button', style: { marginTop: '12px' }, onclick: async () => openAddDialog(ctx, doc.media_kind, await repo.get('readings', doc.id)) }, icon('pencil'), 'Sửa bài') : null,
       doc.user ? h('button', { class: 'btn ghost block del-reading', type: 'button', onclick: async () => { if (!(await confirmDialog({ title: 'Xóa bài này?', ok: 'Xóa', danger: true }))) return; await repo.deleteReading(doc.id); toast('Đã xóa'); ctx.navigate(`readings?k=${doc.media_kind}`); } }, icon('trash'), 'Xóa bài') : null,
       h('div', { class: 'player-wrap' }, playerBar, rateBtn)),
     scrim, sheet);
