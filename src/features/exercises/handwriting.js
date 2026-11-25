@@ -50,11 +50,14 @@ export function charPad(ch, { size = 260, onInk } = {}) {
     for (let yy = 0; yy < S; yy++) for (let xx = 0; xx < S; xx++) if (d[(yy * S + xx) * 4 + 3] > 40) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy; }
     const out = new Uint8Array(GRID * GRID);
     if (x1 < 0) return out;
-    const bw = x1 - x0 + 1, bh = y1 - y0 + 1, sc = (GRID - 4) / Math.max(bw, bh);
-    const ox = (GRID - bw * sc) / 2, oy = (GRID - bh * sc) / 2;
+    const bw = x1 - x0 + 1, bh = y1 - y0 + 1;
+    // Co giãn riêng từng chiều (chữ viết hơi dẹt/cao vẫn khớp), trừ nét rất mảnh (vd 一, 丨) thì giữ tỉ lệ.
+    const big = Math.max(bw, bh), thin = Math.min(bw, bh) < big * 0.25;
+    const sx = (GRID - 4) / (thin ? big : bw), sy = (GRID - 4) / (thin ? big : bh);
+    const ox = (GRID - bw * sx) / 2, oy = (GRID - bh * sy) / 2;
     for (let yy = y0; yy <= y1; yy++) for (let xx = x0; xx <= x1; xx++) {
       if (d[(yy * S + xx) * 4 + 3] <= 40) continue;
-      const gx = Math.floor(ox + (xx - x0) * sc), gy = Math.floor(oy + (yy - y0) * sc);
+      const gx = Math.min(GRID - 1, Math.floor(ox + (xx - x0) * sx)), gy = Math.min(GRID - 1, Math.floor(oy + (yy - y0) * sy));
       out[gy * GRID + gx] = 1;
     }
     return out;
@@ -71,7 +74,7 @@ export function charPad(ch, { size = 260, onInk } = {}) {
       const f = 256 / size;
       const user = mask((x) => { x.lineCap = 'round'; x.lineJoin = 'round'; x.lineWidth = lw * f; x.strokeStyle = '#000'; for (const s of strokes) { x.beginPath(); s.forEach(([px, py], k) => (k ? x.lineTo(px * f, py * f) : x.moveTo(px * f, py * f))); if (s.length === 1) x.lineTo(s[0][0] * f + 0.1, s[0][1] * f); x.stroke(); } });
       const ref = mask((x, S) => { x.fillStyle = '#000'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = `${S * 0.8}px ${FONT}`; x.fillText(ch, S / 2, S / 2); });
-      return inkScore(user, ref, GRID, 3);
+      return inkScore(user, ref, GRID, 4);
     },
   };
 }

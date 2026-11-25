@@ -91,7 +91,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       if (mode === 'test') { i++; next(); return; }
       mark(ok);
       const answer = ex.type === 'speak' ? (response.transcript ? `Máy nghe được: ${response.transcript}` : ex.target) : answerText(ex);
-      const extra = ex.type === 'draw' || ex.type === 'compose' ? h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`) : null;
+      const extra = ex.type === 'draw' || ex.type === 'compose' ? h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.guided ? ' · có tô theo mẫu' : '') : null;
       shell.showSheet({
         ok,
         title: ok ? pickPraise() : 'Chưa đúng',
@@ -247,7 +247,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       body.append(
         h('div', { class: 'hw-hint' }, h('span', { class: 'hw-py' }, ex.pinyin), h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'))),
         area.el);
-      getResponse = () => { const score = area.score(); return { score, ok: score >= 0.7 && !area.usedGuide(), guided: area.usedGuide() }; };
+      getResponse = () => { const score = area.score(); return { score, ok: score >= 0.6, guided: area.usedGuide() }; };
       mark = (ok) => area.showAnswer(ok);
     } else if (ex.type === 'compose') {
       // Viết câu: đọc nghĩa tiếng Việt, tự gõ câu tiếng Trung (bàn phím chữ Hán / viết tay của điện thoại), máy chấm theo từng chữ.
