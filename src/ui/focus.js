@@ -32,7 +32,9 @@ export function focusShell({ onClose, closeLabel = 'Thoát' } = {}) {
       const pct = frac > 0 || label ? Math.max(5, Math.min(1, frac) * 100) : 0;
       progress.style.width = `${pct}%`;
       bar.setAttribute('aria-valuenow', Math.round(pct));
-      count.textContent = label;
+      // Nhãn nhiều dòng (vd "8/12" + "Câu 1/5"): dòng đầu đậm, các dòng sau nhỏ.
+      const [first, ...rest] = String(label).split('\n');
+      count.replaceChildren(first, ...rest.map((r) => h('small', {}, r)));
     },
     setFooter(...nodes) { footer.replaceChildren(...nodes.filter(Boolean)); },
     /** Hiện khung phản hồi. ok: true/false/null (null = trung tính). */

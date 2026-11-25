@@ -99,7 +99,12 @@ export async function render(root, ctx, { query }) {
   let current = null;
   let finished = false;
 
-  function updateProgress(_k, _n, done = 0) { shell.setProgress((idx + (_n ? ((_k || 0) + done) / _n : 0)) / steps.length, `${Math.min(idx + 1, steps.length)}/${steps.length}`); }
+  // Nhãn: vị trí trong buổi học (13/14); đang ở phần bài tập thì ghi thêm số câu (13/14 · câu 3/5).
+  function updateProgress(_k, _n, done = 0) {
+    const step = `${Math.min(idx + 1, steps.length)}/${steps.length}`;
+    const label = _n ? `${step}\nCâu ${Math.min((_k || 0) + 1, _n)}/${_n}` : step;
+    shell.setProgress((idx + (_n ? ((_k || 0) + done) / _n : 0)) / steps.length, label);
+  }
 
   async function showStep() {
     current?.destroy?.();
