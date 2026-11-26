@@ -6,6 +6,7 @@ import { icon, badgeIcon } from '../../ui/icons.js';
 import { newLearnedToday, timeTotals, streak, formatDuration, startOfDay } from '../../core/stats.js';
 import { newCardQueue, nextLessonStep } from '../../core/lessons.js';
 import { SKILLS } from '../../core/practice.js';
+import { recentCards } from '../practice/practice.js';
 import { dayKey, addDays } from '../../core/stats.js';
 
 const WEEKDAYS = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
@@ -21,6 +22,7 @@ export async function render(root, ctx) {
     ctx.repo.getAll('study_sessions'),
   ]);
   const due = data.states.filter((st) => st.due_at <= now).length;
+  const recentN = recentCards(data, now).length;
   const learnedToday = newLearnedToday(events, now);
   const quota = Math.max(0, s.new_per_day - learnedToday);
   const available = newCardQueue(data.lessons, data.cardsById, data.statesById, data.active?.id).length;
@@ -65,10 +67,11 @@ export async function render(root, ctx) {
         planRow('game', 'Trò chơi cuối buổi', s.games_enabled ? 'nối cặp' : 'tắt', '')),
       h('div', { class: 'stack hero-actions' },
         h('a', { class: 'btn primary big block', href: '#/session' }, icon('play'), nothingToDo ? 'Học thêm' : 'Bắt đầu buổi học'),
-        due ? h('a', { class: 'btn big block', href: '#/session?mode=review' }, icon('repeat'), `Chỉ ôn tập (${due})`) : null)),
+        due ? h('a', { class: 'btn big block', href: '#/session?mode=review' }, icon('repeat'), `Chỉ ôn tập (${due})`) : null,
+        recentN >= 4 ? h('a', { class: 'btn tinted big block', href: '#/practice/qa?scope=recent' }, icon('chat'), `Hỏi đáp từ vừa học (${recentN})`) : null)),
 
     active ? h('div', { class: 'today-active' },
-      h('div', { class: 'section-title today-st' }, 'Bài đang học'),
+      h('div', { class: 'section-title today-st' }, activeSt.status === 'done' ? 'Bài vừa hoàn thành' : 'Bài đang học'),
       h('div', { class: 'group active-group' },
         h('a', { class: 'lesson-card', style: { boxShadow: 'none' }, href: `#/lesson/${encodeURIComponent(active.id)}` },
           h('span', { class: 'thumb' }, h('img', { src: `./lessons/${encodeURIComponent(active.id)}.webp`, alt: '', onerror: (e) => e.target.remove() })),

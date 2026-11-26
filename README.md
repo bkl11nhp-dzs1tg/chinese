@@ -29,7 +29,7 @@ npm run build      # kiểm tra + đóng gói nội dung + build ra dist/
 5. **Hỏi đáp**: câu hỏi – trả lời lấy từ hội thoại trong bài + hỏi đáp về từ của bài (“X”是什么意思？/ …用汉语怎么说？).
 6. **Kiểm tra cuối bài**: từ vựng + câu trong bài khóa, đạt ≥ 70% là hoàn thành. Làm xong xem lại toàn bộ câu (lọc sai/đúng).
 
-**Luyện nhớ & viết**: mỗi lượt 5 từ (ưu tiên từ lâu chưa luyện, có nút đổi nhóm). Mỗi từ có một trang tập viết 5 hoặc 10 ô: các ô đầu có mẫu mờ để tô, các ô sau tự viết, chấm từng ô.
+**Luyện nhớ & viết**: dùng toàn bộ từ của bài theo thứ tự sách. Tab **Tập viết** (từ mới, mỗi từ viết 1 lần) và **Luyện tập** (mỗi từ một trang viết 6 lần: các ô đầu có mẫu mờ, các ô sau tự viết). Chữ viết tay đạt từ 70%.
 
 **Thống kê**: mọi câu trả lời (luyện kỹ năng, hỏi đáp, bài tập, kiểm tra, tập viết, trò chơi) đều ghi vào lượt ôn, kể cả câu không gắn với từ nào, nên "Khả năng ghi nhớ" và "Tỷ lệ nhớ đúng" luôn cập nhật.
 

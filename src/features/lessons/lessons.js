@@ -43,7 +43,7 @@ export async function renderList(root, ctx, { query = {} } = {}) {
       return h('a', { class: ['lesson-card', isCurrent ? 'current' : ''], href: `#/lesson/${encodeURIComponent(l.id)}` },
         h('span', { class: 'thumb' }, h('img', { src: lessonArt(l.id), alt: '', loading: 'lazy', onerror: (e) => { e.target.remove(); } })),
         h('span', { class: 'info' },
-          h('span', { class: 'top' }, h('span', { class: 'num' }, `BÀI ${l.unit ?? ''}`), isCurrent ? h('span', { class: 'badge doing' }, st.status === 'todo' ? 'Bắt đầu' : 'Đang học') : statusBadge(st.status)),
+          h('span', { class: 'top' }, h('span', { class: 'num' }, `BÀI ${l.unit ?? ''}`), isCurrent && st.status !== 'done' ? h('span', { class: 'badge doing' }, st.status === 'todo' ? 'Bắt đầu' : 'Đang học') : statusBadge(st.status)),
           h('span', { class: 'han t' }, l.title),
           h('span', { class: 'vi' }, l.title_vi || ''),
           h('span', { class: ['bar', 'thin', st.status === 'done' ? 'good' : ''] }, h('span', { style: { width: `${st.total ? (st.learned / st.total) * 100 : 0}%` } }))),

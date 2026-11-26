@@ -8,7 +8,7 @@ import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { grade, answerText, shuffle, autoExercises } from '../../core/exercises.js';
 import { gradePinyin, gradeSpeech, gradeSentence } from '../../core/practice.js';
-import { writeArea, sheetArea } from './handwriting.js';
+import { writeArea, sheetArea, PASS_INK } from './handwriting.js';
 import { strokeViewer } from '../../ui/strokes.js';
 import { charAnatomy } from '../../ui/char-anatomy.js';
 import { translateZhVi } from '../../core/translate.js';
@@ -291,7 +291,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       setTimeout(() => speak(ex.hanzi, rate), 300);
       getResponse = () => {
         const scores = area.scores();
-        const passed = scores.filter((x) => x >= 0.6).length;
+        const passed = scores.filter((x) => x >= PASS_INK).length;
         const score = area.score();
         return { score, passed, reps, ok: passed >= Math.ceil(reps * 0.6) };
       };
@@ -313,7 +313,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         : h('div', { class: 'hw-hint' }, h('span', { class: 'hw-py' }, ex.pinyin), sayBtn);
       if (m === 'listen') setTimeout(() => speak(ex.hanzi, rate), 300);
       body.append(hint, area.el);
-      getResponse = () => { const score = area.score(); return { score, ok: score >= 0.6, guided: area.usedGuide() }; };
+      getResponse = () => { const score = area.score(); return { score, ok: score >= PASS_INK, guided: area.usedGuide() }; };
       mark = (ok) => area.showAnswer(ok);
     } else if (ex.type === 'freewrite') {
       // Đặt câu tự do với từ vừa học: kiểm tra có dùng từ, dịch máy câu của người học để tự đối chiếu, kèm câu mẫu.

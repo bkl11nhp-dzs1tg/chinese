@@ -14,21 +14,21 @@ const ACTIVITY = {
   'recall-review': 'Nhớ từ cũ', 'recall-compose': 'Cấu tạo chữ', 'recall-sentence': 'Đặt câu',
 };
 const MEM_SKILLS = [
-  ['Nhận mặt chữ (thẻ)', ['review', 'new', 'relearn'], 'cards'],
-  ['Từ vựng & thanh điệu', ['practice-vocab', 'practice-tones', 'practice-typing', 'practice'], 'tone'],
-  ['Tập viết theo mẫu', ['recall-copy'], 'pencil'],
-  ['Tự viết từ nghĩa', ['recall-write'], 'pencil'],
-  ['Viết từ pinyin', ['recall-pinyin', 'recall-missing'], 'keyboard'],
-  ['Nghe rồi viết', ['recall-listen'], 'headphones'],
-  ['Nhớ từ cũ', ['recall-review'], 'repeat'],
-  ['Cấu tạo chữ', ['recall-compose', 'practice-parts'], 'radical'],
-  ['Nghe hiểu', ['practice-listen'], 'headphones'],
-  ['Nói', ['practice-speak'], 'mic'],
-  ['Đọc hiểu & ghép câu', ['practice-reading', 'practice-sentence'], 'eye'],
-  ['Hỏi đáp', ['qa'], 'chat'],
-  ['Đặt câu & viết câu', ['recall-sentence', 'practice-compose'], 'lessons'],
-  ['Bài tập & kiểm tra', ['exercise', 'test'], 'clipboard'],
-  ['Trò chơi', ['game'], 'game'],
+  ['Nhận mặt chữ (thẻ)', ['review', 'new', 'relearn'], 'cards', '#/session'],
+  ['Từ vựng & thanh điệu', ['practice-vocab', 'practice-tones', 'practice-typing', 'practice'], 'tone', '#/practice/vocab'],
+  ['Tập viết theo mẫu', ['recall-copy'], 'pencil', '@recall'],
+  ['Tự viết từ nghĩa', ['recall-write'], 'pencil', '#/practice/write'],
+  ['Viết từ pinyin', ['recall-pinyin', 'recall-missing'], 'keyboard', '#/practice/write'],
+  ['Nghe rồi viết', ['recall-listen'], 'headphones', '#/practice/write'],
+  ['Nhớ từ cũ', ['recall-review'], 'repeat', '@recall'],
+  ['Cấu tạo chữ', ['recall-compose', 'practice-parts'], 'radical', '#/practice/parts'],
+  ['Nghe hiểu', ['practice-listen'], 'headphones', '#/practice/listen'],
+  ['Nói', ['practice-speak'], 'mic', '#/practice/speak'],
+  ['Đọc hiểu & ghép câu', ['practice-reading', 'practice-sentence'], 'eye', '#/practice/reading'],
+  ['Hỏi đáp', ['qa'], 'chat', '#/practice/qa'],
+  ['Đặt câu & viết câu', ['recall-sentence', 'practice-compose'], 'lessons', '#/practice/compose'],
+  ['Bài tập & kiểm tra', ['exercise', 'test'], 'clipboard', '@exercise'],
+  ['Trò chơi', ['game'], 'game', '#/games'],
 ];
 const WD = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
@@ -84,7 +84,7 @@ export async function render(root, ctx) {
   const learnedTotal = counts.learning + counts.mastered;
   const seg = (n, cls) => (n ? h('span', { class: cls, style: { flexGrow: String(n) } }) : null);
 
-  const tile = (v, l, ic) => h('div', { class: 'tile px-box' }, h('div', { class: 'tile-ic' }, icon(ic)), h('div', { class: 'value' }, v), h('div', { class: 'label' }, l));
+  const tile = (v, l, ic, href) => h(href ? 'a' : 'div', { class: ['tile', 'px-box', href ? 'tile-link' : ''], href }, h('div', { class: 'tile-ic' }, icon(ic)), h('div', { class: 'value' }, v), h('div', { class: 'label' }, l));
 
   mount(root,
     h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Tiến độ của bạn'), h('h1', {}, 'Thống kê'))),
@@ -100,8 +100,8 @@ export async function render(root, ctx) {
         h('div', { class: 'grid stats-tiles' },
           tile(formatDuration(totals.week), '7 ngày qua', 'clock'),
           tile(formatDuration(totals.all), 'tổng thời gian', 'target'),
-          tile(`${lessonsDone}/${data.lessons.length}`, 'bài hoàn thành', 'trophy'),
-          tile(String(learnedTotal), 'từ đã học', 'cards'))),
+          tile(`${lessonsDone}/${data.lessons.length}`, 'bài hoàn thành', 'trophy', '#/lessons?f=done'),
+          tile(String(learnedTotal), 'từ đã học', 'cards', '#/cards'))),
       h('section', { class: 'card px-box' },
         h('div', { class: 'row between' }, h('h2', { style: { margin: 0 } }, 'Lịch học 5 tuần'), legend()),
         h('div', { class: 'hm-head' }, WD.map((d) => h('span', {}, d))),
@@ -147,17 +147,21 @@ export async function render(root, ctx) {
     // Khả năng ghi nhớ theo từng kỹ năng (đúng/sai, số lượt).
     h('section', { class: 'card px-box st-card', style: { marginTop: '16px' } },
       h('div', { class: 'st-head' }, h('h2', {}, 'Khả năng ghi nhớ'), h('span', { class: 'st-sum' }, 'theo kỹ năng')),
-      h('div', { class: 'mem-skills' }, MEM_SKILLS.map(([label, acts, ic]) => {
+      h('div', { class: 'mem-skills' }, MEM_SKILLS.map(([label, acts, ic, link]) => {
+        // '@recall' / '@exercise': mở theo bài đang học.
+        const lessonId = encodeURIComponent((data.active || data.lessons[0])?.id || '');
+        const href = link === '@recall' ? `#/recall/${lessonId}` : link === '@exercise' ? `#/exercise/${lessonId}` : link;
         const rows = byAct.filter((a) => acts.includes(a.activity));
         const total = rows.reduce((n, a) => n + a.total, 0);
         const right = rows.reduce((n, a) => n + a.correct, 0);
         const rate = total ? right / total : null;
-        return h('div', { class: ['mem-row', rate == null ? 'empty' : rate >= 0.8 ? 'good' : rate >= 0.5 ? 'mid' : 'low'] },
+        return h('a', { class: ['mem-row', rate == null ? 'empty' : rate >= 0.8 ? 'good' : rate >= 0.5 ? 'mid' : 'low'], href },
           h('span', { class: 'mem-ic' }, icon(ic)),
           h('div', { class: 'mem-main' },
             h('div', { class: 'mem-top' }, h('b', {}, label), h('span', {}, rate == null ? 'chưa luyện' : pct(rate))),
             h('div', { class: 'mem-bar' }, h('i', { style: { width: `${Math.round((rate ?? 0) * 100)}%` } })),
-            total ? h('small', {}, `${total} lượt · sai ${total - right}`) : null));
+            total ? h('small', {}, `${total} lượt · sai ${total - right}`) : null),
+          h('span', { class: 'mem-go' }, icon('chevron')));
       }))),
   );
 }

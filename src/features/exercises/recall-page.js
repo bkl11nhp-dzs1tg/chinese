@@ -25,57 +25,54 @@ export async function render(root, ctx, { params }) {
   });
   const lines = data.lessons.flatMap((l) => (l.texts || []).flatMap((t) => t.lines.map((ln) => ({ zh: ln.zh, vi: ln.vi }))));
   const back = `lesson/${encodeURIComponent(lesson.id)}`;
-  // Từ của bài xếp theo ưu tiên: chưa luyện viết / lâu chưa luyện trước, từ đến hạn ôn được cộng điểm.
-  let ranked = freshOrder(lessonCards.filter(writable), 'recall', {
-    bonus: (c) => { const st = data.statesById.get(c.id); return st?.last_reviewed_at && st.due_at <= now ? 0.8 : 0; },
-  });
-  if (!ranked.length) { mount(root, h('p', { class: 'notice' }, 'Bài này chưa có từ để luyện viết.'), h('a', { class: 'btn', href: `#/${back}` }, 'Về bài')); return; }
+  // Toàn bộ từ của bài, theo thứ tự trong sách.
+  const words = lessonCards.filter(writable);
+  if (!words.length) { mount(root, h('p', { class: 'notice' }, 'Bài này chưa có từ để luyện viết.'), h('a', { class: 'btn', href: `#/${back}` }, 'Về bài')); return; }
   const decomp = await loadDecomp();
-  const total = ranked.length;
-  // Mỗi lượt 5 từ (ưu tiên từ lâu chưa luyện); mỗi từ viết 5 hoặc 10 lần trên một trang.
-  const size = Math.min(5, total);
-  const REPS = [5, 10];
-  let reps = REPS.includes(ctx.settings.recall_reps) ? ctx.settings.recall_reps : 5;
+  // Hai chế độ: Tập viết (từ mới, viết mỗi từ 1 lần) · Luyện tập (viết mỗi từ 6 lần trên một trang).
+  const MODES = [['learn', 'Tập viết', 1], ['drill', 'Luyện tập', 6]];
+  let mode = MODES.some(([id]) => id === ctx.settings.recall_mode) ? ctx.settings.recall_mode : 'learn';
+  const repsOf = (m) => MODES.find(([id]) => id === m)[2];
   let exercises = [];
   const build = () => {
-    exercises = buildRecallSet(ranked, { ordered: true, maxNew: size, reps, reviewCards: reviewCards.slice(0, 12), pool: data.cards, decomp, lines });
+    exercises = buildRecallSet(words, { ordered: true, maxNew: words.length, reps: repsOf(mode), reviewCards: reviewCards.slice(0, 12), pool: data.cards, decomp, lines });
   };
 
   const shell = focusShell({ onClose: () => ctx.navigate(back) });
   mount(root, shell.el);
   shell.setProgress(0, '');
-  const sizeRow = h('div', { class: 'seg seg-fit recall-size', role: 'radiogroup', 'aria-label': 'Số lần viết mỗi từ' });
+  const modeRow = h('div', { class: 'seg seg-fit recall-size', role: 'tablist', 'aria-label': 'Chế độ viết' });
   const wordsRow = h('div', { class: 'recall-words' });
   const countEl = h('strong');
+  const repsEl = h('strong');
   function paint() {
     build();
-    sizeRow.replaceChildren(...REPS.map((k) => h('button', {
-      class: ['seg-btn', k === reps ? 'on' : ''], type: 'button', role: 'radio', 'aria-checked': String(k === reps),
-      onclick: () => { reps = k; paint(); },
-    }, `Mỗi từ viết ${k} lần`)));
-    wordsRow.replaceChildren(...ranked.slice(0, size).map((c) => h('span', { class: 'rw-chip' }, h('span', { class: 'han', lang: 'zh-CN' }, c.hanzi), h('small', {}, c.pinyin))));
+    modeRow.replaceChildren(...MODES.map(([id, label]) => h('button', {
+      class: ['seg-btn', id === mode ? 'on' : ''], type: 'button', role: 'tab', 'aria-selected': String(id === mode),
+      onclick: () => { mode = id; paint(); },
+    }, label)));
+    repsEl.textContent = `${repsOf(mode)} lần`;
     countEl.textContent = `${exercises.length} bước`;
-    shuffleBtn.classList.toggle('hidden', size >= total);
   }
-  // Đổi sang nhóm từ khác: đẩy nhóm đang chọn xuống cuối.
-  const shuffleBtn = h('button', { class: 'btn ghost', type: 'button', onclick: () => { ranked = [...ranked.slice(size), ...ranked.slice(0, size)]; paint(); } }, 'Đổi nhóm từ khác');
+  wordsRow.replaceChildren(...words.map((c) => h('span', { class: 'rw-chip' }, h('span', { class: 'han', lang: 'zh-CN' }, c.hanzi), h('small', {}, c.pinyin))));
   shell.main.replaceChildren(h('div', { class: 'result recall-start' },
     badgeIcon('pencil'),
     h('div', { class: 'q-type' }, `Luyện nhớ & viết · Bài ${lesson.unit ?? ''}`),
     h('h1', { class: 'han' }, lesson.title),
-    sizeRow,
-    wordsRow,
-    shuffleBtn,
-    h('div', { class: 'group', style: { textAlign: 'left', marginTop: '20px' } },
-      h('div', { class: 'row-link' }, h('span', { class: 'grow' }, 'Độ dài'), countEl))));
+    modeRow,
+    h('div', { class: 'group recall-meta' },
+      h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Số từ'), h('strong', {}, `${words.length} từ`)),
+      h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Mỗi từ viết'), repsEl),
+      h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Độ dài'), countEl)),
+    wordsRow));
   paint();
   shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: () => start() }, 'Bắt đầu'));
 
   let runner = null;
   let tracker = null;
   function start() {
-    ctx.repo.saveSettings({ recall_reps: reps });
-    markSeen('recall', ranked.slice(0, size).map((c) => c.id));
+    ctx.repo.saveSettings({ recall_mode: mode });
+    markSeen('recall', words.map((c) => c.id));
     tracker = ctx.startTracking({ kind: 'exercise' });
     const wrong = new Set();
     runner = exerciseRunner({

@@ -6,6 +6,8 @@ import { icon } from '../../ui/icons.js';
 import { inkScore } from '../../core/practice.js';
 
 const GRID = 48;
+/** Điểm tối thiểu để một chữ viết tay được tính là đạt. */
+export const PASS_INK = 0.7;
 const FONT = '"PingFang SC","Noto Sans SC","Microsoft YaHei","Source Han Sans SC",sans-serif';
 
 /** Một ô viết cho một chữ. Trả về { el, isEmpty(), score(), showAnswer(), clear(), setGuide(on) }. */
@@ -132,7 +134,7 @@ export function sheetArea(word, reps, { onChange } = {}) {
     scores: () => rows.map(scoreOf),
     score() { const s = rows.map(scoreOf); return s.reduce((a, b) => a + b, 0) / (s.length || 1); },
     showAnswer() {
-      rows.forEach((r) => { const ok = scoreOf(r) >= 0.6; r.pads.forEach((p) => p.showAnswer(ok)); r.el.classList.add(ok ? 'ok' : 'no'); });
+      rows.forEach((r) => { const ok = scoreOf(r) >= PASS_INK; r.pads.forEach((p) => p.showAnswer(ok)); r.el.classList.add(ok ? 'ok' : 'no'); });
       tools.remove();
     },
   };

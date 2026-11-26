@@ -16,6 +16,7 @@ import { flashcard } from '../flashcards/flashcard.js';
 import { exerciseRunner, lessonExercises } from '../exercises/runner.js';
 import { matchGame, gameCards } from '../games/games.js';
 import { recordAnswer } from '../exercises/record.js';
+import { recentCards } from '../practice/practice.js';
 
 const RELEARN_GAP = 3; // thẻ chấm < 3 quay lại sau 3 bước
 const MAX_RELEARN = 2;
@@ -45,7 +46,8 @@ export async function render(root, ctx, { query }) {
       });
     } else {
       plan = buildPlan({
-        now, settings: { ...s, new_per_day: Math.max(s.new_per_day, 15), session_minutes: Math.max(s.session_minutes, 20), games_enabled: false },
+        // Học theo bài: học hết mọi từ còn lại của bài (không giới hạn 15 từ), thời lượng đủ cho số từ đó.
+        now, settings: { ...s, new_per_day: fresh.length, session_minutes: Math.max(s.session_minutes, Math.ceil((fresh.length * 25) / 60 / 1.2) + 1), games_enabled: false },
         cardStates: [], newCards: fresh, activeLesson: null,
       });
     }
@@ -236,13 +238,18 @@ export async function render(root, ctx, { query }) {
     ));
     const lessonDone = lesson && lesson.vocab_ids.every((id) => after.statesById.get(id)?.last_reviewed_at != null);
     // Học xong từ của bài: về trang bài để làm bước tiếp theo (bài khóa → luyện tập → kiểm tra), không nhảy thẳng vào kiểm tra.
-    const doneBtn = h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.3 }, onclick: () => ctx.navigate(backTo) }, lessonDone ? 'Về bài: bước tiếp theo' : 'Xong');
-    // Vừa học từ mới: mời hỏi đáp ngay với các từ đó.
-    shell.setFooter(stats.learned >= 2
-      ? h('div', { class: 'row nowrap' },
-        h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`practice/qa?scope=recent${lesson ? `&from=${encodeURIComponent(lesson.id)}` : ''}`) }, icon('chat'), 'Hỏi đáp từ vừa học'),
-        doneBtn)
-      : h('div', { class: 'row nowrap' }, doneBtn));
+    // Bài còn từ chưa học: nút chính là học tiếp phần còn lại.
+    const remaining = lesson ? lesson.vocab_ids.filter((id) => after.cardsById.get(id) && after.statesById.get(id)?.last_reviewed_at == null).length : 0;
+    const doneBtn = remaining
+      ? h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.3 }, onclick: () => ctx.navigate(`session?lesson=${encodeURIComponent(lesson.id)}&r=${Date.now()}`) }, `Học tiếp ${remaining} từ`)
+      : h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.3 }, onclick: () => ctx.navigate(backTo) }, lessonDone ? 'Về bài: bước tiếp theo' : 'Xong');
+    // Có từ vừa học (3 ngày qua): nút hỏi đáp riêng, luôn thấy ở thanh dưới, trên nút chính.
+    const qaBtn = recentCards(after).length >= 4
+      ? h('a', { class: 'btn tinted big block', href: `#/practice/qa?scope=recent${lesson ? `&from=${encodeURIComponent(lesson.id)}` : ''}` }, icon('chat'), 'Hỏi đáp từ vừa học')
+      : null;
+    doneBtn.style.flex = '';
+    doneBtn.classList.add('block');
+    shell.setFooter(h('div', { class: 'footer-stack' }, qaBtn, doneBtn));
     if (completed.length) toast(`Hoàn thành ${completed.length} bài!`);
   }
 
