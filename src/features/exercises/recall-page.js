@@ -9,6 +9,7 @@ import { resultView, reviewWords, answerList } from './result-view.js';
 import { buildRecallSet, writable } from '../../core/recall.js';
 import { loadDecomp } from '../../ui/char-anatomy.js';
 import { freshOrder, markSeen } from '../../core/variety.js';
+import { loadResume, saveResume, clearResume, resumeChoice } from './resume.js';
 
 export async function render(root, ctx, { params }) {
   const data = await ctx.loadAll();
@@ -55,37 +56,55 @@ export async function render(root, ctx, { params }) {
     countEl.textContent = `${exercises.length} bước`;
   }
   wordsRow.replaceChildren(...words.map((c) => h('span', { class: 'rw-chip' }, h('span', { class: 'han', lang: 'zh-CN' }, c.hanzi), h('small', {}, c.pinyin))));
-  shell.main.replaceChildren(h('div', { class: 'result recall-start' },
-    badgeIcon('pencil'),
-    h('div', { class: 'q-type' }, `Luyện nhớ & viết · Bài ${lesson.unit ?? ''}`),
-    h('h1', { class: 'han' }, lesson.title),
-    modeRow,
-    h('div', { class: 'group recall-meta' },
-      h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Số từ'), h('strong', {}, `${words.length} từ`)),
-      h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Mỗi từ viết'), repsEl),
-      h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Độ dài'), countEl)),
-    wordsRow));
-  paint();
-  shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: () => start() }, 'Bắt đầu'));
+  const RESUME_ID = `recall:${lesson.id}`;
+  const showStart = () => {
+    shell.setProgress(0, '');
+    shell.main.replaceChildren(h('div', { class: 'result recall-start' },
+      badgeIcon('pencil'),
+      h('div', { class: 'q-type' }, `Luyện nhớ & viết · Bài ${lesson.unit ?? ''}`),
+      h('h1', { class: 'han' }, lesson.title),
+      modeRow,
+      h('div', { class: 'group recall-meta' },
+        h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Số từ'), h('strong', {}, `${words.length} từ`)),
+        h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Mỗi từ viết'), repsEl),
+        h('div', { class: 'row-link static' }, h('span', { class: 'grow' }, 'Độ dài'), countEl)),
+      wordsRow));
+    paint();
+    shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: () => start() }, 'Bắt đầu'));
+  };
+  // Có bài đang làm dở: hỏi làm tiếp hay làm lại.
+  const saved = loadResume(RESUME_ID);
+  if (saved) {
+    resumeChoice(shell, saved, {
+      title: `${MODES.find(([id]) => id === saved.meta?.mode)?.[1] || 'Luyện viết'} · Bài ${lesson.unit ?? ''}`,
+      onResume: () => start(saved),
+      onRestart: () => { clearResume(RESUME_ID); showStart(); },
+    });
+  } else showStart();
 
   let runner = null;
   let tracker = null;
-  function start() {
+  function start(saved = null) {
+    if (saved) { mode = saved.meta?.mode || mode; exercises = saved.exercises; }
     ctx.repo.saveSettings({ recall_mode: mode });
-    markSeen('recall', words.map((c) => c.id));
+    if (!saved) markSeen('recall', words.map((c) => c.id));
     tracker = ctx.startTracking({ kind: 'exercise' });
-    const wrong = new Set();
+    const isGraded = (q) => q.type !== 'study' && q.mode !== 'trace';
+    const wrong = new Set((saved?.results || []).filter((r) => !r.correct && isGraded(r.question)).flatMap((r) => r.question.card_ids || []));
     runner = exerciseRunner({
       shell, exercises, mode: 'practice', rate: ctx.settings.tts_rate,
+      startAt: saved?.i || 0, initialResults: saved?.results || [],
+      onStep: (i, results) => saveResume(RESUME_ID, { exercises, i, results, meta: { mode } }),
       onAnswer: async (ex, ok) => {
         if (ex.type === 'sheet') { for (const id of ex.card_ids || []) await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 2, activity: 'recall-copy', sessionId: tracker.session.id, mode: 'log' }); return; }
-      if (ex.type === 'study' || ex.mode === 'trace') return; // xem từ / viết theo mẫu: không tính điểm nhớ
+        if (ex.type === 'study' || ex.mode === 'trace') return; // xem từ / viết theo mẫu: không tính điểm nhớ
         for (const id of ex.card_ids || []) {
           if (!ok) wrong.add(id);
           await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 1, activity: ex.activity || 'recall-write', sessionId: tracker.session.id, mode: 'light' });
         }
       },
       onDone: async (r) => {
+        clearResume(RESUME_ID);
         const session = await tracker.stop();
         // Chỉ tính các câu tự nhớ (bỏ thẻ xem và viết theo mẫu).
         const graded = r.results.filter((x) => x.question.type !== 'study' && x.question.mode !== 'trace');

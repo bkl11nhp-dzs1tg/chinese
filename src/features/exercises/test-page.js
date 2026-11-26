@@ -12,6 +12,7 @@ import { relatedCardIds } from '../../core/exercises.js';
 import { exerciseRunner } from './runner.js';
 import { reviewWords, resultView, answerList } from './result-view.js';
 import { recordAnswer } from './record.js';
+import { loadResume, resumeChoice, resumeOpts, clearResume } from './resume.js';
 
 export async function render(root, ctx, { params }) {
   const data = await ctx.loadAll();
@@ -39,30 +40,39 @@ export async function render(root, ctx, { params }) {
   const shell = focusShell({ onClose: () => ctx.navigate(back), closeLabel: 'Bỏ bài kiểm tra' });
   mount(root, shell.el);
 
+  const RESUME_ID = `test:${lesson.id}`;
   // Màn mở đầu: số câu, ngưỡng đạt.
-  shell.main.replaceChildren(h('div', { class: 'result' },
-    badgeIcon('clipboard'),
-    h('div', { class: 'q-type' }, `Kiểm tra cuối bài ${lesson.unit ?? ''}`),
-    h('h1', { class: 'han' }, lesson.title),
-    lesson.title_vi ? h('p', { class: 'muted' }, lesson.title_vi) : null,
-    h('div', { class: 'group', style: { textAlign: 'left', marginTop: '24px' } },
-      h('div', { class: 'row-link' }, h('span', { class: 'grow' }, 'Số câu'), h('strong', {}, questions.length)),
-      h('div', { class: 'row-link' }, h('span', { class: 'grow' }, 'Điểm đạt'), h('strong', {}, `${Math.round(s.pass_threshold * 100)}%`)),
-      h('div', { class: 'row-link' }, h('span', { class: 'grow' }, 'Cách chấm'), h('span', { class: 'muted' }, 'Chấm khi nộp bài'))),
-    data.statusById.get(lesson.id).learned < lessonCards.length
-      ? h('p', { class: 'notice small', style: { marginTop: '16px', textAlign: 'left' } }, `Bạn mới học ${data.statusById.get(lesson.id).learned}/${lessonCards.length} từ của bài. Vẫn có thể làm thử.`) : null));
-  shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: start }, 'Bắt đầu'));
+  const showIntro = () => {
+    shell.setProgress(0, '');
+    shell.main.replaceChildren(h('div', { class: 'result' },
+      badgeIcon('clipboard'),
+      h('div', { class: 'q-type' }, `Kiểm tra cuối bài ${lesson.unit ?? ''}`),
+      h('h1', { class: 'han' }, lesson.title),
+      lesson.title_vi ? h('p', { class: 'muted' }, lesson.title_vi) : null,
+      h('div', { class: 'group', style: { textAlign: 'left', marginTop: '24px' } },
+        h('div', { class: 'row-link' }, h('span', { class: 'grow' }, 'Số câu'), h('strong', {}, questions.length)),
+        h('div', { class: 'row-link' }, h('span', { class: 'grow' }, 'Điểm đạt'), h('strong', {}, `${Math.round(s.pass_threshold * 100)}%`)),
+        h('div', { class: 'row-link' }, h('span', { class: 'grow' }, 'Cách chấm'), h('span', { class: 'muted' }, 'Chấm khi nộp bài'))),
+      data.statusById.get(lesson.id).learned < lessonCards.length
+        ? h('p', { class: 'notice small', style: { marginTop: '16px', textAlign: 'left' } }, `Bạn mới học ${data.statusById.get(lesson.id).learned}/${lessonCards.length} từ của bài. Vẫn có thể làm thử.`) : null));
+    shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: () => start(null) }, 'Bắt đầu'));
+  };
+  const saved = loadResume(RESUME_ID);
+  if (saved) resumeChoice(shell, saved, { title: `Kiểm tra · Bài ${lesson.unit ?? ''}`, onResume: () => start(saved), onRestart: () => { clearResume(RESUME_ID); showIntro(); } });
+  else showIntro();
 
   let runner;
-  function start() {
+  function start(saved) {
+    const list = saved?.exercises || questions;
     runner = exerciseRunner({
-      shell, exercises: questions, mode: 'test', rate: s.tts_rate,
+      shell, exercises: list, mode: 'test', rate: s.tts_rate, ...resumeOpts(RESUME_ID, saved, list),
       onAnswer: (ex, ok) => recordAnswer(ctx.repo, relatedCardIds(ex, lessonCards), ok, { activity: 'test', sessionId: tracker.session.id, mode: 'log' }),
       onDone: (r) => finish(r),
     });
   }
 
   async function finish(r) {
+    clearResume(RESUME_ID);
     const session = await tracker.stop();
     const result = scoreTest(r.results, s.pass_threshold);
     await ctx.repo.saveTestScore(lesson.id, result.score);

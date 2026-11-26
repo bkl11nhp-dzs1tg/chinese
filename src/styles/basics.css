@@ -215,3 +215,10 @@ a.tile-link { color: var(--ink); text-decoration: none; }
 a.tile-link:hover, a.tile-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .footer-stack { display: grid; gap: 10px; }
 .mem-top { gap: 10px; } .mem-top span { flex: none; white-space: nowrap; }
+
+/* ---------- làm tiếp bài dở */
+.resume-card h1 { margin-bottom: 16px; }
+.resume-bar { max-width: 420px; height: 12px; margin: 0 auto 20px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.resume-bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent-fill-top), var(--accent)); }
+.resume-meta { max-width: 420px; margin: 0 auto; text-align: left; }
+.resume-card ~ * .btn, .focus-footer .btn { white-space: nowrap; }

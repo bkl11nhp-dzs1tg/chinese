@@ -44,10 +44,13 @@ export function lessonExercises(lesson, data, { limit = Infinity, rand = Math.ra
  * @param {(i:number, n:number)=>void} [o.onProgress]
  * @param {(ex, ok:boolean, response)=>void} [o.onAnswer]
  * @param {(r:{score:number, correct:number, total:number, results:Array})=>void} o.onDone
+ * @param {number} [o.startAt]  làm tiếp từ câu thứ startAt (khôi phục bài đang làm dở)
+ * @param {Array} [o.initialResults]  kết quả các câu đã làm trước đó
+ * @param {(i:number, results:Array)=>void} [o.onStep]  gọi mỗi khi sang câu mới (để lưu tiến độ)
  */
-export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, onProgress, onAnswer, onDone }) {
-  let i = 0;
-  const results = [];
+export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, onProgress, onAnswer, onDone, startAt = 0, initialResults = [], onStep }) {
+  let i = Math.max(0, Math.min(startAt, exercises.length));
+  const results = [...initialResults];
   const queue = [...exercises];
   let keyHandler = null;
   const onKey = (e) => keyHandler?.(e);
@@ -62,6 +65,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       onDone({ score: total ? correct / total : 0, correct, total, results });
       return;
     }
+    onStep?.(i, results);
     progress(i, queue.length);
     render(queue[i]);
   }

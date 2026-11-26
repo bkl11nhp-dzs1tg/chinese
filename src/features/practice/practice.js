@@ -9,6 +9,7 @@ import { ttsSupported } from '../../ui/speech.js';
 import { SKILLS, buildSkillSet, qaPairs } from '../../core/practice.js';
 import { freshOrder, markSeen } from '../../core/variety.js';
 import { recordAnswer } from '../exercises/record.js';
+import { startOrResume, resumeOpts, clearResume } from '../exercises/resume.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
 import { exerciseRunner } from '../exercises/runner.js';
 import { resultView, reviewWords, answerList } from '../exercises/result-view.js';
@@ -191,36 +192,44 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
   const tracker = ctx.startTracking({ kind: 'practice' });
   const shell = focusShell({ onClose: () => ctx.navigate(back) });
   mount(root, shell.el);
+  const RESUME_ID = `practice:${skill.id}:${scope}`;
+  let runner = null;
   const wrong = new Set();
-  const runner = exerciseRunner({
-    shell, exercises: questions, mode: 'practice', rate: s.tts_rate,
-    onAnswer: async (ex, ok) => {
-      if (!ok) for (const id of ex.card_ids || []) wrong.add(id);
-      await recordAnswer(ctx.repo, ex.card_ids, ok, { activity: ex.activity || `practice-${skill.id}`, sessionId: tracker.session.id });
-    },
-    onDone: async (r) => {
-      const session = await tracker.stop();
-      if (wrong.size) await ctx.repo.makeDue([...wrong]);
-      const all = { ...(s.skill_stats || {}) };
-      const prev = all[skill.id] || { sets: 0, best: 0 };
-      all[skill.id] = { sets: prev.sets + 1, best: Math.max(prev.best, r.score), last: r.score, at: Date.now() };
-      await ctx.repo.saveSettings({ skill_stats: all });
-      // Luyện trong phạm vi một bài: lưu điểm vào tiến độ của bài đó.
-      if (/^L\d+$/.test(scope)) await ctx.repo.saveSkillScore(scope, skill.id, r.score);
-      await ctx.refreshSettings();
-      cue('done');
-      shell.setProgress(1, '');
-      shell.main.replaceChildren(resultView({
-        emoji: badgeIcon(skill.icon, r.score >= 0.7 ? 'good' : 'accent'),
-        title: `${skill.label}: ${r.score >= 0.8 ? 'Tốt lắm!' : r.score >= 0.5 ? 'Khá ổn' : 'Luyện thêm nhé'}`,
-        score: r.score, correct: r.correct, total: r.total, activeMs: session.active_ms,
-      }), reviewWords([...wrong].map((id) => data.cardsById.get(id)).filter(Boolean), { rate: s.tts_rate }), answerList(r.results, { rate: s.tts_rate }));
-      shell.setFooter(h('div', { class: 'row nowrap' },
-        h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, fromLesson ? 'Về bài' : 'Kỹ năng khác'),
-        h('button', { class: 'btn primary big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`practice/${skill.id}?scope=${scope}${fromLesson ? `&from=${fromLesson}` : ''}&r=${Date.now()}`) }, 'Luyện tiếp')));
-    },
-  });
-  return () => { runner.destroy(); shell.destroy(); return tracker.stop(); };
+  const start = (saved) => {
+    const exercises = saved?.exercises || questions;
+    for (const r of saved?.results || []) if (!r.correct) for (const id of r.question.card_ids || []) wrong.add(id);
+    runner = exerciseRunner({
+      shell, exercises, mode: 'practice', rate: s.tts_rate, ...resumeOpts(RESUME_ID, saved, exercises),
+      onAnswer: async (ex, ok) => {
+        if (!ok) for (const id of ex.card_ids || []) wrong.add(id);
+        await recordAnswer(ctx.repo, ex.card_ids, ok, { activity: ex.activity || `practice-${skill.id}`, sessionId: tracker.session.id });
+      },
+      onDone: async (r) => {
+        clearResume(RESUME_ID);
+        const session = await tracker.stop();
+        if (wrong.size) await ctx.repo.makeDue([...wrong]);
+        const all = { ...(s.skill_stats || {}) };
+        const prev = all[skill.id] || { sets: 0, best: 0 };
+        all[skill.id] = { sets: prev.sets + 1, best: Math.max(prev.best, r.score), last: r.score, at: Date.now() };
+        await ctx.repo.saveSettings({ skill_stats: all });
+        // Luyện trong phạm vi một bài: lưu điểm vào tiến độ của bài đó.
+        if (/^L\d+$/.test(scope)) await ctx.repo.saveSkillScore(scope, skill.id, r.score);
+        await ctx.refreshSettings();
+        cue('done');
+        shell.setProgress(1, '');
+        shell.main.replaceChildren(resultView({
+          emoji: badgeIcon(skill.icon, r.score >= 0.7 ? 'good' : 'accent'),
+          title: `${skill.label}: ${r.score >= 0.8 ? 'Tốt lắm!' : r.score >= 0.5 ? 'Khá ổn' : 'Luyện thêm nhé'}`,
+          score: r.score, correct: r.correct, total: r.total, activeMs: session.active_ms,
+        }), reviewWords([...wrong].map((id) => data.cardsById.get(id)).filter(Boolean), { rate: s.tts_rate }), answerList(r.results, { rate: s.tts_rate }));
+        shell.setFooter(h('div', { class: 'row nowrap' },
+          h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, fromLesson ? 'Về bài' : 'Kỹ năng khác'),
+          h('button', { class: 'btn primary big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`practice/${skill.id}?scope=${scope}${fromLesson ? `&from=${fromLesson}` : ''}&r=${Date.now()}`) }, 'Luyện tiếp')));
+      },
+    });
+  };
+  startOrResume(shell, RESUME_ID, skill.label, start);
+  return () => { runner?.destroy(); shell.destroy(); return tracker.stop(); };
 }
 
 /** Huy hiệu sao tốt nhất của trò (3 sao), hoặc nhãn kỷ lục cũ. */
