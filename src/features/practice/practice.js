@@ -81,10 +81,11 @@ function openScopePicker(data, current, onPick) {
   dlg.showModal();
 }
 
-export async function renderHub(root, ctx, { query = {} } = {}) {
+export async function renderHub(root, ctx, { query = {}, name } = {}) {
   const data = await ctx.loadAll();
   const s = ctx.settings;
   const scope = query.scope || s.practice_scope || 'upto';
+  const tab = query.tab === 'games' || location.hash.startsWith('#/games') ? 'games' : 'skills';
   const { cards, lines, lessons } = scopeOf(data, scope);
   const stats = s.skill_stats || {};
   const best = {
@@ -93,12 +94,15 @@ export async function renderHub(root, ctx, { query = {} } = {}) {
     build: s.build_done ? `Đã xây ${s.build_done} câu` : 'Chưa chơi',
     listen: s.best_listen != null ? `Tốt nhất ${s.best_listen}/10` : 'Chưa chơi',
   };
-  const setScope = async (v) => { await ctx.repo.saveSettings({ practice_scope: v }); await ctx.refreshSettings(); ctx.navigate(`practice?scope=${v}`); };
+  const setScope = async (v) => { await ctx.repo.saveSettings({ practice_scope: v }); await ctx.refreshSettings(); ctx.navigate(`${tab === 'games' ? 'games' : 'practice'}?scope=${v}`); };
   const scopeLabel = /^L\d+(,L\d+)*$/.test(scope) ? (() => { const n = scope.split(',').map((x) => Number(x.slice(1))); return n.length === 1 ? `Bài ${n[0]}` : n.length <= 4 ? `Bài ${n.join(', ')}` : `${n.length} bài đã chọn`; })() : (SCOPES.find((x) => x[0] === scope)?.[1] || '');
 
   mount(root,
     h('div', { class: 'large-title' },
-      h('div', {}, h('div', { class: 'sub' }, 'Kỹ năng & trò chơi'), h('h1', {}, 'Luyện tập'))),
+      h('div', {}, h('div', { class: 'sub' }, 'Luyện tập'), h('h1', {}, tab === 'games' ? 'Trò chơi' : 'Kỹ năng')),
+      h('div', { class: 'seg seg-fit seg-page', role: 'tablist' },
+        h('a', { class: ['seg-btn', tab === 'skills' ? 'on' : ''], href: '#/practice', role: 'tab', 'aria-selected': String(tab === 'skills') }, 'Kỹ năng'),
+        h('a', { class: ['seg-btn', tab === 'games' ? 'on' : ''], href: '#/games', role: 'tab', 'aria-selected': String(tab === 'games') }, 'Trò chơi'))),
     h('button', { class: 'scope-card glass', type: 'button', onclick: () => openScopePicker(data, scope, setScope), 'aria-haspopup': 'dialog' },
       h('span', { class: 'sc-ic' }, icon('target')),
       h('span', { class: 'grow' },
@@ -107,8 +111,7 @@ export async function renderHub(root, ctx, { query = {} } = {}) {
         h('span', { class: 'sc-meta' }, `${cards.length} từ · ${lines.length} câu bài khóa`)),
       h('span', { class: 'sc-change' }, 'Đổi', icon('chevron'))),
 
-    h('div', { class: 'section-title' }, 'Theo kỹ năng'),
-    h('div', { class: 'skill-grid' }, SKILLS.map((k) => {
+    tab === 'skills' ? h('div', { class: 'skill-grid' }, SKILLS.map((k) => {
       const disabled = (k.id === 'listen' && !ttsSupported()) ? 'Máy không có giọng đọc' : (k.id === 'speak' && !speechOk() ? 'Tự đánh giá khi đọc' : null);
       const st = stats[k.id];
       return h('a', { class: ['skill-card', `tone-${k.tone}`], href: `#/practice/${k.id}?scope=${scope}` },
@@ -118,14 +121,13 @@ export async function renderHub(root, ctx, { query = {} } = {}) {
           h('span', { class: 'sk-desc' }, k.desc),
           h('span', { class: 'sk-meta' }, st ? `Lần gần nhất ${Math.round(st.last * 100)}% · ${st.sets} lượt` : (disabled || 'Chưa luyện'))),
         st ? h('span', { class: 'sk-score' }, `${Math.round(st.best * 100)}%`) : icon('chevron'));
-    })),
+    })) : null,
 
-    h('div', { class: 'section-title' }, 'Trò chơi'),
-    h('div', { class: 'game-grid' }, GAMES.map((g) => h('a', { class: ['game-card', `tone-${GAME_TONES[g.id]}`], href: `#/game/${g.id}` },
+    tab === 'games' ? h('div', { class: 'game-grid' }, GAMES.map((g) => h('a', { class: ['game-card', `tone-${GAME_TONES[g.id]}`], href: `#/game/${g.id}` },
       h('span', { class: 'gc-ic' }, icon(GAME_ICONS[g.id] || 'game')),
       h('strong', {}, g.title),
       h('span', { class: 'sk-desc' }, g.desc),
-      h('span', { class: 'gc-foot' }, starBadge((s.game_stars || {})[g.id], best[g.id]), h('span', { class: 'gc-play' }, icon('play')))))),
+      h('span', { class: 'gc-foot' }, starBadge((s.game_stars || {})[g.id], best[g.id]), h('span', { class: 'gc-play' }, icon('play')))))) : null,
     lessons.length ? null : h('p', { class: 'notice' }, 'Chưa có nội dung trong phạm vi này.'),
   );
 }

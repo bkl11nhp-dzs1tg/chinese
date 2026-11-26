@@ -85,7 +85,7 @@ export async function renderList(root, ctx, { query = {} } = {}) {
   const mine = readings.filter((r) => (r.kind || 'text') === tab).map(readingToDoc);
   const addBtn = tab !== 'text' ? h('button', { class: 'btn primary block', type: 'button', onclick: () => openAddDialog(ctx, tab) }, icon('plus'), tab === 'song' ? 'Thêm bài hát' : 'Thêm hội thoại') : null;
   mount(root,
-    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Nghe · Đọc · Hát'), h('h1', {}, 'Thư viện')), segmented('readings')),
+    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Bài học'), h('h1', {}, 'Thư viện')), segmented('readings')),
     tabs,
     addBtn ? h('div', { class: 'add-media' }, addBtn) : null,
     mine.length ? h('div', { class: 'group' }, mine.map(row)) : h('p', { class: 'notice' }, tab === 'film' ? 'Chưa có hội thoại nào.' : tab === 'song' ? 'Chưa có bài hát nào.' : 'Chưa có câu chuyện riêng.'),

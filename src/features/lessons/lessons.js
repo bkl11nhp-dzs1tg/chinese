@@ -52,7 +52,7 @@ export async function renderList(root, ctx, { query = {} } = {}) {
   search.addEventListener('input', draw);
   const chip = (id, label) => h('button', { class: ['chip', 'opt', filter === id ? 'selected' : ''], type: 'button', onclick: () => go({ f: id }) }, label);
   mount(root,
-    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, `${data.lessons.length} bài · ${books.length} quyển`), h('h1', {}, 'Bài học')), segmented('path')),
+    h('div', { class: 'large-title' }, h('div', {}, h('div', { class: 'sub' }, 'Bài học'), h('h1', {}, 'Lộ trình')), segmented('path')),
     h('div', { class: 'unit-head' },
       h('div', { class: 'row between' },
         h('h2', {}, book),
