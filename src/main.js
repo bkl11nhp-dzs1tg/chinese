@@ -7,6 +7,7 @@ import './styles/v4.css';
 import './styles/glass.css';
 import './styles/landing.css';
 import './styles/polish.css';
+import './styles/games.css';
 import { openDb, createRepo } from './db/repo.js';
 import { createContext, applyTheme } from './app.js';
 import { createRouter } from './router.js';

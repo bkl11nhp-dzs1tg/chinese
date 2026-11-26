@@ -1,0 +1,74 @@
+/* Trò chơi: sao kết quả, Chọn nhanh, Lật thẻ ghi nhớ, Ghép chữ Hán, Đấu trường 2 người. */
+
+/* ---------- Sao kết quả ---------- */
+.star-row { display: flex; justify-content: center; align-items: flex-end; gap: 6px; margin-bottom: 6px; }
+.big-star { font-size: 56px; line-height: 1; color: var(--surface-2); }
+.big-star.on { color: #f5b82e; animation: star-pop .5s var(--ease-spring) both; animation-delay: var(--d); text-shadow: 0 6px 16px rgba(245, 184, 46, .45); }
+.big-star:nth-child(2) { font-size: 70px; }
+@keyframes star-pop { from { transform: scale(.2) rotate(-40deg); opacity: 0; } }
+.stars-badge { display: inline-flex; gap: 1px; background: var(--surface) !important; }
+.stars-badge i { font-style: normal; color: var(--line-strong); }
+.stars-badge i.on { color: #f5b82e; }
+
+/* ---------- Chọn nhanh ---------- */
+.qk-ask { display: grid; justify-items: center; gap: 4px; padding: 14px; border-radius: 20px; background: var(--glass-strong); border: 1px solid var(--glass-border); }
+.qk-ask small { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.qk-main { font-size: clamp(22px, 6vw, 30px); font-weight: 800; text-align: center; }
+.qk-main.py { color: var(--accent-ink); }
+.qk-grid .mg-tile { min-height: 84px; font-size: 32px; }
+
+/* ---------- Lật thẻ ghi nhớ ---------- */
+.mem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; perspective: 900px; }
+@media (min-width: 700px) { .mem-grid { grid-template-columns: repeat(4, 1fr); } }
+.mem-card { position: relative; aspect-ratio: 4 / 5; border: 0; padding: 0; background: none; cursor: pointer; transform-style: preserve-3d; transition: transform .45s var(--ease-out); -webkit-tap-highlight-color: transparent; }
+.mem-card.up { transform: rotateY(180deg); }
+.mem-card > span { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 16px; backface-visibility: hidden; -webkit-backface-visibility: hidden; padding: 6px; text-align: center; }
+.mc-back { background: linear-gradient(150deg, var(--accent-fill-top), var(--accent-fill)); color: rgba(255, 255, 255, .85); font-size: 30px; box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 25%, transparent); }
+.mc-back::after { content: ""; position: absolute; inset: 6px; border-radius: 12px; border: 1.5px dashed rgba(255, 255, 255, .5); }
+.mc-front { transform: rotateY(180deg); background: var(--surface); border: 1.5px solid var(--line-strong); color: var(--ink); font: 700 14px/1.25 var(--font); }
+.mc-front.han { font: 400 34px var(--font-han); }
+.mem-card.done .mc-front { border-color: var(--good); background: var(--good-bg); }
+
+/* ---------- Ghép chữ Hán ---------- */
+.cg-stage { display: grid; gap: 14px; }
+.cg-frame { display: grid; gap: 6px; width: 200px; height: 200px; margin: 0 auto; padding: 8px; border-radius: 22px; background: var(--surface); border: 2px solid color-mix(in srgb, var(--accent) 35%, var(--line)); transition: border-color .2s; }
+.cg-frame.hz { grid-auto-flow: column; }
+.cg-frame.v { grid-auto-flow: row; }
+.cg-frame.ok { border-color: var(--good); background: var(--good-bg); }
+.cg-frame.no { border-color: var(--bad); }
+.cg-frame.shake { animation: shake .3s; }
+.cg-slot { border-radius: 14px; border: 2px dashed var(--line-strong); display: grid; place-items: center; min-height: 60px; transition: background .15s; }
+.cg-slot.over { background: var(--accent-soft); border-color: var(--accent); }
+.cg-slot .cg-tile { width: 100%; height: 100%; border: 0; background: transparent; box-shadow: none; font-size: 44px; }
+.cg-bank { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; min-height: 70px; }
+.cg-tile { width: 60px; height: 60px; border-radius: 14px; border: 1.5px solid var(--line-strong); background: var(--glass-strong); font-size: 32px; color: var(--ink); cursor: grab; touch-action: none; box-shadow: var(--glass-shadow); }
+.cg-tile.dragging { opacity: .4; }
+.cg-ghost { position: fixed; z-index: 90; pointer-events: none; opacity: .9; }
+.cg-answer { display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 800; }
+.cg-answer .han { font-size: 44px; }
+
+/* ---------- Đấu trường 2 người ---------- */
+body.duel-mode .focus-main { padding: 0 !important; max-width: none !important; }
+body.duel-mode .focus-footer { display: none; }
+.duel { display: grid; grid-template-rows: 1fr auto 1fr; gap: 8px; height: calc(100dvh - 90px); padding: 8px; }
+.du-side { display: grid; grid-template-rows: auto auto 1fr; gap: 8px; padding: 12px; border-radius: 22px; border: 2px solid; transition: box-shadow .2s; min-height: 0; }
+.du-side.p1 { border-color: #e8344f; background: color-mix(in srgb, #e8344f 9%, var(--surface)); transform: rotate(180deg); }
+.du-side.p2 { border-color: #3a7bd5; background: color-mix(in srgb, #3a7bd5 9%, var(--surface)); }
+.du-side.win { box-shadow: 0 0 0 4px color-mix(in srgb, var(--good) 45%, transparent); }
+.du-head { display: flex; align-items: center; gap: 8px; }
+.du-name { font-weight: 800; padding: 2px 10px; border-radius: 999px; color: #fff; }
+.p1 .du-name { background: #e8344f; } .p2 .du-name { background: #3a7bd5; }
+.du-combo { font-weight: 800; color: #e2571f; }
+.du-score { margin-left: auto; font-size: 28px; font-variant-numeric: tabular-nums; }
+.du-ask { text-align: center; font-size: clamp(18px, 5vw, 24px); font-weight: 800; }
+.du-ask .py { color: var(--accent-ink); }
+.du-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; min-height: 0; }
+.du-opt { border-radius: 14px; border: 1.5px solid var(--line-strong); background: var(--surface); color: var(--ink); font-size: 30px; cursor: pointer; min-height: 56px; }
+.du-opt.correct { background: var(--good-bg); border-color: var(--good); } .du-opt.wrong { background: var(--bad-bg); border-color: var(--bad); }
+.du-opt:disabled { opacity: .55; }
+.du-mid { text-align: center; font-weight: 800; color: var(--muted); font-size: 13px; }
+@media (orientation: landscape) {
+  .duel { grid-template-rows: none; grid-template-columns: 1fr auto 1fr; }
+  .du-side.p1 { transform: none; }
+  .du-mid { writing-mode: vertical-rl; align-self: center; }
+}

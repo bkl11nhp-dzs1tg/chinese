@@ -720,3 +720,6 @@ body.focus-mode .zhk-fab { bottom: calc(96px + env(safe-area-inset-bottom)); }
 .study-card .anatomy { max-width: 460px; }
 /* Thanh tiến độ trên cùng có nền, không để chữ cuộn lộ ra phía sau */
 .focus-top { background: color-mix(in srgb, var(--bg) 92%, transparent) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.scope-foot { position: sticky; bottom: -1px; display: flex; gap: 10px; justify-content: flex-end; padding: 12px 0 2px; margin-top: 12px; background: var(--glass-strong); } .scope-foot .btn { white-space: nowrap; } .scope-foot .btn.primary { flex: 1; }
+.scope-foot { background: var(--surface) !important; margin-left: -24px; margin-right: -24px; padding: 12px 24px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); box-shadow: 0 -8px 20px rgba(60,20,30,.06); }
+.scope-multi { display: flex; justify-content: flex-end; margin-top: 14px; } .scope-multi .chip { display: inline-flex; align-items: center; gap: 6px; } .scope-multi svg { width: 16px; height: 16px; } .scope-foot.hidden { display: none; }

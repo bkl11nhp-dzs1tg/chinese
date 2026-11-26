@@ -61,5 +61,8 @@ export const COLOR_PATHS = {
   download: F('pink', 'M4.5 17h15v4h-15z', ' opacity=".8"') + '<path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5"/><path d="M4.5 19.5h15"/>',
   speaker: F('pink', 'M4 9.5h3.5L12 5.5v13l-4.5-4H4z') + '<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a7.5 7.5 0 0 1 0 11"/>',
   books: F('pink', 'M4 5h4v15H4z') + F('blue', 'M8 7h4v13H8z') + F('yellow', 'm13 7.5 3.8-1 3.2 12.5-3.8 1z') + '<path d="M4 20V5h4v15M8 20V7h4v13"/><path d="m13 7.5 3.8-1 3.2 12.5-3.8 1z"/><path d="M3 20.5h18"/>',
+  // Cấu tạo chữ: chữ 好 tách 2 thành phần (女 | 子) trong khung chia đôi
+  radical: F('pink', 'M3.5 5.5a2 2 0 0 1 2-2h5v17h-5a2 2 0 0 1-2-2z') + F('yellow', 'M13.5 3.5h5a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-5z')
+    + '<rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M12 3.5v17" stroke-dasharray="2 2"/><path d="M6 8.5h3l-2.5 6M5.5 12.5l3 2.5M15 7.5h3.5l-2 2M17 9.5v7l-1 .5M14.5 12h4.5"/>',
   chat: F('blue', 'M4.5 5.5h15v10h-9l-4.5 4v-4h-1.5z') + '<path d="M4.5 5.5h15v10h-9l-4.5 4v-4h-1.5z"/><path d="M8.5 10.5h7"/>',
 };

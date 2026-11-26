@@ -13,7 +13,7 @@ const MEM_SKILLS = [
   ['Viết từ pinyin', ['recall-pinyin', 'recall-missing'], 'keyboard'],
   ['Nghe rồi viết', ['recall-listen'], 'headphones'],
   ['Nhớ từ cũ', ['recall-review'], 'repeat'],
-  ['Cấu tạo chữ', ['recall-compose'], 'blocks'],
+  ['Cấu tạo chữ', ['recall-compose'], 'radical'],
   ['Đặt câu', ['recall-sentence'], 'chat'],
   ['Bài tập & luyện kỹ năng', ['exercise', 'practice', 'game'], 'target'],
 ];

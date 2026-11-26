@@ -13,8 +13,8 @@ import { resultView, reviewWords } from '../exercises/result-view.js';
 import { loadDecomp } from '../../ui/char-anatomy.js';
 import { GAMES } from '../games/games.js';
 
-export const GAME_ICONS = { match: 'link', race: 'bolt', build: 'blocks', listen: 'headphones' };
-const GAME_TONES = { match: 'orange', race: 'red', build: 'teal', listen: 'blue' };
+export const GAME_ICONS = { match: 'link', race: 'bolt', build: 'blocks', listen: 'headphones', quick: 'target', compose: 'radical', duel: 'trophy', memory: 'cards' };
+const GAME_TONES = { match: 'orange', race: 'red', build: 'teal', listen: 'blue', quick: 'purple', compose: 'green', duel: 'navy', memory: 'red' };
 const speechOk = () => !!(globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition);
 
 /** Phạm vi luyện: 'upto' (từ bài 1 đến bài đang học), 'learned', 'active', 'all', hoặc mã bài. */
@@ -24,7 +24,7 @@ export function scopeOf(data, scope) {
   let lessons;
   if (scope === 'all' || scope === 'learned') lessons = data.lessons;
   else if (scope === 'active') lessons = data.active ? [data.active] : data.lessons.slice(0, 1);
-  else if (/^L\d+$/.test(scope || '')) lessons = data.lessons.filter((l) => l.id === scope);
+  else if (/^L\d+(,L\d+)*$/.test(scope || '')) { const pick = new Set(scope.split(',')); lessons = data.lessons.filter((l) => pick.has(l.id)); }
   else lessons = data.lessons.slice(0, Math.max(1, activeIdx + 1));
   const ids = new Set(lessons.flatMap((l) => l.vocab_ids));
   let cards = data.cards.filter((c) => ids.has(c.id) || (scope !== 'active' && c.source === 'reading'));
@@ -45,16 +45,36 @@ function openScopePicker(data, current, onPick) {
   const close = () => { dlg.close(); };
   const pick = (v) => { close(); onPick(v); };
   const books = [...new Set(data.lessons.map((l) => l.book))];
+  // Chọn nhiều bài: bấm để bật/tắt, rồi bấm "Luyện N bài".
+  const chosen = new Set(/^L\d+(,L\d+)*$/.test(current || '') ? current.split(',') : []);
+  // Mặc định như cũ: bấm 1 bài là chọn luôn. Bật "Chọn nhiều bài" để chọn nhiều.
+  let multi = /,/.test(current || '');
+  const multiBtn = h('button', { class: ['chip', 'opt', multi ? 'selected' : ''], type: 'button', 'aria-pressed': String(multi), onclick: () => {
+    multi = !multi;
+    multiBtn.classList.toggle('selected', multi); multiBtn.setAttribute('aria-pressed', String(multi));
+    if (multi && !chosen.size && /^L\d+$/.test(current || '')) chosen.add(current);
+    dlg.querySelectorAll('.lp-num').forEach((b) => b.classList.toggle('on', multi ? chosen.has(b.dataset.id) : b.dataset.id === current));
+    paintFoot();
+  } }, icon('check'), 'Chọn nhiều bài');
+  const foot = h('div', { class: 'scope-foot' });
+  const goBtn = h('button', { class: 'btn primary', type: 'button', onclick: () => pick(data.lessons.filter((l) => chosen.has(l.id)).map((l) => l.id).join(',')) });
+  const clearBtn = h('button', { class: 'btn ghost', type: 'button', onclick: () => { chosen.clear(); dlg.querySelectorAll('.lp-num.on').forEach((b) => { b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); }); paintFoot(); } }, 'Bỏ chọn');
+  function paintFoot() { foot.classList.toggle('hidden', !multi); goBtn.textContent = chosen.size ? `Luyện ${chosen.size} bài đã chọn` : 'Chọn bài ở trên'; goBtn.disabled = !chosen.size; clearBtn.classList.toggle('hidden', !chosen.size); }
+  foot.append(clearBtn, goBtn);
+  function toggle(id, btn) { if (chosen.has(id)) chosen.delete(id); else chosen.add(id); btn.classList.toggle('on', chosen.has(id)); btn.setAttribute('aria-pressed', String(chosen.has(id))); paintFoot(); }
   const dlg = h('dialog', { class: 'scope-dialog', 'aria-label': 'Chọn phạm vi luyện' },
     h('div', { class: 'row between nowrap' }, h('h2', { style: { margin: 0 } }, 'Phạm vi luyện'),
       h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'Đóng', onclick: close }, icon('close'))),
     h('div', { class: 'scope-opts' }, SCOPES.map(([v, label, desc, ic]) => h('button', { class: ['scope-opt', v === current ? 'on' : ''], type: 'button', onclick: () => pick(v) },
       h('span', { class: 'sc-ic' }, icon(ic)), h('span', { class: 'grow' }, h('strong', {}, label), h('span', { class: 'sc-meta' }, desc)), v === current ? icon('check') : null))),
+    h('div', { class: 'scope-multi' }, multiBtn),
     books.map((b) => [h('div', { class: 'section-title', style: { margin: '16px 2px 8px' } }, b),
       h('div', { class: 'lesson-pick' }, data.lessons.filter((l) => l.book === b).map((l) => {
         const st = data.statusById.get(l.id).status;
-        return h('button', { class: ['lp-num', l.id === current ? 'on' : '', st], type: 'button', title: `Bài ${l.unit}: ${l.title}`, onclick: () => pick(l.id) }, String(l.unit));
-      }))]));
+        return h('button', { class: ['lp-num', (multi ? chosen.has(l.id) : l.id === current) ? 'on' : '', st], type: 'button', title: `Bài ${l.unit}: ${l.title}`, 'aria-pressed': String(chosen.has(l.id)), dataset: { id: l.id }, onclick: (e) => (multi ? toggle(l.id, e.currentTarget) : pick(l.id)) }, String(l.unit));
+      }))]),
+    foot);
+  paintFoot();
   dlg.addEventListener('close', () => dlg.remove());
   dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
   document.body.append(dlg);
@@ -74,7 +94,7 @@ export async function renderHub(root, ctx, { query = {} } = {}) {
     listen: s.best_listen != null ? `Tốt nhất ${s.best_listen}/10` : 'Chưa chơi',
   };
   const setScope = async (v) => { await ctx.repo.saveSettings({ practice_scope: v }); await ctx.refreshSettings(); ctx.navigate(`practice?scope=${v}`); };
-  const scopeLabel = /^L\d+$/.test(scope) ? `Bài ${Number(scope.slice(1))}` : (SCOPES.find((x) => x[0] === scope)?.[1] || '');
+  const scopeLabel = /^L\d+(,L\d+)*$/.test(scope) ? (() => { const n = scope.split(',').map((x) => Number(x.slice(1))); return n.length === 1 ? `Bài ${n[0]}` : n.length <= 4 ? `Bài ${n.join(', ')}` : `${n.length} bài đã chọn`; })() : (SCOPES.find((x) => x[0] === scope)?.[1] || '');
 
   mount(root,
     h('div', { class: 'large-title' },
@@ -105,7 +125,7 @@ export async function renderHub(root, ctx, { query = {} } = {}) {
       h('span', { class: 'gc-ic' }, icon(GAME_ICONS[g.id] || 'game')),
       h('strong', {}, g.title),
       h('span', { class: 'sk-desc' }, g.desc),
-      h('span', { class: 'gc-foot' }, h('span', { class: 'badge' }, best[g.id]), h('span', { class: 'gc-play' }, icon('play')))))),
+      h('span', { class: 'gc-foot' }, starBadge((s.game_stars || {})[g.id], best[g.id]), h('span', { class: 'gc-play' }, icon('play')))))),
     lessons.length ? null : h('p', { class: 'notice' }, 'Chưa có nội dung trong phạm vi này.'),
   );
 }
@@ -161,4 +181,10 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
     },
   });
   return () => { runner.destroy(); shell.destroy(); return tracker.stop(); };
+}
+
+/** Huy hiệu sao tốt nhất của trò (3 sao), hoặc nhãn kỷ lục cũ. */
+function starBadge(n, label) {
+  if (n == null) return h('span', { class: 'badge' }, label || 'Chưa chơi');
+  return h('span', { class: 'badge stars-badge', 'aria-label': `${n}/3 sao` }, [0, 1, 2].map((k) => h('i', { class: k < n ? 'on' : '' }, '★')));
 }

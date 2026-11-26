@@ -14,7 +14,7 @@ export const SKILLS = [
   { id: 'sentence', label: 'Ghép câu', desc: 'Sắp xếp từ thành câu đúng ngữ pháp', icon: 'blocks', tone: 'teal' },
   { id: 'write', label: 'Viết chữ', desc: 'Tự viết từ nghĩa, pinyin hoặc âm nghe', icon: 'pencil', tone: 'orange' },
   { id: 'compose', label: 'Viết câu', desc: 'Dịch câu và tự đặt câu với từ đã học', icon: 'lessons', tone: 'green' },
-  { id: 'parts', label: 'Cấu tạo chữ', desc: 'Ghép bộ thủ, thành phần thành chữ', icon: 'blocks', tone: 'purple' },
+  { id: 'parts', label: 'Cấu tạo chữ', desc: 'Ghép bộ thủ, thành phần thành chữ', icon: 'radical', tone: 'purple' },
 ];
 
 // ---------------------------------------------------------------- viết câu

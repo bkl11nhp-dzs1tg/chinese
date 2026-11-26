@@ -7,11 +7,14 @@ import { speak, chineseVoice, ttsSupported } from '../../ui/speech.js';
 import { shuffle } from '../../core/exercises.js';
 import { flashText, bump } from '../../ui/feedback.js';
 
+// 6 trò chính (Nối cặp và Đua thời gian giữ lại trong code: buổi học vẫn dùng Nối cặp ở cuối buổi).
 export const GAMES = [
-  { id: 'match', title: 'Nối cặp', desc: '6 cặp chữ – nghĩa, càng nhanh càng tốt.' },
-  { id: 'race', title: 'Đua thời gian', desc: '60 giây, đoán nghĩa từ hiện ra.' },
-  { id: 'build', title: 'Xây câu', desc: 'Sắp xếp các mảnh thành câu, không tính điểm.' },
+  { id: 'memory', title: 'Lật thẻ ghi nhớ', desc: 'Lật 2 thẻ tìm cặp chữ – nghĩa, càng ít lượt càng tốt.' },
+  { id: 'quick', title: 'Chọn nhanh', desc: 'Nhìn nghĩa / pinyin, chạm đúng chữ thật nhanh.' },
+  { id: 'compose', title: 'Ghép chữ Hán', desc: 'Kéo thả bộ thủ, thành phần thành chữ.' },
   { id: 'listen', title: 'Nghe chọn chữ', desc: 'Nghe phát âm, chọn chữ Hán đúng.' },
+  { id: 'build', title: 'Sắp xếp câu', desc: 'Sắp các từ thành câu đúng ngữ pháp.' },
+  { id: 'duel', title: 'Đấu trường 2 người', desc: 'Chia đôi màn hình, ai đúng trước được điểm.' },
 ];
 
 /** Chọn thẻ cho trò chơi: ưu tiên thẻ đã học; thiếu thì lấy thêm thẻ của bài đang học. */

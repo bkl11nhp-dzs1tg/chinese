@@ -5,6 +5,8 @@ import { icon, badgeIcon } from '../../ui/icons.js';
 import { focusShell } from '../../ui/focus.js';
 import { cue } from '../../ui/feedback.js';
 import { GAMES, gameCards, matchGame, raceGame, buildGame, listenGame, chineseVoice } from './games.js';
+import { quickGame, composeGame, duelGame, memoryGame, starsFor } from './games2.js';
+import { loadDecomp } from '../../ui/char-anatomy.js';
 
 export async function renderList(root, ctx) {
   const s = ctx.settings;
@@ -44,11 +46,20 @@ export async function renderGame(root, ctx, { params }) {
   const onProgress = (f, label) => shell.setProgress(f, label);
 
   const again = () => ctx.navigate(`game/${game.id}?r=${Date.now()}`);
-  const resultView = (title, lines) => {
+  const resultView = async (title, lines, stars = null) => {
     tracker.stop();
     cue('done');
     shell.setProgress(1, '');
-    mount(stage, h('div', { class: 'result' }, badgeIcon('flag', 'good'), h('h1', {}, title), lines.map((l) => h('p', {}, l))));
+    let best = null;
+    if (stars != null) {
+      const all = { ...(ctx.settings.game_stars || {}) };
+      best = Math.max(all[game.id] ?? 0, stars);
+      if (best !== all[game.id]) { all[game.id] = best; await ctx.repo.saveSettings({ game_stars: all }); await ctx.refreshSettings(); }
+    }
+    mount(stage, h('div', { class: 'result' },
+      stars != null ? h('div', { class: 'star-row', 'aria-label': `${stars}/3 sao` }, [0, 1, 2].map((k) => h('span', { class: ['big-star', k < stars ? 'on' : ''], style: { '--d': `${k * 160}ms` } }, '★'))) : badgeIcon('flag', 'good'),
+      h('h1', {}, title), lines.map((l) => h('p', {}, l)),
+      stars != null && best > stars ? h('p', { class: 'muted small' }, `Tốt nhất: ${'★'.repeat(best)}`) : null));
     shell.setFooter(h('div', { class: 'row nowrap' },
       h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate('games') }, 'Trò khác'),
       h('button', { class: 'btn primary big', type: 'button', style: { flex: 1 }, onclick: again }, 'Chơi lại')));
@@ -61,7 +72,7 @@ export async function renderGame(root, ctx, { params }) {
         const isBest = !s.best_match_ms || r.ms < s.best_match_ms;
         if (isBest) await ctx.repo.saveSettings({ best_match_ms: Math.round(r.ms) });
         await ctx.refreshSettings();
-        resultView(isBest ? 'Kỷ lục mới!' : 'Xong!', [`${(r.ms / 1000).toFixed(1)} giây, nhầm ${r.mistakes} lần.`]);
+        resultView(isBest ? 'Kỷ lục mới!' : 'Xong!', [`${(r.ms / 1000).toFixed(1)} giây, nhầm ${r.mistakes} lần.`], r.mistakes === 0 && r.ms < 25000 ? 3 : r.mistakes <= 2 ? 2 : 1);
       },
     });
   } else if (game.id === 'race') {
@@ -71,7 +82,7 @@ export async function renderGame(root, ctx, { params }) {
         const isBest = r.correct > (s.best_race || 0);
         if (isBest) await ctx.repo.saveSettings({ best_race: r.correct });
         await ctx.refreshSettings();
-        resultView(isBest ? 'Kỷ lục mới!' : 'Hết giờ!', [`Đúng ${r.correct}/${r.total} từ trong 60 giây.`]);
+        resultView(isBest ? 'Kỷ lục mới!' : 'Hết giờ!', [`Đúng ${r.correct}/${r.total} từ trong 60 giây.`], r.correct >= 15 && r.correct / Math.max(1, r.total) >= 0.85 ? 3 : r.correct >= 9 ? 2 : r.correct >= 4 ? 1 : 0);
       },
     });
   } else if (game.id === 'build') {
@@ -87,7 +98,7 @@ export async function renderGame(root, ctx, { params }) {
       onDone: async (r) => {
         await ctx.repo.saveSettings({ build_done: (s.build_done || 0) + r.done });
         await ctx.refreshSettings();
-        resultView('Xong!', [`Hoàn thành ${r.done}/${r.total} câu.`]);
+        resultView('Xong!', [`Hoàn thành ${r.done}/${r.total} câu.`], starsFor(r.done / Math.max(1, r.total)));
       },
     });
   } else if (game.id === 'listen') {
@@ -100,10 +111,29 @@ export async function renderGame(root, ctx, { params }) {
       onDone: async (r) => {
         if (s.best_listen == null || r.correct > s.best_listen) await ctx.repo.saveSettings({ best_listen: r.correct });
         await ctx.refreshSettings();
-        resultView('Xong!', [`Nghe đúng ${r.correct}/${r.total}.`]);
+        resultView('Xong!', [`Nghe đúng ${r.correct}/${r.total}.`], starsFor(r.correct / Math.max(1, r.total)));
       },
     });
   }
+  else if (game.id === 'quick') {
+    current = quickGame({ onProgress, cards: gameCards(data, 10), pool: data.cards, onResult: record,
+      onDone: (r) => resultView('Xong!', [`Đúng ${r.correct}/${r.total} · ${r.points} điểm`], r.correct === r.total && r.points >= r.total * 70 ? 3 : starsFor(r.correct / r.total) === 3 ? 2 : starsFor(r.correct / r.total)) });
+  } else if (game.id === 'compose') {
+    const decomp = await loadDecomp();
+    current = composeGame({ onProgress, cards: gameCards(data, 30), decomp, onResult: record,
+      onDone: (r) => (r.skipped ? resultView('Chưa đủ chữ', ['Học thêm vài bài rồi quay lại nhé.']) : resultView('Xong!', [`Ghép đúng ngay lần đầu ${r.correct}/${r.total} chữ.`], starsFor(r.correct / r.total))) });
+  } else if (game.id === 'memory') {
+    current = memoryGame({ onProgress, cards: gameCards(data, 6), onResult: record,
+      onDone: (r) => resultView('Tìm đủ cặp!', [`${r.moves} lượt lật · ${(r.ms / 1000).toFixed(0)} giây`], r.moves <= r.pairs + 2 ? 3 : r.moves <= r.pairs * 2 ? 2 : 1) });
+  } else if (game.id === 'duel') {
+    document.body.classList.add('duel-mode');
+    current = duelGame({ onProgress, cards: gameCards(data, 10), pool: data.cards,
+      onDone: (r) => {
+        document.body.classList.remove('duel-mode');
+        const [a, b] = r.scores;
+        resultView(a === b ? 'Hòa!' : a > b ? 'Đỏ thắng!' : 'Xanh thắng!', [`Đỏ ${a} – ${b} Xanh`]);
+      } });
+  }
   stage.append(current.el);
-  return () => { current?.destroy?.(); shell.destroy(); return tracker.stop(); };
+  return () => { document.body.classList.remove('duel-mode'); current?.destroy?.(); shell.destroy(); return tracker.stop(); };
 }

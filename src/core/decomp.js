@@ -80,7 +80,7 @@ export function buildComposeChars(words, data, { rand = Math.random, n = 6 } = {
       const x = data[ch];
       if (!x?.d || seen.has(ch)) continue;
       const { parts } = parseIds(x.d);
-      if (parts.length < 2 || parts.some((p) => /[？?⿰-⿻]/.test(p))) continue;
+      if (parts.length < 2 || parts.some((p) => /[？?⿰-⿻一丨丿丶乙亅⺀]/.test(p))) continue;
       // Chữ nhiễu: ưu tiên chữ chung một thành phần (khó hơn), rồi chữ bất kỳ.
       const share = pool.filter((c) => c !== ch && leaves(data[c].d).some((l) => parts.includes(l)));
       const others = [...shuffle(share), ...shuffle(pool)].filter((c, i, a) => c !== ch && a.indexOf(c) === i).slice(0, 3);

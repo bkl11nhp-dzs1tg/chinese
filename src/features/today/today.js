@@ -94,7 +94,7 @@ export async function render(root, ctx) {
         h('div', { class: 'week-strip' }, weekDays(sessions, now))),
       h('section', { class: 'card px-box' },
         h('div', { class: 'row between' }, h('div', { class: 'q-type' }, 'Luyện theo kỹ năng'), h('a', { class: 'small link-more', href: '#/practice' }, 'Tất cả', icon('chevron'))),
-        h('div', { class: 'skill-mini' }, SKILLS.map((k) => h('a', { class: ['skill-pill', `tone-${k.tone}`], href: `#/practice/${k.id}` },
+        h('div', { class: 'skill-mini' }, SKILLS.slice(0, 6).map((k) => h('a', { class: ['skill-pill', `tone-${k.tone}`], href: `#/practice/${k.id}` },
           h('span', { class: 'sk-ic' }, icon(k.icon)), h('span', {}, k.label)))))),
 
   );
