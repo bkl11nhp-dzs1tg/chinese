@@ -267,7 +267,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         h('div', { class: 'sc-py' }, ex.pinyin, h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'))),
         h('div', { class: 'sc-vi' }, ex.meaning),
         strokeViewer(ex.hanzi, { size: [...ex.hanzi].length > 2 ? 96 : 130 }),
-        charAnatomy(ex.hanzi)));
+        charAnatomy(ex.hanzi, { pinyin: ex.pinyin, meaning: ex.meaning })));
       setTimeout(() => speak(ex.hanzi, rate), 300);
       checkBtn.textContent = 'Đã xem, viết thử';
       getResponse = () => ({ ok: true });

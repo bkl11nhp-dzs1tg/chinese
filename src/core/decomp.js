@@ -62,8 +62,52 @@ export function cleanMeaning(m) {
   return out.join(', ');
 }
 
-/** Mô tả một chữ: { ch, struct, type, parts:[{ch, name, isRadical, role}], hint, meaning, pinyin } hoặc null. */
-export function describeChar(ch, data) {
+const TONE_MARKS = { ā: 'a1', á: 'a2', ǎ: 'a3', à: 'a4', ē: 'e1', é: 'e2', ě: 'e3', è: 'e4', ī: 'i1', í: 'i2', ǐ: 'i3', ì: 'i4', ō: 'o1', ó: 'o2', ǒ: 'o3', ò: 'o4', ū: 'u1', ú: 'u2', ǔ: 'u3', ù: 'u4', ǖ: 'v1', ǘ: 'v2', ǚ: 'v3', ǜ: 'v4', ü: 'v0' };
+/** 'jiàn' -> 'jian4', 'lǜ' -> 'lv4', 'men' -> 'men5' (khớp khóa trong trường hv). */
+export function numberedPinyin(py) {
+  let out = '';
+  let tone = 5;
+  for (const ch of String(py || '').normalize('NFC').toLowerCase()) {
+    const m = TONE_MARKS[ch];
+    if (m) { out += m[0]; if (m[1] !== '0') tone = Number(m[1]); } else if (/[a-z]/.test(ch)) out += ch;
+  }
+  return out ? `${out}${tone}` : '';
+}
+
+/** Âm Hán Việt của một chữ, chọn theo cách đọc pinyin trong từ (行 xíng → hành, háng → hàng). */
+export function hanViet(ch, data, syllable = '') {
+  const hv = data?.[ch]?.hv;
+  if (!hv) return '';
+  const pick = hv[numberedPinyin(syllable)] || hv[numberedPinyin(data[ch].py)] || hv['*'] || Object.values(hv)[0];
+  return pick?.[0] || '';
+}
+
+/**
+ * Tách pinyin của từ thành từng âm tiết theo chữ: "jiànkāng" + 健康 → ["jiàn","kāng"].
+ * Pinyin trong dữ liệu viết liền nên dựa vào các cách đọc có thể của từng chữ. Không khớp thì trả [].
+ */
+export function splitSyllables(pinyin, chars, data) {
+  const spaced = String(pinyin || '').trim().split(/[\s'’·-]+/).filter(Boolean);
+  if (spaced.length === chars.length) return spaced;
+  const src = spaced.join('').normalize('NFC');
+  const plain = [...src].map((c) => TONE_MARKS[c.toLowerCase()]?.[0] ?? c.toLowerCase()).join('');
+  if (plain.length !== src.length) return [];
+  const out = [];
+  let i = 0;
+  for (const ch of chars) {
+    const x = data?.[ch];
+    const cands = new Set([...Object.keys(x?.hv || {}), numberedPinyin(x?.py)].map((k) => k.replace(/\d$/, '')).filter((k) => k && k !== '*'));
+    let best = '';
+    for (const c of cands) if (plain.startsWith(c, i) && c.length > best.length) best = c;
+    if (!best) return [];
+    out.push(src.slice(i, i + best.length));
+    i += best.length;
+  }
+  return i === plain.length ? out : [];
+}
+
+/** Mô tả một chữ: { ch, struct, type, parts:[{ch, name, isRadical, role}], hint, meaning, pinyin, hv } hoặc null. */
+export function describeChar(ch, data, syllable = '') {
   const x = data?.[ch];
   if (!x) return null;
   const { op, parts } = parseIds(x.d);
@@ -73,7 +117,8 @@ export function describeChar(ch, data) {
     struct: op ? STRUCT[op] : null,
     type: TYPE[x.t] || null,
     meaning: cleanMeaning(x.m),
-    pinyin: x.py || '',
+    pinyin: syllable || x.py || '',
+    hv: hanViet(ch, data, syllable),
     hint: x.h || '',
     radical: x.r ? { ch: x.r, name: RADICALS[x.r] || nameOf(x.r) } : null,
     parts: parts.filter((p) => p && !/[？?]/.test(p)).map((p) => ({ ch: p, name: [...p].length > 1 ? '' : nameOf(p), isRadical: p === x.r, role: p === x.s ? 'nghĩa' : p === x.p ? 'âm' : null })),

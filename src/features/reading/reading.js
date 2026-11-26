@@ -18,6 +18,8 @@ import { lessonAudioSrc } from '../../content.js';
 import { audioPlayer } from '../lessons/lessons.js';
 import { lyricsToParagraphs, youtubeId, fmtTime } from '../../core/media.js';
 import { translateZhVi } from '../../core/translate.js';
+import { loadDecomp } from '../../ui/char-anatomy.js';
+import { describeChar } from '../../core/decomp.js';
 
 
 const MODES = [
@@ -170,7 +172,7 @@ export async function renderReader(root, ctx, { params }) {
   // Câu phẳng, kèm token và pinyin từng chữ (nạp pinyin-pro khi cần).
   const flat = [];
   doc.paragraphs.forEach((p, pi) => p.sentences.forEach((st) => {
-    flat.push({ ...st, pi, idx: flat.length, tokens: st.tokens?.length ? fillTokenGaps(st.hanzi, st.tokens) : segmentSentence(st.hanzi, dict), charPy: null });
+    flat.push({ ...st, pi, idx: flat.length, tokens: st.tokens?.length ? fillTokenGaps(st.hanzi, st.tokens) : segmentSentence(st.hanzi, dict, { icu: true }), charPy: null });
   }));
   let pinyinLib = null;
   async function ensurePinyin() {
@@ -339,7 +341,15 @@ export async function renderReader(root, ctx, { params }) {
       chars.length > 1 ? h('div', { class: 'chars' }, chars.map((ch, k) => {
         const single = dict.map.get(ch)?.[0];
         const cp = single?.pinyin || (pinyinLib ? (st.charPy?.[[...st.hanzi].indexOf(ch)] || pinyinLib.wordPinyin(ch)) : '');
-        return h('div', { class: 'char-row' }, h('span', { class: 'han' }, ch), h('span', { class: 'muted' }, cp), h('span', {}, single?.meaning || '—'));
+        // Nghĩa từng chữ: thẻ đã học, không có thì lấy từ dữ liệu cấu tạo chữ; kèm âm Hán Việt
+        const hvEl = h('b', { class: 'cr-hv' });
+        const meanEl = h('span', {}, single?.meaning || '—');
+        loadDecomp().then((data) => {
+          const d = describeChar(ch, data, cp);
+          if (d?.hv) hvEl.textContent = d.hv;
+          if (!single?.meaning && d?.meaning) meanEl.textContent = d.meaning.split(',').slice(0, 2).join(',');
+        });
+        return h('div', { class: 'char-row' }, h('span', { class: 'han' }, ch), h('span', { class: 'muted' }, cp), h('span', {}, hvEl, meanEl));
       })) : null,
       h('div', { class: 'example' }, h('div', { class: 'muted small' }, 'Trong bài:'), h('div', { class: 'han', style: { fontSize: '20px' } }, st.hanzi), st.meaning ? h('div', { class: 'small' }, st.meaning) : null),
       h('p', { class: 'muted small' }, [status ? `Trạng thái: ${status === 'mastered' ? 'đã thuộc' : status === 'learning' ? 'đang học' : 'chưa học'}` : null, `Đã tra ${lookups} lần`].filter(Boolean).join(' · ')),

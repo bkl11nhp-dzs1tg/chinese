@@ -118,7 +118,7 @@ export async function render(root, ctx, { query }) {
         lessonRef ? h('a', { class: 'btn', style: { flex: 1 }, href: `#/lesson/${encodeURIComponent(lessonRef.id)}`, onclick: () => dlg.close() }, icon('lessons'), `Bài ${lessonRef.unit}`) : null,
         h('button', { class: 'btn primary', type: 'button', style: { flex: 1 }, onclick: () => dlg.close() }, 'Đóng')));
     const sd = dlg.querySelector('.stroke-details');
-    sd.addEventListener('toggle', () => { const b = sd.querySelector('.sd-body'); if (sd.open && !b.children.length) b.append(strokeViewer(c.hanzi, { size: [...c.hanzi].length > 2 ? 80 : 110 }), charAnatomy(c.hanzi)); });
+    sd.addEventListener('toggle', () => { const b = sd.querySelector('.sd-body'); if (sd.open && !b.children.length) b.append(strokeViewer(c.hanzi, { size: [...c.hanzi].length > 2 ? 80 : 110 }), charAnatomy(c.hanzi, { pinyin: c.pinyin, meaning: c.meaning })); });
     dlg.addEventListener('close', () => dlg.remove());
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
     document.body.append(dlg);

@@ -753,3 +753,19 @@ body.focus-mode .zhk-fab { bottom: calc(96px + env(safe-area-inset-bottom)); }
 .word-dialog .stroke-details summary::after { content: "▾"; margin-left: 2px; transition: transform .2s; }
 .word-dialog .stroke-details[open] summary::after { transform: rotate(180deg); }
 .word-dialog .sd-body { display: grid; justify-items: center; gap: 10px; }
+
+/* Cấu tạo chữ: âm Hán Việt + dòng ghép nghĩa của từ nhiều chữ */
+.an-hv { display: block; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-ink); }
+.an-sum { display: grid; gap: 10px; justify-items: center; padding: 14px 12px; border-radius: 18px; background: var(--accent-soft); margin-bottom: 4px; }
+.as-row { display: flex; align-items: stretch; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.as-chip { display: grid; align-content: start; justify-items: center; gap: 1px; width: 108px; box-sizing: border-box; padding: 8px 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.as-chip .han { font-size: 30px; line-height: 1.15; }
+.as-chip b { font-size: 14px; color: var(--accent-ink); }
+.as-chip small { font-size: 12px; color: var(--muted); max-width: 96px; text-align: center; line-height: 1.25; }
+.as-plus { align-self: center; font-weight: 800; color: var(--muted); }
+.as-out { display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 4px 10px; text-align: center; }
+.as-out::before { content: "→"; font-weight: 800; color: var(--accent-ink); }
+.as-hv { font-weight: 800; color: var(--accent-ink); }
+.as-vi { font-weight: 800; font-size: 17px; color: var(--ink); }
+.as-eq { font-weight: 800; color: var(--muted); }
+.char-row .cr-hv { color: var(--accent-ink); margin-right: 6px; } .char-row .cr-hv:empty { display: none; }

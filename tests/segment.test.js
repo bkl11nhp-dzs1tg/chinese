@@ -59,3 +59,25 @@ describe('sentencePinyin theo pinyin trong sách', () => {
     expect(sentencePinyin('他跑得很快。', segmentSentence('他跑得很快。', d), d)).toMatch(/pǎo de hěn kuài/);
   });
 });
+
+describe('tách từ ngoài từ điển bằng Intl.Segmenter (icu)', () => {
+  const dict = buildDictionary(['我', '爱', '你', '的', '心'].map((hanzi, i) => ({ id: String(i), hanzi })));
+  const words = (t, o) => segmentSentence(t, dict, o).filter((x) => x.word).map((x) => x.text);
+  it('gộp từ chưa học thành cụm: 幸福', () => {
+    expect(words('祝你幸福', { icu: true })).toEqual(['祝', '你', '幸福']);
+  });
+  it('tách đại từ/trợ từ khỏi cụm ICU: 祝你, 笑得', () => {
+    expect(words('祝你幸福', { icu: true })).toEqual(['祝', '你', '幸福']);
+    expect(words('你笑得甜蜜蜜', { icu: true })).toEqual(['你', '笑', '得', '甜蜜蜜']);
+  });
+  it('cụm ghép từ các từ đã học thì vẫn tách: 我爱你', () => {
+    expect(words('我爱你', { icu: true })).toEqual(['我', '爱', '你']);
+  });
+  it('không bật icu thì tách từng chữ như cũ', () => {
+    expect(words('幸福')).toEqual(['幸', '福']);
+  });
+  it('ghép lại các token = câu gốc', () => {
+    const t = '月亮代表我的心。';
+    expect(segmentSentence(t, dict, { icu: true }).map((x) => x.text).join('')).toBe(t);
+  });
+});
