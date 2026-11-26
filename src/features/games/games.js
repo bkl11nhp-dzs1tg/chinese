@@ -5,6 +5,7 @@ import { h, mount } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { speak, chineseVoice, ttsSupported } from '../../ui/speech.js';
 import { shuffle } from '../../core/exercises.js';
+import { freshOrder, markSeen } from '../../core/variety.js';
 import { flashText, bump } from '../../ui/feedback.js';
 
 // 6 trò chính (Nối cặp và Đua thời gian giữ lại trong code: buổi học vẫn dùng Nối cặp ở cuối buổi).
@@ -17,17 +18,22 @@ export const GAMES = [
   { id: 'duel', title: 'Đấu trường 2 người', desc: 'Chia đôi màn hình, ai đúng trước được điểm.' },
 ];
 
-/** Chọn thẻ cho trò chơi: ưu tiên thẻ đã học; thiếu thì lấy thêm thẻ của bài đang học. */
+/**
+ * Chọn thẻ cho trò chơi: từ các bài đã qua tới bài đang học (cộng từ đã học ở bài khác),
+ * ưu tiên từ lâu chưa gặp trong trò chơi / luyện tập để không lặp mãi vài từ đầu sách.
+ */
 export function gameCards(data, n) {
-  const learned = data.cards.filter((c) => data.statesById.get(c.id)?.last_reviewed_at != null);
-  let pool = shuffle(learned);
-  if (pool.length < n) {
-    const extra = (data.active ? data.active.vocab_ids.map((id) => data.cardsById.get(id)) : data.cards)
-      .filter((c) => c && !pool.includes(c));
-    pool = [...pool, ...shuffle(extra)];
-  }
-  if (pool.length < n) pool = [...pool, ...shuffle(data.cards.filter((c) => !pool.includes(c)))];
-  return pool.slice(0, n);
+  const learned = (c) => data.statesById.get(c.id)?.last_reviewed_at != null;
+  const activeIdx = data.active ? data.lessons.indexOf(data.active) : -1;
+  const upto = new Set(data.lessons.slice(0, Math.max(1, activeIdx + 1)).flatMap((l) => l.vocab_ids));
+  let pool = data.cards.filter((c) => upto.has(c.id) || learned(c));
+  if (pool.length < n) pool = data.cards;
+  const now = Date.now();
+  const picked = freshOrder(pool, 'w', {
+    bonus: (c) => { const st = data.statesById.get(c.id); return !st?.last_reviewed_at ? -0.5 : st.due_at <= now ? 0.8 : 0.3; },
+  }).slice(0, n);
+  markSeen('w', picked.map((c) => c.id));
+  return picked;
 }
 
 const fmtSec = (ms) => `${(ms / 1000).toFixed(1)} giây`;

@@ -5,6 +5,7 @@ import { freewriteQ } from './recall.js';
 import { buildComposeChars } from './decomp.js';
 
 export const SKILLS = [
+  { id: 'qa', label: 'Hỏi đáp', desc: 'Nghe câu hỏi trong bài, chọn hoặc ghép câu trả lời', icon: 'chat', tone: 'pink' },
   { id: 'listen', label: 'Nghe', desc: 'Nghe phát âm, chọn chữ hoặc câu đúng', icon: 'headphones', tone: 'blue' },
   { id: 'speak', label: 'Nói', desc: 'Đọc to từ và câu, máy nghe và chấm', icon: 'mic', tone: 'red' },
   { id: 'reading', label: 'Đọc hiểu', desc: 'Đọc câu trong bài khóa, chọn nghĩa', icon: 'eye', tone: 'green' },
@@ -141,11 +142,14 @@ function pickOthers(pool, exclude, key, n, rand) {
  * @param {{cards:Array, pool:Array, lines:Array<{zh,vi,tokens?}>, rand?:Function, n?:number}} src
  *   cards: từ trong phạm vi luyện; pool: kho để lấy phương án nhiễu; lines: câu bài khóa trong phạm vi.
  */
-export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], rand = Math.random, n = 10, decomp = null }) {
+export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], pairs = [], rand = Math.random, n = 10, decomp = null, order = null }) {
+  // order(arr, kind): thứ tự ưu tiên chọn ('word' | 'line' | 'pair'); mặc định xáo ngẫu nhiên.
+  const ord = order || ((a) => shuffle(a, rand));
   const words = cards.filter(usableCard);
   const poolWords = pool.filter(usableCard);
   const shortLines = lines.filter((l) => l.zh && l.vi && [...l.zh].length <= 24);
-  const pickWords = (k) => shuffle(words, rand).slice(0, k);
+  const pickWords = (k) => ord(words, 'word').slice(0, k);
+  const pickLines = (arr) => ord(arr, 'line');
   const out = [];
   const choose = (prompt, answer, others, extra = {}) => {
     if (others.length < 2) return;
@@ -165,13 +169,13 @@ export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], ran
       const others = pickOthers(poolWords, c, 'hanzi', 3, rand);
       if (others.length >= 2) out.push({ type: 'listen', speak: c.hanzi, prompt: 'Nghe và chọn chữ đúng', answer: c.hanzi, options: shuffle([c.hanzi, ...others], rand), card_ids: [c.id], explanation: `${c.hanzi} (${c.pinyin}): ${c.meaning}` });
     }
-    const vis = shuffle(shortLines, rand).slice(0, n - out.length);
+    const vis = pickLines(shortLines).slice(0, n - out.length);
     for (const l of vis) {
       const others = shuffle(shortLines.filter((x) => x.vi !== l.vi), rand).slice(0, 3).map((x) => x.vi);
       if (others.length >= 2) out.push({ type: 'listen', speak: l.zh, prompt: 'Nghe câu và chọn nghĩa', answer: l.vi, options: shuffle([l.vi, ...others], rand), explanation: l.zh });
     }
   } else if (skill === 'reading') {
-    for (const l of shuffle(shortLines, rand).slice(0, n)) {
+    for (const l of pickLines(shortLines).slice(0, n)) {
       choose(`Câu “${l.zh}” nghĩa là gì?`, l.vi, shuffle(shortLines.filter((x) => x.vi !== l.vi), rand).slice(0, 3).map((x) => x.vi), { explanation: l.zh });
     }
   } else if (skill === 'tones') {
@@ -185,12 +189,12 @@ export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], ran
       out.push({ type: 'pinyin', prompt: `Gõ pinyin của “${c.hanzi}” (${c.meaning})`, hanzi: c.hanzi, answer: c.pinyin, card_ids: [c.id], explanation: 'Không cần gõ dấu thanh; có thể gõ số (ni3hao3) hoặc v thay ü.' });
     }
   } else if (skill === 'write') {
-    for (const c of shuffle(words.filter((c) => [...c.hanzi].length <= 2 && /^[㐀-鿿]+$/.test(c.hanzi)), rand).slice(0, Math.min(n, 8))) {
+    for (const c of ord(words.filter((c) => [...c.hanzi].length <= 2 && /^[㐀-鿿]+$/.test(c.hanzi)), 'word').slice(0, Math.min(n, 8))) {
       const mode = ['meaning', 'pinyin', 'listen'][out.length % 3];
       out.push({ type: 'draw', mode, activity: `recall-${mode === 'meaning' ? 'write' : mode}`, prompt: mode === 'meaning' ? 'Viết chữ Hán có nghĩa:' : mode === 'pinyin' ? 'Viết chữ Hán có pinyin:' : 'Nghe rồi viết chữ', hanzi: c.hanzi, pinyin: c.pinyin, meaning: c.meaning, answer: c.hanzi, card_ids: [c.id], explanation: `${c.hanzi} (${c.pinyin}): ${c.meaning}` });
     }
   } else if (skill === 'compose') {
-    for (const l of shuffle(shortLines.filter((l) => [...l.zh].length <= 16), rand).slice(0, Math.min(n, 8))) {
+    for (const l of pickLines(shortLines.filter((l) => [...l.zh].length <= 16)).slice(0, Math.min(n, 8))) {
       out.push({ type: 'compose', prompt: l.vi, answer: l.zh });
     }
     // Xen 3 câu tự đặt với từ đã học
@@ -198,22 +202,93 @@ export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], ran
   } else if (skill === 'parts' && decomp) {
     out.push(...buildComposeChars(pickWords(n * 2), decomp, { rand, n }));
   } else if (skill === 'sentence') {
-    const ok = shuffle(shortLines.filter((l) => {
+    const ok = pickLines(shortLines.filter((l) => {
       const w = (l.tokens || []).filter((t) => t.word).map((t) => t.text);
       return w.length >= 3 && w.length <= 8 && new Set(w).size === w.length && !/[，,、]/.test(l.zh.replace(/[。？！]$/, ''));
-    }), rand).slice(0, n);
+    })).slice(0, n);
     for (const l of ok) {
       const pieces = l.tokens.filter((t) => t.word).map((t) => t.text);
       out.push({ type: 'reorder', prompt: `Sắp xếp thành câu: “${l.vi}”`, options: pieces, answer: pieces, explanation: `${l.zh} — ${l.vi}`, speak: l.zh });
     }
+  } else if (skill === 'qa') {
+    out.push(...qaQuestions(pairs, { rand, n, order: (a) => ord(a, 'pair'), words: pickWords(n), pool: poolWords }));
   } else if (skill === 'speak') {
     const ws = pickWords(Math.ceil(n / 2));
     for (const c of ws) out.push({ type: 'speak', prompt: 'Đọc to từ này', target: c.hanzi, pinyin: c.pinyin, meaning: c.meaning, card_ids: [c.id] });
-    for (const l of shuffle(shortLines.filter((x) => [...x.zh].length <= 12), rand).slice(0, n - out.length)) {
+    for (const l of pickLines(shortLines.filter((x) => [...x.zh].length <= 12)).slice(0, n - out.length)) {
       out.push({ type: 'speak', prompt: 'Đọc to câu này', target: l.zh, meaning: l.vi });
     }
   }
   return shuffle(out, rand).slice(0, n + 1).map((q, i) => ({ id: `p-${skill}-${i}`, ...q }));
+}
+
+// ---------------------------------------------------------------- hỏi đáp
+const Q_RX = /[？?]\s*$|吗[。！!]?$|呢[。！!]?$/;
+/** Câu hỏi trong bài khóa? */
+export const isQuestion = (zh) => Q_RX.test(String(zh || '').trim());
+
+/**
+ * Cặp hỏi – đáp từ các đoạn hội thoại: câu hỏi + câu ngay sau của người khác.
+ * texts: [{ lines:[{speaker, zh, vi}] }]. Trả về [{ q:{zh,vi}, a:{zh,vi}, lesson }].
+ */
+export function qaPairs(texts, lessonId = null) {
+  const out = [];
+  for (const t of texts || []) {
+    const ls = t.lines || [];
+    for (let i = 0; i + 1 < ls.length; i++) {
+      const q = ls[i], a = ls[i + 1];
+      if (!q.zh || !a.zh || !q.vi || !a.vi || !isQuestion(q.zh) || isQuestion(a.zh)) continue;
+      if (q.speaker && a.speaker && q.speaker === a.speaker) continue;
+      if ([...a.zh].length > 30 || [...q.zh].length > 30) continue;
+      out.push({ q: { zh: q.zh, vi: q.vi }, a: { zh: a.zh, vi: a.vi }, lesson: lessonId });
+    }
+  }
+  return out;
+}
+
+/**
+ * Câu hỏi hỏi – đáp. pairs: [{ q, a, tokens? }] (tokens: các từ của câu trả lời, để ghép câu).
+ * Xen 3 dạng: đọc câu hỏi chọn câu trả lời, nghe câu hỏi chọn câu trả lời, ghép câu trả lời.
+ */
+export function qaQuestions(pairs, { rand = Math.random, n = 10, order = null, words: vocab = [], pool = vocab } = {}) {
+  const uniq = [];
+  const seen = new Set();
+  for (const p of pairs) { const k = `${p.q.zh}|${p.a.zh}`; if (!seen.has(k)) { seen.add(k); uniq.push(p); } }
+  const answersOf = (p) => uniq.filter((x) => x.a.zh !== p.a.zh && x.q.zh !== p.q.zh).map((x) => x.a.zh);
+  const out = [];
+  // Hội thoại trong bài trước; chừa ít nhất 3 câu hỏi về từ (nếu có từ).
+  const maxDialog = vocab.length ? Math.max(n - 3, Math.ceil(n / 2)) : n;
+  for (const p of (order ? order(uniq) : shuffle(uniq, rand))) {
+    if (out.length >= maxDialog) break;
+    const others = [...new Set(shuffle(answersOf(p), rand))].slice(0, 3);
+    const kind = out.length % 3;
+    const words = (p.tokens || []).filter((t) => t.word).map((t) => t.text);
+    const explanation = `${p.q.zh} ${p.q.vi} → ${p.a.zh} ${p.a.vi}`;
+    if (kind === 2 && words.length >= 3 && words.length <= 8 && new Set(words).size === words.length) {
+      out.push({ type: 'reorder', activity: 'qa', prompt: `${p.q.zh} → Ghép câu trả lời: “${p.a.vi}”`, ask: `Ghép câu trả lời: “${p.a.vi}”`, options: words, answer: words, speak: p.q.zh, explanation, qa: p });
+    } else if (others.length >= 2) {
+      const opts = shuffle([p.a.zh, ...others], rand);
+      if (kind === 1) out.push({ type: 'listen', activity: 'qa', speak: p.q.zh, prompt: 'Nghe câu hỏi, chọn câu trả lời hợp', answer: p.a.zh, options: opts, explanation, qa: p });
+      else out.push({ type: 'choose', activity: 'qa', prompt: p.q.zh, ask: 'Chọn câu trả lời hợp', speak: p.q.zh, answer: p.a.zh, options: opts, explanation, qa: p });
+    }
+  }
+  // Hỏi đáp về từ: “X”是什么意思？ / “…”用汉语怎么说？
+  for (const [k, c] of vocab.entries()) {
+    if (out.length >= n) break;
+    const explanation = `${c.hanzi} (${c.pinyin}): ${c.meaning}`;
+    if (k % 2 === 0) {
+      const others = pickOthers(pool, c, 'meaning', 3, rand);
+      if (others.length < 2) continue;
+      const q = { zh: `“${c.hanzi}”是什么意思？`, vi: `“${c.hanzi}” nghĩa là gì?` };
+      out.push({ type: 'choose', activity: 'qa', prompt: q.zh, ask: 'Trả lời câu hỏi', speak: q.zh, answer: c.meaning, options: shuffle([c.meaning, ...others], rand), card_ids: [c.id], explanation, qa: { q, a: { zh: c.hanzi, vi: c.meaning } } });
+    } else {
+      const others = pickOthers(pool, c, 'hanzi', 3, rand);
+      if (others.length < 2) continue;
+      const q = { zh: `“${c.meaning}”用汉语怎么说？`, vi: `“${c.meaning}” tiếng Trung nói thế nào?` };
+      out.push({ type: 'choose', activity: 'qa', prompt: `“${c.meaning}”用汉语怎么说？`, ask: 'Trả lời câu hỏi', speak: '用汉语怎么说？', answer: c.hanzi, options: shuffle([c.hanzi, ...others], rand), card_ids: [c.id], explanation, qa: { q, a: { zh: c.hanzi, vi: c.meaning } } });
+    }
+  }
+  return out;
 }
 
 /** Chấm phần nói: so khớp chữ Hán sau khi bỏ dấu câu; chấp nhận nếu trùng ≥ 70% ký tự theo thứ tự. */

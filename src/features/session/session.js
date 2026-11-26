@@ -1,4 +1,4 @@
-import { badgeIcon, artOr } from '../../ui/icons.js';
+import { badgeIcon, artOr, icon } from '../../ui/icons.js';
 // Chạy buổi học theo kế hoạch của planner (mục 3.1, 11), toàn màn hình.
 // #/session              buổi học thường
 // #/session?mode=review  chỉ ôn tập
@@ -237,7 +237,13 @@ export async function render(root, ctx, { query }) {
     ));
     const lessonDone = lesson && lesson.vocab_ids.every((id) => after.statesById.get(id)?.last_reviewed_at != null);
     // Học xong từ của bài: về trang bài để làm bước tiếp theo (bài khóa → luyện tập → kiểm tra), không nhảy thẳng vào kiểm tra.
-    shell.setFooter(h('button', { class: 'btn primary big block', type: 'button', onclick: () => ctx.navigate(backTo) }, lessonDone ? 'Về bài: bước tiếp theo' : 'Xong'));
+    const doneBtn = h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.3 }, onclick: () => ctx.navigate(backTo) }, lessonDone ? 'Về bài: bước tiếp theo' : 'Xong');
+    // Vừa học từ mới: mời hỏi đáp ngay với các từ đó.
+    shell.setFooter(stats.learned >= 2
+      ? h('div', { class: 'row nowrap' },
+        h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`practice/qa?scope=recent${lesson ? `&from=${encodeURIComponent(lesson.id)}` : ''}`) }, icon('chat'), 'Hỏi đáp từ vừa học'),
+        doneBtn)
+      : h('div', { class: 'row nowrap' }, doneBtn));
     if (completed.length) toast(`Hoàn thành ${completed.length} bài!`);
   }
 

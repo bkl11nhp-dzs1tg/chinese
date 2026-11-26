@@ -18,8 +18,16 @@ export const writable = (c) => { const hz = clean(c.hanzi); return HAN.test(hz) 
  * lessonCards: từ của bài; reviewCards: từ cũ đã học (để xen kẽ); pool: mọi thẻ (lấy chữ nhiễu).
  * Trả về mảng câu hỏi cho exerciseRunner.
  */
-export function buildRecallSet(lessonCards, { reviewCards = [], pool = [], rand = Math.random, maxNew = 8, maxReview = 4, decomp = null, lines = [] } = {}) {
-  const words = lessonCards.filter(writable).slice(0, maxNew).map((c) => ({ ...c, hanzi: clean(c.hanzi) }));
+export function buildRecallSet(lessonCards, { reviewCards = [], pool = [], rand = Math.random, maxNew = 5, maxReview = null, decomp = null, lines = [], ordered = false } = {}) {
+  // ordered: lessonCards đã xếp theo ưu tiên (vd. lâu chưa luyện) → lấy từ đầu; không thì chọn ngẫu nhiên.
+  const src = lessonCards.filter(writable);
+  const words = (ordered ? src : shuffle(src, rand)).slice(0, maxNew).map((c) => ({ ...c, hanzi: clean(c.hanzi) }));
+  const nw = words.length;
+  // Số câu theo số từ: ít từ thì bài ngắn.
+  const nListen = Math.min(nw, Math.max(2, Math.ceil(nw / 2)));
+  const nReview = maxReview ?? Math.min(4, Math.max(1, Math.round(nw / 2)));
+  const nCompose = Math.min(3, Math.max(1, Math.round(nw / 3)));
+  const nSentence = nw >= 6 ? 2 : 1;
   if (!words.length) return [];
   const q = (c, extra) => ({ hanzi: c.hanzi, pinyin: c.pinyin, meaning: c.meaning, answer: c.hanzi, card_ids: [c.id], explanation: `${c.hanzi} (${c.pinyin}): ${c.meaning}`, ...extra });
   const out = [];
@@ -31,7 +39,7 @@ export function buildRecallSet(lessonCards, { reviewCards = [], pool = [], rand 
   // 2. Tự nhớ: nhìn nghĩa viết lại (thứ tự xáo trộn)
   for (const c of shuffle(words, rand)) out.push(q(c, { type: 'draw', mode: 'meaning', prompt: 'Viết chữ Hán có nghĩa:', activity: 'recall-write' }));
   // 3. Nghe rồi viết
-  for (const c of shuffle(words, rand).slice(0, 5)) out.push(q(c, { type: 'draw', mode: 'listen', prompt: 'Nghe rồi viết chữ', activity: 'recall-listen' }));
+  for (const c of shuffle(words, rand).slice(0, nListen)) out.push(q(c, { type: 'draw', mode: 'listen', prompt: 'Nghe rồi viết chữ', activity: 'recall-listen' }));
   // 4. Kiểm tra tổng hợp: pinyin → viết, điền chữ thiếu, xen từ cũ
   const test = [];
   const chars = [...new Set(pool.flatMap((c) => [...clean(c.hanzi)]).filter((ch) => HAN.test(ch)))];
@@ -47,14 +55,14 @@ export function buildRecallSet(lessonCards, { reviewCards = [], pool = [], rand 
     }
     test.push(q(c, { type: 'draw', mode: 'pinyin', prompt: 'Viết chữ Hán có pinyin:', activity: 'recall-pinyin' }));
   }
-  for (const c of shuffle(reviewCards.filter(writable), rand).slice(0, maxReview)) {
+  for (const c of shuffle(reviewCards.filter(writable), rand).slice(0, nReview)) {
     test.push(q({ ...c, hanzi: clean(c.hanzi) }, { type: 'draw', mode: 'meaning', prompt: 'Từ cũ – viết chữ Hán có nghĩa:', activity: 'recall-review' }));
   }
   // Ghép thành phần thành chữ (cấu tạo chữ)
-  if (decomp) test.push(...buildComposeChars(words, decomp, { rand, n: 3 }));
+  if (decomp) test.push(...buildComposeChars(words, decomp, { rand, n: nCompose }));
   out.push(...shuffle(test, rand));
   // 5. Đặt câu tự do với 2 từ (máy kiểm tra có dùng từ + dịch câu để tự đối chiếu)
-  for (const c of shuffle(words.filter((w) => [...w.hanzi].length >= 1), rand).slice(0, 2)) out.push(freewriteQ(c, lines));
+  for (const c of shuffle(words, rand).slice(0, nSentence)) out.push(freewriteQ(c, lines));
   return out;
 }
 

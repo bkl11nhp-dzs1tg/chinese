@@ -136,7 +136,8 @@ function openAddDialog(ctx, kind, existing = null) {
 export function segmented(active) {
   return h('div', { class: 'seg seg-fit seg-page', role: 'tablist' },
     h('a', { class: ['seg-btn', active === 'path' ? 'on' : ''], href: '#/lessons', role: 'tab', 'aria-selected': String(active === 'path') }, 'Lộ trình'),
-    h('a', { class: ['seg-btn', active === 'readings' ? 'on' : ''], href: '#/readings', role: 'tab', 'aria-selected': String(active === 'readings') }, 'Thư viện'));
+    h('a', { class: ['seg-btn', active === 'readings' ? 'on' : ''], href: '#/readings', role: 'tab', 'aria-selected': String(active === 'readings') }, 'Thư viện'),
+    h('a', { class: ['seg-btn', active === 'basics' ? 'on' : ''], href: '#/basics', role: 'tab', 'aria-selected': String(active === 'basics') }, 'Cơ bản'));
 }
 
 // ---------------------------------------------------------------- trang đọc

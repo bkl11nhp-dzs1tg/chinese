@@ -16,6 +16,7 @@
     "cut-gpt": "node scripts/cut-gpt.js",
     "cut-kit": "node scripts/cut-kit2.js && node scripts/cut-branch.js && node scripts/cut-wave.js",
     "icons": "node scripts/make-icons.js",
+    "pinyin-chars": "node scripts/build-pinyin-chars.js",
     "sync-server": "node scripts/sync-dev-server.js",
     "worker:deploy": "cd worker && npx wrangler d1 migrations apply chinese-study --remote && npx wrangler deploy",
     "worker:vapid": "node scripts/vapid-keys.js && cd worker && npx wrangler secret put VAPID_PRIVATE_JWK < .vapid-private.json",

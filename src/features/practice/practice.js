@@ -6,10 +6,11 @@ import { icon, badgeIcon } from '../../ui/icons.js';
 import { focusShell } from '../../ui/focus.js';
 import { cue } from '../../ui/feedback.js';
 import { ttsSupported } from '../../ui/speech.js';
-import { SKILLS, buildSkillSet } from '../../core/practice.js';
+import { SKILLS, buildSkillSet, qaPairs } from '../../core/practice.js';
+import { freshOrder, markSeen } from '../../core/variety.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
 import { exerciseRunner } from '../exercises/runner.js';
-import { resultView, reviewWords } from '../exercises/result-view.js';
+import { resultView, reviewWords, answerList } from '../exercises/result-view.js';
 import { loadDecomp } from '../../ui/char-anatomy.js';
 import { GAMES } from '../games/games.js';
 
@@ -17,10 +18,30 @@ export const GAME_ICONS = { match: 'link', race: 'bolt', build: 'blocks', listen
 const GAME_TONES = { match: 'orange', race: 'red', build: 'teal', listen: 'blue', quick: 'purple', compose: 'green', duel: 'navy', memory: 'red' };
 const speechOk = () => !!(globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition);
 
-/** Phạm vi luyện: 'upto' (từ bài 1 đến bài đang học), 'learned', 'active', 'all', hoặc mã bài. */
+const RECENT_MS = 3 * 86_400_000;
+/** Từ vừa học: lần học gần nhất trong 3 ngày qua. */
+export function recentCards(data, now = Date.now()) {
+  return data.cards.filter((c) => (data.statesById.get(c.id)?.last_reviewed_at || 0) >= now - RECENT_MS);
+}
+
+/** Phạm vi luyện: 'upto' (từ bài 1 đến bài đang học), 'recent', 'learned', 'active', 'all', hoặc mã bài. */
 export function scopeOf(data, scope) {
   const learned = (c) => data.statesById.get(c.id)?.last_reviewed_at != null;
   const activeIdx = data.active ? data.lessons.indexOf(data.active) : data.lessons.length - 1;
+  if (scope === 'recent') {
+    const rc = recentCards(data);
+    if (rc.length >= 4) {
+      const ids = new Set(rc.map((c) => c.lesson_id));
+      const lessons = data.lessons.filter((l) => ids.has(l.id));
+      const hz = rc.map((c) => c.hanzi);
+      // Chỉ giữ câu bài khóa có chứa từ vừa học.
+      const keep = (zh) => hz.some((w) => zh.includes(w));
+      const lines = lessons.flatMap((l) => (l.texts || []).flatMap((t) => t.lines)).filter((ln) => keep(ln.zh));
+      const pairs = lessons.flatMap((l) => qaPairs(l.texts, l.id)).filter((p) => keep(p.q.zh + p.a.zh));
+      return { cards: rc, lines, lessons, pairs };
+    }
+    scope = 'active';
+  }
   let lessons;
   if (scope === 'all' || scope === 'learned') lessons = data.lessons;
   else if (scope === 'active') lessons = data.active ? [data.active] : data.lessons.slice(0, 1);
@@ -30,11 +51,13 @@ export function scopeOf(data, scope) {
   let cards = data.cards.filter((c) => ids.has(c.id) || (scope !== 'active' && c.source === 'reading'));
   if (scope === 'learned') cards = data.cards.filter(learned);
   const lines = lessons.flatMap((l) => (l.texts || []).flatMap((t) => t.lines));
-  return { cards, lines, lessons };
+  const pairs = lessons.flatMap((l) => qaPairs(l.texts, l.id));
+  return { cards, lines, lessons, pairs };
 }
 
 const SCOPES = [
   ['upto', 'Đến bài đang học', 'Từ bài 1 tới bài đang học', 'today'],
+  ['recent', 'Từ vừa học', 'Các từ học trong 3 ngày qua', 'sparkle'],
   ['active', 'Bài đang học', 'Chỉ bài đang học', 'lessons'],
   ['learned', 'Từ đã học', 'Mọi từ đã học qua thẻ', 'cards'],
   ['all', 'Cả 2 quyển', 'Toàn bộ 30 bài', 'books'],
@@ -138,12 +161,26 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
   const skill = SKILLS.find((k) => k.id === params.skill);
   if (!skill) { mount(root, h('p', {}, 'Không có kỹ năng này.')); return; }
   const scope = query.scope || s.practice_scope || 'upto';
-  const { cards, lines } = scopeOf(data, scope);
+  const { cards, lines, pairs } = scopeOf(data, scope);
   const dict = buildDictionary(data.cards);
-  const withTokens = lines.map((l) => ({ zh: l.zh, vi: (l.vi || '').replace(/^\([^)]*\)\s*/, ''), tokens: segmentSentence(l.zh.replace(/[。？！]+$/, ''), dict) }));
+  const stripVi = (vi) => (vi || '').replace(/^\([^)]*\)\s*/, '');
+  const withTokens = lines.map((l) => ({ zh: l.zh, vi: stripVi(l.vi), tokens: segmentSentence(l.zh.replace(/[。？！]+$/, ''), dict) }));
+  const qa = skill.id === 'qa' ? pairs.map((p) => ({ ...p, q: { ...p.q, vi: stripVi(p.q.vi) }, a: { ...p.a, vi: stripVi(p.a.vi) }, tokens: segmentSentence(p.a.zh.replace(/[。？！!?]+$/, ''), dict) })) : [];
   const decomp = skill.id === 'parts' ? await loadDecomp() : null;
-  const questions = buildSkillSet(skill.id, { cards, pool: data.cards, lines: withTokens, n: 10, decomp });
-  const back = `practice?scope=${scope}`;
+  // Ưu tiên từ / câu lâu chưa gặp; từ hay sai và từ vừa học được cộng điểm.
+  const recentHz = recentCards(data).map((c) => c.hanzi);
+  const now = Date.now();
+  const order = (arr, kind) => (kind === 'word'
+    ? freshOrder(arr, 'w', { bonus: (c) => { const st = data.statesById.get(c.id); return st && st.due_at <= now ? 0.8 : 0; } })
+    : kind === 'pair'
+      ? freshOrder(arr, 'pair', { key: (p) => `${p.q.zh}|${p.a.zh}`, bonus: (p) => Math.min(3, recentHz.filter((w) => (p.q.zh + p.a.zh).includes(w)).length) * 0.8 })
+      : freshOrder(arr, 'line', { key: (l) => l.zh }));
+  const questions = buildSkillSet(skill.id, { cards, pool: data.cards, lines: withTokens, pairs: qa, n: 10, decomp, order });
+  markSeen('w', questions.flatMap((q) => q.card_ids || []));
+  markSeen('line', questions.map((q) => q.speak || q.answer).filter((x) => typeof x === 'string'));
+  markSeen('pair', questions.filter((q) => q.qa).map((q) => `${q.qa.q.zh}|${q.qa.a.zh}`));
+  const fromLesson = /^L\d+$/.test(query.from || '') ? query.from : null;
+  const back = fromLesson ? `lesson/${fromLesson}` : `practice?scope=${scope}`;
   if (!questions.length) {
     mount(root, h('div', { class: 'large-title' }, h('h1', {}, skill.label)),
       h('p', { class: 'notice' }, 'Phạm vi này chưa đủ nội dung cho kỹ năng này. Thử chọn phạm vi rộng hơn.'),
@@ -176,10 +213,10 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
         emoji: badgeIcon(skill.icon, r.score >= 0.7 ? 'good' : 'accent'),
         title: `${skill.label}: ${r.score >= 0.8 ? 'Tốt lắm!' : r.score >= 0.5 ? 'Khá ổn' : 'Luyện thêm nhé'}`,
         score: r.score, correct: r.correct, total: r.total, activeMs: session.active_ms,
-      }), reviewWords([...wrong].map((id) => data.cardsById.get(id)).filter(Boolean), { rate: s.tts_rate }));
+      }), reviewWords([...wrong].map((id) => data.cardsById.get(id)).filter(Boolean), { rate: s.tts_rate }), answerList(r.results, { rate: s.tts_rate }));
       shell.setFooter(h('div', { class: 'row nowrap' },
-        h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, 'Kỹ năng khác'),
-        h('button', { class: 'btn primary big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`practice/${skill.id}?scope=${scope}&r=${Date.now()}`) }, 'Luyện tiếp')));
+        h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, fromLesson ? 'Về bài' : 'Kỹ năng khác'),
+        h('button', { class: 'btn primary big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(`practice/${skill.id}?scope=${scope}${fromLesson ? `&from=${fromLesson}` : ''}&r=${Date.now()}`) }, 'Luyện tiếp')));
     },
   });
   return () => { runner.destroy(); shell.destroy(); return tracker.stop(); };

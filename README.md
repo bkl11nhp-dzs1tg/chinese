@@ -26,7 +26,14 @@ npm run build      # kiểm tra + đóng gói nội dung + build ra dist/
 2. **Bài khóa**: chép từ sách, bấm từ để tra, nghe từng câu, 4 chế độ đọc.
 3. **Ngữ pháp**: theo mục lục sách, giải thích tiếng Việt + ví dụ trong bài.
 4. **Luyện tập**: trắc nghiệm, ghép cặp, điền từ, sắp xếp câu.
-5. **Kiểm tra cuối bài**: từ vựng + câu trong bài khóa, đạt ≥ 70% là hoàn thành.
+5. **Hỏi đáp**: câu hỏi – trả lời lấy từ hội thoại trong bài + hỏi đáp về từ của bài (“X”是什么意思？/ …用汉语怎么说？).
+6. **Kiểm tra cuối bài**: từ vựng + câu trong bài khóa, đạt ≥ 70% là hoàn thành. Làm xong xem lại toàn bộ câu (lọc sai/đúng).
+
+**Luyện nhớ & viết** chọn 5 / 10 / cả bài; ưu tiên từ lâu chưa luyện, có nút đổi nhóm từ.
+
+**Cơ bản** (Bài học → Cơ bản): bảng thanh mẫu, vận mẫu, bảng ghép âm (bấm nghe 4 thanh), thanh điệu + biến điệu, 214 bộ thủ (kèm từ trong sách), nét cơ bản và quy tắc bút thuận. Chữ đại diện cho từng âm tiết: `npm run pinyin-chars` (tạo `src/features/basics/pinyin-chars.json`).
+
+**Chống lặp từ**: luyện tập, trò chơi, luyện viết nhớ lần gần nhất mỗi từ/câu xuất hiện (localStorage) và ưu tiên thứ lâu chưa gặp; trò chơi lấy từ các bài đã qua tới bài đang học.
 
 ## Tài khoản & đồng bộ nhiều thiết bị
 

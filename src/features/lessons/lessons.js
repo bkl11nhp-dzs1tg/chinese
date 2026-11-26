@@ -9,6 +9,7 @@ import { speak } from '../../ui/speech.js';
 import { cardStatus } from '../../core/srs.js';
 import { segmented } from '../reading/reading.js';
 import { lessonAudioSrc } from '../../content.js';
+import { qaPairs } from '../../core/practice.js';
 
 const STATUS_LABEL = { todo: 'Chưa học', doing: 'Đang học', done: 'Hoàn thành' };
 const statusBadge = (st) => h('span', { class: ['badge', st === 'done' ? 'done' : st === 'doing' ? 'doing' : 'new'] }, STATUS_LABEL[st]);
@@ -87,6 +88,7 @@ export async function renderLesson(root, ctx, { params }) {
   const readProg = await ctx.repo.get('reading_progress', `lesson:${lesson.id}`);
   const marks = await ctx.repo.wordMarks();
   const testPassed = st.test_best != null && st.test_best >= threshold;
+  const qaCount = qaPairs(lesson.texts, lesson.id).length;
 
   const stepRow = ({ n, iconName, title, meta, done, href, onclick }) => h(href ? 'a' : 'button', {
     class: 'row-link', href, type: href ? null : 'button', onclick,
@@ -128,9 +130,10 @@ export async function renderLesson(root, ctx, { params }) {
       textCount
         ? stepRow({ n: 3, iconName: 'lessons', title: 'Bài khóa', meta: `${textCount} câu · bấm từ để tra, nghe từng câu${readProg?.finished ? ' · đã đọc xong' : ''}`, done: !!readProg?.finished, href: `#/read/${encodeURIComponent(`lesson:${lesson.id}`)}` })
         : stepRow({ n: 3, iconName: 'lessons', title: 'Bài khóa', meta: 'Bài này chưa có bài khóa', href: `#/lesson/${encodeURIComponent(lesson.id)}` }),
-      stepRow({ n: 4, iconName: 'sparkle', title: 'Ngữ pháp', meta: gpTotal ? `${gpDone.size}/${gpTotal} điểm đã hiểu` : 'Bài này không có điểm ngữ pháp', done: gpTotal > 0 && gpDone.size >= gpTotal, onclick: () => root.querySelector('#grammar')?.scrollIntoView({ behavior: 'smooth' }) }),
-      stepRow({ n: 5, iconName: 'target', title: 'Luyện tập', meta: [st.best_score != null ? `Tốt nhất ${Math.round(st.best_score * 100)}%` : 'Trắc nghiệm, ghép cặp, sắp xếp câu', wbCount ? `${wbCount} câu sách bài tập` : null].filter(Boolean).join(' · '), done: st.best_score != null && st.best_score >= threshold, href: `#/exercise/${encodeURIComponent(lesson.id)}` }),
-      stepRow({ n: 6, iconName: 'trophy', title: 'Kiểm tra cuối bài', meta: st.test_best != null ? `Tốt nhất ${Math.round(st.test_best * 100)}% · ${progress?.test_attempts || 0} lần · đạt từ ${Math.round(threshold * 100)}%` : `Từ vựng + bài khóa · đạt từ ${Math.round(threshold * 100)}% để hoàn thành bài`, done: testPassed, href: `#/test/${encodeURIComponent(lesson.id)}` })),
+      stepRow({ n: 4, iconName: 'chat', title: 'Hỏi đáp', meta: [qaCount ? `${qaCount} câu hỏi trong bài khóa` : null, 'hỏi đáp với từ của bài'].filter(Boolean).join(' · '), href: `#/practice/qa?scope=${encodeURIComponent(lesson.id)}&from=${encodeURIComponent(lesson.id)}` }),
+      stepRow({ n: 5, iconName: 'sparkle', title: 'Ngữ pháp', meta: gpTotal ? `${gpDone.size}/${gpTotal} điểm đã hiểu` : 'Bài này không có điểm ngữ pháp', done: gpTotal > 0 && gpDone.size >= gpTotal, onclick: () => root.querySelector('#grammar')?.scrollIntoView({ behavior: 'smooth' }) }),
+      stepRow({ n: 6, iconName: 'target', title: 'Luyện tập', meta: [st.best_score != null ? `Tốt nhất ${Math.round(st.best_score * 100)}%` : 'Trắc nghiệm, ghép cặp, sắp xếp câu', wbCount ? `${wbCount} câu sách bài tập` : null].filter(Boolean).join(' · '), done: st.best_score != null && st.best_score >= threshold, href: `#/exercise/${encodeURIComponent(lesson.id)}` }),
+      stepRow({ n: 7, iconName: 'trophy', title: 'Kiểm tra cuối bài', meta: st.test_best != null ? `Tốt nhất ${Math.round(st.test_best * 100)}% · ${progress?.test_attempts || 0} lần · đạt từ ${Math.round(threshold * 100)}%` : `Từ vựng + bài khóa · đạt từ ${Math.round(threshold * 100)}% để hoàn thành bài`, done: testPassed, href: `#/test/${encodeURIComponent(lesson.id)}` })),
     audioUrl
       ? [h('div', { class: 'section-title' }, 'Nghe bài (MP3 của sách)'),
         audioPlayer(audioUrl, `${lesson.book} · Bài ${lesson.unit ?? ''}`)]

@@ -8,6 +8,7 @@ import './styles/glass.css';
 import './styles/landing.css';
 import './styles/polish.css';
 import './styles/games.css';
+import './styles/basics.css';
 import { openDb, createRepo } from './db/repo.js';
 import { createContext, applyTheme } from './app.js';
 import { createRouter } from './router.js';
@@ -21,6 +22,7 @@ import * as exercisePage from './features/exercises/exercise-page.js';
 import * as testPage from './features/exercises/test-page.js';
 import * as recallPage from './features/exercises/recall-page.js';
 import * as reading from './features/reading/reading.js';
+import * as basics from './features/basics/basics.js';
 import * as practice from './features/practice/practice.js';
 import * as account from './features/account/account.js';
 import * as landing from './features/landing/landing.js';
@@ -37,7 +39,7 @@ import * as settings from './features/settings/settings.js';
 
 const NAV = [
   { name: 'today', label: 'Hôm nay', icon: 'today', match: ['today', 'session'] },
-  { name: 'lessons', label: 'Bài học', icon: 'lessons', match: ['lessons', 'lesson', 'exercise', 'test', 'recall', 'readings', 'read'] },
+  { name: 'lessons', label: 'Bài học', icon: 'lessons', match: ['lessons', 'lesson', 'exercise', 'test', 'recall', 'readings', 'read', 'basics'] },
   { name: 'practice', label: 'Luyện tập', icon: 'target', match: ['practice', 'games', 'game'] },
   { name: 'cards', label: 'Thẻ', icon: 'cards', match: ['cards'] },
   { name: 'stats', label: 'Thống kê', icon: 'stats', match: ['stats'] },
@@ -53,6 +55,7 @@ const routes = [
   { path: 'test/:id', render: testPage.render },
   { path: 'recall/:id', render: recallPage.render },
   { path: 'readings', render: reading.renderList },
+  { path: 'basics', render: basics.render },
   { path: 'read/:id', render: reading.renderReader },
   { path: 'practice', render: practice.renderHub },
   { path: 'practice/:skill', render: practice.renderSkill },

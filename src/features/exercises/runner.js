@@ -73,9 +73,11 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       mode === 'test' ? (isLast ? 'Nộp bài' : 'Tiếp') : 'Kiểm tra');
     shell.setFooter(checkBtn);
     shell.main.replaceChildren(
-      h('div', { class: 'q-type' }, ex._orig ? h('span', { class: 'retry-tag' }, icon('repeat'), 'Làm lại câu sai') : null, (ex.type === 'draw' && DRAW_LABEL[ex.mode]) || (ex.compose ? 'Ghép thành chữ' : null) || TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
-      (ex.type === 'draw' && ex.mode) || ex.compose ? null : ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
+      h('div', { class: 'q-type' }, ex._orig ? h('span', { class: 'retry-tag' }, icon('repeat'), 'Làm lại câu sai') : null, (ex.type === 'draw' && DRAW_LABEL[ex.mode]) || (ex.compose ? 'Ghép thành chữ' : null) || (ex.qa ? 'Hỏi đáp' : null) || TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
+      ex.qa && ex.type !== 'listen' ? qaBubble(ex, rate)
+        : (ex.type === 'draw' && ex.mode) || ex.compose ? null : ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
       body);
+    if (ex.qa && ex.type !== 'listen') setTimeout(() => speak(ex.speak, rate), 250);
 
     let answered = false;
     let getResponse = () => null;
@@ -378,6 +380,15 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
 
 const PRAISE = ['Chính xác!', 'Tuyệt!', 'Giỏi lắm!', 'Đúng rồi!', '很好！'];
 function pickPraise() { return PRAISE[Math.floor(Math.random() * PRAISE.length)]; }
+
+/** Hỏi đáp: bong bóng câu hỏi (nghe lại, nghĩa) + yêu cầu. */
+function qaBubble(ex, rate) {
+  return h('div', { class: 'qa-ask' },
+    h('div', { class: 'qa-bubble' },
+      h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe câu hỏi', onclick: () => speak(ex.qa.q.zh, rate) }, icon('speaker')),
+      h('div', { class: 'grow' }, h('div', { class: 'han qa-zh', lang: 'zh-CN' }, ex.qa.q.zh), h('div', { class: 'qa-vi' }, ex.qa.q.vi))),
+    ex.ask ? h('div', { class: 'ex-prompt qa-req' }, ex.ask) : null);
+}
 
 function renderPrompt(text) {
   return text.split(/(\p{Script=Han}[\p{Script=Han}＿_\s，。？！、…—]*)/u).filter(Boolean)

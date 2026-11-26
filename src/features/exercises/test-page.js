@@ -8,9 +8,9 @@ import { cue } from '../../ui/feedback.js';
 import { chineseVoice } from '../../ui/speech.js';
 import { buildLessonTest, scoreTest } from '../../core/lessontest.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
-import { answerText, relatedCardIds } from '../../core/exercises.js';
+import { relatedCardIds } from '../../core/exercises.js';
 import { exerciseRunner } from './runner.js';
-import { reviewWords, resultView } from './result-view.js';
+import { reviewWords, resultView, answerList } from './result-view.js';
 
 export async function render(root, ctx, { params }) {
   const data = await ctx.loadAll();
@@ -84,13 +84,7 @@ export async function render(root, ctx, { params }) {
           : `Cần ${Math.round(s.pass_threshold * 100)}% để hoàn thành bài.`,
       }),
       reviewWords([...wrongIds].map((id) => lessonCards.find((c) => c.id === id)).filter(Boolean), { rate: s.tts_rate }),
-      result.wrong.length ? h('div', {},
-        h('div', { class: 'section-title' }, `Xem lại câu sai (${result.wrong.length})`),
-        h('ul', { class: 'list group review-list' }, result.wrong.map((w) => h('li', {}, h('div', { class: 'item' },
-          h('div', { class: 'grow' },
-            h('div', { style: { fontWeight: 700 } }, w.question.type === 'listen' ? `Nghe: ${w.question.speak}` : w.question.prompt),
-            h('div', { class: 'small', style: { color: 'var(--bad)' } }, 'Bạn chọn: ', formatResponse(w.response)),
-            h('div', { class: 'small', style: { color: 'var(--good)' } }, 'Đáp án: ', h('span', { class: 'han' }, answerText(w.question))))))))) : null);
+      answerList(r.results, { rate: s.tts_rate, title: 'Xem lại bài làm' }));
     shell.setFooter(result.passed && nextLesson
       ? h('div', { class: 'row nowrap' },
           h('button', { class: 'btn big', type: 'button', style: { flex: 1 }, onclick: () => ctx.navigate(back) }, 'Về bài'),
@@ -101,11 +95,4 @@ export async function render(root, ctx, { params }) {
   }
 
   return () => { runner?.destroy(); shell.destroy(); return tracker.stop(); };
-}
-
-function formatResponse(r) {
-  if (r == null) return '—';
-  if (Array.isArray(r)) return r.join('');
-  if (r instanceof Map) return [...r].map(([k, v]) => `${k}=${v}`).join(', ');
-  return String(r);
 }

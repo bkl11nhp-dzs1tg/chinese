@@ -13,12 +13,22 @@ describe('luyện nhớ chủ động', () => {
     expect(kinds.slice(0, 2)).toEqual(['study', 'draw:trace']);
     expect(kinds.filter((k) => k === 'study').length).toBe(3);
     expect(kinds.filter((k) => k === 'draw:meaning').length).toBeGreaterThanOrEqual(3);
-    expect(kinds.filter((k) => k === 'draw:listen').length).toBe(3);
+    expect(kinds.filter((k) => k === 'draw:listen').length).toBe(2);
     const missing = set.filter((x) => x.activity === 'recall-missing');
     expect(missing.length).toBe(2);
     for (const m of missing) { expect(m.options).toContain(m.answer); expect(m.prompt).toContain('＿'); }
     expect(set.some((x) => x.activity === 'recall-review')).toBe(true);
     // Tự viết (pha 2) chỉ cho nghĩa, không lộ chữ/pinyin trong đề
     for (const x of set.filter((y) => y.mode === 'meaning')) expect(x.prompt).not.toContain(x.hanzi);
+  });
+  it('độ dài theo số từ chọn, không cố định', () => {
+    const many = Array.from({ length: 14 }, (_, i) => C(`w${i}`, '学生老师朋友大夫'.slice(i % 7, i % 7 + 2), 'x', `nghĩa ${i}`));
+    const lens = [3, 5, 10, 14].map((k) => buildRecallSet(many, { pool, maxNew: k, rand: () => 0.4 }).length);
+    for (let i = 1; i < lens.length; i++) expect(lens[i]).toBeGreaterThan(lens[i - 1]);
+    expect(new Set(lens).size).toBe(4);
+  });
+  it('ordered: lấy đúng các từ đầu danh sách ưu tiên', () => {
+    const set = buildRecallSet(words, { pool, maxNew: 1, ordered: true });
+    expect(set.filter((x) => x.type === 'study').map((x) => x.hanzi)).toEqual(['你好']);
   });
 });

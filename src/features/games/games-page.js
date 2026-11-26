@@ -7,6 +7,7 @@ import { cue } from '../../ui/feedback.js';
 import { GAMES, gameCards, matchGame, raceGame, buildGame, listenGame, chineseVoice } from './games.js';
 import { quickGame, composeGame, duelGame, memoryGame, starsFor } from './games2.js';
 import { loadDecomp } from '../../ui/char-anatomy.js';
+import { freshOrder, markSeen } from '../../core/variety.js';
 
 export async function renderList(root, ctx) {
   const s = ctx.settings;
@@ -86,7 +87,14 @@ export async function renderGame(root, ctx, { params }) {
       },
     });
   } else if (game.id === 'build') {
-    const sentences = [...data.exercisesByLesson.values()].flat().filter((e) => e.type === 'reorder');
+    // Câu của các bài đã qua tới bài đang học, ưu tiên câu lâu chưa gặp.
+    const activeIdx = data.active ? data.lessons.indexOf(data.active) : data.lessons.length - 1;
+    const okLessons = new Set(data.lessons.slice(0, Math.max(1, activeIdx + 1)).map((l) => l.id));
+    const sentKey = (e) => (Array.isArray(e.answer) ? e.answer.join('') : String(e.answer));
+    let sentences = [...data.exercisesByLesson.entries()].filter(([id]) => okLessons.has(id)).flatMap(([, xs]) => xs).filter((e) => e.type === 'reorder');
+    if (sentences.length < 4) sentences = [...data.exercisesByLesson.values()].flat().filter((e) => e.type === 'reorder');
+    sentences = freshOrder(sentences, 'line', { key: sentKey }).slice(0, 8);
+    markSeen('line', sentences.map(sentKey));
     if (!sentences.length) {
       tracker.stop();
       shell.destroy();
