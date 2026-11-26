@@ -123,7 +123,7 @@ export async function renderLesson(root, ctx, { params }) {
 
     h('div', { class: 'section-title' }, 'Các bước'),
     h('div', { class: 'group' },
-      stepRow({ n: 1, iconName: 'cards', title: 'Học từ mới', meta: `${st.learned}/${st.total} từ đã học`, done: allLearned, onclick: startLearning }),
+      stepRow({ n: 1, iconName: 'cards', title: allLearned ? 'Học từ mới · Xem lại' : 'Học từ mới', meta: allLearned ? `Đã học ${st.total} từ · ôn lại cả bài` : `${st.learned}/${st.total} từ đã học`, done: allLearned, onclick: startLearning }),
       stepRow({ n: 2, iconName: 'pencil', title: 'Luyện nhớ & viết', meta: st.recall_best != null ? `Nhớ đúng ${Math.round(st.recall_best * 100)}% · xem nét, viết theo mẫu, tự viết, nghe viết` : 'Xem thứ tự nét, viết theo mẫu, ẩn mẫu tự viết, nghe rồi viết', done: st.recall_best != null && st.recall_best >= 0.7, href: `#/recall/${encodeURIComponent(lesson.id)}` }),
       textCount
         ? stepRow({ n: 3, iconName: 'lessons', title: 'Bài khóa', meta: `${textCount} câu · bấm từ để tra, nghe từng câu${readProg?.finished ? ' · đã đọc xong' : ''}`, done: !!readProg?.finished, href: `#/read/${encodeURIComponent(`lesson:${lesson.id}`)}` })

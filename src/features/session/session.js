@@ -35,10 +35,19 @@ export async function render(root, ctx, { query }) {
       s = await ctx.refreshSettings();
     }
     const fresh = newCardQueue([lesson], data.cardsById, data.statesById, lesson.id).filter((c) => lesson.vocab_ids.includes(c.id));
-    plan = buildPlan({
-      now, settings: { ...s, new_per_day: Math.max(s.new_per_day, 15), session_minutes: Math.max(s.session_minutes, 20), games_enabled: false },
-      cardStates: [], newCards: fresh, activeLesson: null,
-    });
+    if (query.again || !fresh.length) {
+      // Xem lại: ôn toàn bộ từ đã học của bài, kể cả khi chưa đến hạn
+      const learned = lesson.vocab_ids.map((id) => data.statesById.get(id)).filter(Boolean).map((st) => ({ ...st, due_at: 0 }));
+      plan = buildPlan({
+        now, settings: { ...s, session_minutes: Math.max(s.session_minutes, 30), games_enabled: false },
+        cardStates: learned, newCards: [], activeLesson: null, reviewOnly: true,
+      });
+    } else {
+      plan = buildPlan({
+        now, settings: { ...s, new_per_day: Math.max(s.new_per_day, 15), session_minutes: Math.max(s.session_minutes, 20), games_enabled: false },
+        cardStates: [], newCards: fresh, activeLesson: null,
+      });
+    }
   } else {
     const active = data.active;
     plan = buildPlan({

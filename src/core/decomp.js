@@ -48,17 +48,31 @@ export function parseIds(ids) {
 /** Các thành phần lá (bỏ dấu cấu trúc, bỏ thành phần chưa xác định "？"). */
 export const leaves = (ids) => [...String(ids || '')].filter((c) => !OPS.test(c) && c !== '？');
 
+/** Nghĩa máy dịch hay bị lặp ("đúng, đúng", "không, không, không-"): bỏ trùng, bỏ gạch thừa. */
+export function cleanMeaning(m) {
+  const seen = new Set();
+  const out = [];
+  for (const raw of String(m || '').split(/[,;，；]/)) {
+    const t = raw.trim().replace(/^[-–\s]+|[-–\s]+$/g, '');
+    const key = t.toLowerCase();
+    if (!t || seen.has(key)) continue;
+    seen.add(key);
+    out.push(t);
+  }
+  return out.join(', ');
+}
+
 /** Mô tả một chữ: { ch, struct, type, parts:[{ch, name, isRadical, role}], hint, meaning, pinyin } hoặc null. */
 export function describeChar(ch, data) {
   const x = data?.[ch];
   if (!x) return null;
   const { op, parts } = parseIds(x.d);
-  const nameOf = (c) => RADICALS[c] || (data[c]?.m ? data[c].m.split(',')[0] : '');
+  const nameOf = (c) => RADICALS[c] || (data[c]?.m ? cleanMeaning(data[c].m).split(',')[0] : '');
   return {
     ch,
     struct: op ? STRUCT[op] : null,
     type: TYPE[x.t] || null,
-    meaning: x.m || '',
+    meaning: cleanMeaning(x.m),
     pinyin: x.py || '',
     hint: x.h || '',
     radical: x.r ? { ch: x.r, name: RADICALS[x.r] || nameOf(x.r) } : null,
