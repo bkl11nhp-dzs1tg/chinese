@@ -85,6 +85,13 @@ export function createRepo(db) {
     return { state: next, event, previous: current };
   }
 
+  /** Ghi một lượt làm bài không gắn với từ nào (câu bài khóa, hỏi đáp…) để thống kê theo kỹ năng. */
+  async function logActivity({ activity, quality, sessionId = null, now = Date.now() }) {
+    const event = { id: uuid(), card_id: null, quality, activity, session_id: sessionId, created_at: now };
+    await put('review_events', event);
+    return event;
+  }
+
   /** Hoàn tác một lần chấm (nút "Quay lại"): khôi phục trạng thái cũ, xóa sự kiện. */
   async function undoReview({ cardId, previous, eventId }) {
     const tx = db.transaction(['card_state', 'review_events'], 'readwrite');
@@ -139,6 +146,12 @@ export function createRepo(db) {
   async function saveRecallScore(lessonId, score, now = Date.now()) {
     const old = (await get('lesson_progress', lessonId)) || { lesson_id: lessonId, status: 'doing', best_score: null, attempts: 0 };
     await put('lesson_progress', { ...old, recall_best: Math.max(old.recall_best ?? 0, score), recall_attempts: (old.recall_attempts || 0) + 1, status: old.status === 'todo' ? 'doing' : old.status, updated_at: now });
+  }
+
+  /** Điểm tốt nhất của một kỹ năng trong bài (vd. 'qa' → qa_best, qa_attempts). */
+  async function saveSkillScore(lessonId, key, score, now = Date.now()) {
+    const old = (await get('lesson_progress', lessonId)) || { lesson_id: lessonId, status: 'doing', best_score: null, attempts: 0 };
+    await put('lesson_progress', { ...old, [`${key}_best`]: Math.max(old[`${key}_best`] ?? 0, score), [`${key}_attempts`]: (old[`${key}_attempts`] || 0) + 1, status: old.status === 'todo' ? 'doing' : old.status, updated_at: now });
   }
 
   async function saveLessonScore(lessonId, score, now = Date.now()) {
@@ -283,10 +296,10 @@ export function createRepo(db) {
   return {
     db, get, getAll, count, byIndex, put, putMany, delete: del,
     getSettings, saveSettings,
-    recordReview, undoReview, makeDue,
+    recordReview, logActivity, undoReview, makeDue,
     importContent, existingIds,
     saveReadingProgress, recordLookup, lookupCount, saveReadingWord, markKnown, unmarkKnown, markWord, wordMarks, saveUserReading, deleteReading,
-    lessonsOrdered, saveLessonScore, saveRecallScore, saveTestScore, setLessonStatus, markGrammar,
+    lessonsOrdered, saveLessonScore, saveRecallScore, saveSkillScore, saveTestScore, setLessonStatus, markGrammar,
     saveSession,
     putAudio, getAudio, audioIndex,
     exportAll, restoreBackup, clearAll,

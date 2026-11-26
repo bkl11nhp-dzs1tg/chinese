@@ -6,6 +6,7 @@ import { cue } from '../../ui/feedback.js';
 import { relatedCardIds } from '../../core/exercises.js';
 import { exerciseRunner, lessonExercises } from './runner.js';
 import { resultView, reviewWords, answerList } from './result-view.js';
+import { recordAnswer } from './record.js';
 
 export async function render(root, ctx, { params }) {
   const data = await ctx.loadAll();
@@ -24,9 +25,7 @@ export async function render(root, ctx, { params }) {
     shell, exercises, mode: 'practice', rate: ctx.settings.tts_rate,
     onAnswer: async (ex, ok) => {
       if (!ok) relatedCardIds(ex, lessonCards).forEach((id) => wrongCards.add(id));
-      for (const id of ex.card_ids || []) {
-        if (data.statesById.get(id)) await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 1, activity: 'exercise', sessionId: tracker.session.id, mode: 'none' });
-      }
+      await recordAnswer(ctx.repo, relatedCardIds(ex, lessonCards), ok, { activity: 'exercise', sessionId: tracker.session.id, mode: 'log' });
     },
     onDone: async (r) => {
       const session = await tracker.stop();

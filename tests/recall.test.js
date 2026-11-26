@@ -31,4 +31,11 @@ describe('luyện nhớ chủ động', () => {
     const set = buildRecallSet(words, { pool, maxNew: 1, ordered: true });
     expect(set.filter((x) => x.type === 'study').map((x) => x.hanzi)).toEqual(['你好']);
   });
+  it('reps > 1: mỗi từ có một trang tập viết viết reps lần', () => {
+    const set = buildRecallSet(words, { pool, reps: 10, rand: () => 0.3 });
+    const sheets = set.filter((x) => x.type === 'sheet');
+    expect(sheets.length).toBe(3);
+    for (const x of sheets) { expect(x.reps).toBe(10); expect(x.activity).toBe('recall-copy'); }
+    expect(set.some((x) => x.type === 'draw' && x.mode === 'trace')).toBe(false);
+  });
 });

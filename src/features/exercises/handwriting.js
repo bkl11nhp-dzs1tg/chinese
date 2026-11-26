@@ -99,3 +99,41 @@ export function writeArea(word, { onChange, guide: guideMode = 'toggle' } = {}) 
     showAnswer: (ok) => { pads.forEach((p) => p.showAnswer(ok)); tools.remove(); },
   };
 }
+
+/**
+ * Trang tập viết: viết một từ `reps` lần trên cùng một trang. Các lần đầu có chữ mẫu mờ để tô,
+ * các lần sau để trống (tự viết). Mỗi lần là một hàng ô (mỗi chữ một ô).
+ * Trả về { el, filled(), scores(), score(), showAnswer() }.
+ */
+export function sheetArea(word, reps, { onChange } = {}) {
+  const chars = [...word];
+  const guided = Math.ceil(reps * 0.4);
+  const avail = Math.min(globalThis.innerWidth || 390, 640) - 40;
+  // Điện thoại: chữ đơn 3 ô một hàng; từ nhiều chữ một lần một hàng. Mỗi ô có viền 12px, cách nhau 12px.
+  const cols = chars.length === 1 ? 3 : 1;
+  const size = Math.max(80, Math.min(128, Math.floor((avail - cols * 12 - (cols - 1) * 12 - cols * (chars.length - 1) * 6) / (cols * chars.length))));
+  const rows = [];
+  const changed = () => onChange?.(rows.filter((r) => r.pads.every((p) => !p.isEmpty())).length);
+  for (let k = 0; k < reps; k++) {
+    const pads = chars.map((ch) => charPad(ch, { size, onInk: changed }));
+    if (k < guided) pads.forEach((p) => p.setGuide(true));
+    const el = h('div', { class: ['ws-cell', k < guided ? 'guided' : ''] },
+      h('span', { class: 'ws-n' }, String(k + 1)),
+      h('div', { class: 'ws-pads' }, pads.map((p) => p.el)));
+    rows.push({ pads, el });
+  }
+  const scoreOf = (r) => (r.pads.some((p) => p.isEmpty()) ? 0 : Math.min(...r.pads.map((p) => p.score())));
+  const tools = h('div', { class: 'hw-tools' },
+    h('button', { class: 'chip opt', type: 'button', onclick: () => { const r = [...rows].reverse().find((x) => x.pads.some((p) => !p.isEmpty())); r?.pads.forEach((p) => p.undo()); } }, icon('back'), 'Hoàn tác'),
+    h('button', { class: 'chip opt', type: 'button', onclick: () => rows.forEach((r) => r.pads.forEach((p) => p.clear())) }, icon('trash'), 'Xóa hết'));
+  return {
+    el: h('div', { class: 'ws-area' }, h('div', { class: ['ws-grid', chars.length > 1 ? 'multi' : ''] }, rows.map((r) => r.el)), tools),
+    filled: () => rows.filter((r) => r.pads.every((p) => !p.isEmpty())).length,
+    scores: () => rows.map(scoreOf),
+    score() { const s = rows.map(scoreOf); return s.reduce((a, b) => a + b, 0) / (s.length || 1); },
+    showAnswer() {
+      rows.forEach((r) => { const ok = scoreOf(r) >= 0.6; r.pads.forEach((p) => p.showAnswer(ok)); r.el.classList.add(ok ? 'ok' : 'no'); });
+      tools.remove();
+    },
+  };
+}

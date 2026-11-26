@@ -32,26 +32,27 @@ export async function render(root, ctx, { params }) {
   if (!ranked.length) { mount(root, h('p', { class: 'notice' }, 'Bài này chưa có từ để luyện viết.'), h('a', { class: 'btn', href: `#/${back}` }, 'Về bài')); return; }
   const decomp = await loadDecomp();
   const total = ranked.length;
-  const sizes = [...new Set([5, 10].filter((k) => k < total).concat(total))];
-  let size = sizes.includes(ctx.settings.recall_words) ? ctx.settings.recall_words : (sizes.find((k) => k >= 5) ?? total);
-  if (ctx.settings.recall_words === 'all') size = total;
+  // Mỗi lượt 5 từ (ưu tiên từ lâu chưa luyện); mỗi từ viết 5 hoặc 10 lần trên một trang.
+  const size = Math.min(5, total);
+  const REPS = [5, 10];
+  let reps = REPS.includes(ctx.settings.recall_reps) ? ctx.settings.recall_reps : 5;
   let exercises = [];
   const build = () => {
-    exercises = buildRecallSet(ranked, { ordered: true, maxNew: size, reviewCards: reviewCards.slice(0, 12), pool: data.cards, decomp, lines });
+    exercises = buildRecallSet(ranked, { ordered: true, maxNew: size, reps, reviewCards: reviewCards.slice(0, 12), pool: data.cards, decomp, lines });
   };
 
   const shell = focusShell({ onClose: () => ctx.navigate(back) });
   mount(root, shell.el);
   shell.setProgress(0, '');
-  const sizeRow = h('div', { class: 'seg seg-fit recall-size', role: 'radiogroup', 'aria-label': 'Số từ' });
+  const sizeRow = h('div', { class: 'seg seg-fit recall-size', role: 'radiogroup', 'aria-label': 'Số lần viết mỗi từ' });
   const wordsRow = h('div', { class: 'recall-words' });
   const countEl = h('strong');
   function paint() {
     build();
-    sizeRow.replaceChildren(...sizes.map((k) => h('button', {
-      class: ['seg-btn', k === size ? 'on' : ''], type: 'button', role: 'radio', 'aria-checked': String(k === size),
-      onclick: () => { size = k; paint(); },
-    }, k === total ? `Cả bài · ${total} từ` : `${k} từ`)));
+    sizeRow.replaceChildren(...REPS.map((k) => h('button', {
+      class: ['seg-btn', k === reps ? 'on' : ''], type: 'button', role: 'radio', 'aria-checked': String(k === reps),
+      onclick: () => { reps = k; paint(); },
+    }, `Mỗi từ viết ${k} lần`)));
     wordsRow.replaceChildren(...ranked.slice(0, size).map((c) => h('span', { class: 'rw-chip' }, h('span', { class: 'han', lang: 'zh-CN' }, c.hanzi), h('small', {}, c.pinyin))));
     countEl.textContent = `${exercises.length} bước`;
     shuffleBtn.classList.toggle('hidden', size >= total);
@@ -73,14 +74,15 @@ export async function render(root, ctx, { params }) {
   let runner = null;
   let tracker = null;
   function start() {
-    ctx.repo.saveSettings({ recall_words: size === total ? 'all' : size });
+    ctx.repo.saveSettings({ recall_reps: reps });
     markSeen('recall', ranked.slice(0, size).map((c) => c.id));
     tracker = ctx.startTracking({ kind: 'exercise' });
     const wrong = new Set();
     runner = exerciseRunner({
       shell, exercises, mode: 'practice', rate: ctx.settings.tts_rate,
       onAnswer: async (ex, ok) => {
-        if (ex.type === 'study' || ex.mode === 'trace') return; // xem từ / viết theo mẫu: không tính
+        if (ex.type === 'sheet') { for (const id of ex.card_ids || []) await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 2, activity: 'recall-copy', sessionId: tracker.session.id, mode: 'log' }); return; }
+      if (ex.type === 'study' || ex.mode === 'trace') return; // xem từ / viết theo mẫu: không tính điểm nhớ
         for (const id of ex.card_ids || []) {
           if (!ok) wrong.add(id);
           await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 1, activity: ex.activity || 'recall-write', sessionId: tracker.session.id, mode: 'light' });

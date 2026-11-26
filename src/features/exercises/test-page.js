@@ -11,6 +11,7 @@ import { buildDictionary, segmentSentence } from '../../core/segment.js';
 import { relatedCardIds } from '../../core/exercises.js';
 import { exerciseRunner } from './runner.js';
 import { reviewWords, resultView, answerList } from './result-view.js';
+import { recordAnswer } from './record.js';
 
 export async function render(root, ctx, { params }) {
   const data = await ctx.loadAll();
@@ -56,6 +57,7 @@ export async function render(root, ctx, { params }) {
   function start() {
     runner = exerciseRunner({
       shell, exercises: questions, mode: 'test', rate: s.tts_rate,
+      onAnswer: (ex, ok) => recordAnswer(ctx.repo, relatedCardIds(ex, lessonCards), ok, { activity: 'test', sessionId: tracker.session.id, mode: 'log' }),
       onDone: (r) => finish(r),
     });
   }

@@ -18,7 +18,7 @@ export const writable = (c) => { const hz = clean(c.hanzi); return HAN.test(hz) 
  * lessonCards: từ của bài; reviewCards: từ cũ đã học (để xen kẽ); pool: mọi thẻ (lấy chữ nhiễu).
  * Trả về mảng câu hỏi cho exerciseRunner.
  */
-export function buildRecallSet(lessonCards, { reviewCards = [], pool = [], rand = Math.random, maxNew = 5, maxReview = null, decomp = null, lines = [], ordered = false } = {}) {
+export function buildRecallSet(lessonCards, { reviewCards = [], pool = [], rand = Math.random, maxNew = 5, maxReview = null, decomp = null, lines = [], ordered = false, reps = 1 } = {}) {
   // ordered: lessonCards đã xếp theo ưu tiên (vd. lâu chưa luyện) → lấy từ đầu; không thì chọn ngẫu nhiên.
   const src = lessonCards.filter(writable);
   const words = (ordered ? src : shuffle(src, rand)).slice(0, maxNew).map((c) => ({ ...c, hanzi: clean(c.hanzi) }));
@@ -34,7 +34,10 @@ export function buildRecallSet(lessonCards, { reviewCards = [], pool = [], rand 
   // 1. Xem + viết theo mẫu
   for (const c of words) {
     out.push(q(c, { type: 'study', prompt: '' }));
-    out.push(q(c, { type: 'draw', mode: 'trace', prompt: `Viết theo mẫu: ${c.meaning}` }));
+    // reps > 1: trang tập viết, viết từ này reps lần (mẫu mờ ở các ô đầu).
+    out.push(reps > 1
+      ? q(c, { type: 'sheet', mode: 'trace', reps, activity: 'recall-copy', prompt: `Tập viết ${c.hanzi} × ${reps}` })
+      : q(c, { type: 'draw', mode: 'trace', prompt: `Viết theo mẫu: ${c.meaning}` }));
   }
   // 2. Tự nhớ: nhìn nghĩa viết lại (thứ tự xáo trộn)
   for (const c of shuffle(words, rand)) out.push(q(c, { type: 'draw', mode: 'meaning', prompt: 'Viết chữ Hán có nghĩa:', activity: 'recall-write' }));
@@ -74,6 +77,7 @@ export function freewriteQ(c, lines = []) {
 
 /** Nhãn kỹ năng nhớ cho thống kê. */
 export const RECALL_SKILLS = {
+  'recall-copy': 'Tập viết theo mẫu',
   'recall-write': 'Tự viết (nhìn nghĩa)',
   'recall-listen': 'Nghe rồi viết',
   'recall-pinyin': 'Viết từ pinyin',

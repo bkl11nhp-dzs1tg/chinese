@@ -8,6 +8,7 @@ import { cue } from '../../ui/feedback.js';
 import { ttsSupported } from '../../ui/speech.js';
 import { SKILLS, buildSkillSet, qaPairs } from '../../core/practice.js';
 import { freshOrder, markSeen } from '../../core/variety.js';
+import { recordAnswer } from '../exercises/record.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
 import { exerciseRunner } from '../exercises/runner.js';
 import { resultView, reviewWords, answerList } from '../exercises/result-view.js';
@@ -194,10 +195,8 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
   const runner = exerciseRunner({
     shell, exercises: questions, mode: 'practice', rate: s.tts_rate,
     onAnswer: async (ex, ok) => {
-      for (const id of ex.card_ids || []) {
-        if (!ok) wrong.add(id);
-        if (data.statesById.get(id)) await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 2, activity: ex.activity || 'practice', sessionId: tracker.session.id, mode: 'light' });
-      }
+      if (!ok) for (const id of ex.card_ids || []) wrong.add(id);
+      await recordAnswer(ctx.repo, ex.card_ids, ok, { activity: ex.activity || `practice-${skill.id}`, sessionId: tracker.session.id });
     },
     onDone: async (r) => {
       const session = await tracker.stop();
@@ -206,6 +205,8 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
       const prev = all[skill.id] || { sets: 0, best: 0 };
       all[skill.id] = { sets: prev.sets + 1, best: Math.max(prev.best, r.score), last: r.score, at: Date.now() };
       await ctx.repo.saveSettings({ skill_stats: all });
+      // Luyện trong phạm vi một bài: lưu điểm vào tiến độ của bài đó.
+      if (/^L\d+$/.test(scope)) await ctx.repo.saveSkillScore(scope, skill.id, r.score);
       await ctx.refreshSettings();
       cue('done');
       shell.setProgress(1, '');

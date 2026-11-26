@@ -47,9 +47,15 @@ export function mergeRecord(store, local, remote) {
     }
     case 'lesson_progress': {
       const status = (STATUS_RANK[local.status] ?? 0) >= (STATUS_RANK[remote.status] ?? 0) ? local.status : remote.status;
+      // Mọi điểm "…_best" / "…_attempts" (luyện viết, hỏi đáp, kỹ năng khác): lấy giá trị lớn hơn.
+      const maxed = {};
+      for (const k of new Set([...Object.keys(local), ...Object.keys(remote)])) {
+        if (/_(best|attempts)$/.test(k)) maxed[k] = max(local[k], remote[k]);
+      }
       return {
         ...remote,
         ...local,
+        ...maxed,
         status,
         best_score: max(local.best_score, remote.best_score),
         test_best: max(local.test_best, remote.test_best),

@@ -8,13 +8,13 @@ import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { grade, answerText, shuffle, autoExercises } from '../../core/exercises.js';
 import { gradePinyin, gradeSpeech, gradeSentence } from '../../core/practice.js';
-import { writeArea } from './handwriting.js';
+import { writeArea, sheetArea } from './handwriting.js';
 import { strokeViewer } from '../../ui/strokes.js';
 import { charAnatomy } from '../../ui/char-anatomy.js';
 import { translateZhVi } from '../../core/translate.js';
 
 const isHan = (s) => /\p{Script=Han}/u.test(s || '');
-const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ pinyin', speak: 'Luyện nói', draw: 'Viết chữ', compose: 'Viết câu', study: 'Từ mới', missing: 'Điền chữ còn thiếu', freewrite: 'Đặt câu' };
+const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ pinyin', speak: 'Luyện nói', draw: 'Viết chữ', compose: 'Viết câu', study: 'Từ mới', sheet: 'Tập viết', missing: 'Điền chữ còn thiếu', freewrite: 'Đặt câu' };
 const DRAW_LABEL = { trace: 'Viết theo mẫu', meaning: 'Tự viết', pinyin: 'Tự viết', listen: 'Tự viết' };
 const PAIR_COLORS = ['#e07b39', '#3a7bd5', '#2e9d63', '#9b59b6', '#d4a017', '#c0392b'];
 
@@ -75,7 +75,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
     shell.main.replaceChildren(
       h('div', { class: 'q-type' }, ex._orig ? h('span', { class: 'retry-tag' }, icon('repeat'), 'Làm lại câu sai') : null, (ex.type === 'draw' && DRAW_LABEL[ex.mode]) || (ex.compose ? 'Ghép thành chữ' : null) || (ex.qa ? 'Hỏi đáp' : null) || TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
       ex.qa && ex.type !== 'listen' ? qaBubble(ex, rate)
-        : (ex.type === 'draw' && ex.mode) || ex.compose ? null : ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
+        : (ex.type === 'draw' && ex.mode) || ex.type === 'sheet' || ex.compose ? null : ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
       body);
     if (ex.qa && ex.type !== 'listen') setTimeout(() => speak(ex.speak, rate), 250);
 
@@ -91,7 +91,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       answered = true;
       if (ex.type === 'study') { i++; next(); return; } // thẻ xem từ: không chấm
       const ok = ex.type === 'pinyin' ? gradePinyin(response, ex.answer)
-        : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'compose' || ex.type === 'freewrite' ? !!response.ok
+        : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'sheet' || ex.type === 'compose' || ex.type === 'freewrite' ? !!response.ok
         : grade(ex.type === 'listen' ? { ...ex, type: 'choose' } : ex, response);
       const orig = ex._orig || ex;
       // Điểm và lịch ôn chỉ tính lần làm đầu; lần làm lại để sửa sai.
@@ -102,7 +102,8 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       if (mode === 'test') { i++; next(); return; }
       mark(ok);
       const answer = ex.type === 'speak' ? (response.transcript ? `Máy nghe được: ${response.transcript}` : ex.target) : answerText(ex);
-      const extra = ex.type === 'freewrite' ? freewriteFeedback(ex, response) : ex.type === 'draw' || ex.type === 'compose' ? h('div', {}, h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.guided ? ' · có tô theo mẫu' : ''),
+      const extra = ex.type === 'sheet' ? h('div', { class: 'score-line' }, `Viết đạt ${response.passed}/${response.reps} lần · trung bình ${Math.round(response.score * 100)}%`)
+        : ex.type === 'freewrite' ? freewriteFeedback(ex, response) : ex.type === 'draw' || ex.type === 'compose' ? h('div', {}, h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.guided ? ' · có tô theo mẫu' : ''),
         ex.type === 'draw' && !ok ? h('div', { class: 'sheet-strokes' }, strokeViewer(ex.hanzi, { size: 84 })) : null) : null;
       shell.showSheet({
         ok,
@@ -274,6 +275,27 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       checkBtn.textContent = 'Đã xem, viết thử';
       getResponse = () => ({ ok: true });
       setReady(true);
+    } else if (ex.type === 'sheet') {
+      // Trang tập viết: một từ viết nhiều lần; các ô đầu có mẫu mờ, các ô sau tự viết.
+      const reps = ex.reps || 5;
+      const counter = h('span', { class: 'ask-n' }, `0/${reps}`);
+      const area = sheetArea(ex.hanzi, reps, { onChange: (n) => { counter.textContent = `${n}/${reps}`; setReady(n === reps); } });
+      body.append(h('div', { class: 'ask-card ws-head' },
+        h('div', { class: 'ask-cap' }, h('span', {}, `Viết ${reps} lần`), counter),
+        h('div', { class: 'ws-word' },
+          strokeViewer(ex.hanzi, { size: 76 }),
+          h('div', { class: 'ws-info' },
+            h('div', { class: 'ask-main py' }, ex.pinyin, h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'))),
+            h('div', { class: 'ask-sub' }, ex.meaning)))),
+        area.el);
+      setTimeout(() => speak(ex.hanzi, rate), 300);
+      getResponse = () => {
+        const scores = area.scores();
+        const passed = scores.filter((x) => x >= 0.6).length;
+        const score = area.score();
+        return { score, passed, reps, ok: passed >= Math.ceil(reps * 0.6) };
+      };
+      mark = () => area.showAnswer();
     } else if (ex.type === 'draw') {
       // Viết chữ bằng tay. mode: trace (viết theo mẫu) | meaning (chỉ nghĩa) | pinyin (chỉ pinyin) | listen (chỉ nghe) | mặc định (nghĩa + pinyin, có nút tô mẫu).
       const m = ex.mode;

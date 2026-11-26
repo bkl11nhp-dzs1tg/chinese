@@ -29,7 +29,9 @@ npm run build      # kiểm tra + đóng gói nội dung + build ra dist/
 5. **Hỏi đáp**: câu hỏi – trả lời lấy từ hội thoại trong bài + hỏi đáp về từ của bài (“X”是什么意思？/ …用汉语怎么说？).
 6. **Kiểm tra cuối bài**: từ vựng + câu trong bài khóa, đạt ≥ 70% là hoàn thành. Làm xong xem lại toàn bộ câu (lọc sai/đúng).
 
-**Luyện nhớ & viết** chọn 5 / 10 / cả bài; ưu tiên từ lâu chưa luyện, có nút đổi nhóm từ.
+**Luyện nhớ & viết**: mỗi lượt 5 từ (ưu tiên từ lâu chưa luyện, có nút đổi nhóm). Mỗi từ có một trang tập viết 5 hoặc 10 ô: các ô đầu có mẫu mờ để tô, các ô sau tự viết, chấm từng ô.
+
+**Thống kê**: mọi câu trả lời (luyện kỹ năng, hỏi đáp, bài tập, kiểm tra, tập viết, trò chơi) đều ghi vào lượt ôn, kể cả câu không gắn với từ nào, nên "Khả năng ghi nhớ" và "Tỷ lệ nhớ đúng" luôn cập nhật.
 
 **Cơ bản** (Bài học → Cơ bản): bảng thanh mẫu, vận mẫu, bảng ghép âm (bấm nghe 4 thanh), thanh điệu + biến điệu, 214 bộ thủ (kèm từ trong sách), nét cơ bản và quy tắc bút thuận. Chữ đại diện cho từng âm tiết: `npm run pinyin-chars` (tạo `src/features/basics/pinyin-chars.json`).
 

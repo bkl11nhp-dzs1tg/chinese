@@ -6,16 +6,29 @@ import { icon } from '../../ui/icons.js';
 import { dayKey, dailySeries, timeTotals, streak, cardStatusCounts, weeklyAccuracy, accuracyByActivity, formatDuration, startOfDay, addDays } from '../../core/stats.js';
 import { scoreRing } from '../exercises/result-view.js';
 
-const ACTIVITY = { review: 'Ôn thẻ', new: 'Thẻ mới', relearn: 'Ôn lại trong buổi', exercise: 'Bài tập', game: 'Trò chơi', practice: 'Luyện kỹ năng', 'recall-write': 'Tự viết', 'recall-listen': 'Nghe viết', 'recall-pinyin': 'Viết từ pinyin', 'recall-missing': 'Điền chữ thiếu', 'recall-review': 'Nhớ từ cũ', 'recall-compose': 'Cấu tạo chữ', 'recall-sentence': 'Đặt câu' };
+const ACTIVITY = {
+  review: 'Ôn thẻ', new: 'Thẻ mới', relearn: 'Ôn lại trong buổi', exercise: 'Bài tập', test: 'Kiểm tra', game: 'Trò chơi', practice: 'Luyện kỹ năng', qa: 'Hỏi đáp',
+  'practice-listen': 'Nghe', 'practice-speak': 'Nói', 'practice-reading': 'Đọc hiểu', 'practice-vocab': 'Từ vựng', 'practice-tones': 'Thanh điệu',
+  'practice-typing': 'Gõ pinyin', 'practice-sentence': 'Ghép câu', 'practice-compose': 'Viết câu', 'practice-parts': 'Cấu tạo chữ',
+  'recall-copy': 'Tập viết', 'recall-write': 'Tự viết', 'recall-listen': 'Nghe viết', 'recall-pinyin': 'Viết từ pinyin', 'recall-missing': 'Điền chữ thiếu',
+  'recall-review': 'Nhớ từ cũ', 'recall-compose': 'Cấu tạo chữ', 'recall-sentence': 'Đặt câu',
+};
 const MEM_SKILLS = [
   ['Nhận mặt chữ (thẻ)', ['review', 'new', 'relearn'], 'cards'],
+  ['Từ vựng & thanh điệu', ['practice-vocab', 'practice-tones', 'practice-typing', 'practice'], 'tone'],
+  ['Tập viết theo mẫu', ['recall-copy'], 'pencil'],
   ['Tự viết từ nghĩa', ['recall-write'], 'pencil'],
   ['Viết từ pinyin', ['recall-pinyin', 'recall-missing'], 'keyboard'],
   ['Nghe rồi viết', ['recall-listen'], 'headphones'],
   ['Nhớ từ cũ', ['recall-review'], 'repeat'],
-  ['Cấu tạo chữ', ['recall-compose'], 'radical'],
-  ['Đặt câu', ['recall-sentence'], 'chat'],
-  ['Bài tập & luyện kỹ năng', ['exercise', 'practice', 'game'], 'target'],
+  ['Cấu tạo chữ', ['recall-compose', 'practice-parts'], 'radical'],
+  ['Nghe hiểu', ['practice-listen'], 'headphones'],
+  ['Nói', ['practice-speak'], 'mic'],
+  ['Đọc hiểu & ghép câu', ['practice-reading', 'practice-sentence'], 'eye'],
+  ['Hỏi đáp', ['qa'], 'chat'],
+  ['Đặt câu & viết câu', ['recall-sentence', 'practice-compose'], 'lessons'],
+  ['Bài tập & kiểm tra', ['exercise', 'test'], 'clipboard'],
+  ['Trò chơi', ['game'], 'game'],
 ];
 const WD = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 

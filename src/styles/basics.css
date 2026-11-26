@@ -185,3 +185,19 @@
   .tone-grid { grid-template-columns: 1fr 1fr; }
   .al-a small { min-width: 70px; }
 }
+
+/* ---------- trang tập viết (một từ viết nhiều lần) */
+.ws-head { margin-bottom: 16px; }
+.ws-word { display: flex; align-items: center; gap: 16px; }
+.ws-word .sk-viewer { flex: none; margin: 0; }
+.ws-word .sk-viewer .sk-info, .ws-word .sk-viewer > .btn { display: none; }
+.ws-info { display: grid; gap: 4px; min-width: 0; }
+.ws-area { display: grid; gap: 14px; }
+.ws-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.ws-cell { position: relative; padding: 6px; border-radius: 20px; background: var(--glass-strong); border: 1px solid var(--line); }
+.ws-cell.guided { background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface)); }
+.ws-cell.ok { border-color: var(--good); }
+.ws-cell.no { border-color: var(--bad); }
+.ws-pads { display: flex; gap: 6px; }
+.ws-pads .hw-pad { border-radius: 14px; border-width: 1.5px; }
+.ws-n { position: absolute; top: 10px; left: 14px; z-index: 2; font-size: 11px; font-weight: 800; color: var(--muted); pointer-events: none; }
