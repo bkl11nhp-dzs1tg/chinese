@@ -9,9 +9,13 @@ import { speak } from '../../ui/speech.js';
 import { grade, answerText, shuffle, autoExercises } from '../../core/exercises.js';
 import { gradePinyin, gradeSpeech, gradeSentence } from '../../core/practice.js';
 import { writeArea } from './handwriting.js';
+import { strokeViewer } from '../../ui/strokes.js';
+import { charAnatomy } from '../../ui/char-anatomy.js';
+import { translateZhVi } from '../../core/translate.js';
 
 const isHan = (s) => /\p{Script=Han}/u.test(s || '');
-const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ pinyin', speak: 'Luyện nói', draw: 'Viết chữ', compose: 'Viết câu' };
+const TYPE_LABEL = { choose: 'Chọn đáp án đúng', listen: 'Nghe và chọn', fill: 'Điền vào chỗ trống', match: 'Nối cặp', reorder: 'Sắp xếp thành câu', pinyin: 'Gõ pinyin', speak: 'Luyện nói', draw: 'Viết chữ', compose: 'Viết câu', study: 'Từ mới', missing: 'Điền chữ còn thiếu', freewrite: 'Đặt câu' };
+const DRAW_LABEL = { trace: 'Viết theo mẫu', meaning: 'Tự viết', pinyin: 'Tự viết', listen: 'Tự viết' };
 const PAIR_COLORS = ['#e07b39', '#3a7bd5', '#2e9d63', '#9b59b6', '#d4a017', '#c0392b'];
 
 /** Gom bài tập luyện của một bài: bài tập câu của bài + câu tự sinh từ từ vựng. */
@@ -69,8 +73,8 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       mode === 'test' ? (isLast ? 'Nộp bài' : 'Tiếp') : 'Kiểm tra');
     shell.setFooter(checkBtn);
     shell.main.replaceChildren(
-      h('div', { class: 'q-type' }, ex._orig ? h('span', { class: 'retry-tag' }, icon('repeat'), 'Làm lại câu sai') : null, TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
-      ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
+      h('div', { class: 'q-type' }, ex._orig ? h('span', { class: 'retry-tag' }, icon('repeat'), 'Làm lại câu sai') : null, (ex.type === 'draw' && DRAW_LABEL[ex.mode]) || (ex.compose ? 'Ghép thành chữ' : null) || TYPE_LABEL[ex.type] || '', ex.source === 'workbook' || String(ex.id).includes('-wb') ? h('span', { class: 'wb-tag' }, icon('lessons'), 'Sách bài tập') : null),
+      (ex.type === 'draw' && ex.mode) || ex.compose ? null : ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
       body);
 
     let answered = false;
@@ -83,8 +87,9 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       const response = getResponse();
       if (response == null) return;
       answered = true;
+      if (ex.type === 'study') { i++; next(); return; } // thẻ xem từ: không chấm
       const ok = ex.type === 'pinyin' ? gradePinyin(response, ex.answer)
-        : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'compose' ? !!response.ok
+        : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'compose' || ex.type === 'freewrite' ? !!response.ok
         : grade(ex.type === 'listen' ? { ...ex, type: 'choose' } : ex, response);
       const orig = ex._orig || ex;
       // Điểm và lịch ôn chỉ tính lần làm đầu; lần làm lại để sửa sai.
@@ -95,12 +100,13 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       if (mode === 'test') { i++; next(); return; }
       mark(ok);
       const answer = ex.type === 'speak' ? (response.transcript ? `Máy nghe được: ${response.transcript}` : ex.target) : answerText(ex);
-      const extra = ex.type === 'draw' || ex.type === 'compose' ? h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.guided ? ' · có tô theo mẫu' : '') : null;
+      const extra = ex.type === 'freewrite' ? freewriteFeedback(ex, response) : ex.type === 'draw' || ex.type === 'compose' ? h('div', {}, h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.guided ? ' · có tô theo mẫu' : ''),
+        ex.type === 'draw' && !ok ? h('div', { class: 'sheet-strokes' }, strokeViewer(ex.hanzi, { size: 84 })) : null) : null;
       shell.showSheet({
         ok,
         title: ok ? pickPraise() : 'Chưa đúng',
         detail: h('div', {},
-          ok ? null : h('div', {}, 'Đáp án đúng: ', h('strong', { class: isHan(answer) ? 'han' : '' }, answer)),
+          ok || ex.type === 'freewrite' ? null : h('div', {}, 'Đáp án đúng: ', h('strong', { class: isHan(answer) ? 'han' : '' }, answer)),
           extra,
           ex.explanation ? h('div', { class: 'muted', style: { marginTop: '4px' } }, ex.explanation) : null),
         onContinue: () => { i++; next(); },
@@ -110,6 +116,13 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
     }
     checkBtn.onclick = submit;
 
+    if (ex.compose) {
+      // Ghép thành phần: thành phần in to, nối bằng dấu +, bố cục và nghĩa gợi ý bên dưới.
+      body.append(h('div', { class: 'ask-card' },
+        h('div', { class: 'ask-cap' }, h('span', {}, 'Thành phần'), ex.compose.struct ? h('span', { class: 'ask-n' }, ex.compose.struct) : null),
+        h('div', { class: 'ask-parts' }, ex.compose.parts.map((p, k) => [k ? h('span', { class: 'ap-plus' }, '+') : null, h('span', { class: 'ap-part han', lang: 'zh-CN' }, p)])),
+        ex.hint ? h('div', { class: 'ask-sub' }, ex.hint) : null));
+    }
     if (ex.type === 'choose' || ex.type === 'listen') {
       let picked = null;
       const hanOpts = ex.options.every(isHan);
@@ -247,14 +260,54 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         drawLines();
       };
       keyHandler = (e) => { if (e.key === 'Enter' && !answered) submit(); };
+    } else if (ex.type === 'study') {
+      // Thẻ xem từ mới: chữ, pinyin, nghĩa, nghe, thứ tự nét (không chấm điểm).
+      body.append(h('div', { class: 'study-card' },
+        h('div', { class: 'sc-word han', lang: 'zh-CN' }, ex.hanzi),
+        h('div', { class: 'sc-py' }, ex.pinyin, h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'))),
+        h('div', { class: 'sc-vi' }, ex.meaning),
+        strokeViewer(ex.hanzi, { size: [...ex.hanzi].length > 2 ? 96 : 130 }),
+        charAnatomy(ex.hanzi)));
+      setTimeout(() => speak(ex.hanzi, rate), 300);
+      checkBtn.textContent = 'Đã xem, viết thử';
+      getResponse = () => ({ ok: true });
+      setReady(true);
     } else if (ex.type === 'draw') {
-      // Viết chữ bằng tay: nhìn nghĩa + pinyin, vẽ chữ; có thể bật "Tô theo mẫu" (khi đó tính là đã xem gợi ý).
-      const area = writeArea(ex.hanzi, { onChange: (full) => setReady(full) });
-      body.append(
-        h('div', { class: 'hw-hint' }, h('span', { class: 'hw-py' }, ex.pinyin), h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'))),
-        area.el);
+      // Viết chữ bằng tay. mode: trace (viết theo mẫu) | meaning (chỉ nghĩa) | pinyin (chỉ pinyin) | listen (chỉ nghe) | mặc định (nghĩa + pinyin, có nút tô mẫu).
+      const m = ex.mode;
+      const area = writeArea(ex.hanzi, { onChange: (full) => setReady(full), guide: m === 'trace' ? 'on' : m ? 'none' : 'toggle' });
+      const sayBtn = h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'));
+      // Thẻ đề: nhãn nhỏ (đề cho gì) + nội dung lớn + số chữ cần viết.
+      const nChars = [...ex.hanzi].length;
+      const ask = (cap, main, extra = null) => h('div', { class: 'ask-card' },
+        h('div', { class: 'ask-cap' }, h('span', {}, cap), h('span', { class: 'ask-n' }, `${nChars} chữ`)),
+        main, extra);
+      const hint = m === 'meaning' ? ask('Nghĩa', h('div', { class: 'ask-main' }, ex.meaning))
+        : m === 'pinyin' ? ask('Pinyin', h('div', { class: 'ask-main py' }, ex.pinyin))
+        : m === 'listen' ? ask('Nghe', h('div', { class: 'ask-listen' }, h('button', { class: 'btn primary listen-btn', type: 'button', 'aria-label': 'Nghe lại', onclick: () => speak(ex.hanzi, rate) }, icon('speaker')), h('button', { class: 'btn ghost', type: 'button', onclick: () => speak(ex.hanzi, 0.5) }, 'Nghe chậm')))
+        : m === 'trace' ? ask('Viết theo mẫu', h('div', { class: 'ask-main py' }, ex.pinyin, sayBtn), h('div', { class: 'ask-sub' }, ex.meaning))
+        : h('div', { class: 'hw-hint' }, h('span', { class: 'hw-py' }, ex.pinyin), sayBtn);
+      if (m === 'listen') setTimeout(() => speak(ex.hanzi, rate), 300);
+      body.append(hint, area.el);
       getResponse = () => { const score = area.score(); return { score, ok: score >= 0.6, guided: area.usedGuide() }; };
       mark = (ok) => area.showAnswer(ok);
+    } else if (ex.type === 'freewrite') {
+      // Đặt câu tự do với từ vừa học: kiểm tra có dùng từ, dịch máy câu của người học để tự đối chiếu, kèm câu mẫu.
+      body.append(h('div', { class: 'ask-card' },
+        h('div', { class: 'ask-cap' }, h('span', {}, 'Đặt câu với từ'), h('span', { class: 'ask-n' }, 'tự do')),
+        h('div', { class: 'ask-main' }, h('span', { class: 'han', lang: 'zh-CN' }, ex.word), h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.word, rate) }, icon('speaker'))),
+        h('div', { class: 'ask-sub' }, `${ex.pinyin} · ${ex.meaning}`)));
+      const input = h('textarea', { class: 'compose-input han', lang: 'zh-CN', rows: 2, autocomplete: 'off', spellcheck: false, 'aria-label': 'Câu của bạn' });
+      input.addEventListener('input', () => setReady(input.value.trim() !== ''));
+      body.append(input);
+      getResponse = () => {
+        const text = input.value.trim();
+        if (!text) return null;
+        const used = text.includes(ex.word);
+        const long = [...text.replace(/[\s，。？！,.?!]/g, '')].length >= [...ex.word].length + 2;
+        return { text, used, long, ok: used && long, score: used && long ? 1 : used ? 0.5 : 0 };
+      };
+      setTimeout(() => input.focus(), 50);
     } else if (ex.type === 'compose') {
       // Viết câu: đọc nghĩa tiếng Việt, tự gõ câu tiếng Trung (bàn phím chữ Hán / viết tay của điện thoại), máy chấm theo từng chữ.
       const input = h('textarea', { class: 'compose-input han', lang: 'zh-CN', rows: 2, autocomplete: 'off', spellcheck: false, 'aria-label': 'Câu tiếng Trung' });
@@ -329,4 +382,15 @@ function pickPraise() { return PRAISE[Math.floor(Math.random() * PRAISE.length)]
 function renderPrompt(text) {
   return text.split(/(\p{Script=Han}[\p{Script=Han}＿_\s，。？！、…—]*)/u).filter(Boolean)
     .map((part) => (isHan(part) ? h('span', { class: 'han', lang: 'zh-CN' }, part) : part));
+}
+
+/** Phản hồi đặt câu: dùng từ chưa, độ dài, bản dịch máy câu của người học (để tự kiểm tra ý), câu mẫu trong bài. */
+function freewriteFeedback(ex, r) {
+  const tr = h('div', { class: 'fw-tr' }, h('span', { class: 'spinner sm' }), 'Đang dịch câu của bạn…');
+  translateZhVi(r.text).then((t) => tr.replaceChildren(t ? h('span', {}, h('small', {}, 'Máy dịch câu của bạn: '), h('b', {}, t.text)) : h('small', {}, 'Chưa dịch được (cần mạng).')));
+  return h('div', { class: 'fw-fb' },
+    h('div', { class: ['fw-check', r.used ? 'ok' : 'no'] }, r.used ? `Đã dùng từ ${ex.word}` : `Câu chưa có từ ${ex.word}`),
+    r.used && !r.long ? h('div', { class: 'fw-check no' }, 'Câu hơi ngắn, thêm chủ ngữ / tân ngữ nhé') : null,
+    tr,
+    ex.sample ? h('div', { class: 'fw-sample' }, h('small', {}, 'Câu mẫu trong bài: '), h('span', { class: 'han', lang: 'zh-CN' }, ex.sample.zh), ex.sample.vi ? h('span', { class: 'muted' }, ` – ${ex.sample.vi}`) : null) : null);
 }

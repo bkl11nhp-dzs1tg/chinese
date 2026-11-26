@@ -7,6 +7,8 @@ import { cardStatus } from '../../core/srs.js';
 import { cue } from '../../ui/feedback.js';
 import { TOPICS } from '../../core/topics.js';
 import { phrasesView } from './phrases.js';
+import { strokeViewer } from '../../ui/strokes.js';
+import { charAnatomy } from '../../ui/char-anatomy.js';
 
 const STATUS = {
   new: { label: 'Mới', hint: 'chưa học', icon: 'sparkle' },
@@ -111,10 +113,13 @@ export async function render(root, ctx, { query }) {
         h('span', { class: ['badge', s === 'mastered' ? 'done' : s === 'learning' ? 'doing' : 'new'] }, STATUS[s].label),
         dots(strength(st)),
         st ? h('span', { class: 'muted small' }, st.due_at <= now ? 'đến hạn ôn' : `ôn sau ${Math.ceil((st.due_at - now) / 86400000)} ngày`) : null),
+      h('details', { class: 'stroke-details' }, h('summary', {}, icon('pencil'), 'Thứ tự nét & cấu tạo chữ'), h('div', { class: 'sd-body' })),
       markRow(c),
       h('div', { class: 'row nowrap', style: { marginTop: '14px' } },
         lessonRef ? h('a', { class: 'btn', style: { flex: 1 }, href: `#/lesson/${encodeURIComponent(lessonRef.id)}`, onclick: () => dlg.close() }, icon('lessons'), `Bài ${lessonRef.unit}`) : null,
         h('button', { class: 'btn primary', type: 'button', style: { flex: 1 }, onclick: () => dlg.close() }, 'Đóng')));
+    const sd = dlg.querySelector('.stroke-details');
+    sd.addEventListener('toggle', () => { const b = sd.querySelector('.sd-body'); if (sd.open && !b.children.length) b.append(strokeViewer(c.hanzi, { size: [...c.hanzi].length > 2 ? 80 : 110 }), charAnatomy(c.hanzi)); });
     dlg.addEventListener('close', () => dlg.remove());
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
     document.body.append(dlg);

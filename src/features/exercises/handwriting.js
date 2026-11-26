@@ -80,19 +80,21 @@ export function charPad(ch, { size = 260, onInk } = {}) {
 }
 
 /** Khu viết cho cả từ (1–2 chữ) + nút gợi ý, xóa, hoàn tác. */
-export function writeArea(word, { onChange } = {}) {
+/** guide: 'toggle' (có nút tô mẫu) | 'on' (luôn hiện mẫu – viết theo) | 'none' (ẩn mẫu – viết từ trí nhớ) */
+export function writeArea(word, { onChange, guide: guideMode = 'toggle' } = {}) {
   const chars = [...word];
   const size = Math.min(chars.length > 1 ? 168 : 260, Math.floor((Math.min(globalThis.innerWidth || 390, 560) - 48) / chars.length));
   const pads = chars.map((ch) => charPad(ch, { size, onInk: () => onChange?.(pads.every((p) => !p.isEmpty())) }));
-  let guide = false;
+  let guide = guideMode === 'on';
+  if (guide) pads.forEach((p) => p.setGuide(true));
   const guideBtn = h('button', { class: 'chip opt', type: 'button', 'aria-pressed': 'false', onclick: () => { guide = !guide; pads.forEach((p) => p.setGuide(guide)); guideBtn.classList.toggle('selected', guide); guideBtn.setAttribute('aria-pressed', String(guide)); } }, icon('eye'), 'Tô theo mẫu');
   const tools = h('div', { class: 'hw-tools' },
-    guideBtn,
+    guideMode === 'toggle' ? guideBtn : null,
     h('button', { class: 'chip opt', type: 'button', onclick: () => pads.forEach((p) => p.undo()) }, icon('back'), 'Hoàn tác'),
     h('button', { class: 'chip opt', type: 'button', onclick: () => pads.forEach((p) => p.clear()) }, icon('trash'), 'Xóa'));
   return {
     el: h('div', { class: 'hw-area' }, h('div', { class: 'hw-pads' }, pads.map((p) => p.el)), tools),
-    usedGuide: () => guide,
+    usedGuide: () => guide && guideMode !== 'on',
     score: () => Math.min(...pads.map((p) => p.score())),
     showAnswer: (ok) => { pads.forEach((p) => p.showAnswer(ok)); tools.remove(); },
   };

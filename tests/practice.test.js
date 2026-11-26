@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+const DECOMP = JSON.parse(readFileSync('data/decomp.json', 'utf8'));
 import { SKILLS, buildSkillSet, toneVariants, gradePinyin, normalizePinyin, gradeSpeech, stripTones } from '../src/core/practice.js';
 import { mulberry32 } from '../src/core/exercises.js';
 import { buildDictionary, segmentSentence } from '../src/core/segment.js';
@@ -41,7 +43,7 @@ describe('pinyin', () => {
 describe('buildSkillSet', () => {
   for (const s of SKILLS) {
     it(`kỹ năng ${s.id}: có câu hỏi, đáp án hợp lệ`, () => {
-      const qs = buildSkillSet(s.id, { cards: words, lines, rand: mulberry32(7), n: 6 });
+      const qs = buildSkillSet(s.id, { cards: words, lines, rand: mulberry32(7), n: 6, decomp: DECOMP });
       expect(qs.length).toBeGreaterThan(0);
       for (const q of qs) {
         if (q.options && q.type !== 'reorder') expect(q.options).toContain(q.answer);

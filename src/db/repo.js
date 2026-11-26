@@ -135,6 +135,12 @@ export function createRepo(db) {
     return ls.sort((a, b) => (a.book || '').localeCompare(b.book || '', 'vi') || a.order - b.order || a.id.localeCompare(b.id));
   }
 
+  /** Điểm Luyện nhớ chủ động (giữ điểm cao nhất). */
+  async function saveRecallScore(lessonId, score, now = Date.now()) {
+    const old = (await get('lesson_progress', lessonId)) || { lesson_id: lessonId, status: 'doing', best_score: null, attempts: 0 };
+    await put('lesson_progress', { ...old, recall_best: Math.max(old.recall_best ?? 0, score), recall_attempts: (old.recall_attempts || 0) + 1, status: old.status === 'todo' ? 'doing' : old.status, updated_at: now });
+  }
+
   async function saveLessonScore(lessonId, score, now = Date.now()) {
     const tx = db.transaction('lesson_progress', 'readwrite');
     const s = tx.objectStore('lesson_progress');
@@ -280,7 +286,7 @@ export function createRepo(db) {
     recordReview, undoReview, makeDue,
     importContent, existingIds,
     saveReadingProgress, recordLookup, lookupCount, saveReadingWord, markKnown, unmarkKnown, markWord, wordMarks, saveUserReading, deleteReading,
-    lessonsOrdered, saveLessonScore, saveTestScore, setLessonStatus, markGrammar,
+    lessonsOrdered, saveLessonScore, saveRecallScore, saveTestScore, setLessonStatus, markGrammar,
     saveSession,
     putAudio, getAudio, audioIndex,
     exportAll, restoreBackup, clearAll,

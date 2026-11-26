@@ -39,6 +39,8 @@ function contentFromData() {
         return;
       }
       this.emitFile({ type: 'asset', fileName: 'content/pack.json', source: readFileSync(pack) });
+      const decomp = join(dataDir, 'decomp.json');
+      if (existsSync(decomp)) this.emitFile({ type: 'asset', fileName: 'content/decomp.json', source: readFileSync(decomp) });
       const audioDir = join(dataDir, 'audio');
       if (process.env.INCLUDE_AUDIO !== '0' && existsSync(audioDir)) {
         for (const f of readdirSync(audioDir).filter((x) => x.endsWith('.mp3'))) {

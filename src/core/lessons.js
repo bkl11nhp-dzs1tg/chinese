@@ -22,7 +22,7 @@ export function lessonStatus(lesson, statesById, progress, { threshold = 0.7 } =
   if (testBest != null && testBest >= threshold) status = 'done';
   else if (total === 0 && touched) status = 'done';
   else if (touched) status = 'doing';
-  return { status, learned: learnedCount, total, best_score: progress?.best_score ?? null, test_best: testBest };
+  return { status, learned: learnedCount, total, best_score: progress?.best_score ?? null, test_best: testBest, recall_best: progress?.recall_best ?? null };
 }
 
 /** Bài đang học: bài người học đã chọn (kể cả khi đã xong – chỉ đổi khi họ tự sang bài khác)
@@ -45,6 +45,7 @@ export function pickActiveLesson(sortedLessons, statusById, preferredId = null) 
 export function nextLessonStep(lesson, st, { readFinished = false, readStarted = false, threshold = 0.7, next = null } = {}) {
   const enc = encodeURIComponent;
   if (st.total > 0 && st.learned < st.total) return { id: 'words', label: st.learned ? `Học tiếp (${st.total - st.learned} từ)` : 'Bắt đầu học từ mới', href: `#/session?lesson=${enc(lesson.id)}` };
+  if (st.total > 0 && st.recall_best == null) return { id: 'recall', label: 'Luyện nhớ & viết', href: `#/recall/${enc(lesson.id)}` };
   if (lesson.texts?.length && !readFinished) return { id: 'read', label: readStarted ? 'Đọc tiếp bài khóa' : 'Đọc bài khóa', href: `#/read/${enc(`lesson:${lesson.id}`)}` };
   if (st.best_score == null) return { id: 'exercise', label: 'Luyện tập', href: `#/exercise/${enc(lesson.id)}` };
   if (st.test_best == null || st.test_best < threshold) return { id: 'test', label: 'Làm kiểm tra cuối bài', href: `#/test/${enc(lesson.id)}` };

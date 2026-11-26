@@ -10,6 +10,7 @@ import { SKILLS, buildSkillSet } from '../../core/practice.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
 import { exerciseRunner } from '../exercises/runner.js';
 import { resultView, reviewWords } from '../exercises/result-view.js';
+import { loadDecomp } from '../../ui/char-anatomy.js';
 import { GAMES } from '../games/games.js';
 
 export const GAME_ICONS = { match: 'link', race: 'bolt', build: 'blocks', listen: 'headphones' };
@@ -118,7 +119,8 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
   const { cards, lines } = scopeOf(data, scope);
   const dict = buildDictionary(data.cards);
   const withTokens = lines.map((l) => ({ zh: l.zh, vi: (l.vi || '').replace(/^\([^)]*\)\s*/, ''), tokens: segmentSentence(l.zh.replace(/[。？！]+$/, ''), dict) }));
-  const questions = buildSkillSet(skill.id, { cards, pool: data.cards, lines: withTokens, n: 10 });
+  const decomp = skill.id === 'parts' ? await loadDecomp() : null;
+  const questions = buildSkillSet(skill.id, { cards, pool: data.cards, lines: withTokens, n: 10, decomp });
   const back = `practice?scope=${scope}`;
   if (!questions.length) {
     mount(root, h('div', { class: 'large-title' }, h('h1', {}, skill.label)),
@@ -135,7 +137,7 @@ export async function renderSkill(root, ctx, { params, query = {} }) {
     onAnswer: async (ex, ok) => {
       for (const id of ex.card_ids || []) {
         if (!ok) wrong.add(id);
-        if (data.statesById.get(id)) await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 2, activity: 'practice', sessionId: tracker.session.id, mode: 'light' });
+        if (data.statesById.get(id)) await ctx.repo.recordReview({ cardId: id, quality: ok ? 4 : 2, activity: ex.activity || 'practice', sessionId: tracker.session.id, mode: 'light' });
       }
     },
     onDone: async (r) => {

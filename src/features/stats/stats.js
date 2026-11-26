@@ -6,7 +6,17 @@ import { icon } from '../../ui/icons.js';
 import { dayKey, dailySeries, timeTotals, streak, cardStatusCounts, weeklyAccuracy, accuracyByActivity, formatDuration, startOfDay, addDays } from '../../core/stats.js';
 import { scoreRing } from '../exercises/result-view.js';
 
-const ACTIVITY = { review: 'Ôn thẻ', new: 'Thẻ mới', relearn: 'Ôn lại trong buổi', exercise: 'Bài tập', game: 'Trò chơi', practice: 'Luyện kỹ năng' };
+const ACTIVITY = { review: 'Ôn thẻ', new: 'Thẻ mới', relearn: 'Ôn lại trong buổi', exercise: 'Bài tập', game: 'Trò chơi', practice: 'Luyện kỹ năng', 'recall-write': 'Tự viết', 'recall-listen': 'Nghe viết', 'recall-pinyin': 'Viết từ pinyin', 'recall-missing': 'Điền chữ thiếu', 'recall-review': 'Nhớ từ cũ', 'recall-compose': 'Cấu tạo chữ', 'recall-sentence': 'Đặt câu' };
+const MEM_SKILLS = [
+  ['Nhận mặt chữ (thẻ)', ['review', 'new', 'relearn'], 'cards'],
+  ['Tự viết từ nghĩa', ['recall-write'], 'pencil'],
+  ['Viết từ pinyin', ['recall-pinyin', 'recall-missing'], 'keyboard'],
+  ['Nghe rồi viết', ['recall-listen'], 'headphones'],
+  ['Nhớ từ cũ', ['recall-review'], 'repeat'],
+  ['Cấu tạo chữ', ['recall-compose'], 'blocks'],
+  ['Đặt câu', ['recall-sentence'], 'chat'],
+  ['Bài tập & luyện kỹ năng', ['exercise', 'practice', 'game'], 'target'],
+];
 const WD = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
 export async function render(root, ctx) {
@@ -121,6 +131,21 @@ export async function render(root, ctx) {
         h('b', {}, w.rate == null ? '–' : pct(w.rate)),
         h('small', {}, i === weeks.length - 1 ? 'Tuần này' : `${dm(dayKey(w.from))}`)))),
       byAct.length ? h('div', { class: 'act-chips' }, byAct.map((a) => h('span', { class: 'act-chip' }, ACTIVITY[a.activity] || a.activity, h('b', {}, a.rate == null ? '—' : pct(a.rate)), h('small', {}, `${a.total} lượt`)))) : null),
+    // Khả năng ghi nhớ theo từng kỹ năng (đúng/sai, số lượt).
+    h('section', { class: 'card px-box st-card', style: { marginTop: '16px' } },
+      h('div', { class: 'st-head' }, h('h2', {}, 'Khả năng ghi nhớ'), h('span', { class: 'st-sum' }, 'theo kỹ năng')),
+      h('div', { class: 'mem-skills' }, MEM_SKILLS.map(([label, acts, ic]) => {
+        const rows = byAct.filter((a) => acts.includes(a.activity));
+        const total = rows.reduce((n, a) => n + a.total, 0);
+        const right = rows.reduce((n, a) => n + a.correct, 0);
+        const rate = total ? right / total : null;
+        return h('div', { class: ['mem-row', rate == null ? 'empty' : rate >= 0.8 ? 'good' : rate >= 0.5 ? 'mid' : 'low'] },
+          h('span', { class: 'mem-ic' }, icon(ic)),
+          h('div', { class: 'mem-main' },
+            h('div', { class: 'mem-top' }, h('b', {}, label), h('span', {}, rate == null ? 'chưa luyện' : pct(rate))),
+            h('div', { class: 'mem-bar' }, h('i', { style: { width: `${Math.round((rate ?? 0) * 100)}%` } })),
+            total ? h('small', {}, `${total} lượt · sai ${total - right}`) : null));
+      }))),
   );
 }
 

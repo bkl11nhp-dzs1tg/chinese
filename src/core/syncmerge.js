@@ -53,6 +53,7 @@ export function mergeRecord(store, local, remote) {
         status,
         best_score: max(local.best_score, remote.best_score),
         test_best: max(local.test_best, remote.test_best),
+        recall_best: max(local.recall_best, remote.recall_best),
         attempts: max(local.attempts, remote.attempts) ?? 0,
         test_attempts: max(local.test_attempts, remote.test_attempts),
         test_last: (local.updated_at ?? 0) >= (remote.updated_at ?? 0) ? local.test_last : remote.test_last,

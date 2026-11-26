@@ -18,6 +18,7 @@ import * as cardsPage from './features/flashcards/cards-page.js';
 import * as lessons from './features/lessons/lessons.js';
 import * as exercisePage from './features/exercises/exercise-page.js';
 import * as testPage from './features/exercises/test-page.js';
+import * as recallPage from './features/exercises/recall-page.js';
 import * as reading from './features/reading/reading.js';
 import * as practice from './features/practice/practice.js';
 import * as account from './features/account/account.js';
@@ -35,7 +36,7 @@ import * as settings from './features/settings/settings.js';
 
 const NAV = [
   { name: 'today', label: 'Hôm nay', icon: 'today', match: ['today', 'session'] },
-  { name: 'lessons', label: 'Bài học', icon: 'lessons', match: ['lessons', 'lesson', 'exercise', 'test', 'readings', 'read'] },
+  { name: 'lessons', label: 'Bài học', icon: 'lessons', match: ['lessons', 'lesson', 'exercise', 'test', 'recall', 'readings', 'read'] },
   { name: 'practice', label: 'Luyện tập', icon: 'target', match: ['practice', 'games', 'game'] },
   { name: 'cards', label: 'Thẻ', icon: 'cards', match: ['cards'] },
   { name: 'stats', label: 'Thống kê', icon: 'stats', match: ['stats'] },
@@ -49,6 +50,7 @@ const routes = [
   { path: 'lesson/:id', render: lessons.renderLesson },
   { path: 'exercise/:id', render: exercisePage.render },
   { path: 'test/:id', render: testPage.render },
+  { path: 'recall/:id', render: recallPage.render },
   { path: 'readings', render: reading.renderList },
   { path: 'read/:id', render: reading.renderReader },
   { path: 'practice', render: practice.renderHub },

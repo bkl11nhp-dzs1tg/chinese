@@ -1,6 +1,8 @@
 // Luyện tập theo kỹ năng: tạo bộ câu hỏi từ từ vựng và câu trong bài khóa. Hàm thuần.
 
 import { shuffle } from './exercises.js';
+import { freewriteQ } from './recall.js';
+import { buildComposeChars } from './decomp.js';
 
 export const SKILLS = [
   { id: 'listen', label: 'Nghe', desc: 'Nghe phát âm, chọn chữ hoặc câu đúng', icon: 'headphones', tone: 'blue' },
@@ -10,8 +12,9 @@ export const SKILLS = [
   { id: 'tones', label: 'Thanh điệu', desc: 'Chọn pinyin có dấu thanh đúng', icon: 'tone', tone: 'purple' },
   { id: 'typing', label: 'Gõ pinyin', desc: 'Nhìn chữ, gõ cách đọc', icon: 'keyboard', tone: 'navy' },
   { id: 'sentence', label: 'Ghép câu', desc: 'Sắp xếp từ thành câu đúng ngữ pháp', icon: 'blocks', tone: 'teal' },
-  { id: 'write', label: 'Viết chữ', desc: 'Vẽ chữ Hán bằng tay, máy chấm nét', icon: 'pencil', tone: 'orange' },
-  { id: 'compose', label: 'Viết câu', desc: 'Dịch câu sang tiếng Trung, máy chấm', icon: 'lessons', tone: 'green' },
+  { id: 'write', label: 'Viết chữ', desc: 'Tự viết từ nghĩa, pinyin hoặc âm nghe', icon: 'pencil', tone: 'orange' },
+  { id: 'compose', label: 'Viết câu', desc: 'Dịch câu và tự đặt câu với từ đã học', icon: 'lessons', tone: 'green' },
+  { id: 'parts', label: 'Cấu tạo chữ', desc: 'Ghép bộ thủ, thành phần thành chữ', icon: 'blocks', tone: 'purple' },
 ];
 
 // ---------------------------------------------------------------- viết câu
@@ -138,7 +141,7 @@ function pickOthers(pool, exclude, key, n, rand) {
  * @param {{cards:Array, pool:Array, lines:Array<{zh,vi,tokens?}>, rand?:Function, n?:number}} src
  *   cards: từ trong phạm vi luyện; pool: kho để lấy phương án nhiễu; lines: câu bài khóa trong phạm vi.
  */
-export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], rand = Math.random, n = 10 }) {
+export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], rand = Math.random, n = 10, decomp = null }) {
   const words = cards.filter(usableCard);
   const poolWords = pool.filter(usableCard);
   const shortLines = lines.filter((l) => l.zh && l.vi && [...l.zh].length <= 24);
@@ -183,12 +186,17 @@ export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], ran
     }
   } else if (skill === 'write') {
     for (const c of shuffle(words.filter((c) => [...c.hanzi].length <= 2 && /^[㐀-鿿]+$/.test(c.hanzi)), rand).slice(0, Math.min(n, 8))) {
-      out.push({ type: 'draw', prompt: `Viết chữ: ${c.meaning}`, hanzi: c.hanzi, pinyin: c.pinyin, answer: c.hanzi, card_ids: [c.id], explanation: `${c.hanzi} (${c.pinyin}): ${c.meaning}` });
+      const mode = ['meaning', 'pinyin', 'listen'][out.length % 3];
+      out.push({ type: 'draw', mode, activity: `recall-${mode === 'meaning' ? 'write' : mode}`, prompt: mode === 'meaning' ? 'Viết chữ Hán có nghĩa:' : mode === 'pinyin' ? 'Viết chữ Hán có pinyin:' : 'Nghe rồi viết chữ', hanzi: c.hanzi, pinyin: c.pinyin, meaning: c.meaning, answer: c.hanzi, card_ids: [c.id], explanation: `${c.hanzi} (${c.pinyin}): ${c.meaning}` });
     }
   } else if (skill === 'compose') {
     for (const l of shuffle(shortLines.filter((l) => [...l.zh].length <= 16), rand).slice(0, Math.min(n, 8))) {
       out.push({ type: 'compose', prompt: l.vi, answer: l.zh });
     }
+    // Xen 3 câu tự đặt với từ đã học
+    for (const c of pickWords(3)) out.splice(Math.floor(rand() * (out.length + 1)), 0, freewriteQ(c, lines));
+  } else if (skill === 'parts' && decomp) {
+    out.push(...buildComposeChars(pickWords(n * 2), decomp, { rand, n }));
   } else if (skill === 'sentence') {
     const ok = shuffle(shortLines.filter((l) => {
       const w = (l.tokens || []).filter((t) => t.word).map((t) => t.text);
