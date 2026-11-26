@@ -145,9 +145,10 @@ body.focus-mode .main { padding: 0; max-width: none; }
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
   padding: var(--s4) var(--s4) calc(var(--s4) + env(safe-area-inset-bottom));
   border-radius: var(--r-lg) var(--r-lg) 0 0; box-shadow: var(--shadow-up);
-  transform: translateY(110%); transition: transform .28s cubic-bezier(.2,.8,.2,1);
+  transform: translateY(110%); visibility: hidden;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), visibility 0s linear .28s;
 }
-.sheet.open { transform: translateY(0); }
+.sheet.open { transform: translateY(0); visibility: visible; transition: transform .28s cubic-bezier(.2,.8,.2,1), visibility 0s; }
 .sheet.ok { background: var(--good-bg); }
 .sheet.no { background: var(--bad-bg); }
 .sheet .inner { max-width: 680px; margin: 0 auto; }

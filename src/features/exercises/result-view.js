@@ -134,7 +134,15 @@ export function answerList(results, { rate = 1, title = 'Các câu vừa làm' }
     }) : [h('li', { class: 'al-empty' }, filter === 'wrong' ? 'Không có câu sai.' : 'Chưa có câu đúng.')]));
   }
   draw();
-  return h('section', { class: 'answer-review' },
-    h('div', { class: 'al-head' }, h('strong', {}, title), seg),
-    list);
+  // Thu gọn mặc định: bấm thanh tiêu đề để mở danh sách.
+  const panel = h('div', { class: 'al-panel', hidden: true }, seg, list);
+  const toggle = h('button', { class: 'al-toggle', type: 'button', 'aria-expanded': 'false', onclick: () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+  } },
+  h('span', { class: 'al-t-ic' }, icon('clipboard')),
+  h('span', { class: 'grow' }, h('strong', {}, title), h('small', {}, `${items.length} câu · ${nWrong ? `${nWrong} câu sai` : 'không sai câu nào'}`)),
+  h('span', { class: 'al-chev' }, icon('chevron')));
+  return h('section', { class: 'answer-review' }, toggle, panel);
 }

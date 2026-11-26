@@ -141,9 +141,21 @@
 
 /* ---------- danh sách câu vừa làm */
 .answer-review { max-width: 620px; margin: 24px auto 0; text-align: left; }
-.al-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-.al-head strong { font-size: 17px; }
-.al-filter { margin: 0; }
+.al-toggle {
+  display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; border-radius: 16px;
+  border: 1px solid var(--line); background: var(--glass-strong); color: var(--ink); font: inherit; text-align: left; cursor: pointer;
+}
+.al-toggle .grow { flex: 1; display: grid; gap: 2px; min-width: 0; }
+.al-toggle strong { font-size: 16px; }
+.al-toggle small { color: var(--muted); font-size: 13px; }
+.al-t-ic { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); }
+.al-t-ic svg { width: 20px; height: 20px; }
+.al-chev { flex: none; color: var(--muted); transition: transform .2s ease; }
+.al-chev svg { width: 20px; height: 20px; transform: rotate(90deg); }
+.al-toggle[aria-expanded="true"] .al-chev { transform: rotate(180deg); }
+.al-panel { margin-top: 14px; }
+.al-panel[hidden] { display: none; }
+.al-filter { margin: 0 0 12px; }
 .al-filter .seg-btn { white-space: nowrap; padding: 6px 14px; font-size: 14px; min-height: 32px; }
 .answer-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .al-item {
