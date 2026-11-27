@@ -48,7 +48,7 @@ export function lessonExercises(lesson, data, { limit = Infinity, rand = Math.ra
  * @param {Array} [o.initialResults]  kết quả các câu đã làm trước đó
  * @param {(i:number, results:Array)=>void} [o.onStep]  gọi mỗi khi sang câu mới (để lưu tiến độ)
  */
-export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, onProgress, onAnswer, onDone, startAt = 0, initialResults = [], onStep }) {
+export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, onProgress, onAnswer, onDone, startAt = 0, initialResults = [], onStep, nav = false }) {
   let i = Math.max(0, Math.min(startAt, exercises.length));
   const results = [...initialResults];
   const queue = [...exercises];
@@ -70,6 +70,14 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
     render(queue[i]);
   }
 
+  function goBack() {
+    if (i === 0) return;
+    i--;
+    // Câu trước đã làm: bỏ kết quả cũ để làm lại.
+    for (let k = results.length - 1; k >= 0; k--) if (results[k].question === queue[i]) results.splice(k, 1);
+    next();
+  }
+
   function render(ex) {
     const body = h('div');
     const isLast = i === queue.length - 1;
@@ -82,6 +90,11 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         : (ex.type === 'draw' && ex.mode) || ex.type === 'sheet' || ex.compose ? null : ex.prompt && ex.type !== 'listen' ? h('div', { class: 'ex-prompt' }, renderPrompt(ex.prompt)) : h('div', { class: 'ex-prompt' }, ex.prompt || ''),
       body);
     if (ex.qa && ex.type !== 'listen') setTimeout(() => speak(ex.speak, rate), 250);
+    // Quay lại câu trước (làm lại, kết quả cũ bị thay) / Bỏ qua câu này (không tính điểm).
+    const navRow = nav && !ex._orig ? h('div', { class: 'card-nav ex-nav' },
+      h('button', { class: 'btn ghost', type: 'button', disabled: i === 0, onclick: () => goBack() }, icon('back'), 'Quay lại'),
+      h('button', { class: 'btn ghost', type: 'button', onclick: () => { i++; next(); } }, 'Bỏ qua', icon('chevron'))) : null;
+    if (navRow) shell.main.append(navRow);
 
     let answered = false;
     let getResponse = () => null;
@@ -94,12 +107,17 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       if (response == null) return;
       answered = true;
       if (ex.type === 'study') { i++; next(); return; } // thẻ xem từ: không chấm
+      navRow?.remove();
       const ok = ex.type === 'pinyin' ? gradePinyin(response, ex.answer)
         : ex.type === 'speak' || ex.type === 'draw' || ex.type === 'sheet' || ex.type === 'compose' || ex.type === 'freewrite' ? !!response.ok
         : grade(ex.type === 'listen' ? { ...ex, type: 'choose' } : ex, response);
       const orig = ex._orig || ex;
       // Điểm và lịch ôn chỉ tính lần làm đầu; lần làm lại để sửa sai.
-      if (!ex._orig) { results.push({ question: ex, correct: ok, response }); onAnswer?.(ex, ok, response); }
+      if (!ex._orig) {
+        results.push({ question: ex, correct: ok, response });
+        onAnswer?.(ex, ok, response);
+        onStep?.(i + 1, results); // lưu ngay: thoát lúc đang xem kết quả câu này cũng không phải làm lại
+      }
       else if (ok) { const r = results.find((x) => x.question === orig); if (r) r.fixed = true; }
       progress(i, queue.length, 1); // trả lời xong: thanh chạy lên ngay
       body.querySelectorAll('button, input').forEach((b) => { b.disabled = true; });

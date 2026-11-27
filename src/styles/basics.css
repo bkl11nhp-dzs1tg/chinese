@@ -243,3 +243,8 @@ a.tile-link:hover, a.tile-link:focus-visible { outline: 2px solid var(--accent);
 .fc .ex-word { color: var(--accent-ink); font-weight: 700; }
 .fc .ex-py { color: var(--accent-ink); font-size: 15px; min-height: 1.2em; }
 .fc .ex-vi { font-size: 15px; }
+
+/* ---------- Quay lại / Bỏ qua trong luyện nhớ & viết */
+.ex-nav { display: flex; justify-content: space-between; margin-top: 18px; }
+.ex-nav .btn { min-height: 40px; }
+.ws-word { flex-wrap: wrap; } .ws-info { flex: 1 1 150px; } .ws-info .ask-main { white-space: nowrap; }

@@ -11,7 +11,7 @@ export const PASS_INK = 0.7;
 const FONT = '"PingFang SC","Noto Sans SC","Microsoft YaHei","Source Han Sans SC",sans-serif';
 
 /** Một ô viết cho một chữ. Trả về { el, isEmpty(), score(), showAnswer(), clear(), setGuide(on) }. */
-export function charPad(ch, { size = 260, onInk } = {}) {
+export function charPad(ch, { size = 260, onInk, onStroke } = {}) {
   const dpr = Math.min(2, globalThis.devicePixelRatio || 1);
   const canvas = h('canvas', { class: 'hw-canvas', width: size * dpr, height: size * dpr, style: { width: `${size}px`, height: `${size}px` }, 'aria-label': `Ô viết chữ ${ch}` });
   const guide = h('span', { class: 'hw-guide han', lang: 'zh-CN', 'aria-hidden': 'true', style: { fontSize: `${size * 0.82}px` } }, ch);
@@ -36,7 +36,7 @@ export function charPad(ch, { size = 260, onInk } = {}) {
   }
   canvas.addEventListener('pointerdown', (e) => { e.preventDefault(); canvas.setPointerCapture(e.pointerId); cur = [pos(e)]; strokes.push(cur); redraw(); });
   canvas.addEventListener('pointermove', (e) => { if (!cur) return; cur.push(pos(e)); redraw(); });
-  const end = () => { if (cur) { cur = null; onInk?.(); } };
+  const end = () => { if (cur) { cur = null; onStroke?.(); onInk?.(); } };
   canvas.addEventListener('pointerup', end);
   canvas.addEventListener('pointercancel', end);
   canvas.style.touchAction = 'none';
@@ -86,14 +86,16 @@ export function charPad(ch, { size = 260, onInk } = {}) {
 export function writeArea(word, { onChange, guide: guideMode = 'toggle' } = {}) {
   const chars = [...word];
   const size = Math.min(chars.length > 1 ? 168 : 260, Math.floor((Math.min(globalThis.innerWidth || 390, 560) - 48) / chars.length));
-  const pads = chars.map((ch) => charPad(ch, { size, onInk: () => onChange?.(pads.every((p) => !p.isEmpty())) }));
+  // Thứ tự nét trên mọi ô: Hoàn tác chỉ bỏ đúng nét vừa viết (ở ô nào thì bỏ ở ô đó).
+  const order = [];
+  const pads = chars.map((ch, k) => charPad(ch, { size, onStroke: () => order.push(k), onInk: () => onChange?.(pads.every((p) => !p.isEmpty())) }));
   let guide = guideMode === 'on';
   if (guide) pads.forEach((p) => p.setGuide(true));
   const guideBtn = h('button', { class: 'chip opt', type: 'button', 'aria-pressed': 'false', onclick: () => { guide = !guide; pads.forEach((p) => p.setGuide(guide)); guideBtn.classList.toggle('selected', guide); guideBtn.setAttribute('aria-pressed', String(guide)); } }, icon('eye'), 'Tô theo mẫu');
   const tools = h('div', { class: 'hw-tools' },
     guideMode === 'toggle' ? guideBtn : null,
-    h('button', { class: 'chip opt', type: 'button', onclick: () => pads.forEach((p) => p.undo()) }, icon('back'), 'Hoàn tác'),
-    h('button', { class: 'chip opt', type: 'button', onclick: () => pads.forEach((p) => p.clear()) }, icon('trash'), 'Xóa'));
+    h('button', { class: 'chip opt', type: 'button', onclick: () => { const k = order.pop(); if (k != null) pads[k].undo(); } }, icon('back'), 'Hoàn tác'),
+    h('button', { class: 'chip opt', type: 'button', onclick: () => { order.length = 0; pads.forEach((p) => p.clear()); } }, icon('trash'), 'Xóa'));
   return {
     el: h('div', { class: 'hw-area' }, h('div', { class: 'hw-pads' }, pads.map((p) => p.el)), tools),
     usedGuide: () => guide && guideMode !== 'on',
@@ -115,9 +117,10 @@ export function sheetArea(word, reps, { onChange } = {}) {
   const cols = chars.length === 1 ? 3 : 1;
   const size = Math.max(80, Math.min(128, Math.floor((avail - cols * 12 - (cols - 1) * 12 - cols * (chars.length - 1) * 6) / (cols * chars.length))));
   const rows = [];
+  const order = []; // [hàng, ô] theo thứ tự nét viết
   const changed = () => onChange?.(rows.filter((r) => r.pads.every((p) => !p.isEmpty())).length);
   for (let k = 0; k < reps; k++) {
-    const pads = chars.map((ch) => charPad(ch, { size, onInk: changed }));
+    const pads = chars.map((ch, j) => charPad(ch, { size, onInk: changed, onStroke: () => order.push([k, j]) }));
     if (k < guided) pads.forEach((p) => p.setGuide(true));
     const el = h('div', { class: ['ws-cell', k < guided ? 'guided' : ''] },
       h('span', { class: 'ws-n' }, String(k + 1)),
@@ -126,8 +129,8 @@ export function sheetArea(word, reps, { onChange } = {}) {
   }
   const scoreOf = (r) => (r.pads.some((p) => p.isEmpty()) ? 0 : Math.min(...r.pads.map((p) => p.score())));
   const tools = h('div', { class: 'hw-tools' },
-    h('button', { class: 'chip opt', type: 'button', onclick: () => { const r = [...rows].reverse().find((x) => x.pads.some((p) => !p.isEmpty())); r?.pads.forEach((p) => p.undo()); } }, icon('back'), 'Hoàn tác'),
-    h('button', { class: 'chip opt', type: 'button', onclick: () => rows.forEach((r) => r.pads.forEach((p) => p.clear())) }, icon('trash'), 'Xóa hết'));
+    h('button', { class: 'chip opt', type: 'button', onclick: () => { const last = order.pop(); if (last) rows[last[0]].pads[last[1]].undo(); } }, icon('back'), 'Hoàn tác'),
+    h('button', { class: 'chip opt', type: 'button', onclick: () => { order.length = 0; rows.forEach((r) => r.pads.forEach((p) => p.clear())); } }, icon('trash'), 'Xóa hết'));
   return {
     el: h('div', { class: 'ws-area' }, h('div', { class: ['ws-grid', chars.length > 1 ? 'multi' : ''] }, rows.map((r) => r.el)), tools),
     filled: () => rows.filter((r) => r.pads.every((p) => !p.isEmpty())).length,

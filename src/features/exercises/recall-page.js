@@ -92,7 +92,7 @@ export async function render(root, ctx, { params }) {
     const isGraded = (q) => q.type !== 'study' && q.mode !== 'trace';
     const wrong = new Set((saved?.results || []).filter((r) => !r.correct && isGraded(r.question)).flatMap((r) => r.question.card_ids || []));
     runner = exerciseRunner({
-      shell, exercises, mode: 'practice', rate: ctx.settings.tts_rate,
+      shell, exercises, mode: 'practice', rate: ctx.settings.tts_rate, nav: true,
       startAt: saved?.i || 0, initialResults: saved?.results || [],
       onStep: (i, results) => saveResume(RESUME_ID, { exercises, i, results, meta: { mode } }),
       onAnswer: async (ex, ok) => {
