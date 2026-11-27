@@ -51,7 +51,11 @@ export async function speak(text, rate = 1, { gender = null } = {}) {
     if (zh.length >= 2) { voice = gender === 'male' ? zh[1] : zh[0]; exact = false; }
   }
   if (!voice) voice = await chineseVoice();
-  speechSynthesis.cancel();
+  // Chrome Android: gọi speak() ngay sau cancel() đôi khi bị nuốt mất → chỉ cancel khi đang đọc và chờ một nhịp.
+  if (speechSynthesis.speaking || speechSynthesis.pending) {
+    speechSynthesis.cancel();
+    await new Promise((r) => setTimeout(r, 60));
+  }
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'zh-CN';
   if (voice) u.voice = voice;
@@ -59,4 +63,23 @@ export async function speak(text, rate = 1, { gender = null } = {}) {
   if (gender && !exact) { u.pitch = gender === 'male' ? 0.5 : 1.45; if (gender === 'male') u.rate = rate * 0.95; }
   speechSynthesis.speak(u);
   return !!voice;
+}
+
+/**
+ * Chuẩn bị giọng đọc từ lúc mở app: tải sẵn danh sách giọng, và ở lần chạm đầu tiên phát một câu im lặng
+ * để "mở khóa" giọng đọc (nhiều trình duyệt điện thoại bỏ qua lần đọc đầu nếu chưa được mở khóa).
+ */
+export function primeSpeech() {
+  if (!ttsSupported()) return;
+  loadVoices();
+  const unlock = () => {
+    try {
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0;
+      u.lang = 'zh-CN';
+      speechSynthesis.speak(u);
+    } catch { /* bỏ qua */ }
+  };
+  window.addEventListener('pointerdown', unlock, { once: true, capture: true });
+  window.addEventListener('keydown', unlock, { once: true, capture: true });
 }

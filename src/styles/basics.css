@@ -224,5 +224,13 @@ a.tile-link:hover, a.tile-link:focus-visible { outline: 2px solid var(--accent);
 .resume-card ~ * .btn, .focus-footer .btn { white-space: nowrap; }
 
 /* Chữ trong nút không bao giờ xuống dòng; quá dài thì rút gọn bằng "…". */
-.btn, .seg-btn, .chip { white-space: nowrap; }
+.btn, .seg-btn { white-space: nowrap; }
+/* Ô đáp án là câu dài: được xuống dòng, không tràn khung. */
+.options .chip { white-space: normal; overflow-wrap: anywhere; min-width: 0; }
 .btn { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- thẻ: nút xem nét viết (dưới nút loa) */
+.fc .fc-stroke-btn { position: absolute; top: calc(var(--s2) + 52px); right: var(--s2); }
+.fc .fc-stroke-btn.on { background: var(--accent); color: var(--on-accent); }
+.fc-strokes .sk-viewer { margin: 0 auto; }
+.fc-strokes .sk-row { justify-content: center; }

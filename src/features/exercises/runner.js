@@ -132,7 +132,8 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
     }
     if (ex.type === 'choose' || ex.type === 'listen') {
       let picked = null;
-      const hanOpts = ex.options.every(isHan);
+      // Lưới 2 cột chỉ cho đáp án chữ Hán ngắn; câu dài xếp mỗi đáp án một hàng.
+      const hanOpts = ex.options.every((o) => isHan(o) && [...o].length <= 5);
       const opts = ex.options.map((o, k) => h('button', {
         class: ['chip', isHan(o) ? 'han' : ''], type: 'button', dataset: { v: o },
         onclick: () => { picked = o; opts.forEach((b) => b.classList.toggle('selected', b.dataset.v === o)); setReady(true); if (isHan(o)) speak(o, rate); },

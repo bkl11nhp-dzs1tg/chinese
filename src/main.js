@@ -31,6 +31,7 @@ import { initZhKeyboard } from './ui/zh-keyboard.js';
 import { startReminder, syncPushSubscription } from './reminder.js';
 import { startOfDay } from './core/stats.js';
 import { setFeedbackEnabled } from './ui/feedback.js';
+import { primeSpeech } from './ui/speech.js';
 import { syncContent } from './content.js';
 import { loadAccount, syncNow } from './sync.js';
 import * as games from './features/games/games-page.js';
@@ -71,6 +72,7 @@ const prefersDark = () => globalThis.matchMedia?.('(prefers-color-scheme: dark)'
 const effectiveTheme = (t) => (t === 'dark' || t === 'light' ? t : prefersDark() ? 'dark' : 'light');
 
 initInstall();
+primeSpeech();
 
 async function boot() {
   const appEl = document.getElementById('app');

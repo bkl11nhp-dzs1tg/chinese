@@ -5,6 +5,7 @@
 import { h } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
+import { strokeViewer } from '../../ui/strokes.js';
 import { review, newCardState, markMastered } from '../../core/srs.js';
 
 // grade: 'again' (chưa nhớ → ôn lại sớm), 'good' (đã nhớ → theo lịch), 'mastered' (đã thuộc → ≥ 21 ngày)
@@ -74,10 +75,27 @@ export function flashcard({ card, state, kind, settings, onGrade, onBack = null,
 
   const flipBtn = h('button', { class: 'btn primary big block', type: 'button', onclick: () => flip(), 'aria-keyshortcuts': 'Space' }, 'Lật thẻ', h('span', { class: 'kbd' }, 'Space'));
 
+  // Nét viết: bấm nút bút để xem thứ tự nét ngay trên thẻ, bấm lại để ẩn.
+  const hasHan = /[㐀-鿿]/.test(card.hanzi);
+  const strokesSlot = h('div', { class: 'fc-strokes hidden', onclick: (e) => e.stopPropagation() });
+  const hanziEl = h('div', { class: 'hanzi', lang: 'zh-CN' }, card.hanzi);
+  const toggleStrokes = (e) => {
+    e.stopPropagation();
+    const show = strokesSlot.classList.contains('hidden');
+    if (show && !strokesSlot.firstChild) strokesSlot.append(strokeViewer(card.hanzi.replace(/（.*?）|\(.*?\)/g, ''), { size: [...card.hanzi].length > 2 ? 72 : 96 }));
+    strokesSlot.classList.toggle('hidden', !show);
+    hanziEl.classList.toggle('hidden', show);
+    strokeBtn.classList.toggle('on', show);
+    strokeBtn.setAttribute('aria-pressed', String(show));
+  };
+  const strokeBtn = hasHan ? h('button', { class: 'btn tinted icon-only fc-stroke-btn', type: 'button', 'aria-label': 'Xem nét viết', title: 'Xem nét viết', 'aria-pressed': 'false', onclick: toggleStrokes }, icon('pencil')) : null;
+
   const face = h('div', { class: 'fc px-box', onclick: () => { if (!flipped) flip(); } },
     tag,
     speakButton(card.hanzi, rate),
-    h('div', { class: 'hanzi', lang: 'zh-CN' }, card.hanzi),
+    strokeBtn,
+    hanziEl,
+    strokesSlot,
     pinyinSlot,
     back);
 
