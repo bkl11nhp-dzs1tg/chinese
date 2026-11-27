@@ -252,3 +252,7 @@ a.tile-link:hover, a.tile-link:focus-visible { outline: 2px solid var(--accent);
 /* ---------- Gợi ý khi tự viết: thứ tự nét nhỏ dưới ô viết */
 .hw-hint-strokes { display: flex; justify-content: center; margin-top: 12px; }
 .hw-hint-strokes .sk-viewer { margin: 0; }
+
+/* Thẻ phản hồi trung tính (viết theo gợi ý): nền kem đặc, không lộ màu phía sau. */
+.sheet.open:not(.ok):not(.no) { background: var(--surface); border-top: 1px solid var(--line); }
+.sheet:not(.ok):not(.no) .sheet-retry { background: var(--surface-2) !important; color: var(--accent-ink) !important; border-color: var(--line-strong) !important; }
