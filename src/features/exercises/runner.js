@@ -125,7 +125,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       mark(ok);
       const answer = ex.type === 'speak' ? (response.transcript ? `Máy nghe được: ${response.transcript}` : ex.target) : answerText(ex);
       const extra = ex.type === 'sheet' ? h('div', { class: 'score-line' }, `Viết đạt ${response.passed}/${response.reps} lần · trung bình ${Math.round(response.score * 100)}%`)
-        : ex.type === 'freewrite' ? freewriteFeedback(ex, response) : ex.type === 'draw' || ex.type === 'compose' ? h('div', {}, h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.guided ? ' · có tô theo mẫu' : ''),
+        : ex.type === 'freewrite' ? freewriteFeedback(ex, response) : ex.type === 'draw' || ex.type === 'compose' ? h('div', {}, h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.hinted ? ' · đã xem gợi ý' : response.guided ? ' · có tô theo mẫu' : ''),
         ex.type === 'draw' && !ok ? h('div', { class: 'sheet-strokes' }, strokeViewer(ex.hanzi, { size: 84 })) : null) : null;
       shell.showSheet({
         ok,
@@ -322,7 +322,7 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
     } else if (ex.type === 'draw') {
       // Viết chữ bằng tay. mode: trace (viết theo mẫu) | meaning (chỉ nghĩa) | pinyin (chỉ pinyin) | listen (chỉ nghe) | mặc định (nghĩa + pinyin, có nút tô mẫu).
       const m = ex.mode;
-      const area = writeArea(ex.hanzi, { onChange: (full) => setReady(full), guide: m === 'trace' ? 'on' : m ? 'none' : 'toggle' });
+      const area = writeArea(ex.hanzi, { onChange: (full) => setReady(full), guide: m === 'trace' ? 'on' : m ? 'hint' : 'toggle' });
       const sayBtn = h('button', { class: 'btn tinted icon-only', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(ex.hanzi, rate) }, icon('speaker'));
       // Thẻ đề: nhãn nhỏ (đề cho gì) + nội dung lớn + số chữ cần viết.
       const nChars = [...ex.hanzi].length;
@@ -336,7 +336,8 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
         : h('div', { class: 'hw-hint' }, h('span', { class: 'hw-py' }, ex.pinyin), sayBtn);
       if (m === 'listen') setTimeout(() => speak(ex.hanzi, rate), 300);
       body.append(hint, area.el);
-      getResponse = () => { const score = area.score(); return { score, ok: score >= PASS_INK, guided: area.usedGuide() }; };
+      // Đã xem gợi ý thì tính là chưa nhớ (từ được đưa vào danh sách ôn).
+      getResponse = () => { const score = area.score(); return { score, ok: score >= PASS_INK && !area.usedHint?.(), guided: area.usedGuide(), hinted: area.usedHint?.() }; };
       mark = (ok) => area.showAnswer(ok);
     } else if (ex.type === 'freewrite') {
       // Đặt câu tự do với từ vừa học: kiểm tra có dùng từ, dịch máy câu của người học để tự đối chiếu, kèm câu mẫu.

@@ -4,6 +4,7 @@
 import { h } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { inkScore } from '../../core/practice.js';
+import { strokeViewer } from '../../ui/strokes.js';
 
 const GRID = 48;
 /** Điểm tối thiểu để một chữ viết tay được tính là đạt. */
@@ -82,7 +83,7 @@ export function charPad(ch, { size = 260, onInk, onStroke } = {}) {
 }
 
 /** Khu viết cho cả từ (1–2 chữ) + nút gợi ý, xóa, hoàn tác. */
-/** guide: 'toggle' (có nút tô mẫu) | 'on' (luôn hiện mẫu – viết theo) | 'none' (ẩn mẫu – viết từ trí nhớ) */
+/** guide: 'toggle' (có nút tô mẫu) | 'on' (luôn hiện mẫu – viết theo) | 'none' (ẩn mẫu) | 'hint' (ẩn mẫu, có nút Gợi ý: hiện mẫu + thứ tự nét, tính là chưa nhớ) */
 export function writeArea(word, { onChange, guide: guideMode = 'toggle' } = {}) {
   const chars = [...word];
   const size = Math.min(chars.length > 1 ? 168 : 260, Math.floor((Math.min(globalThis.innerWidth || 390, 560) - 48) / chars.length));
@@ -92,13 +93,25 @@ export function writeArea(word, { onChange, guide: guideMode = 'toggle' } = {}) 
   let guide = guideMode === 'on';
   if (guide) pads.forEach((p) => p.setGuide(true));
   const guideBtn = h('button', { class: 'chip opt', type: 'button', 'aria-pressed': 'false', onclick: () => { guide = !guide; pads.forEach((p) => p.setGuide(guide)); guideBtn.classList.toggle('selected', guide); guideBtn.setAttribute('aria-pressed', String(guide)); } }, icon('eye'), 'Tô theo mẫu');
+  let hinted = false;
+  const hintSlot = h('div', { class: 'hw-hint-strokes hidden' });
+  const hintBtn = h('button', { class: 'chip opt', type: 'button', onclick: () => {
+    if (hinted) return;
+    hinted = true;
+    pads.forEach((p) => p.setGuide(true));
+    hintSlot.append(strokeViewer(word, { size: 72 }));
+    hintSlot.classList.remove('hidden');
+    hintBtn.classList.add('selected');
+    hintBtn.disabled = true;
+  } }, icon('eye'), 'Gợi ý');
   const tools = h('div', { class: 'hw-tools' },
-    guideMode === 'toggle' ? guideBtn : null,
+    guideMode === 'toggle' ? guideBtn : guideMode === 'hint' ? hintBtn : null,
     h('button', { class: 'chip opt', type: 'button', onclick: () => { const k = order.pop(); if (k != null) pads[k].undo(); } }, icon('back'), 'Hoàn tác'),
     h('button', { class: 'chip opt', type: 'button', onclick: () => { order.length = 0; pads.forEach((p) => p.clear()); } }, icon('trash'), 'Xóa'));
   return {
-    el: h('div', { class: 'hw-area' }, h('div', { class: 'hw-pads' }, pads.map((p) => p.el)), tools),
-    usedGuide: () => guide && guideMode !== 'on',
+    el: h('div', { class: 'hw-area' }, h('div', { class: 'hw-pads' }, pads.map((p) => p.el)), tools, hintSlot),
+    usedGuide: () => (guide && guideMode !== 'on') || hinted,
+    usedHint: () => hinted,
     score: () => Math.min(...pads.map((p) => p.score())),
     showAnswer: (ok) => { pads.forEach((p) => p.showAnswer(ok)); tools.remove(); },
   };

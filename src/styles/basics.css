@@ -248,3 +248,7 @@ a.tile-link:hover, a.tile-link:focus-visible { outline: 2px solid var(--accent);
 .ex-nav { display: flex; justify-content: space-between; margin-top: 18px; }
 .ex-nav .btn { min-height: 40px; }
 .ws-word { flex-wrap: wrap; } .ws-info { flex: 1 1 150px; } .ws-info .ask-main { white-space: nowrap; }
+
+/* ---------- Gợi ý khi tự viết: thứ tự nét nhỏ dưới ô viết */
+.hw-hint-strokes { display: flex; justify-content: center; margin-top: 12px; }
+.hw-hint-strokes .sk-viewer { margin: 0; }
