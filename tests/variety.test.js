@@ -59,3 +59,20 @@ describe('hỏi đáp', () => {
     expect(qs.some((q) => q.qa.q.zh.includes('什么意思') || q.qa.q.zh.includes('怎么说'))).toBe(true);
   });
 });
+
+import { recentFromEvents } from '../src/features/practice/practice.js';
+describe('từ vừa học chưa hỏi đáp', () => {
+  const data = { cards: ['a', 'b', 'c', 'd'].map((id) => ({ id, hanzi: id })) };
+  it('chỉ tính từ học mới; trả lời đúng hỏi đáp sau khi học thì bớt đi', () => {
+    const ev = [
+      { card_id: 'a', activity: 'new', quality: 4, created_at: 10 },
+      { card_id: 'b', activity: 'new', quality: 4, created_at: 10 },
+      { card_id: 'c', activity: 'review', quality: 4, created_at: 10 },
+      { card_id: 'a', activity: 'qa', quality: 4, created_at: 20 },
+      { card_id: 'b', activity: 'qa', quality: 2, created_at: 20 },
+    ];
+    const r = recentFromEvents(data, ev);
+    expect(r.cards.map((c) => c.id)).toEqual(['a', 'b']);
+    expect(r.pending.map((c) => c.id)).toEqual(['b']);
+  });
+});

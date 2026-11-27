@@ -16,7 +16,7 @@ import { flashcard } from '../flashcards/flashcard.js';
 import { exerciseRunner, lessonExercises } from '../exercises/runner.js';
 import { matchGame, gameCards } from '../games/games.js';
 import { recordAnswer } from '../exercises/record.js';
-import { recentCards } from '../practice/practice.js';
+import { recentInfo } from '../practice/practice.js';
 import { exampleForCard } from '../../core/examples.js';
 import { buildDictionary, segmentSentence } from '../../core/segment.js';
 
@@ -249,7 +249,8 @@ export async function render(root, ctx, { query }) {
       ? h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.3 }, onclick: () => ctx.navigate(`session?lesson=${encodeURIComponent(lesson.id)}&r=${Date.now()}`) }, `Học tiếp ${remaining} từ`)
       : h('button', { class: 'btn primary big', type: 'button', style: { flex: 1.3 }, onclick: () => ctx.navigate(backTo) }, lessonDone ? 'Về bài: bước tiếp theo' : 'Xong');
     // Có từ vừa học (3 ngày qua): nút hỏi đáp riêng, luôn thấy ở thanh dưới, trên nút chính.
-    const qaBtn = recentCards(after).length >= 4
+    const recent = await recentInfo(ctx, after);
+    const qaBtn = recent.cards.length >= 4 && recent.pending.length
       ? h('a', { class: 'btn tinted big block', href: `#/practice/qa?scope=recent${lesson ? `&from=${encodeURIComponent(lesson.id)}` : ''}` }, icon('chat'), 'Hỏi đáp từ vừa học')
       : null;
     doneBtn.style.flex = '';

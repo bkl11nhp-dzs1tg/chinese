@@ -142,7 +142,7 @@ function pickOthers(pool, exclude, key, n, rand) {
  * @param {{cards:Array, pool:Array, lines:Array<{zh,vi,tokens?}>, rand?:Function, n?:number}} src
  *   cards: từ trong phạm vi luyện; pool: kho để lấy phương án nhiễu; lines: câu bài khóa trong phạm vi.
  */
-export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], pairs = [], rand = Math.random, n = 10, decomp = null, order = null }) {
+export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], pairs = [], rand = Math.random, n = 10, decomp = null, order = null, qaWordShare = 0.3 }) {
   // order(arr, kind): thứ tự ưu tiên chọn ('word' | 'line' | 'pair'); mặc định xáo ngẫu nhiên.
   const ord = order || ((a) => shuffle(a, rand));
   const words = cards.filter(usableCard);
@@ -211,7 +211,7 @@ export function buildSkillSet(skill, { cards = [], pool = cards, lines = [], pai
       out.push({ type: 'reorder', prompt: `Sắp xếp thành câu: “${l.vi}”`, options: pieces, answer: pieces, explanation: `${l.zh} — ${l.vi}`, speak: l.zh });
     }
   } else if (skill === 'qa') {
-    out.push(...qaQuestions(pairs, { rand, n, order: (a) => ord(a, 'pair'), words: pickWords(n), pool: poolWords }));
+    out.push(...qaQuestions(pairs, { rand, n, order: (a) => ord(a, 'pair'), words: pickWords(n), pool: poolWords, allWords: words, wordShare: qaWordShare }));
   } else if (skill === 'speak') {
     const ws = pickWords(Math.ceil(n / 2));
     for (const c of ws) out.push({ type: 'speak', prompt: 'Đọc to từ này', target: c.hanzi, pinyin: c.pinyin, meaning: c.meaning, card_ids: [c.id] });
@@ -250,26 +250,29 @@ export function qaPairs(texts, lessonId = null) {
  * Câu hỏi hỏi – đáp. pairs: [{ q, a, tokens? }] (tokens: các từ của câu trả lời, để ghép câu).
  * Xen 3 dạng: đọc câu hỏi chọn câu trả lời, nghe câu hỏi chọn câu trả lời, ghép câu trả lời.
  */
-export function qaQuestions(pairs, { rand = Math.random, n = 10, order = null, words: vocab = [], pool = vocab } = {}) {
+export function qaQuestions(pairs, { rand = Math.random, n = 10, order = null, words: vocab = [], pool = vocab, allWords = vocab, wordShare = 0.3 } = {}) {
   const uniq = [];
   const seen = new Set();
   for (const p of pairs) { const k = `${p.q.zh}|${p.a.zh}`; if (!seen.has(k)) { seen.add(k); uniq.push(p); } }
   const answersOf = (p) => uniq.filter((x) => x.a.zh !== p.a.zh && x.q.zh !== p.q.zh).map((x) => x.a.zh);
   const out = [];
   // Hội thoại trong bài trước; chừa ít nhất 3 câu hỏi về từ (nếu có từ).
-  const maxDialog = vocab.length ? Math.max(n - 3, Math.ceil(n / 2)) : n;
+  const maxDialog = vocab.length ? n - Math.max(3, Math.round(n * wordShare)) : n;
+  // Từ (trong phạm vi) có mặt trong cặp hỏi – đáp: trả lời đúng thì tính là đã hỏi đáp với từ đó.
+  const idsIn = (p) => allWords.filter((w) => [...w.hanzi].length >= 2 && (p.q.zh + p.a.zh).includes(w.hanzi)).slice(0, 4).map((w) => w.id);
   for (const p of (order ? order(uniq) : shuffle(uniq, rand))) {
     if (out.length >= maxDialog) break;
     const others = [...new Set(shuffle(answersOf(p), rand))].slice(0, 3);
     const kind = out.length % 3;
     const words = (p.tokens || []).filter((t) => t.word).map((t) => t.text);
     const explanation = `${p.q.zh} ${p.q.vi} → ${p.a.zh} ${p.a.vi}`;
+    const card_ids = idsIn(p);
     if (kind === 2 && words.length >= 3 && words.length <= 8 && new Set(words).size === words.length) {
-      out.push({ type: 'reorder', activity: 'qa', prompt: `${p.q.zh} → Ghép câu trả lời: “${p.a.vi}”`, ask: `Ghép câu trả lời: “${p.a.vi}”`, options: words, answer: words, speak: p.q.zh, explanation, qa: p });
+      out.push({ type: 'reorder', activity: 'qa', prompt: `${p.q.zh} → Ghép câu trả lời: “${p.a.vi}”`, ask: `Ghép câu trả lời: “${p.a.vi}”`, options: words, answer: words, speak: p.q.zh, explanation, qa: p, card_ids });
     } else if (others.length >= 2) {
       const opts = shuffle([p.a.zh, ...others], rand);
-      if (kind === 1) out.push({ type: 'listen', activity: 'qa', speak: p.q.zh, prompt: 'Nghe câu hỏi, chọn câu trả lời hợp', answer: p.a.zh, options: opts, explanation, qa: p });
-      else out.push({ type: 'choose', activity: 'qa', prompt: p.q.zh, ask: 'Chọn câu trả lời hợp', speak: p.q.zh, answer: p.a.zh, options: opts, explanation, qa: p });
+      if (kind === 1) out.push({ type: 'listen', activity: 'qa', speak: p.q.zh, prompt: 'Nghe câu hỏi, chọn câu trả lời hợp', answer: p.a.zh, options: opts, explanation, qa: p, card_ids });
+      else out.push({ type: 'choose', activity: 'qa', prompt: p.q.zh, ask: 'Chọn câu trả lời hợp', speak: p.q.zh, answer: p.a.zh, options: opts, explanation, qa: p, card_ids });
     }
   }
   // Hỏi đáp về từ: “X”是什么意思？ / “…”用汉语怎么说？

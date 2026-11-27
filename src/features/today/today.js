@@ -6,7 +6,7 @@ import { icon, badgeIcon } from '../../ui/icons.js';
 import { newLearnedToday, timeTotals, streak, formatDuration, startOfDay } from '../../core/stats.js';
 import { newCardQueue, nextLessonStep } from '../../core/lessons.js';
 import { SKILLS } from '../../core/practice.js';
-import { recentCards } from '../practice/practice.js';
+import { recentInfo } from '../practice/practice.js';
 import { dayKey, addDays } from '../../core/stats.js';
 
 const WEEKDAYS = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
@@ -22,7 +22,9 @@ export async function render(root, ctx) {
     ctx.repo.getAll('study_sessions'),
   ]);
   const due = data.states.filter((st) => st.due_at <= now).length;
-  const recentN = recentCards(data, now).length;
+  // Số từ vừa học chưa hỏi đáp xong (giảm dần khi làm; về 0 thì ẩn nút).
+  const recent = await recentInfo(ctx, data, now);
+  const recentN = recent.cards.length >= 4 ? recent.pending.length : 0;
   const learnedToday = newLearnedToday(events, now);
   const quota = Math.max(0, s.new_per_day - learnedToday);
   const available = newCardQueue(data.lessons, data.cardsById, data.statesById, data.active?.id).length;
@@ -68,7 +70,7 @@ export async function render(root, ctx) {
       h('div', { class: 'stack hero-actions' },
         h('a', { class: 'btn primary big block', href: '#/session' }, icon('play'), nothingToDo ? 'Học thêm' : 'Bắt đầu buổi học'),
         due ? h('a', { class: 'btn big block', href: '#/session?mode=review' }, icon('repeat'), `Chỉ ôn tập (${due})`) : null,
-        recentN >= 4 ? h('a', { class: 'btn tinted big block', href: '#/practice/qa?scope=recent' }, icon('chat'), `Hỏi đáp từ vừa học (${recentN})`) : null)),
+        recentN > 0 ? h('a', { class: 'btn tinted big block', href: '#/practice/qa?scope=recent' }, icon('chat'), `Hỏi đáp từ vừa học (${recentN})`) : null)),
 
     active ? h('div', { class: 'today-active' },
       h('div', { class: 'section-title today-st' }, activeSt.status === 'done' ? 'Bài vừa hoàn thành' : 'Bài đang học'),
