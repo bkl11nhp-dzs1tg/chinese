@@ -95,14 +95,16 @@ export function writeArea(word, { onChange, guide: guideMode = 'toggle' } = {}) 
   const guideBtn = h('button', { class: 'chip opt', type: 'button', 'aria-pressed': 'false', onclick: () => { guide = !guide; pads.forEach((p) => p.setGuide(guide)); guideBtn.classList.toggle('selected', guide); guideBtn.setAttribute('aria-pressed', String(guide)); } }, icon('eye'), 'Tô theo mẫu');
   let hinted = false;
   const hintSlot = h('div', { class: 'hw-hint-strokes hidden' });
-  const hintBtn = h('button', { class: 'chip opt', type: 'button', onclick: () => {
-    if (hinted) return;
-    hinted = true;
-    pads.forEach((p) => p.setGuide(true));
-    hintSlot.append(strokeViewer(word, { size: 72 }));
-    hintSlot.classList.remove('hidden');
-    hintBtn.classList.add('selected');
-    hintBtn.disabled = true;
+  // Bấm để hiện mẫu + thứ tự nét, bấm lần nữa để ẩn. Đã mở một lần là tính "đã xem gợi ý".
+  let hintOn = false;
+  const hintBtn = h('button', { class: 'chip opt', type: 'button', 'aria-pressed': 'false', onclick: () => {
+    hintOn = !hintOn;
+    hinted ||= hintOn;
+    pads.forEach((p) => p.setGuide(hintOn));
+    if (hintOn && !hintSlot.firstChild) hintSlot.append(strokeViewer(word, { size: 72 }));
+    hintSlot.classList.toggle('hidden', !hintOn);
+    hintBtn.classList.toggle('selected', hintOn);
+    hintBtn.setAttribute('aria-pressed', String(hintOn));
   } }, icon('eye'), 'Gợi ý');
   const tools = h('div', { class: 'hw-tools' },
     guideMode === 'toggle' ? guideBtn : guideMode === 'hint' ? hintBtn : null,

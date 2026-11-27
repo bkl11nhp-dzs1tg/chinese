@@ -122,16 +122,17 @@ export function exerciseRunner({ shell, exercises, mode = 'practice', rate = 1, 
       progress(i, queue.length, 1); // trả lời xong: thanh chạy lên ngay
       body.querySelectorAll('button, input').forEach((b) => { b.disabled = true; });
       if (mode === 'test') { i++; next(); return; }
-      mark(ok);
+      const hinted = !!response?.hinted; // viết theo gợi ý: không phải sai, nhưng chưa tính là nhớ
+      mark(hinted ? (response.score ?? 0) >= PASS_INK : ok);
       const answer = ex.type === 'speak' ? (response.transcript ? `Máy nghe được: ${response.transcript}` : ex.target) : answerText(ex);
       const extra = ex.type === 'sheet' ? h('div', { class: 'score-line' }, `Viết đạt ${response.passed}/${response.reps} lần · trung bình ${Math.round(response.score * 100)}%`)
         : ex.type === 'freewrite' ? freewriteFeedback(ex, response) : ex.type === 'draw' || ex.type === 'compose' ? h('div', {}, h('div', { class: 'score-line' }, `Điểm: ${Math.round(response.score * 100)}%`, response.hinted ? ' · đã xem gợi ý' : response.guided ? ' · có tô theo mẫu' : ''),
-        ex.type === 'draw' && !ok ? h('div', { class: 'sheet-strokes' }, strokeViewer(ex.hanzi, { size: 84 })) : null) : null;
+        ex.type === 'draw' && !ok && !hinted ? h('div', { class: 'sheet-strokes' }, strokeViewer(ex.hanzi, { size: 84 })) : null) : null;
       shell.showSheet({
-        ok,
-        title: ok ? pickPraise() : 'Chưa đúng',
+        ok: hinted ? null : ok,
+        title: hinted ? 'Viết theo gợi ý' : ok ? pickPraise() : 'Chưa đúng',
         detail: h('div', {},
-          ok || ex.type === 'freewrite' ? null : h('div', {}, 'Đáp án đúng: ', h('strong', { class: isHan(answer) ? 'han' : '' }, answer)),
+          ok || hinted || ex.type === 'freewrite' ? null : h('div', {}, 'Đáp án đúng: ', h('strong', { class: isHan(answer) ? 'han' : '' }, answer)),
           extra,
           ex.explanation ? h('div', { class: 'muted', style: { marginTop: '4px' } }, ex.explanation) : null),
         onContinue: () => { i++; next(); },
