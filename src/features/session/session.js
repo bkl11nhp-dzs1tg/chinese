@@ -17,6 +17,8 @@ import { exerciseRunner, lessonExercises } from '../exercises/runner.js';
 import { matchGame, gameCards } from '../games/games.js';
 import { recordAnswer } from '../exercises/record.js';
 import { recentCards } from '../practice/practice.js';
+import { exampleForCard } from '../../core/examples.js';
+import { buildDictionary, segmentSentence } from '../../core/segment.js';
 
 const RELEARN_GAP = 3; // thẻ chấm < 3 quay lại sau 3 bước
 const MAX_RELEARN = 2;
@@ -25,6 +27,8 @@ export async function render(root, ctx, { query }) {
   let s = ctx.settings;
   const now = Date.now();
   const data = await ctx.loadAll();
+  let dictCache = null;
+  const exDict = () => (dictCache ||= buildDictionary(data.cards));
   const todayEvents = await ctx.repo.byIndex('review_events', 'created_at', IDBKeyRange.lowerBound(startOfDay(now)));
 
   let plan;
@@ -130,6 +134,7 @@ export async function render(root, ctx, { query }) {
       if (!card) { idx++; return showStep(); }
       current = flashcard({
         card, state: data.statesById.get(card.id) || null, kind: step.type, settings: s,
+        example: exampleForCard(card, data.lessons, (zh) => segmentSentence(zh, exDict()).filter((t) => t.word).map((t) => t.text)), dict: exDict(),
         onBack: history.length ? () => goBack() : null,
         onSkip: () => { history.push({ idx, skipped: true }); stats.skipped++; idx++; showStep(); },
         onGrade: async (q, kindOfGrade) => {

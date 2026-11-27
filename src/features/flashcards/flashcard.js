@@ -37,7 +37,7 @@ export function speakButton(text, rate, label = 'Nghe phát âm') {
  * @param {object} o.settings
  * @param {(q:number)=>void} o.onGrade
  */
-export function flashcard({ card, state, kind, settings, onGrade, onBack = null, onSkip = null }) {
+export function flashcard({ card, state, kind, settings, onGrade, onBack = null, onSkip = null, example = null, dict = null }) {
   let flipped = false;
   let pinyinShown = !!settings.show_pinyin_front;
   const rate = settings.tts_rate ?? 1;
@@ -49,10 +49,7 @@ export function flashcard({ card, state, kind, settings, onGrade, onBack = null,
   const back = h('div', { class: 'back hidden' },
     h('div', { class: 'meaning' }, card.meaning),
     card.pos || card.han_viet ? h('div', { class: 'muted small' }, [card.pos ? `(${card.pos})` : '', card.han_viet ? `Hán Việt: ${card.han_viet}` : ''].filter(Boolean).join(' · ')) : null,
-    card.example ? h('div', { class: 'example' },
-      h('div', { class: 'han' }, card.example, ' ', speakButtonInline(card.example, rate)),
-      card.example_pinyin ? h('div', {}, card.example_pinyin) : null,
-      card.example_meaning ? h('div', { class: 'muted' }, card.example_meaning) : null) : null,
+    exampleBlock(example || (card.example ? { zh: card.example, vi: card.example_meaning, pinyin: card.example_pinyin } : null), card.hanzi, rate, dict),
   );
 
   function renderPinyin() {
@@ -139,4 +136,26 @@ function speakButtonInline(text, rate) {
     style: { minHeight: '32px', padding: '0 8px', verticalAlign: 'middle' },
     onclick: (e) => { e.stopPropagation(); speak(text, rate); },
   }, icon('speaker'));
+}
+
+/** Câu ví dụ ở mặt sau thẻ: chữ Hán (tô đậm từ đang học) + nút nghe, pinyin, nghĩa. */
+function exampleBlock(ex, word, rate, dict) {
+  if (!ex?.zh) return null;
+  const w = String(word).replace(/（.*?）|\(.*?\)/g, '').trim();
+  const parts = w && ex.zh.includes(w) ? ex.zh.split(w) : [ex.zh];
+  const zh = h('div', { class: 'han ex-zh', lang: 'zh-CN' }, parts.flatMap((p, i) => (i ? [h('b', { class: 'ex-word' }, w), p] : [p])));
+  const py = h('div', { class: 'ex-py' }, ex.pinyin || '');
+  if (!ex.pinyin) {
+    // Pinyin theo ngữ cảnh câu, tính khi cần (thư viện pinyin tải riêng).
+    Promise.all([import('../../core/pinyin-text.js'), import('../../core/segment.js')]).then(([P, S]) => {
+      const text = ex.zh.replace(/[。？！]+$/, '');
+      py.textContent = P.sentencePinyin(ex.zh, S.segmentSentence(ex.zh, dict || S.buildDictionary([])), dict);
+      if (!py.textContent) py.textContent = P.charPinyin(text).filter(Boolean).join(' ');
+    }).catch(() => {});
+  }
+  return h('div', { class: 'example', onclick: (e) => e.stopPropagation() },
+    h('div', { class: 'ex-cap' }, 'Ví dụ'),
+    h('div', { class: 'ex-line' }, zh, speakButtonInline(ex.zh, rate)),
+    py,
+    ex.vi ? h('div', { class: 'muted ex-vi' }, ex.vi) : null);
 }

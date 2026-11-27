@@ -234,3 +234,12 @@ a.tile-link:hover, a.tile-link:focus-visible { outline: 2px solid var(--accent);
 .fc .fc-stroke-btn.on { background: var(--accent); color: var(--on-accent); }
 .fc-strokes .sk-viewer { margin: 0 auto; }
 .fc-strokes .sk-row { justify-content: center; }
+
+/* ---------- ví dụ ở mặt sau thẻ */
+.fc .example { display: grid; gap: 4px; text-align: left; max-width: 520px; width: 100%; margin: 4px auto 0; cursor: default; }
+.fc .ex-cap { font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.fc .ex-line { display: flex; align-items: center; gap: 6px; }
+.fc .ex-line .han { flex: 1; min-width: 0; }
+.fc .ex-word { color: var(--accent-ink); font-weight: 700; }
+.fc .ex-py { color: var(--accent-ink); font-size: 15px; min-height: 1.2em; }
+.fc .ex-vi { font-size: 15px; }

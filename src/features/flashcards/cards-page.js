@@ -1,6 +1,9 @@
 // Trang "Thẻ": tổng quan mức nhớ, lọc theo trạng thái/bài, lưới thẻ từ; bấm thẻ để xem chi tiết và nghe.
 
 import { h, mount, toast } from '../../ui/dom.js';
+import { exampleForCard } from '../../core/examples.js';
+import { buildDictionary, segmentSentence } from '../../core/segment.js';
+let exDict = null;
 import { icon, artOr } from '../../ui/icons.js';
 import { speak } from '../../ui/speech.js';
 import { cardStatus } from '../../core/srs.js';
@@ -97,6 +100,8 @@ export async function render(root, ctx, { query }) {
     const st = data.statesById.get(c.id);
     const s = cardStatus(st);
     const lessonRef = data.lessons.find((l) => l.id === c.lesson_id);
+    exDict ||= buildDictionary(data.cards);
+    const ex = exampleForCard(c, data.lessons, (zh) => segmentSentence(zh, exDict).filter((t) => t.word).map((t) => t.text));
     const dlg = h('dialog', { class: 'word-dialog', 'aria-label': `Từ ${c.hanzi}` },
       h('div', { class: 'wd-head' },
         h('div', { class: 'wd-glyphs', lang: 'zh-CN' }, [...c.hanzi].map((ch) => h('span', { class: ['wd-glyph', [...c.hanzi].length > 2 ? 'sm' : ''] }, ch))),
@@ -104,10 +109,10 @@ export async function render(root, ctx, { query }) {
           h('button', { class: 'btn tinted icon-only wd-speak', type: 'button', 'aria-label': 'Nghe', onclick: () => speak(c.hanzi, rate) }, icon('speaker'))),
         h('div', { class: 'wd-mean' }, c.meaning),
         c.pos ? h('div', { class: 'wd-pos' }, c.pos) : null),
-      c.example ? h('div', { class: 'example-box' },
+      ex ? h('div', { class: 'example-box' },
         h('div', { class: 'row nowrap', style: { alignItems: 'flex-start' } },
-          h('div', { style: { flex: 1 } }, h('div', { class: 'han', style: { fontSize: '20px' } }, c.example), c.example_meaning ? h('div', { class: 'muted small' }, c.example_meaning) : null),
-          h('button', { class: 'btn ghost icon-only', type: 'button', 'aria-label': 'Nghe ví dụ', onclick: () => speak(c.example, rate) }, icon('speaker')))) : null,
+          h('div', { style: { flex: 1 } }, h('div', { class: 'han', style: { fontSize: '20px' } }, ex.zh), ex.vi ? h('div', { class: 'muted small' }, ex.vi) : null),
+          h('button', { class: 'btn ghost icon-only', type: 'button', 'aria-label': 'Nghe ví dụ', onclick: () => speak(ex.zh, rate) }, icon('speaker')))) : null,
       h('div', { class: 'detail-meta' },
         h('span', { class: ['badge', s === 'mastered' ? 'done' : s === 'learning' ? 'doing' : 'new'] }, STATUS[s].label),
         dots(strength(st)),
